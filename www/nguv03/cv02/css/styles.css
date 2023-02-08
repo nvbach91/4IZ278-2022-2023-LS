@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+.business-card {
+  padding: 30px;
+  background-color: #292a30;
+  color: #e1e1e1;
+  width: 540px;
+  margin: 20px auto;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 5px 20px #000;
+}
+.bc-firstname {
+  line-height: 1.2em;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+.bc-lastname {
+  line-height: 1.2em;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #b49e65;
+}
+.bc-title, .bc-company {
+  font-size: 1em;
+}
+.bc-company {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.logo {
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.contacts {
+  font-size: 0.8em;
+  line-height: 1.5em;
+}
+.bc-back .bc-firstname, .bc-back .bc-lastname {
+  font-size: 2em;
+}
+.bc-back > div:first-child {
+  border-right: 2px solid #e1e1e1;
+}
+.bc-address {
+  font-weight: bold;
+}

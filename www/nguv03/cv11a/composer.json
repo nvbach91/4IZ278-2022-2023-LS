@@ -1,0 +1,15 @@
+{
+    "name": "4iz278/test",
+    "description": "tohle je testovaci projekt",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nguyen Viet Bach",
+            "email": "nvbach91@outlook.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^2.5"
+    }
+}

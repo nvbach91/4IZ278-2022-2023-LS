@@ -1,0 +1,12 @@
+{
+    "name": "dev/fpdf",
+    "authors": [
+        {
+            "name": "Nguyen Viet Bach",
+            "email": "nvbach91@outlook.com"
+        }
+    ],
+    "require": {
+        "fpdf/fpdf": "^1.83"
+    }
+}

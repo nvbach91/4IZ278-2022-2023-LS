@@ -1,0 +1,14 @@
+{
+    "name": "4iz278/fb-oauth",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nguyen Viet Bach",
+            "email": "nvbach91@outlook.com"
+        }
+    ],
+    "require": {
+        "facebook/graph-sdk": "^5.1"
+    }
+}

@@ -1,0 +1,26 @@
+# directive to enable rewrite
+RewriteEngine On
+
+# set conditions for the rules that follow
+
+## if the request URL matches a directory dont apply any rules
+RewriteCond %{REQUEST_FILENAME} !-d
+
+## if the request URL matches a file dont apply any rules
+RewriteCond %{REQUEST_FILENAME} !-f
+
+## if the request URL matches a symlink dont apply any rules
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# rules
+
+## RewriteRule   pattern       substitution      modificators/flags
+RewriteRule      ^(.*)$        index.php?path=$1   [QSA,L]
+
+
+# R - redirect
+# R=301 - redirect permanent
+# QSA - append the query string to the final URL
+# L - last rule/redirect in the list
+# F - disable access to files
+

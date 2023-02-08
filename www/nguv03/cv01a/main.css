@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+.business-card {
+    width: 400px;
+    height: 200px;
+    background-color: pink;
+    padding: 20px;
+}
+.bc-name {
+    font-weight: bold;
+    font-size: 24px;
+}

@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+.form-registration, .form-auth {
+    width: 480px;
+    margin: 0 auto;
+}
+.avatar {
+    height: 100px;
+}
+.form-control {
+    color: #434343;
+}

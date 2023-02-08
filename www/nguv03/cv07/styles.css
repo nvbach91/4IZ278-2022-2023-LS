@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: medium;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    padding-top: 84px;
+}
+.products {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.product {
+    border: none;
+    cursor: pointer;
+}
+.product:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.product a:hover {
+    text-decoration: underline;
+}
+.pagination a {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #eee;
+}
+.pagination a.active {
+    color: cadetblue;
+}
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.card-img-top {
+    padding: 20px;
+    background-position: center;
+    background-size: contain;
+    height: 200px;
+    background-repeat: no-repeat;
+}

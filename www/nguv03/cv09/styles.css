@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: medium;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    padding-top: 84px;
+}
+.products {
+    width: 100%;
+}
+.product {
+    border: none;
+    cursor: pointer;
+}
+.product:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+.product a:hover {
+    text-decoration: underline;
+}
+.pagination a {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #eee;
+}
+.pagination a.active {
+    color: cadetblue;
+}
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.card-img-top {
+    padding: 20px;
+}
+.product {
+    display: flex;
+}
+.product:nth-child(1) { border-bottom: 1px solid grey; }
+.product > div:nth-child(1) { min-width: 80px; }
+.product > div:nth-child(2) { min-width: 200px; }
+.product > div:nth-child(3) { min-width: 100px; text-align: right; padding-right: 10px; }
+.product > div:nth-child(4) { display: flex; flex-grow: 1; }
+.product > div:nth-child(5) { min-width: 50px; }
+.product > div:nth-child(6) { min-width: 50px; }

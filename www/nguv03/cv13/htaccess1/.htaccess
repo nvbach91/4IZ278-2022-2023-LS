@@ -1,0 +1,15 @@
+Options +Indexes
+
+#DirectoryIndex main.php
+
+IndexIgnore *.txt *.pem *.ps
+
+<files e.txt>
+    order allow,deny
+    deny from all
+</files>
+
+<FilesMatch "\.txt">
+    order allow,deny
+    deny from all
+</FilesMatch>

@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    padding-top: 84px;
+}
+body > .container {
+    margin-bottom: 10px;
+}
+.logo {
+    height: 50px;
+    width: 50px;
+}
+.slide {
+    text-align: center;
+}
+.slide-image {
+    max-height: 350px;
+    margin: 0 auto;
+}
+.product a {
+    text-align: center;
+}
+.product-image {
+    max-height: 150px;
+    width: auto;
+}
