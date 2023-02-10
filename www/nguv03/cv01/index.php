@@ -30,6 +30,7 @@ $currency = 'CZK';
 $address = $street . ' ' . $propertyNumber . '/' . $orientationNumber . ', ' . $city;
 
 // string variable interpolation
+$address = "$street $propertyNumber/$orientationNumber, $city";
 $address = "{$street} {$propertyNumber}/{$orientationNumber}, {$city}";
 
 ?>
