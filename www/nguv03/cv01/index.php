@@ -20,9 +20,11 @@ $email = 'skywalker@jedi-council.com';
 $website = 'www.jedi-council.com';
 $available = false;                         // data type boolean
 $street = 'Temple of Eedit';
-$propertyNumber = 42;                       // datatype number
+$propertyNumber = 42;                       // datatype integer number
 $orientationNumber = 121;
 $city = 'Coruscant';
+$bankBalance = 1217412.420;                 // datatype double/float
+$currency = 'CZK';
 
 // string concatenation
 $address = $street . ' ' . $propertyNumber . '/' . $orientationNumber . ', ' . $city;
