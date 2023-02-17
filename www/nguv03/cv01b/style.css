@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.business-card {
+    margin: 50px 0 0 50px;
+    background-color: pink;
+    width: 400px;
+    height: 220px;
+    padding: 20px;
+    background-image: url(https://png.pngtree.com/thumb_back/fh260/back_our/20190623/ourmid/pngtree-blue-geometric-business-minimalistic-business-card-background-image_237858.jpg);
+    background-size: cover;
+    position: relative;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.business-card > div {
+    text-align: right;
+    padding: 10px 0;
+}
+
+.bc-name {
+    font-size: 2em;
+}
+.bc-avatar {
+    position: absolute;
+    top: 20px;
+}
