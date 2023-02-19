@@ -1,0 +1,66 @@
+.vizitka {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 600px;
+    margin: 0 auto;
+    /* Created with https://www.css-gradient.com */
+    background: #FF8F8F;
+    background: -webkit-linear-gradient(right, #FF8F8F, #FFEC6E);
+    background: -moz-linear-gradient(right, #FF8F8F, #FFEC6E);
+    background: linear-gradient(to left, #FF8F8F, #FFEC6E);
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+
+.vizitka img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 2rem;
+    object-fit: cover;
+}
+
+.leftSide {
+    flex: 1;
+}
+
+.nameSur {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #212121;
+}
+
+.student {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #757575;
+}
+
+.underLeftSide {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.underLeftSide li {
+    margin-bottom: 0.5rem;
+}
+
+
+.rightSide {
+    padding-top: 15px;
+    flex: 1;
+    font-size: 1.2rem;
+    color: #424242;
+}
+
+.rightSide p {
+    margin: 0 0 0.5rem;
+    line-height: 1.5;
+}
