@@ -1,0 +1,118 @@
+:root {
+  --background: white;
+  --font: #353535;
+  --accent: #5FA8AB;
+}
+
+* {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.card-front {
+  background: var(--background);
+  color: var(--font);
+
+  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+
+  padding: 20px;
+
+  box-shadow: 0 22px 70px 4px rgba(0,0,0,0.3); 
+  border: none;
+  border-radius: 10px;
+
+  width: 460px;
+  height: 260px;
+
+  display: block;
+}
+
+.logo {
+  height: 200px;
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+}
+
+.company {
+  color: var(--font);
+
+  margin-top: 0px;
+
+  font-size: 40px;
+  text-align: center;
+}
+
+.card-back {
+  background: var(--background);
+  color: var(--font);
+
+  margin-left: 16px;
+
+  box-shadow: 0 22px 70px 4px rgba(0,0,0,0.3); 
+  border: none;
+  border-radius: 10px;
+
+  width: 500px;
+  height: 300px;
+
+  display: grid;
+  grid-template-columns: 37% auto;
+}
+
+.avatar {
+  width: 175px;
+  height: 300px;
+  margin-left: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.details {
+  padding: 10px;
+}
+
+.name {
+  font-size: 24px;
+}
+
+.occupation {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.card-info {
+  display: grid;
+  grid-template-columns: 35% auto;
+}
+
+.contacts {
+  margin-top: 8px;
+  display: grid;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 16px;
+}
+
+.label {
+  color: var(--accent);
+  font-size: 12px;
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+
