@@ -64,5 +64,5 @@ class Person {
         return $this->available ? 'Not available for contracts' : 'Now available for contracts';
     }
 }
-*/*/
+*/
 ?>
