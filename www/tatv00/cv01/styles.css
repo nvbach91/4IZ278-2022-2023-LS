@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Hack";
+    background-color: antiquewhite;
+    background-size: cover;
+}
+.container {
+    width: 600px;
+    height: 350px;
+    margin: 50px auto;
+    border-radius: 10px;
+    background-color: #44475a;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+}
+.block {
+    width: 600px;
+    height: 350px;
+    margin: 50px auto;
+    border-radius: 10px;
+    background-color: #44475a;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: block;
+    text-align: center;
+}
+.flex {
+    display: flex;
+}
+
+.foot {
+    margin-top: 70px;
+    padding: 30px;
+    color: #f1fa8c;
+}
+
+.foot a {
+    color: #f8f8f2;
+}
+.com-8 {
+    /* margin-top: 70px; */
+    padding: 30px;
+}
+.avatar {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    border-radius: 50%;
+    border-color: #f8f8f2;
+
+    background-size: cover;
+}
+.info {
+    text-align: center;
+    margin-top: 25px;
+    color: #ff79c6;
+    margin-left: 50px;
+}
+h2 {
+    font-size: 30px;
+    margin: 10px 0;
+    color: #f8f8f2;
+    font-family: "Hack";
+    text-decoration: underline;
+}
+
+p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.contact a {
+    display: block;
+    text-decoration: none;
+    color: #f1fa8c;
+
+}
+
+.meow {
+    width: 50%;
+    text-align: center;
+    color: #f1fa8c;
+}
+
+.line {
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-right-color: #f8f8f2;
+}
+
+.contact {
+    margin-top: 30%;
+}
+
+.name {
+    margin-bottom: 50px;
+}
