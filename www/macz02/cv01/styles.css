@@ -1,0 +1,48 @@
+/* Styly pro celou stránku */
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+/* Styly pro vizitku */
+div {
+  border: 1px solid black;
+  padding: 10px;
+  background-color: lightblue;
+  width: 500px;
+  margin: 0 auto;
+}
+
+/* Styly pro obrázek v levé části */
+img {
+  border-radius: 50%;
+  height: 150px;
+  margin-right: 20px;
+  width: 150px;
+  float: left;
+}
+
+/* Styly pro textové informace v pravé části */
+h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
