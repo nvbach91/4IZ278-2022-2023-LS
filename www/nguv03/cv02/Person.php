@@ -1,21 +1,22 @@
 <?php
 
 // PHP 8 constructor promotion
+
 class Person {
     public function __construct(
-        private $avatar;
-        private $firstName;
-        private $lastName;
-        private $title;
-        private $company;
-        private $available;
-        private $phone;
-        private $email;
-        private $website;
-        private $street;
-        private $propNumber;
-        private $orientationNumber;
-        private $city;
+        private $avatar,
+        private $firstName,
+        private $lastName,
+        private $title,
+        private $company,
+        private $available,
+        private $phone,
+        private $email,
+        private $website,
+        private $street,
+        private $propNumber,
+        private $orientationNumber,
+        private $city,
     ) {}
 
     public function getAddress() {
