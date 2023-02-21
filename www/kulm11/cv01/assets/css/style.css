@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family:  Arial, Helvetica, sans-serif;
+    display:grid;
+    justify-content: center;
+}
+.business-card{
+    background-color: #b19efd;
+    width: 500px;
+    height: 250px;
+    padding: 20px;
+    margin: 20px;
+    padding-top: 50px;
+    border-radius: 10px;
+}
+.business-card>div{
+    text-align: right;
+    padding: 8px 0;
+}
+.bc-name {
+    font-size: 2em;
+    font-weight: bold;
+}
+.bc-avatar{
+    position: absolute;
+    top: 60px;
+}
+#back{
+    padding-top: 20px;
+}
+#back>div{
+    text-align: left;
+    padding: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.desc{
+    font-weight: bold;
+    color: rgb(188, 0, 113);
+}
+
+.bc-adress, .bc-phone, .bc-email{
+    font-size: small;
+}
