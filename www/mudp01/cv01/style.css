@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Labrada";
+}
+
+.bc {
+    display: flex;
+    flex-direction: column;
+    margin-top: 70px;
+}
+
+.bc-side1 {
+    border: 1px solid #faf0e6;
+    width: 550px;
+    height: 250px;
+    margin: auto;
+    margin-bottom: 50px;
+    background-color: #faf0e6;
+}
+
+.bc-side1-name {
+    margin-top: 35px;
+    margin-left: 40px;
+    font-size: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+.bc-side1-profession {
+    margin-top: 3px;
+    margin-left: 50px;
+    font-size: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.square {
+    background-color: #61876E;
+    width: 210px;
+    height: 210px;
+    position: absolute;
+    top: 12%;
+    right: 33%;
+}
+
+.bc-side2 {
+    border: 1px solid #faf0e6;
+    width: 550px;
+    height: 250px;
+    margin: auto;
+    background-color: #faf0e6;
+}
+
+.cdge {
+    margin: 1%;
+    padding: 4%;
+    border: 5px solid #61876E;
+    height: 96%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    width: 180px;
+    height: 100%;
+    border: 3px solid #61876E;
+    margin: auto;
+    margin-right: 0px;
+}
+
+.bc-side2-content {
+    width: 58%;
+    background-color: white;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.avatar-img {
+    width: 174px;
+    height: 179px;
+}
+
+.bc-side2-content {
+    align-items: center;
+    display: flex;
+}
+
+.contact-img {
+    width: 50px;
+    height: 50px;
+}
+
+.contact-content {
+    width: 70%;
+    padding-left: 30px;
+    align-items: center;
+    font-size: 18px;
+}
