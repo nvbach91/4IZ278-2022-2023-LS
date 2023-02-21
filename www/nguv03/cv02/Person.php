@@ -1,22 +1,20 @@
 <?php
 
-// PHP 8 constructor promotion
-
 class Person {
     public function __construct(
-        private $avatar,
-        private $firstName,
-        private $lastName,
-        private $title,
-        private $company,
-        private $available,
-        private $phone,
-        private $email,
-        private $website,
-        private $street,
-        private $propNumber,
-        private $orientationNumber,
-        private $city,
+        public $avatar, // PHP 8 constructor promotion
+        public $firstName,
+        public $lastName,
+        public $title,
+        public $company,
+        public $available,
+        public $phone,
+        public $email,
+        public $website,
+        public $street,
+        public $propNumber,
+        public $orientationNumber,
+        public $city,
     ) {}
 
     public function getAddress() {
@@ -31,20 +29,19 @@ class Person {
 /*
 // PHP 7
 class Person {
-    private $avatar;
-    private $firstName;
-    private $lastName;
-    private $title;
-    private $company;
-    private $available;
-    private $phone;
-    private $email;
-    private $website;
-    private $street;
-    private $propNumber;
-    private $orientationNumber;
-    private $city;
-
+    public $avatar;
+    public $firstName;
+    public $lastName;
+    public $title;
+    public $company;
+    public $available;
+    public $phone;
+    public $email;
+    public $website;
+    public $street;
+    public $propNumber;
+    public $orientationNumber;
+    public $city;
     public function __construct($avatar, $firstName, $lastName, $title, $company, $available, $phone, $email, $website, $street, $propNumber, $orientationNumber, $city) {
         $this->avatar = $avatar;
         $this->firstName = $firstName;
@@ -63,7 +60,6 @@ class Person {
     public function getAddress() {
         return "$this->street $this->propNumber / $this->orientationNumber, $this->city";
     }
-
     public function getAvailability() {
         return $this->available ? 'Not available for contracts' : 'Now available for contracts';
     }
