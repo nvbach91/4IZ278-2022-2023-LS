@@ -1,15 +1,15 @@
 <?php
 $name = "David";
 $surname = "Wais";
-$age = "21";
+$age = 21;
 $profession = "Student";
 $student = "VŠE";
 $street = "Obama Street";
-$streetPopis = "123";
-$streetOrient = "7";
+$streetPopis = 123;
+$streetOrient = 7;
 $wholeStreet = $street . " " . $streetPopis . "/" . $streetOrient;
 $city = "New Prague";
-$phone = "723 888 777";
+$phone = 723 888 777;
 $mail = "david@wais.cz";
 $webUrl = "david.pohena.com";
 $doINeedWork = true;
