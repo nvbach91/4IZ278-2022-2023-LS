@@ -1,0 +1,88 @@
+body {
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+
+  }
+
+  .card {
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 120%;
+    
+  }
+
+  .content {
+    margin-top: 60px;
+    margin-left: 10px;
+  }
+
+  .FirstName {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f5f5f5;
+  }
+
+  .LastName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+  }
+
+  .text {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+  }
+
+  .contact {
+    font-size: 16px;
+    color: #f5f5f5;
+  }
+
+  .email {
+    color: rgba(243, 152, 1, 1);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .avatar{
+        width: 100px;
+        height: 100px;
+        float: right;
+        background-position: 1000px;
+        border-radius: 20%;
+        background-image: url("../img/logo.jpg");
+        background-size: cover; 
+  }
+  
+  .cardBack{
+    width: 400px;
+    height: 200px;
+    background-color: rgba(2, 85, 163, 1);
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+  }
+
+  .backText{
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+    text-align: center;
+  }
+
+  .companyName{
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #f5f5f5;
+    text-align: center;
+  }
