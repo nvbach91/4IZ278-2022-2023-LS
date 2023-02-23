@@ -1,2 +1,2 @@
 RewriteEngine on
-RewriteRule ^.*$ - [R=404]
+RewriteRule ^.*$ - [R=403]
