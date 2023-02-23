@@ -12,7 +12,7 @@
 
     </head>
     <body class="antialiased">
-        <h1>ahoj</h1>
+        <h1>List of galaxies</h1>
         <ul>
             @foreach($galaxies as $galaxy) 
                 <li>{{ $galaxy->name }}</li>

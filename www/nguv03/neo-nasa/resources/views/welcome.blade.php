@@ -12,6 +12,8 @@
 
     </head>
     <body class="antialiased">
-        <h1>ahoj</h1>
+        <h1>NEO NASA (powered by LARAVEL)</h1>
+        <h2>Check our galaxies</h2>
+        <a href="./galaxies">Go to galaxies page</a>
     </body>
 </html>
