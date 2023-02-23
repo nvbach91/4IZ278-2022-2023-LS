@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box;
+  }
+  body{
+    background-color: #1d1d1d;
+    line-height: 1.5;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  }
+  .business-card {
+    padding: 30px;
+    background-color: rgba(25,35,46,255);
+    color: #e1e1e1;
+    max-width: 600px;
+    margin: 20px auto;
+    height: 300px;
+    display: grid;
+    align-items: center;
+    box-shadow: 0px 5px 20px #000;
+    transform: scale(1.0);
+    transition: all 0.5s ease-out;
+  }
+  .bc-front{
+    grid-template-columns: 4fr 5fr;
+  }
+  .bc-back{
+    display:flex;
+  }
+  .column{
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .contacts{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contacts *{
+    text-align: center;
+    margin: 3px;
+  }
+  .business-card:hover{
+    transform: scale(1.05);
+  }
+  .bc-firstname {
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+  }
+  .bc-lastname {
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #e48510;
+  }
+  .bc-title, .bc-company {
+    font-size: 1em;
+  }
+  .bc-company {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .logo {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .bc-back .bc-firstname, .bc-back .bc-lastname {
+    font-size: 2em;
+  }
+  .bc-address {
+    font-weight: bold;
+  }
+  a{
+    text-decoration: none;
+    color: #e1e1e1;
+  }
+  a:hover{
+    color: #e48510;
+    text-decoration: none;
+  }
