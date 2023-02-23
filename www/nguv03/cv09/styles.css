@@ -8,6 +8,8 @@ body {
 }
 .products {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 .product {
     border: none;
@@ -33,14 +35,8 @@ body {
 }
 .card-img-top {
     padding: 20px;
+    background-position: center;
+    background-size: contain;
+    height: 200px;
+    background-repeat: no-repeat;
 }
-.product {
-    display: flex;
-}
-.product:nth-child(1) { border-bottom: 1px solid grey; }
-.product > div:nth-child(1) { min-width: 80px; }
-.product > div:nth-child(2) { min-width: 200px; }
-.product > div:nth-child(3) { min-width: 100px; text-align: right; padding-right: 10px; }
-.product > div:nth-child(4) { display: flex; flex-grow: 1; }
-.product > div:nth-child(5) { min-width: 50px; }
-.product > div:nth-child(6) { min-width: 50px; }

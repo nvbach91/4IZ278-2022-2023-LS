@@ -1,8 +1,17 @@
 <?php
+const DB_HOST = 'localhost';
+const DB_DATABASE = 'test';
+const DB_USERNAME = 'root';
+const DB_PASSWORD = 'root';
+
 class UsersDB {
     private $pdo;
     public function __construct() {
-        $this->$pdo = new PDO('mysql:host=localhost;dbname=test;charset=utf8mb4', 'root', 'root');
+        $this->pdo = new PDO(
+            'mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . ';charset=utf8mb4',
+            DB_USERNAME,
+            DB_PASSWORD
+        );
     }
     public function fetchAll() {
         $sql = 'SELECT * FROM users';
@@ -14,7 +23,7 @@ class UsersDB {
         $sql = 'INSERT INTO users (name, age) VALUES (:name, :age)';
         $statement = $this->pdo->prepare($sql);
         $statement->execute(['name' => $user['name'], 'age' => $user['age']]);
-        return $pdo->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
     public function update($id, $user) {
         $sql = 'UPDATE TABLE users SET name = :name, age = :age WHERE id = :id';
