@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $userController = new UserController();
-    $data = $userController->fetchAll();
+    $data = [];//$userController->fetchAll();
     return view('welcome')->with('users', $data);
 });
