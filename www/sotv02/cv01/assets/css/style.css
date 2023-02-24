@@ -1,0 +1,70 @@
+
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.business-card {
+    width: 30rem;
+    height: 18rem;
+
+    border: 2px solid rgb(15, 28, 81);
+    border-radius: 0.75rem;
+    box-shadow: 0 22px 70px 4px rgba(6, 38, 68, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3);
+
+    background: rgb(255, 255, 255);
+
+    display: grid;
+    grid-template-columns: 40% auto;
+    color: rgb(0, 0, 0);
+}
+
+.image {
+    display: grid;
+    align-items: center;
+    padding: 0.4rem;
+}
+
+
+
+.content {
+    padding: 2rem;
+}
+
+.title {
+    padding-bottom: 0.6rem;
+}
+
+.info {
+    display: grid;
+    align-items: center;
+}
+
+.rick {
+    border-bottom-left-radius: 0.75rem;
+    width: 11rem;
+}
+
+.roll {
+    width: 6rem;
+}
+
+.bc-name {
+    font-size: 2rem;
+    color: rgb(15, 28, 81);
+}
+
+.bc-quote {
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+
+.bc-date {
+    font-size: 1rem;
+}
