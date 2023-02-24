@@ -1,0 +1,93 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:darkcyan;
+}
+.bc_front{
+    width: 600px;
+    height: 350px;
+    margin: 10px auto;
+    border-radius: 10%;
+    background-image: url("https://media.istockphoto.com/vectors/wavy-abstract-backgrounds-for-design-of-web-banners-packaging-posters-vector-id1211961939?b=1&k=20&m=1211961939&s=170667a&w=0&h=zAfk6widLaz3ZWrpUdxHi1ez_8_5aO2W2wA8fvhs9QE=");
+    display: flex;
+    text-align: center;
+}
+.bc_back{
+    width: 600px;
+    height: 350px;
+    margin: 10px auto;
+    border-radius: 10%;
+    background-image: url("https://t4.ftcdn.net/jpg/03/85/72/67/360_F_385726776_2KgzDmzFHanqlx9oPKbQusB9p0GqPCLH.jpg");
+    display: flex;
+    text-align: center;
+}
+.avatar {
+    margin-left: 50px;
+    margin-top: 75px;
+    width: 200px;
+    height: 200px;
+    background-size:contain;
+    border-radius: 20%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.info {
+    box-sizing: border-box;
+    height: fit-content;
+    text-align: center;
+    margin-left: 45px;
+    margin-top: 15%;
+    border-radius: 20%;
+    padding: 10px;
+    display: block;
+}
+.line{
+    text-align: left;
+    padding: 10px;
+}
+.name{
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
+    margin-top: 280px;
+    margin-left: -150px;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+}
+.contact{
+    width: max-content;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 5px;
+    display: flex;
+    writing-mode: sideways-lr;
+    position: relative;
+    top: -10px;
+}
+.company_name{
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: underline;
+    padding: 10px;
+    display: flex;
+    margin-top: 20%;
+    margin-left: 5%;
+}
+.company_web{
+    width: fit-content;
+    height: fit-content;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    margin-top: 180px;
+    margin-left: -200px;
+    background-color: rgb(255, 213, 0);
+    border-radius: 30%;
+}
