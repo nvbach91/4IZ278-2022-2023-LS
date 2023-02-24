@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: bold;
+}
+body {
+    text-align: center;
+}
+
+.front{
+    display: flex;
+    max-width: 600px;
+    height: 300px;
+    margin: 20px auto;
+    align-items: center;
+    background: #dcdcdc;
+    border-radius: 10px;
+}
+.avatar {
+    width: 200px;
+    height: 200px;
+    margin-left: 50px;
+}
+.line{
+    height: 200px;
+    margin: 50px;
+    border: 2px solid #3E3E3F;
+}
+.text{
+    margin-top: 0px;
+    text-align: left;
+}
+.name, .lastname {
+    font-size: 36px;
+    color: #3E3E3F;
+}
+.position, .age {
+    color: #3E3E3F;
+}
