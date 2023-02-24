@@ -1,0 +1,79 @@
+.business_card{
+    width:600px;
+    height:400px;
+    background-color:transparent;
+    margin-left:auto;
+    margin-right:auto;
+    background-image:url(../img/image-background.jpg);
+    background-size:100% 100%;
+    display:flex;
+    flex-direction:row;
+    transition: all 0.7s;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.paper{
+    display:flex;
+    justify-content:space-evenly;
+    flex-direction:row;
+}
+.logo{
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    width:40%;
+    height:100%;
+}
+.logo > img{
+    width:100%;
+}
+.col-1{
+    padding-left:10px;
+    padding-right:10px;
+    margin-top:30px;
+    margin-bottom:30px;
+    width:50%;
+}
+.col-0{
+    line-height:1.7em;
+    border:0px;
+    border-left:1px;
+    border-color:black;
+    border-style:solid;
+    padding-left:10px;
+    padding-right:10px;
+    margin-top:30px;
+    margin-bottom:30px;
+    width:50%;
+}
+col-sm-4{
+    width:60%;
+}
+.info{
+    margin-top:auto!important;
+    margin-bottom:auto!important;
+    height:auto;
+}
+.bc-lastname{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color:gold;
+    text-transform:uppercase;
+    margin-bottom:0px;
+    margin-top:10px;
+}
+.bc-firstname{
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color:white;
+    text-transform:uppercase;
+    margin-bottom:0px;
+    margin-top:10px;
+}
+.front_page .col-sm-4{
+    border:0px;
+    border-left:1px;
+    border-style:solid;
+    padding-left:10px;
+    margin-right:20px;
+}
+.bc-address{
+    font-weight:bold;
+}
