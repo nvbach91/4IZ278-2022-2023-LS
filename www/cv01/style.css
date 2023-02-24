@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 100%;
+}
+
+.businessCardFront, .businessCardBack{
+    border-radius: 15px;
+    margin: 5px auto;
+    background-image: linear-gradient(to bottom right, rgb(253, 109, 57), #ff9e5de1);
+    padding: 2px;
+    display: flex;
+    max-width: 400px;
+    align-items: center;
+    height: 200px;
+    color: antiquewhite;
+}
+
+.basicInfo{
+    line-height: 40px;
+}
+
+
+.logo img{
+    height: 100px;
+}
+
+.name{
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.position, .studyProgram{
+    font-size: 24px;
+}
+
+.company{
+    font-style: italic;
+    font-size: 15px;
+}
+
+.contactInfo{
+    font-size: 20px;
+    line-height: 50px;
+}
+
+.phone, .contactEmail, .adress {
+    padding-;
+}
+
+.fas {
+    padding: 10px;
+}
