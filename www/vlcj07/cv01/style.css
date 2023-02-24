@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(rgb(239, 239, 239));
+}
+
+.business-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name, 
+.age, 
+.job-position,
+.adress,
+.phone-number,
+.email,
+.website,
+.looking-for-job,
+.company-name {
+    font-family: 'Poppins', sans-serif;
+    color:rgb(36, 31, 31);
+}
+
+
+
+.business-card-frontside {
+    padding: 30px 40px 30px 40px;
+    width:500px;
+    height: 270px;
+    border-color: black;
+    border: solid;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    align-items: center;
+    row-gap: 20px;
+    border-width: 1px;
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+    background: linear-gradient(130deg, #f95b00 2% , #ffed4b 80%);
+    background-blend-mode: screen;
+}
+
+.logo {
+    height: 240px;
+    width: 240px;
+}
+
+.picture {
+    width: 240px;
+}
+
+.company-name {
+    margin-top: -40px;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.business-card-backside {
+    padding: 30px 40px 30px 40px;
+    width: 500px;
+    height: 270px;
+    display: flex;
+    align-items: center;
+    border-color: black;
+    margin: 20px;
+    border: solid;
+    flex-direction: row;
+    flex: 1fr 1fr;
+    justify-content: space-between;
+    vertical-align: middle;
+    line-height: 1.5; 
+    border-width: 1px;
+
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+    background: linear-gradient(130deg, #f95b00 2% , #ffed4b 80%);
+    background-blend-mode: screen;
+}
+
+.bc-left-side {
+    margin: 10px;
+    padding: 10px;
+    border-right: black 2px solid;
+}
+
+.bc-right-side {
+    margin: 10px;
+    padding: 10px;;
+}
+
+.name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.age {
+    font-size: 20px;
+}
+
+.job-position {
+    font-size: 18px;
+}
+
+
