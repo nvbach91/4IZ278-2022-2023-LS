@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.title {
+    font-family: 'Segoe UI';
+    font-size: 16px;
+}
+.body {
+    text-align: left;
+}
+.title {
+    padding-left: 700px;
+}
+.main {
+    padding-left: 250px;
+}
+.front, .back{
+    display: flex;
+    max-width: 615px;
+    height: 338px;
+    margin: 20px;
+    
+    background: #3E3E3E;
+    box-shadow: -6px 8px 9px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+}
+.front {
+    align-items: center;
+}
+.icon {
+    width: 189px;
+    height: 189px;
+    margin-left: 27px;
+    border-radius: 120px;
+}
+.line1{
+    height: 189px;
+    margin: 22px;
+    border: 2px solid #F6F4FF;
+}
+.line2{
+    height: 215px;
+    margin-top: 66px;
+    margin-left: 74px;
+    border: 2px solid #F6F4FF;
+}
+.text1{
+    font-family: system-ui, -apple-system, 'Open Sans', sans-serif;
+    margin-top: -15px;
+    text-align: left;
+}
+.name {
+    font-weight: lighter;
+    font-size: 36px;
+    color: #F6F4FF;
+}
+.lastname {
+    font-weight: bold;
+    font-size: 36px;
+    color: #03C4E3;
+}
+.age {
+    font-size: 15px;
+    font-weight: lighter;
+    color: #F6F4FF;
+    margin-top: -8px;
+}
+.position {
+    font-weight: bold;
+    font-size: 16px;
+    color: #F6F4FF;
+}
+
+.back_header {
+    margin-top: 28px;
+    margin-left: 31px;
+    text-align: left;
+    display: flex;
+}
+
+.icon_small {
+    width: 38px;
+    height: 38px;
+    border-radius: 94px;
+}
+.company_name {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 35px;
+    padding-left: 9px;
+    color: #F6F4FF;
+    width: 195px;
+}
+.qrcode {
+    width: 156px;
+    height: 156px;
+    margin-top: 101px;
+    margin-left: -176px;
+}
+.contacts {
+    margin-left: 36px;
+    margin-top: 122px;
+    text-align: left;
+    align-items: center;
+    vertical-align: middle;
+}
+.contact_div {
+    padding-right: 25px;
+    display: flex;
+    padding-bottom: 3px;
+}
+.contact_icon {
+    height: 18px;
+    width: 18px;
+}
+.contact_text {
+    margin-left: 15px;
+    font-family: system-ui, -apple-system, 'Open Sans', sans-serif;
+    color: #F6F4FF;
+    font-weight: 400;
+    font-size: 14px;
+}
+.buisness_card {
+    padding-right: 75px;
+    display: inline-block;
+    padding-bottom: 50px;
+}
