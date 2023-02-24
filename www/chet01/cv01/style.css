@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.card {
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 5px 5px 15px #c8c8c8;
+    border-radius: 10px;
+    width: 500px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    background-image: url(http://cdn.onlinewebfonts.com/svg/img_423422.png);
+    background-size: auto 200px;
+    background-repeat: no-repeat;
+    background-position: 320px 120px;
+}
+.box {
+    margin-left: 25px;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding-bottom: 10px;
+}
+img {
+    width: 25px;
+    object-fit: contain;
+}
+p{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid black;
+}
