@@ -64,28 +64,28 @@ justify-content: center;
     flex-direction: row;
 }
 
-.jmeno{
+.name{
     list-style:upper-roman ;
     margin: 0px;
     font-size: 2.5em;
     text-transform: uppercase;
 }
 
-.prijmeni{
+.surname{
     list-style: upper-roman;
     font-size: 2.5em;
     text-transform: uppercase;
 }
 
-.pozice, .nazev_firmy {
+.position, .firm_name {
     font-size: 1em;
   }
-  .nazev_firmy {
+  .firm_name {
     text-transform: uppercase;
     font-weight: bold;
   }
 
-  .adresa, .telefon, .email, .web, .prace{
+  .adress, .number, .email, .web, .job{
     font-size: 0.8em;
     line-height: 1.5em;
 

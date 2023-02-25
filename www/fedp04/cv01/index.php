@@ -1,14 +1,14 @@
 <?php
-$jmeno = 'Polina';
-$prijmeni = 'Fediaeva';
-$vek = '04.08.2002';
-$adresa = 'Praha 4';
-$telefon = '1234567';
-$pozice = 'Director of the firm';
-$nazev_firmy = 'Best firm';
+$name = 'Polina';
+$surname = 'Fediaeva';
+$year = '04.08.2002';
+$adress = 'Praha 4';
+$number = '1234567';
+$position = 'Director of the firm';
+$firm_name = 'Best firm';
 $email = 'zzefir.rum@mail.com';
 $web = 'www.web.com';
-$prace = 'Available for job';
+$job = 'Available for job';
 
 
 ?>
@@ -33,20 +33,20 @@ $prace = 'Available for job';
 
             <div class="front-image"><img src=<?php echo "./pepeRound.png" ?>></div>
             <div class="front-info">
-                <h2 class="jmeno"> <?php echo $jmeno; ?> </h2>
-                <h2 class="prijmeni"> <?php echo $prijmeni; ?> </h2>
-                <p class="vek"> <?php echo $vek; ?> </p>
-                <p class="nazev_firmy"> <?php echo $nazev_firmy; ?> </p>
-                <p class="pozice"> <?php echo $pozice; ?> </p>
+                <h2 class="name"> <?php echo $name; ?> </h2>
+                <h2 class="surname"> <?php echo $surname; ?> </h2>
+                <p class="year"> <?php echo $year; ?> </p>
+                <p class="firm_name"> <?php echo $firm_name; ?> </p>
+                <p class="position"> <?php echo $position; ?> </p>
             </div>
         </div>
 
         <div class="business-card back">
-            <p class="adresa"> <?php echo $adresa; ?> </p>
-            <p class="telefon"> <?php echo $telefon; ?> </p>
+            <p class="adress"> <?php echo $adress; ?> </p>
+            <p class="number"> <?php echo $number; ?> </p>
             <p class="email"> <?php echo $email; ?> </p>
             <p class="web"> <?php echo $web; ?> </p>
-            <p class="prace"> <?php echo $prace; ?> </p>
+            <p class="job"> <?php echo $job; ?> </p>
         </div>
 
 
