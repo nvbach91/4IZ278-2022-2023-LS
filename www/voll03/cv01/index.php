@@ -42,32 +42,26 @@ $country = "Česká republika";
                 <img src="./img/portrait.png" alt="portrét osoby">
             </div>
             <div class="person-info">
-                <div -class="main-info">
-                    <?php
-                    echo "<h2>$name</h2>";
-                    echo "<p>$position</p>";
-                    echo "<p>" . $birthdate->format("j.n.Y") . " (" . $age . ")</p>"
-                    ?>
+                <div class="main-info">
+                    <h2><?php echo $name ?></h2>
+                    <p><?php echo $position ?></p>
+                    <p><?php echo $birthdate->format("j.n.Y") . " (" . $age . ")" ?></p>
                 </div>
                 <div class="contact-info">
-                    <?php
-                    echo "<p><a href=tel:" . $phone . ">" . $phone . "</a></p>";
-                    echo "<p><a href=mailto:" . $email . ">" . $email . "</a></p>";
-                    echo  $lookingForJob ? "<p>Máro, gdě stě?</p>" : "<p class=\"nechsitovsecizapamatuji\">nikdy neodstupim</p>";
-                    ?>
+                    <p><a href="tel:<?php echo $phone ?>"><?php echo $phone ?></a></p>
+                    <p><a href="mailto:<?php echo $email ?>"><?php echo $email ?></a></p>
+                    <p class="stress"><?php echo $lookingForJob ? "Máro, gdě stě?" : "nikdy neodstupim" ?></p>
                 </div>
             </div>
             <div class="company-contact-info">
                 <h2><?php echo "$company" ?></h2>
                 <div class="address">
-                    <?php
-                    echo "<p>" . $street . "</p>";
-                    echo "<p>" . $psc . "</p>";
-                    echo "<p>" . $city . "</p>";
-                    echo "<p>" . $country . "</p>";
-                    ?>
+                    <p><?php echo $street ?></p>
+                    <p><?php echo $psc ?></p>
+                    <p><?php echo $city ?></p>
+                    <p><?php echo $country ?></p>
                 </div>
-                <p><a href="https://<?php echo $web ?>"><?php echo "$web" ?></a></p>
+                <p><a href="https://<?php echo $web ?>"><?php echo $web ?></a></p>
             </div>
         </div>
     </div>
