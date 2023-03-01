@@ -118,7 +118,7 @@ $teams = [$team1, $team2, $team3, $team4, $team5];
                 <div class="col-sm-6">
                     <div class="bc-driver"><?php echo $team->driver1; ?></div>
                     <div class="bc-number"><?php echo $team->driver1Number; ?></div>
-                    <div class="bc-date"><?php echo $team->driver1Date ?></div>
+                    <div class="bc-date"><?php echo $team->driver1Date; ?></div>
                 </div>
                 <div class="col-sm-6">
                     <div class="bc-driver"><?php echo $team->driver2; ?></div>
@@ -132,6 +132,7 @@ $teams = [$team1, $team2, $team3, $team4, $team5];
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <?php require '../../../hotreloader.php'; ?>
 </body>
 
 </html>
