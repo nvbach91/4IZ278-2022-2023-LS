@@ -28,7 +28,7 @@
     </head>
     <body>
         <div class = "front">
-            <img class = 'avatar' src = '<?php echo $avatar; ?>'>
+            <img class = 'avatar' alt = 'avatar-image' src = '<?php echo $avatar; ?>'>
             <div class = 'line'></div>
             <div class = 'text'>
                 <span class = 'name'> <?php echo $name; ?> </span>
