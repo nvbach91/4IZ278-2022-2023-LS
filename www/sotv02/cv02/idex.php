@@ -1,6 +1,7 @@
 <?php
 
-class Team {
+class Team
+{
     public function __construct(
         public $logo,
         public $teamName,
@@ -12,8 +13,7 @@ class Team {
         public $driver2Number,
         public $driver2,
         public $driver2Date
-    ) {  
-        
+    ) {
     }
 }
 
@@ -102,37 +102,36 @@ $teams = [$team1, $team2, $team3, $team4, $team5];
 
 <body>
     <main class="container">
-    <?php foreach($teams as $team): ?>
-        <div class="row">
-            <div class="business-card bc-front">
-                <div class="col-sm-4">
-                    <div class="logo" style="background-image: url(./assets/img/<?php echo $team->logo; ?>)"></div>
+        <?php foreach ($teams as $team) : ?>
+            <div class="row">
+                <div class="business-card bc-front">
+                    <div class="col-sm-4">
+                        <div class="logo" style="background-image: url(./assets/img/<?php echo $team->logo; ?>)"></div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="bc-teamname"><?php echo $team->teamName;; ?></div>
+                        <div class="bc-company"><?php echo $team->company; ?></div>
+                        <div class="bc-title"><?php echo $team->title; ?></div>
+                    </div>
                 </div>
-                <div class="col-sm-8">
-                    <div class="bc-teamname"><?php echo $team->teamName;; ?></div>
-                    <div class="bc-company"><?php echo $team->company; ?></div>
-                    <div class="bc-title"><?php echo $team->title; ?></div>
+                <div class="business-card bc-back">
+                    <div class="col-sm-6">
+                        <div class="bc-driver"><?php echo $team->driver1; ?></div>
+                        <div class="bc-number"><?php echo $team->driver1Number; ?></div>
+                        <div class="bc-date"><?php echo $team->driver1Date; ?></div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="bc-driver"><?php echo $team->driver2; ?></div>
+                        <div class="bc-number"><?php echo $team->driver2Number; ?></div>
+                        <div class="bc-date"><?php echo $team->driver2Date; ?></div>
+                    </div>
                 </div>
             </div>
-            <div class="business-card bc-back">
-                <div class="col-sm-6">
-                    <div class="bc-driver"><?php echo $team->driver1; ?></div>
-                    <div class="bc-number"><?php echo $team->driver1Number; ?></div>
-                    <div class="bc-date"><?php echo $team->driver1Date; ?></div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="bc-driver"><?php echo $team->driver2; ?></div>
-                    <div class="bc-number"><?php echo $team->driver2Number; ?></div>
-                    <div class="bc-date"><?php echo $team->driver2Date; ?></div>
-                </div>
-            </div>
-        </div>
-    <?php endforeach?> 
+        <?php endforeach ?>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
-    <?php require '../../../hotreloader.php'; ?>
 </body>
 
 </html>
