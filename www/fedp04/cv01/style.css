@@ -1,0 +1,92 @@
+*,*::before, *::after {   box-sizing: border-box; }
+
+body{
+    font-family: 'Merienda';font-size: 22px;
+    box-sizing: border-box;
+    background: rgb(199,100,221);
+background: linear-gradient(90deg, rgba(199,100,221,1) 35%, rgba(100,224,249,1) 100%);
+display: flex;
+justify-content: center;
+}
+
+.front-image img{
+    display: flex;
+    position:relative;
+    width: 200px;
+    height: 220px;
+
+}
+
+.business-card-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.business-card{
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid #EA8FEA;
+    background-color:rgb(26, 26, 64);
+    color: rgb(169, 13, 208);
+    width: 650px;
+    margin: 30px;
+    height: 310px;
+    display: flex;
+    align-items: center;
+    box-shadow: 6px 6px 20px #FFAACF;
+}
+
+.front-info p, .front-info h2 {
+    margin: 0;
+}
+
+.back p, .back h2 {
+    margin: 0;
+}
+
+.back{
+    
+    display: flex;
+    justify-content: center;
+}
+.business-card:hover{
+    transform: scale(1.1);
+    transition-duration: 200ms;
+    animation-direction: alternate;
+}
+
+.front div {
+    width: 50%;
+}
+
+.front{
+    flex-direction: row;
+}
+
+.name{
+    list-style:upper-roman ;
+    margin: 0px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.surname{
+    list-style: upper-roman;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.position, .firm_name {
+    font-size: 1em;
+  }
+  .firm_name {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .adress, .number, .email, .web, .job{
+    font-size: 0.8em;
+    line-height: 1.5em;
+
+  }
