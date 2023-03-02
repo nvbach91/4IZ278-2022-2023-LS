@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+.title{
+    text-align: center;
+}
+.business-card {
+    padding: 30px;
+    background-color: #292a30;
+    color: #000000;
+    max-width: 600px;
+    margin: 20px auto;
+    height: 300px;
+    background-image: url(https://i.pinimg.com/736x/bf/f0/8c/bff08c4f1bcc4a4d35c8f5ba6df95e0e.jpg);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 5px 20px #000;
+  }
+  .bc-firstname {
+    margin-left: 20px;
+    
+
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+  }
+  .bc-lastname {
+    margin-left: 20px;
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #060606;
+  }
+  .bc-title, .bc-company {
+    margin-left: 20px;
+    font-size: 1em;
+  }
+  .bc-company {
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .logo {
+    padding: 20px;
+    margin: 20px auto;
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .contacts {
+    font-weight: bold;
+    font-size: 1.0em;
+    line-height: 1.5em;
+  }
+  .bc-back .bc-firstname, .bc-back .bc-lastname {
+    font-size: 2em;
+    margin-right: 20px;
+  }
+  
+  
+  .bc-address {
+    font-weight: bold;
+  }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
