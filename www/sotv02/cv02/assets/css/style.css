@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+  }
+  .business-card {
+    padding: 30px;
+    background-color: #fefefe;
+    color: #000000;
+    width: 550px;
+    margin: 20px auto;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 5px 20px #000000;
+  }
+
+  .row {
+    display: flex;
+  }
+
+  .bc-teamname {
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+  }
+  .bc-company {
+    white-space: nowrap;
+    line-height: 1.2em;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .bc-title {
+    font-size: 1em;
+  }
+
+  .bc-driver {
+    white-space: nowrap;
+    font-size: 2em;
+  }
+
+  .bc-number {
+    font-size: 1.8em;
+  }
+
+  .bc-company {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .logo {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .bc-back > div:first-child {
+    border-right: 2px solid #e1e1e1;
+  }
+
+  .row:nth-child(1) > .business-card > .col-sm-8 > .bc-company , .row:nth-child(1) > .business-card > .col-sm-6 > .bc-number {
+    color: #38B09D;
+  }
+  .row:nth-child(2) > .business-card > .col-sm-8 > .bc-company , .row:nth-child(2) > .business-card > .col-sm-6 > .bc-number {
+    color: #ff2800;
+  }
+  .row:nth-child(3) > .business-card > .col-sm-8 > .bc-company , .row:nth-child(3) > .business-card > .col-sm-6 > .bc-number {
+    color: #E0610E;
+  }
+  .row:nth-child(4) > .business-card > .col-sm-8 > .bc-company , .row:nth-child(4) > .business-card > .col-sm-6 > .bc-number {
+    color: #245e97;
+  }
+  .row:nth-child(5) > .business-card > .col-sm-8 > .bc-company , .row:nth-child(5) > .business-card > .col-sm-6 > .bc-number {
+    color: #df2127;
+  }
+
+  
