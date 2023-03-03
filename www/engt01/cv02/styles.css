@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+}
+
+.bc {
+    display: flex;
+    margin: 64px auto;
+    width: fit-content;
+    background: #e1e1e1;
+    border-radius: 4px;
+    line-height: 1.15;
+    gap: 2px;
+    overflow: hidden;
+}
+
+img {
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-flow: column;
+    width: 200px;
+    justify-content: space-evenly;
+    padding: 8px;
+}
+
+.info span {
+    text-align: center;
+}
