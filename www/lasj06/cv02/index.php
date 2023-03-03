@@ -52,7 +52,7 @@ $people = [$person1, $person2, $person3];
 <?php foreach($people as $person): ?>
     <div class="main">
         <div class="main-info">
-            <img class="logo" src="<?php echo $person->logo; ?>" width="30px" height="20px">
+            <img class="logo" src="<?php echo $person->logo; ?>" width="30" height="20" alt="VŠE logo">
             <p><?php echo $person->name ?></p>
             <p><?php echo $person->age ?></p>
             <p><?php echo $person->position ?></p>
@@ -76,4 +76,4 @@ $people = [$person1, $person2, $person3];
         </div>
     </div>
 <?php endforeach ?>
-<?php include 'head.php' ?>
+<?php include 'foot.php' ?>
