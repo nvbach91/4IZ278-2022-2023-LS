@@ -4,7 +4,6 @@
     $age = 20;
     $logo = "https://ysdmikula.github.io/me/aboutMe/logo.jpg";
     $city = "Praha";
-    $status = "student";
     $backPic = "potato.png";
 ?>
 
@@ -32,7 +31,7 @@
         
     </div>
     <div id="back" class="card-side">
-        <img src=<?php echo $backPic ?> alt="">
+        <img src=<?php echo $backPic ?> alt="githubPic">
         <div>github.com/ysdmikula</div>
     </div>
 </body>
