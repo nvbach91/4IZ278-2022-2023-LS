@@ -2,9 +2,6 @@
 
 require_once __DIR__ . '/utils/utils.php';
 
-require_once __DIR__ . '/view/BusinessCardFront.php';
-require_once __DIR__ . '/view/BusinessCardBack.php';
-
 require_once __DIR__ . '/model/Company.php';
 require_once __DIR__ . '/model/Person.php';
 
@@ -106,8 +103,8 @@ $persons = [$person1, $person2, $person3];
             <main>
                 <?php
                     foreach ($persons as $person) {
-                        BusinessCardFront::render($person);
-                        BusinessCardBack::render($person);
+                        require __DIR__ . '/view/businessCardFront.php';
+                        require __DIR__ . '/view/businessCardBack.php';
                         echo '<hr/>';
                     }
                 ?>
