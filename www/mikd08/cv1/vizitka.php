@@ -2,12 +2,10 @@
     $name = "David";
     $surname = "Mikula";
     $age = 20;
-    $logo = "https://ysdmikula.github.io/me/aboutMe/logo.jpg";
-    $city = "Praha";
-    $status = "student";
-    $backPic = "potato.png";
-?>
+    $pic = "logo.jpg";
 
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,22 +16,13 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="vizitka.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
-    <div id="front" class="card-side">
-        <img src=<?php echo $logo;?> alt="profPic">
-        <div>
-            <h1 id="name"><?php echo $name?></h1>
-            <h1 id="surname"><?php echo $surname ?></h1>
-            <div id="age" class="info"><span class="material-symbols-outlined">cake</span><span><?php echo $age ?></span></div>
-            <div id="city" class="info"><span class="material-symbols-outlined">home</span><span><?php echo $city ?></span></div>
-        </div>
-        
-    </div>
-    <div id="back" class="card-side">
-        <img src=<?php echo $backPic ?> alt="">
-        <div>github.com/ysdmikula</div>
+    <div id="card">
+        <div id="pic"><img src=<?php echo $pic?> alt="pic"></div>
+        <div id="name">jméno: <?php echo $name?></div>
+        <div id="surname">přijmení: <?php echo $surname?></div>
+        <div id="age">věk: <?php echo $age?></div>
     </div>
 </body>
 </html>
