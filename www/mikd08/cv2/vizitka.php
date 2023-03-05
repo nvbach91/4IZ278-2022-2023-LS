@@ -26,8 +26,6 @@
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
 <?php include "head.php"?>
 <body>
     <div id="front" class="card-side">
@@ -48,7 +46,7 @@
 
     <?php foreach($people as $person):?>
         <div id="front" class="card-side">
-        <img src=<?php echo $logo;?> alt="profPic">
+        <img src="<?php echo $logo;?>" alt="profPic">
         <div>
             <h1 id="name"><?php echo $person->name?></h1>
             <h1 id="surname"><?php echo $person->surname ?></h1>
@@ -59,7 +57,7 @@
 
     </div>
     <div id="back" class="card-side">
-        <img src=<?php echo $backPic ?> alt="">
+        <img src="<?php echo $backPic ?>" alt="">
         <div>github.com/ysdmikula</div>
     </div>
     <?php endforeach?>
