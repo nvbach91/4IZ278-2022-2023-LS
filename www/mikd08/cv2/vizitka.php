@@ -29,7 +29,7 @@
 <?php include "head.php"?>
 <body>
     <div id="front" class="card-side">
-        <img src=<?php echo $logo;?> alt="profPic">
+        <img src="<?php echo $logo;?>" alt="profPic">
         <div>
             <h1 id="name"><?php echo $name?></h1>
             <h1 id="surname"><?php echo $surname ?></h1>
@@ -40,7 +40,7 @@
 
     </div>
     <div id="back" class="card-side">
-        <img src=<?php echo $backPic ?> alt="">
+        <img src="<?php echo $backPic ?>" alt="">
         <div>github.com/ysdmikula</div>
     </div>
 
