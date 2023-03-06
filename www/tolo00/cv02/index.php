@@ -3,39 +3,6 @@
 require_once __DIR__ . '/utils/utils.php';
 
 require_once __DIR__ . '/model/Company.php';
-require_once __DIR__ . '/model/Person.php';
-
-$person1 = new Person(
-    'Ondřej',
-    'Tölg',
-    '9.3.2001',
-    'Lead Developer',
-    '(+420) 608 363 903',
-    'tolgicraft@gmail.com',
-    false,
-);
-
-$person2 = new Person(
-    'Vojtěch',
-    'Přiklopil',
-    '2.4.2004',
-    'Architect',
-    '(+420) 777 888 999',
-    'vojta@priklopil.com',
-    false,
-);
-
-$person3 = new Person(
-    'Jan',
-    'Tölg',
-    '17.11.1989',
-    'Consultant',
-    '(+420) 888 777 999',
-    'jan@tolg.com',
-    false,
-);
-
-$persons = [$person1, $person2, $person3];
 
 ?>
 
@@ -102,11 +69,7 @@ $persons = [$person1, $person2, $person3];
 
             <main>
                 <?php
-                    foreach ($persons as $person) {
-                        require __DIR__ . '/view/businessCardFront.php';
-                        require __DIR__ . '/view/businessCardBack.php';
-                        echo '<hr/>';
-                    }
+                    require __DIR__ . '/view/businessCards.php';
                 ?>
             </main>
 
