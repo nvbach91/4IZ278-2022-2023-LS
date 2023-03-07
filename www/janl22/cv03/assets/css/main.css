@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+::placeholder {
+    font-size: 0.75em;
+}
+
+.avatar {
+    height: 128px;
+    width: 128px;
+    border-radius: 50%;
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
