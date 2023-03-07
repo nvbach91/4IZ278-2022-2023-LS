@@ -18,5 +18,13 @@ class Person
         public $webpage,
         public $isJobless
     ){}
+
+function getFullName($person){
+    return $person->firstName.' '.$person->lastName;
+}
+
+function getFullAddress($person){
+    return $person->streetName.' '.$person->buildingNumber.'/'.$person->orientationNumber.', '.$person->city;
+}
 }
 ?>

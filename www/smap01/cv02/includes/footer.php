@@ -1,6 +1,3 @@
-<?php echo "
 </body>
 
 </html>
-"
-?>

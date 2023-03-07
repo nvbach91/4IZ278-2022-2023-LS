@@ -1,4 +1,3 @@
-<?php echo '
 <!DOCTYPE html>
 
 
@@ -11,5 +10,3 @@
     <title>cv02</title>
     <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
-'
-?>
