@@ -1,0 +1,67 @@
+* {
+	box-sizing: border-box;
+}
+
+main {
+	padding-top: 4rem;
+}
+
+.form-signup {
+    width: 500px;
+}
+
+.avatar {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+/*footer*/
+footer {
+	background-color: #343a40;
+	color: white;
+	padding-top: 0.75rem;
+	margin-top: 1rem;
+	text-align: center;
+}
+
+footer .footer-copyright {
+	background-color: #333333;
+	padding-top: 0.05rem;
+	padding-bottom: 0.075rem;
+	font-size: 0.75rem;
+}
+
+footer .footer-copyright p {
+	margin: 0.5rem;
+	color: #ccc;
+}
+
+footer .row {
+	margin-bottom: 0.75rem;
+}
+
+footer a {
+	color: #d2d1d1;
+	text-decoration: none;
+}
+
+footer a:hover,
+footer a:focus {
+	text-decoration: none;
+	color: white;
+}
+
+footer .social-networks {
+	padding-top: 0;
+}
+
+footer .social-networks a {
+	color: #f9f9f9;
+	padding: 0.5rem;
+	transition: 0.2s;
+}
+
+footer .social-networks a:hover {
+	text-decoration: none;
+	color: #0077e2;
+}
