@@ -1,0 +1,51 @@
+.avatar{
+    height: 100px;
+    width: 100px;
+    margin-right: 35px;
+}
+
+.success{
+    color: darkgreen;
+    margin-right: 70px;
+    margin-bottom: 15px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 20%;
+
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+}
+.genderInput{
+    width: 177px;
+    padding-left: 60px;
+}
+button{
+    margin-top: 10px;
+    width: 177px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+form > *{
+    margin-bottom: 10px;
+}
+.error{
+
+    margin-right: 90px;
+    margin-bottom: 15px;
+    color: darkred ;
+}
+div input, .genderInput{
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 3px;
+    padding: 7px;
+    margin-left: 10px;
+}
