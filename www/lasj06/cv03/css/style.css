@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-signup {
+    width: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pfp {
+    max-height: 100px;
+    width: auto;
+}
+
+.form-control {
+    color: darkslategray;
+}
