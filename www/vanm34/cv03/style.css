@@ -1,0 +1,91 @@
+
+  .form {
+    margin: 20px auto;
+    width: 400px;
+    height: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.9);
+    background: #ffffff;
+  }
+
+  body{
+    background: linear-gradient(140deg, #2e81c5, #ad14b3);
+    display: flex;
+    height: 100vh;
+  }
+
+
+  h1 {
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #474747 ;
+    }
+
+    .userInfo{
+        align-items: center;
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    input:focus, select:focus{
+        outline: none;
+        border: 2px solid #000000  !important;
+        
+    }
+
+    .inputNames{  
+        width: fit-content;
+        flex: content;
+        
+    }
+
+    input{
+        width: 100%;
+        margin-bottom: 10px;
+        height: 20px;
+    }
+
+   .avatar{
+        height: 120px;
+   }
+
+    button{
+        margin-top: 20px;
+        height: 100%;
+        width: 80%;
+        border: none;
+        background: linear-gradient(140deg, #2e81c5, #ad14b3);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 500;
+        text-decoration-color: #4ec9c3;
+    }
+
+    .errorMessage{
+        border-radius: 10px;
+        background: rgb(236, 155, 155);
+        text-align: center;
+        margin-top: 2px;
+        margin-left: 2px;
+        margin-bottom: 2px;
+        margin-right: 2px;
+
+    }
+
+    .succsesText{
+        border-radius: 10px;
+        background: rgb(112, 233, 101);
+        text-align: center;
+        margin-top: 2px;
+        margin-left: 2px;
+        margin-bottom: 2px;
+        margin-right: 2px;
+    }
