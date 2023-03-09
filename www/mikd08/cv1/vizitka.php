@@ -29,7 +29,7 @@
             <div id="age" class="info"><span class="material-symbols-outlined">cake</span><span><?php echo $age ?></span></div>
             <div id="city" class="info"><span class="material-symbols-outlined">home</span><span><?php echo $city ?></span></div>
         </div>
-
+        
     </div>
     <div id="back" class="card-side">
         <img src=<?php echo $backPic ?> alt="">
