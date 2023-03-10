@@ -1,0 +1,163 @@
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+body {
+    background-image: url('../img/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: brightness(4
+    0%);
+    background-color: black;
+}
+
+.form {
+    position: relative;
+    margin-left: auto;
+    margin-right: 34px;
+    margin-top: 30px;
+    height: 942px;
+    width: 646px;
+    background: rgba(26, 25, 29, 0.88);
+    border-radius: 70px;
+}
+p[id = 'reg_menu'] {
+    padding-top: 60px;
+    height: inherit;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: 400;
+    font-size: 48px;
+    font-style: normal;
+    line-height: 60px;
+    color: #D1D1D1;
+}
+
+p[id = 'text'] {
+    font-family: 'Franklin Gothic Medium';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+    color: #B8B8B8;
+}
+.field {
+    padding-top: 32px;
+    padding-left: 41px;
+}
+input[id = 'text'] {
+    width: 544px;
+    height: 42px;
+    background: #D9D9D9;
+    border-radius: 14px;
+    border-color: #D9D9D9;
+    border-style: solid;
+    font-family: 'Franklin Gothic Medium';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    padding-left: 10px;
+}
+*:focus {
+    outline: 5px solid #5048a3;
+    transition-duration: 500ms;
+}
+.selection {
+    background: #D9D9D9;
+    border-radius: 14px;
+    width: 186px;
+    height: 42px;
+    font-family: 'Franklin Gothic Medium';
+    font-size: 18px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+}
+.file-upload {
+    display: inline-block;
+    cursor: pointer;
+    width: 176px;
+    height: 42px;
+    background: #D9D9D9;
+    border-radius: 14px;
+    font-family: 'Franklin Gothic Medium';
+    font-size: 18px;
+    padding-left: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+}
+.submition {
+    text-align: center;
+    padding-top: 57px;
+}
+input[type = 'submit'], button[type = 'button'] {
+    width: 335px;
+    height: 73px;
+    background-color: rgba(26, 25, 29, 0);
+    border-color: rgba(127, 84, 149, 0.65);
+    color: rgba(127, 84, 149, 0.65);
+    border-radius: 34px;
+    border-style: solid;
+    font-family: 'Franklin Gothic Medium';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 45px;
+    outline: none;
+}
+
+input[type = 'submit']:hover, button[type = 'button']:hover {
+    transition: 1s;
+    cursor: pointer;
+    background-color: rgba(127, 84, 149, 0.65);
+    border-color: rgba(249, 249, 249, 0.25);
+    color: #D9D9D9;
+}
+
+button[type = 'button'] {
+    width: 305px;
+    height: 53px;
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+.error {
+    margin-left: auto;
+    margin-right: auto;
+    width: 344px;
+    height: 20px;
+    border-radius: 14px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium';
+    background-color: rgba(255, 0, 0, 0.6);
+    color: #D9D9D9;
+    transition: 1s;
+}
+.success, .fault {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 57px;
+    width: 344px;
+    height: 20px;
+    border-radius: 14px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium';
+    font-size: 15px;
+    background-color: rgba(30, 163, 57, 0.6);
+    color: #D9D9D9;
+    transition: 1s;
+}
+.fault {
+    background-color: rgba(163, 30, 30, 0.6);
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    color:#887dff;
+    transition: 0.5s;
+}
