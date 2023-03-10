@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:aqua;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+button {
+    background-color:green;
+    color: white;
+    padding: 15px 20px;
+    margin: 10px 0;
+}
+
+.avatar-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.avatar-photo img {
+    border-radius: 5px;
+    max-width: 200px;
+    max-height: 250px
+}
