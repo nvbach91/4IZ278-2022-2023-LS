@@ -22,13 +22,18 @@
             public $surname,
             public $phone,
             public $birthYear,
-            public $city
+            public $city,
+            public $pic
         ) {
             
         }
 
         function getFullName () {
             return $this->name . " " . $this->surname;
+        }
+
+        function calcAge(){
+            return 2023 - $this->birthYear;
         }
     }
 ?>
