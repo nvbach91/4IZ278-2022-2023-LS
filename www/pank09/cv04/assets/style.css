@@ -1,0 +1,88 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+    position: relative;
+    padding: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.form-wrapper h1 {
+    margin-bottom: 1rem;
+}
+
+.form-wrapper form {
+    min-width: 380px;
+}
+
+.form-wrapper form .message {
+    padding: 15px 10px;
+    color: #FFFFFF;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+}
+
+.form-wrapper form .message.success {
+    background-color: #2C9D6C;
+}
+
+.form-wrapper form .message.error {
+    background-color: #A82637;
+}
+
+.form-wrapper form .message ul {
+    padding-left: 20px;
+}
+
+.form-wrapper form .message ul li:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.form-wrapper form .field {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.form-wrapper form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-wrapper form input,
+.form-wrapper form select {
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.form-wrapper form button {
+    cursor: pointer;
+    padding: 0 30px;
+    height: 42px;
+}
+
+.form-wrapper form input {
+    width: 100%;
+}
+
+.form-wrapper form button[type="submit"] {
+    color: #FFFFFF;
+    background-color: #25282E;
+}
