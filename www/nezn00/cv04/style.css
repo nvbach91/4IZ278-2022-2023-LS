@@ -1,0 +1,35 @@
+body{
+    padding: 100px;
+    background-image: url(https://images.pexels.com/photos/2508565/pexels-photo-2508565.jpeg?cs=srgb&dl=pexels-dids-2508565.jpg&fm=jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1{
+    text-align: center;
+    color: black;
+}
+h2{
+    text-align: left;
+    margin-left: 250px;
+}
+img {
+    width: 300px;
+    float:right;
+    margin-right: 200px;         
+    
+}
+
+.form-group{
+    margin-bottom: 20px;
+    align-items: center;
+}
+form{
+    margin-left: 200px;
+    margin-right: 200px;
+    align-items: center;
+}
+h3{
+    text-align: center;
+    color: black;
+}
