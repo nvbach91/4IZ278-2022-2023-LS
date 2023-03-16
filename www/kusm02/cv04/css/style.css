@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(221, 172, 252);
+    font-size: 14px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.business-card {
+    margin: 50px 0 0 50px;
+    background-color: rgb(248, 162, 239);
+    width: 400px;
+    height: 220px;
+    padding: 20px;
+    background-image: url(https://img.freepik.com/premium-photo/neoncolored-lake-shiny-cyberpunk-style_476006-786.jpg);
+    background-size: cover;
+    position: relative;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.business-card > div {
+    text-align: right;
+    padding: 2px 0;
+    color: white;
+}
+
+.bc-name {
+    font-size: 2em;
+}
+.bc-avatar {
+    position: absolute;
+    bottom: 15px;
+    left: 40px;
+}
+
