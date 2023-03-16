@@ -1,9 +1,11 @@
 .card {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
     width: 600px;
-    margin: 0 auto;
+    margin: 20px ;
     /* Created with https://www.css-gradient.com */
     background: #FF8F8F;
     background: -webkit-linear-gradient(right, #FF8F8F, #FFEC6E);
@@ -15,16 +17,26 @@
     font-size: 1.2rem;
 }
 
+#back{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .card img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     margin-right: 2rem;
+    margin-left: 1rem;
     object-fit: cover;
 }
 
 .leftSide {
     flex: 1;
+
 }
 
 .nameSur {
@@ -36,7 +48,7 @@
 
 .student {
     margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     font-size: 1.2rem;
     font-weight: 500;
     color: #757575;
@@ -44,8 +56,9 @@
 
 .underLeftSide {
     list-style: none;
-    margin: 0;
+    margin: 1rem 0 0;
     padding: 0;
+    line-height: 2.0rem;
 }
 
 .underLeftSide li {
@@ -56,11 +69,12 @@
 .rightSide {
     padding-top: 15px;
     flex: 1;
-    font-size: 1.2rem;
-    color: #424242;
+
+    line-height: 2;
 }
 
-.rightSide p {
+.rightSide, .leftSide {
     margin: 0 0 0.5rem;
-    line-height: 1.5;
+    color: #424242;
+    font-size: 1.2rem;
 }
