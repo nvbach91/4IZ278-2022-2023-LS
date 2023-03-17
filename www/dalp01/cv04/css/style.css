@@ -1,0 +1,18 @@
+body {
+    background-image: url("https://static.vecteezy.com/system/resources/previews/006/691/305/original/abstract-background-with-soft-gradient-color-and-dynamic-shadow-on-background-background-for-wallpaper-eps-10-free-vector.jpg");
+}
+.title{
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 3%;
+}
+.avatar {
+    margin-left: 50px;
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    border-radius: 20%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}

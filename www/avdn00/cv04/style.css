@@ -1,0 +1,66 @@
+body {
+  text-align: center;
+  background-color: floralwhite;
+}
+
+form {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 5px 13px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+select {
+  width: 100%;
+  padding: 5px 13px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+div .errors {
+  color: red;
+  padding: 2px;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+div.success {
+  color: #4caf50;
+  border: none;
+  padding: 12px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+div.avatar {
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.avatar img {
+  width: auto;
+  height: 120px;
+  border-radius: 5px;
+}
