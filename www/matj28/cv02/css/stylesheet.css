@@ -1,0 +1,59 @@
+.bCard {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    background-color: #333333;
+}
+
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #ffccff;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #ffccff;
+}
+
+
+p {
+    margin: 0;
+    color: #cccccc;
+}
+
+a:link {
+    color: #cccccc;
+}
+
+a:visited {
+    color: #ffccff;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    background-image: url('../resources/DALL·E.png');
+    background-size: cover;
+}
+
+.contact {
+    margin-top: 20px;
+}
