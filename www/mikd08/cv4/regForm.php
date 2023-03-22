@@ -1,6 +1,4 @@
 <?php 
-    session_start();
-
     // var_dump($_POST);
     require "funcs.php";
 
@@ -9,7 +7,6 @@
 
     if (!empty($_POST)) {
         $password = htmlspecialchars(trim($_POST["password"]));
-        $confPassword = htmlspecialchars(trim($_POST["confPassword"]));
         $phone = htmlspecialchars(trim($_POST["phone"]));
         $email = htmlspecialchars(trim($_POST["email"]));
         $gender = htmlspecialchars(trim($_POST["gender"]));
@@ -28,12 +25,9 @@
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             array_push($errors, "Email not valid");
         }
-        if ($confPassword != $password) {
-            array_push($errors, "Password confirmation invalid");
-        }
       
-        $registeredUser = getUser($email);
-        if ($registeredUser != null) {
+        $existingUser = validateUser($email);
+        if ($existingUser != null) {
             array_push($errors, "User exists already");
         }
 
@@ -43,7 +37,6 @@
             file_put_contents($databasePath, $userRecord, FILE_APPEND);
             // var_dump(file_get_contents($databasePath));
             header("Location: login.php");
-            $_SESSION["registered"] = true;
             exit;
         }
 
@@ -77,12 +70,7 @@
     <div class="inputSection">
         <label for="password">Password</label>
         <br>
-        <input type="password" name="password" placeholder="password" value="<?php if (isset($password)) echo $password?>">
-    </div>
-    <div class="inputSection">
-        <label for="confPassword">Confirm password</label>
-        <br>
-        <input type="password" name="confPassword" placeholder="confirm password" value="<?php if (isset($confPassword)) echo $confPassword?>">
+        <input type="text" name="password" placeholder="password" value="<?php if (isset($password)) echo $password?>">
     </div>
     <br>
     <button style="margin-top: 20px;">Submit</button>
@@ -95,5 +83,4 @@
 <?php elseif (!empty($_POST)):?>
     <h2>The form was succesfully sent</h2>
 <?php endif ?>
-
 </div>
