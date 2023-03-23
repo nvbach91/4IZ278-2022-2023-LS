@@ -95,8 +95,7 @@ if (!empty($_POST)) {
     if (empty($errors)) {
         $dbFile = './database.db';
         //$userRecord = "$email;$password;" . PHP_EOL;
-        $userRecord = "$mail;$password;$firstName;$lastName;$address;$occupation;$birthYear;$avatar";
-        $mail . PHP_EOL . "\r\n";
+        $userRecord = "$mail;$password;$firstName;$lastName;$address;$occupation;$birthYear" . "\r\n";
         file_put_contents($dbFile, $userRecord, FILE_APPEND);
         //reg complete co next
         header('Location: login.php');
