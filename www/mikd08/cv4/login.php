@@ -1,15 +1,12 @@
 <?php 
-    session_start();
-
     require "funcs.php";
-
 
     $logInSubmitted = !empty($_POST);
 
     if ($logInSubmitted) {
         $email = $_POST["email"];
         $password = $_POST["password"];
-        $user = getUser($email);
+        $user = validateUser($email);
         if ($user == null) {
             $msg = "User not registered";
         } else if ($user["password"] != $password){
@@ -41,16 +38,15 @@
     </style>
 </head>
 <body>
-    <?php if ($_SESSION["registered"] == true): ?>
+    <?php if ($_SERVER["HTTP_REFERER"] == "http://localhost/www/mikd08/cv4/index.php"): ?>
         <div>
             Succesfully registered
         </div>
-        <?php $_SESSION["registered"] = false ?>
     <?php endif ?>
     <h1>Log in</h1>
     <form action="login.php" method="post">
-        <input type="text" name="email" placeholder="email" value="<?php echo isset($email) && $msg == "Incorrect password" ? $email : "" ?>">
-        <input type="password" name="password" placeholder="password">
+        <input type="text" name="email" placeholder="email" value="<?php echo $msg == "Incorrect password" ? $email : "" ?>">
+        <input type="text" name="password" placeholder="password">
         <button name="submit">log in</button>
     </form>
     

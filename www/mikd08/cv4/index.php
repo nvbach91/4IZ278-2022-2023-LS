@@ -1,7 +1,5 @@
 <?php 
 
-    //write do db
-
     //jeden způsob
     // $file = fopen("database.db", "w");
     // fwrite($file, "");    
