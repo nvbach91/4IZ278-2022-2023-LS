@@ -1,14 +1,16 @@
+<?php require_once __DIR__ . '/../db/CategoriesDB.php'; ?>
 <?php
-$categories = [
-    ['number' => 0, 'name' => 'Alphonso'],
-    ['number' => 1, 'name' => 'Chaunsa'],
-    ['number' => 2, 'name' => 'Langra'],
-    ['number' => 3, 'name' => 'Benishan'],
-];
-// fetch from database
+
+$categoriesDB = new CategoriesDB();
+$categories = $categoriesDB->fetchAll();
+
 ?>
+
 <div class="list-group">
+    <a href="." class="list-group-item">All categories</a>
     <?php foreach($categories as $category): ?>
-    <a href="#" class="list-group-item"><?php echo '(', $category['number'], ') ', $category['name']; ?></a>
+    <a href="?category_id=<?php echo $category['category_id']; ?>" class="list-group-item">
+        <?php echo '[', $category['category_id'], '] ', $category['name']; ?>
+    </a>
     <?php endforeach; ?>
 </div>

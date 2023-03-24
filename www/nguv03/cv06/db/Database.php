@@ -1,9 +1,10 @@
-<?php require __DIR__ . '/../config/global.php'; ?>
-<?php require __DIR__ . '/DatabaseOperations.php'; ?>
+<?php require_once __DIR__ . '/../config/global.php'; ?>
+<?php require_once __DIR__ . '/DatabaseOperations.php'; ?>
 <?php
 
 abstract class Database implements DatabaseOperations {
     protected $pdo;
+    protected $tableName; // $tableName will be specified in child classes
     public function __construct() {
         //try {
         $this->pdo = new PDO(
@@ -16,7 +17,13 @@ abstract class Database implements DatabaseOperations {
         $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // allows LIMIT
         //} catch (PDOException $e) {
         //    exit('Connection to DB failed: ' . $e->getMessage());
-        //} 
+        //}
+    }
+    public function fetchAll() {
+        $sql = 'SELECT * FROM ' . $this->tableName;
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
     }
     public function fetchBy($field, $value) {
         // PREPARED STATEMENT: POSITIONAL PARAMS
