@@ -28,7 +28,7 @@ abstract class Database implements DatabaseOperations {
 class UsersDB extends Database {
     public function fetch($args) {
         return $this->query(
-            "SELECT * FROM users WHERE Email = '" . $args['email'] . "'"
+            "SELECT * FROM cv05_users WHERE Email = '" . $args['email'] . "'"
         );
     }
 }
