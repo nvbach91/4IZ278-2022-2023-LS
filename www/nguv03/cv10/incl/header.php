@@ -33,7 +33,7 @@
                     <a class="nav-link" href="cart.php">Cart</a>
                 </li>
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'profile') ? ' active' : '' ?>">
-                    <a class="nav-link" href="profile.php"><i class="fas fa-user"></i> <?php echo $_SESSION['user_email']; ?></a>
+                    <a class="nav-link" href="#"><i class="fas fa-user"></i> <?php echo $_SESSION['user_email']; ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="signout.php"><i class="fas fa-sign-out-alt"></i></a>

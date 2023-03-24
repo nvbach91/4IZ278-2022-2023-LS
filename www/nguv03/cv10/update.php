@@ -7,9 +7,9 @@ require 'user_required.php';
 // pristup jen pro admina
 require 'admin_required.php';
 
-$stmt = $db->prepare('SELECT * FROM cv10_products WHERE id = :id');
+$stmt = $db->prepare('SELECT * FROM cv10_products WHERE product_id = :product_id');
 $stmt->execute([
-    'id' => $_GET['id']
+    'product_id' => $_GET['product_id']
 ]);
 $product = $stmt->fetch();
 
@@ -18,12 +18,13 @@ if (!$product) {
 }
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $stmt = $db->prepare('UPDATE cv10_products SET name = :name, description = :description, price = :price WHERE id = :id');
+    var_dump($_POST);
+    $stmt = $db->prepare('UPDATE cv10_products SET name = :name, description = :description, price = :price WHERE product_id = :product_id');
     $stmt->execute([
         'name' => $_POST['name'], 
         'description' => $_POST['description'], 
-        'price' => (float) $_POST['price'], 
-        'id' => $_POST['id']
+        'price' => $_POST['price'], 
+        'product_id' => $_POST['product_id']
     ]);
 
     header('Location: index.php');
@@ -55,7 +56,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             <label for="img">Image</label>
             <input name="img" class="form-control" placeholder="Image" required value="<?php echo $product['img']; ?>">
         </div>
-        <input type="hidden" name="id" value="<?php echo $product['id'];?>'">
+        <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
         <br>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save</button> or <a href="index.php">Cancel</a>
     </form>

@@ -8,7 +8,7 @@ require 'user_required.php';
 // zrusime id zbozi ze session
 // nekontrolujeme, jestli tam je
 
-$id = $_GET['id'];
+$id = $_GET['product_id'];
 
 //var_dump($_SESSION['cart']);
 

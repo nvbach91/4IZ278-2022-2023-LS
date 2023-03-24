@@ -7,9 +7,9 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-$stmt = $db->prepare('SELECT * FROM cv10_products WHERE id = :id');
+$stmt = $db->prepare('SELECT * FROM cv10_products WHERE product_id = :product_id');
 $stmt->execute([
-    'id' => $_GET['id']
+    'product_id' => $_GET['product_id']
 ]);
 $products = $stmt->fetch();
 
@@ -17,7 +17,7 @@ if (!$products) {
     exit('Unable to find products!');
 }
 
-$_SESSION['cart'][] = $products['id'];
+$_SESSION['cart'][] = $products['product_id'];
 
 header('Location: cart.php');
 
