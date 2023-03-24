@@ -1,9 +1,14 @@
+<?php require_once __DIR__ . '/../db/SlidesDB.php'; ?>
+
 <?php 
-$slides = [
-    ['img' => 'https://listaka.com/wp-content/uploads/2015/06/Langra.jpg', 'alt' => 'First slide'],
-    ['img' => 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Mango_and_cross_section_edit.jpg', 'alt' => 'Second slide'],
-    ['img' => 'https://img-aws.ehowcdn.com/877x500p/cpi.studiod.com/www_ehow_com/photos.demandstudios.com/getty/article/228/233/124812932.jpg', 'alt' => 'Third slide']
-];
+$slidesDB = new SlidesDB();
+$slides = $slidesDB->fetchAll();
+
+// $slides = [
+//     ['slide_id' => 1, 'img' => 'https://listaka.com/wp-content/uploads/2015/06/Langra.jpg', 'alt' => 'First slide'],
+//     ['slide_id' => 2, 'img' => 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Mango_and_cross_section_edit.jpg', 'alt' => 'Second slide'],
+//     ['slide_id' => 3, 'img' => 'https://img-aws.ehowcdn.com/877x500p/cpi.studiod.com/www_ehow_com/photos.demandstudios.com/getty/article/228/233/124812932.jpg', 'alt' => 'Third slide']
+// ];
 ?>
 
 <div id="slider" class="carousel slide my-4" data-ride="carousel">

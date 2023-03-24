@@ -4,6 +4,12 @@
 $categoriesDB = new CategoriesDB();
 $categories = $categoriesDB->fetchAll();
 
+// $categories = [
+//     ['category_id' => 0, 'name' => 'Alphonso'],
+//     ['category_id' => 1, 'name' => 'Chaunsa'],
+//     ['category_id' => 2, 'name' => 'Langra'],
+//     ['category_id' => 3, 'name' => 'Benishan'],
+// ];
 ?>
 
 <div class="list-group">

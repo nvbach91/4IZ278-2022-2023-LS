@@ -8,6 +8,14 @@ if (isset($_GET['category_id'])) {
   $products = $productsDB->fetchAll();
 }
 
+// $products = [
+//   ['name' => 'Tommy Atkins', 'price' => 49.9, 'img' => 'https://www.mango.org/wp-content/uploads/2017/11/kent-variety.jpg'],
+//   ['name' => 'Ataulfo', 'price' => 60.9, 'img' => 'http://elbefruit.eu/wp-content/uploads/2018/07/tommy-variety-1.jpg'],
+//   ['name' => 'Kent', 'price' => 47.9, 'img' => 'https://media.mercola.com/assets/images/foodfacts/mango-nutrition-facts.jpg'],
+//   ['name' => 'Haden', 'price' => 51.9, 'img' => 'https://images-na.ssl-images-amazon.com/images/I/21jivLJsAeL.jpg'],
+//   ['name' => 'Keitt', 'price' => 39.9, 'img' => 'http://betterhomegardening.com/wp-content/uploads/2015/05/pakistan-Ataulfo-mango.jpg'],
+//   ['name' => 'Francine', 'price' => 59.9, 'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvS-QHWIlsLILy-fIIGXcxlb2jUIrXNDjKXs4eLbSJt4gJKLu'],
+// ];
 ?>
 
 <div class="row">
