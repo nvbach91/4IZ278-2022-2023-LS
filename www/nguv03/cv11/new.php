@@ -9,8 +9,8 @@ require 'user_required.php';
 require 'admin_required.php';
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $stmt = $db->prepare('INSERT INTO products(name, description, price) VALUES (?, ?, ?)');
-    $stmt->execute([$_POST['name'], $_POST['description'], (float) $_POST['price']]);
+    $stmt = $db->prepare('INSERT INTO cv11_products(name, description, price, img) VALUES (?, ?, ?, ?)');
+    $stmt->execute([$_POST['name'], $_POST['description'], $_POST['price'], $_POST['img']]);
 
     header('Location: index.php');
 }
@@ -35,6 +35,10 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         <div class="form-label-group">
             <label for="description">Description</label>
             <input name="description" class="form-control" placeholder="Description" required>
+        </div>
+        <div class="form-label-group">
+            <label for="img">Image URL</label>
+            <input name="img" class="form-control" placeholder="Image URL" required>
         </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save</button> or <a href="index.php">Cancel</a>

@@ -29,19 +29,19 @@
                     </a>
                 </li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
-                    <a class="nav-link" href="cart.php">Cart</a>
-                </li>
-                <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'profile') ? ' active' : '' ?>">
-                    <a class="nav-link" href="profile.php"><i class="fas fa-user"></i> <?php echo $_SESSION['user_email']; ?></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="signout.php"><i class="fas fa-sign-out-alt"></i></a>
-                </li>
-                <?php else: ?>
-                <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'signin') ? ' active' : '' ?>">
-                    <a class="nav-link" href="signin.php">Sign in</a>
-                </li>
+                    <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
+                        <a class="nav-link" href="cart.php">Cart</a>
+                    </li>
+                    <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'profile') ? ' active' : '' ?>">
+                        <a class="nav-link" href="#"><i class="fas fa-user"></i> <?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signout.php"><i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                    <?php else: ?>
+                    <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'signin') ? ' active' : '' ?>">
+                        <a class="nav-link" href="signin.php">Sign in</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>

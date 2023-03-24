@@ -15,8 +15,8 @@ if (isset($_GET['offset'])) {
     $offset = 0;
 }
 // celkovy pocet zbozi pro strankovani
-$count = $db->query('SELECT COUNT(id) FROM products')->fetchColumn();
-$stmt = $db->prepare('SELECT * FROM products ORDER BY id DESC LIMIT 10 OFFSET ?');
+$count = $db->query('SELECT COUNT(product_id) FROM cv11_products')->fetchColumn();
+$stmt = $db->prepare('SELECT * FROM cv11_products ORDER BY product_id DESC LIMIT 10 OFFSET ?');
 $stmt->bindValue(1, $offset, PDO::PARAM_INT);
 $stmt->execute();
 $products = $stmt->fetchAll();
@@ -46,17 +46,18 @@ $products = $stmt->fetchAll();
             <div>Name</div>
             <div>Price</div>
             <div>Description</div>
-            <div></div>
+            <div>Image URL</div>
             <div></div>
         </div>
         <?php foreach ($products as $product): ?>
         <div class="product">
-            <div><a href='buy.php?id=<?php echo $product['id']; ?>'>Buy</a></div>
+            <div><a href="buy.php?product_id=<?php echo $product['product_id']; ?>">Buy</a></div>
             <div><?php echo $product['name']; ?></div>
             <div><?php echo $product['price']; ?></div>
             <div><?php echo $product['description']; ?></div>
-            <div><a href='update.php?id=<?php echo $product['id']; ?>'>Edit</a></div>
-            <div><a href='delete.php?id=<?php echo $product['id']; ?>'>Delete</a></div>
+            <div><?php echo substr($product['img'], 0, 50); ?>...</div>
+            <div><a href="update.php?product_id=<?php echo $product['product_id']; ?>">Edit</a></div>
+            <div><a href="delete.php?product_id=<?php echo $product['product_id']; ?>">Delete</a></div>
         </div>
         <?php endforeach; ?>
     </div>

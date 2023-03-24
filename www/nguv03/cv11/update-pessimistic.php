@@ -7,9 +7,9 @@ require 'user_required.php';
 // pristup jen pro admina
 require 'admin_required.php';
 
-$stmt = $db->prepare('SELECT * FROM products WHERE id = :id');
+$stmt = $db->prepare('SELECT * FROM cv11_products WHERE product_id = :product_id');
 $stmt->execute([
-    'id' => $_GET['id']
+    'product_id' => $_GET['product_id']
 ]);
 $product = $stmt->fetch();
 
@@ -34,11 +34,11 @@ if ($product['edit_by']) {
 }
 
 
-$sql = "UPDATE products SET edited_by = :user_id, opened_at = now() WHERE id = :product_id;";
+$sql = "UPDATE cv11_products SET edited_by = :user_id, opened_at = now() WHERE product_id = :product_id;";
 $stmt = $db->prepare($sql);
 $stmt ->execute([
     'user_id' => $_COOKIE['user_id'],
-    'product_id' => $_GET['id'],
+    'product_id' => $_GET['product_id'],
 ]);
 
 
@@ -46,22 +46,22 @@ $stmt ->execute([
 
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $stmt = $db->prepare('UPDATE products SET name = :name, description = :description, price = :price WHERE id = :id');
+    $stmt = $db->prepare('UPDATE cv11_products SET name = :name, description = :description, price = :price WHERE product_id = :product_id');
     $stmt->execute([
         'name' => $_POST['name'], 
         'description' => $_POST['description'], 
         'price' => (float) $_POST['price'], 
-        'id' => $_POST['id']
+        'product_id' => $_POST['product_id']
     ]);
     
     
 
-    $sql = "UPDATE products SET edited_by = :user_id, opened_at = :opened_at WHERE id = :product_id;";
+    $sql = "UPDATE cv11_products SET edited_by = :user_id, opened_at = :opened_at WHERE product_id = :product_id;";
     $stmt = $db->prepare($sql);
     $stmt ->execute([
         'user_id' => null,
         'opened_at' => null,
-        'product_id' => $_GET['id'],
+        'product_id' => $_GET['product_id'],
     ]);
 
 
@@ -99,7 +99,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
             <label for="description">Description</label>
             <input name="description" class="form-control" placeholder="Description" required value="<?php echo $product['description']; ?>">
         </div>
-        <input type="hidden" name="id" value="<?php echo $product['id'];?>'">
+        <input type="hidden" name="product_id" value="<?php echo $product['product_id'];?>'">
         <br>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Save</button> or <a href="index.php">Cancel</a>
     </form>

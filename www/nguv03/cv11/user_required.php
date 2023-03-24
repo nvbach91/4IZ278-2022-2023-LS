@@ -8,9 +8,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // v session je user id uzivatele, ted ho nacteme z db
-$stmt = $db->prepare('SELECT * FROM users WHERE id = :id LIMIT 1'); //limit 1 jen jako vykonnostni optimalizace, 2 stejne maily se v db nepotkaji
+$stmt = $db->prepare('SELECT * FROM cv11_users WHERE user_id = :user_id LIMIT 1'); //limit 1 jen jako vykonnostni optimalizace, 2 stejne maily se v db nepotkaji
 $stmt->execute([
-    'id' => $_SESSION['user_id']
+    'user_id' => $_SESSION['user_id']
 ]);
 
 // nacte do promenne $user aktualne prihlaseneho usera, bude pristupny z cele aplikace
