@@ -2,7 +2,7 @@
 <?php
 
 class ProductsDB extends Database {
-    protected $tableName = 'products';
+    protected $tableName = 'cv06_products';
     public function fetchByCategory($category_id) {
         return $this->fetchBy('category_id', $category_id);
     }

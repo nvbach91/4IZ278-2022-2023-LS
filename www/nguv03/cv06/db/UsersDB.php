@@ -2,7 +2,7 @@
 <?php
 
 class UsersDB extends Database {
-    protected $tableName = 'users';
+    protected $tableName = 'cv06_users';
     public function create($args) {
         $sql = 'INSERT INTO ' . $this->tableName . '(name, email, age) VALUES (:name, :email, :age)';
         $statement = $this->pdo->prepare($sql);
