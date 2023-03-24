@@ -1,0 +1,216 @@
+header {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(gray, #4d4d4d, #4d4d4d);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0px;
+}
+
+.brand {
+    font-size: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.brand:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar ul {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.navbar ul>li {
+    display: inline;
+    padding: 5px 20px;
+}
+
+.navbar ul>li:hover {
+    color: lightgray;
+}
+
+.navbar ul>li>a {
+    color: white;
+}
+
+header .et_col_2 {
+    display: flex;
+    height: 30px !important;
+    align-self: center;
+    margin-right: 20px;
+}
+
+header .et_col_2 button {
+    background: gray;
+    padding-left: 5px;
+    margin-left: -5px;
+    border-color: gray;
+    border-radius: 7px;
+}
+
+header .et_col_2 button:hover {
+    background-color: lightgray;
+    transition: all 0.1s ease;
+}
+
+header .et_col_2 input {
+    background: linear-gradient(gray, lightgray);
+    border-radius: 7px;
+    border-color: gray;
+}
+
+.navbar ul>li>a:hover {
+    color: lightgray;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.navbar ul>li:hover {
+    background-color: gray;
+    border-radius: 7px;
+    transition: all 0.3s ease;
+}
+
+.col-form {
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(90deg, gray, lightgray, gray);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 90px;
+}
+
+.input_label {
+    display: block;
+    text-align: left;
+    width: 100%;
+}
+
+.required::after {
+    content: '*';
+    color: red;
+}
+
+.input {
+    width: 100%;
+    text-align: left;
+    border-radius: 7px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 35px;
+    background-color: white;
+}
+
+.signup_form {
+    max-width: 480px;
+    align-self: center;
+    width: 100%;
+}
+
+.signup_form div {
+    margin-bottom: 20px;
+}
+
+.signup_form button {
+    padding: 10px;
+    border-radius: 7px;
+    background: linear-gradient(lightgray, gray, #4d4d4d);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.signup_form button:hover {
+    background: linear-gradient(#4d4d4d, gray, lightgray);
+    border-radius: 12px;
+    transition: all 0.5s;
+}
+
+.title {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.messages_list {
+    max-width: 480px;
+    width: 100%;
+    color: white;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    padding-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.error_list p {
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.body-form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.avatar {
+    padding: 20px;
+    width: 30%;
+    background-color: lightslategrey;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.avatar img {
+    max-width: 80%;
+    max-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 13px;
+}
+
+.avatar .info-col {
+    text-align: left;
+    text-transform: uppercase;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.legend_label {
+    margin-top: 20px;
+    text-align: left;
+    color: #4d4d4d;
+    font-size: 13px;
+    width: 100%;
+}
+
+.legend_label::before {
+    content: '* ';
+    color: red;
+}
+
+.play {
+    background: linear-gradient(red, darkred, black);
+    text-transform: uppercase;
+    border-radius: 7px;
+    font-size: 20px;
+    transition: all 0.5s;
+}
+
+.play:hover {
+    background: linear-gradient(black, darkred, red);
+    border-radius: 12px !important;
+}
