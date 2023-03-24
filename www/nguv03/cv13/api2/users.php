@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         'age' => $input['age'],
         'gender' => $input['gender'],
     ];
-    $id = $input['id'];
-    $success = $users->update($id, $user);
+    $user_id = $input['user_id'];
+    $success = $users->update($user_id, $user);
     echo json_encode([
         'success' => $success,
     ]);
@@ -53,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 // D = DELETE = mazani zaznamu == DELETE metoda
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     parse_str(file_get_contents("php://input"), $input);
-    $userId = $input['id'];
-    $success = $users->delete($id);
+    $user_id = $input['user_id'];
+    $success = $users->delete($user_id);
     echo json_encode([
         'success' => $success,
     ]);

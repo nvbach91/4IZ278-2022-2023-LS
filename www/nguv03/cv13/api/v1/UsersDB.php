@@ -14,7 +14,7 @@ class UsersDB {
         );
     }
     public function fetchAll() {
-        $sql = 'SELECT * FROM users';
+        $sql = 'SELECT * FROM cv13_users';
         $statement = $this->pdo->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
@@ -25,14 +25,14 @@ class UsersDB {
         $statement->execute(['name' => $user['name'], 'age' => $user['age']]);
         return $this->pdo->lastInsertId();
     }
-    public function update($id, $user) {
-        $sql = 'UPDATE TABLE users SET name = :name, age = :age WHERE id = :id';
+    public function update($user_id, $user) {
+        $sql = 'UPDATE TABLE users SET name = :name, age = :age WHERE user_id = :user_id';
         $statement = $this->pdo->prepare($sql);
-        $statement->execute(['id' => $id, 'name' => $user['name'], 'age' => $user['age']]);
+        $statement->execute(['user_id' => $user_id, 'name' => $user['name'], 'age' => $user['age']]);
     }
-    public function delete($id) {
-        $sql = 'DELETE FROM users WHERE id = :id';
+    public function delete($user_id) {
+        $sql = 'DELETE FROM cv13_users WHERE user_id = :user_id';
         $statement = $this->pdo->prepare($sql);
-        $statement->execute(['id' => $id]);
+        $statement->execute(['user_id' => $user_id]);
     }
 }
