@@ -1,8 +1,8 @@
 <?php
 const DB_HOST = 'localhost';
-const DB_DATABASE = 'test';
+const DB_DATABASE = 'nguv03';
 const DB_USERNAME = 'root';
-const DB_PASSWORD = 'root';
+const DB_PASSWORD = '';
 
 //pripojeni do db na serveru eso.vse.cz
 $db = new PDO(

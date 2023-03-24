@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "test";
+$database = "nguv03";
 $username = "root";
 $password = "";
 ?>
