@@ -20,8 +20,8 @@
 //     exit('Unauthorized');
 // }
 
-if ($user['privilege'] < 3) {
-    exit();
-}
+// if ($user['privilege'] < 3) {
+//     exit();
+// }
 
 ?>

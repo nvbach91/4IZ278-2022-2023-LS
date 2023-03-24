@@ -5,7 +5,7 @@ require 'db.php';
 // pristup jen pro admina
 require 'admin_required.php';
 
-$stmt = $db->prepare('DELETE FROM products WHERE id=?');
+$stmt = $db->prepare('DELETE FROM cv10_products WHERE id=?');
 $stmt->execute([$_GET['id']]);
 
 header('Location: index.php');

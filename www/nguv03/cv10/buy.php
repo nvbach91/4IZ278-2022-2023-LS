@@ -7,7 +7,7 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-$stmt = $db->prepare('SELECT * FROM products WHERE id = :id');
+$stmt = $db->prepare('SELECT * FROM cv10_products WHERE id = :id');
 $stmt->execute([
     'id' => $_GET['id']
 ]);

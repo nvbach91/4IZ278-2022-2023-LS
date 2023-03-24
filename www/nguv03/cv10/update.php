@@ -7,7 +7,7 @@ require 'user_required.php';
 // pristup jen pro admina
 require 'admin_required.php';
 
-$stmt = $db->prepare('SELECT * FROM products WHERE id = :id');
+$stmt = $db->prepare('SELECT * FROM cv10_products WHERE id = :id');
 $stmt->execute([
     'id' => $_GET['id']
 ]);
@@ -18,7 +18,7 @@ if (!$product) {
 }
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    $stmt = $db->prepare('UPDATE products SET name = :name, description = :description, price = :price WHERE id = :id');
+    $stmt = $db->prepare('UPDATE cv10_products SET name = :name, description = :description, price = :price WHERE id = :id');
     $stmt->execute([
         'name' => $_POST['name'], 
         'description' => $_POST['description'], 
@@ -50,6 +50,10 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         <div class="form-label-group">
             <label for="description">Description</label>
             <input name="description" class="form-control" placeholder="Description" required value="<?php echo $product['description']; ?>">
+        </div>
+        <div class="form-label-group">
+            <label for="img">Image</label>
+            <input name="img" class="form-control" placeholder="Image" required value="<?php echo $product['img']; ?>">
         </div>
         <input type="hidden" name="id" value="<?php echo $product['id'];?>'">
         <br>

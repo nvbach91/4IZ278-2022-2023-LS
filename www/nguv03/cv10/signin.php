@@ -9,19 +9,21 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     // zajimavost: mysql porovnani retezcu je case insensitive, pokud dame select na NECO@DOMENA.COM, najde to i zaznam neco@domena.com
     // viz http://dev.mysql.com/doc/refman/5.0/en/case-sensitivity.html
 
-    $stmt = $db->prepare('SELECT * FROM users WHERE email = :email LIMIT 1'); //limit 1 jen jako vykonnostni optimalizace, 2 stejne maily se v db nepotkaji
+    $stmt = $db->prepare('SELECT * FROM cv10_users WHERE email = :email LIMIT 1'); //LIMIT 1 jen jako vykonnostni optimalizace, 2 stejne maily se v db nepotkaji
     $stmt->execute([
         'email' => $email
     ]);
     $existing_user = @$stmt->fetchAll()[0];
 
     if (password_verify($password, $existing_user['password'])) {
-        $_SESSION['user_id'] = $existing_user['id'];
+        $_SESSION['user_id'] = $existing_user['user_id'];
         $_SESSION['user_email'] = $existing_user['email'];
 
         header('Location: index.php');
+        exit;
     } else {
-        exit('Invalid user or password!');
+        header('HTTP/1.1 401 Unauthorized');
+        exit('Invalid login');
     }
 }
 ?>

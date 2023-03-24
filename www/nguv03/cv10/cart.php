@@ -13,12 +13,12 @@ $ids = $_SESSION['cart'];
 if (is_array($ids) && count($ids)) {
     $question_marks = str_repeat('?,', count($ids) - 1) . '?';
 
-    $stmt = $db->prepare("SELECT * FROM products WHERE id IN (${question_marks}) ORDER BY name");
+    $stmt = $db->prepare("SELECT * FROM cv10_products WHERE id IN ($question_marks) ORDER BY name");
     // array_values - vrati poled indexovane od 0, napr [42, 47, 63, 12, 44]
     $stmt->execute(array_values($ids));
     $products = $stmt->fetchAll();
 
-    $stmt_sum = $db->prepare("SELECT SUM(price) FROM products WHERE id IN (${question_marks})");
+    $stmt_sum = $db->prepare("SELECT SUM(price) FROM cv10_products WHERE id IN ($question_marks)");
     $stmt_sum->execute(array_values($ids));
     $sum = $stmt_sum->fetchColumn();
 }
