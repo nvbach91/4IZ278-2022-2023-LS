@@ -15,10 +15,10 @@ if (!empty($_POST)) {
     // $minPrice = "0 OR 1 = 1; --";
     // $minPrice = "0; DROP TABLE products; --";
 
-    //$sql = "SELECT * FROM products WHERE price > $minPrice LIMIT 10;";
+    //$sql = "SELECT * FROM cv09_products WHERE price > $minPrice LIMIT 10;";
     //$statement = $pdo->query($sql);
     
-    $sql = "SELECT * FROM products WHERE price > :minPrice LIMIT 10;";
+    $sql = "SELECT * FROM cv09_products WHERE price > :minPrice LIMIT 10;";
     $statement = $pdo->prepare($sql);
     $statement->execute(['minPrice' => $minPrice]);
 

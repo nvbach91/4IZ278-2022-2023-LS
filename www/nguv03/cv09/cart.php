@@ -2,19 +2,20 @@
 session_start();
 require 'db.php';
 $ids = @$_SESSION['cart'];
+$goods = [];
 if (is_array($ids) && count($ids)) {
     # retezec s otazniky pro predani seznamu ids
     # pocet otazniku = pocet prvku v poli ids
     # pokud mam treba v ids 1,2,3, vrati mi ?,?,?
     $question_marks = str_repeat('?,', count($ids) - 1) . '?';
     
-    $stmt = $db->prepare("SELECT * FROM goods WHERE id IN ($question_marks) ORDER BY name");
+    $stmt = $db->prepare("SELECT * FROM cv09_goods WHERE id IN ($question_marks) ORDER BY name");
     # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
     $stmt->execute(array_values($ids));
     $goods = $stmt->fetchAll();
     
     
-    $stmt_sum = $db->prepare("SELECT SUM(price) FROM goods WHERE id IN ($question_marks)");
+    $stmt_sum = $db->prepare("SELECT SUM(price) FROM cv09_goods WHERE id IN ($question_marks)");
     # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
     $stmt_sum->execute(array_values($ids));
     $sum = $stmt_sum->fetchColumn();
@@ -27,7 +28,7 @@ if (is_array($ids) && count($ids)) {
 <?php include './incl/navbar.php' ?>
 <main class="container">
     <h1>My shopping cart</h1>
-    Total goods selected: <?= @count($goods) ?>
+    Total goods selected: <?= count($goods) ?>
     <br><br>
     <a href="index.php">Back to the mangos!</a>
     <br><br>

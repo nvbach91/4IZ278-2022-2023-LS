@@ -19,9 +19,9 @@ if (isset($_GET['offset'])) {
 }
 
 # celkovy pocet zbozi pro strankovani
-$count = $db->query("SELECT COUNT(id) FROM goods")->fetchColumn();
+$count = $db->query("SELECT COUNT(id) FROM cv09_goods")->fetchColumn();
 
-$stmt = $db->prepare("SELECT * FROM goods ORDER BY id DESC LIMIT $nItemsPerPagination OFFSET ?");
+$stmt = $db->prepare("SELECT * FROM cv09_goods ORDER BY id DESC LIMIT $nItemsPerPagination OFFSET ?");
 $stmt->bindValue(1, $offset, PDO::PARAM_INT);
 $stmt->execute();
 $goods = $stmt->fetchAll();

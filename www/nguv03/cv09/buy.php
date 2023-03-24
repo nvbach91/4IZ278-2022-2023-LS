@@ -10,7 +10,7 @@ if (!isset($_SESSION['cart'])) {
         // ['id' => 1, 'name' => 'PC', 'price' => 500, 'quantity' => 2]
     ];
 }
-$sql = "SELECT * FROM goods WHERE id = :id";
+$sql = "SELECT * FROM cv09_goods WHERE id = :id";
 $stmt = $db->prepare($sql);
 $stmt->execute(['id' => $_GET['id']]);
 $goods = $stmt->fetch();
