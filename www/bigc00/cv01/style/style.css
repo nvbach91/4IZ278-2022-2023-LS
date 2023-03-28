@@ -1,0 +1,30 @@
+.Name{
+    text-align: center;
+}
+.FrontSide, .BackSide{ 
+    margin-bottom: 20px;
+    width: 500px;
+    height:200px;
+    background-color: darkseagreen;
+    margin-right: auto;
+    margin-left: auto;
+}
+.BackSide{
+    text-align: center;
+}
+.text{
+    padding-top: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+.picture{
+    padding-top: 50px;
+    margin-left: 10px;
+}
+.text2 {
+    margin-top: -122px;
+    margin-left: 180px;
+}
