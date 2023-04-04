@@ -1,15 +1,7 @@
 <?php
     require "Products.php";
     require "Categories.php";
-    
-    // $products = [
-    //     ['name' => 'Tommy Atkins', 'price' => 49.90, 'img' => 'https://www.mango.org/wp-content/uploads/2017/11/kent-variety.jpg'],
-    //     ['name' => 'Ataulfo',      'price' => 60.90, 'img' => 'http://elbefruit.eu/wp-content/uploads/2018/07/tommy-variety-1.jpg'],
-    //     ['name' => 'Kent',         'price' => 47.90, 'img' => 'https://media.mercola.com/assets/images/foodfacts/mango-nutrition-facts.jpg'],
-    //     ['name' => 'Haden',        'price' => 51.90, 'img' => 'https://images-na.ssl-images-amazon.com/images/I/21jivLJsAeL.jpg'],
-    //     ['name' => 'Keitt',        'price' => 39.90, 'img' => 'http://betterhomegardening.com/wp-content/uploads/2015/05/pakistan-Ataulfo-mango.jpg'],
-    //     ['name' => 'Francine',     'price' => 59.90, 'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStvS-QHWIlsLILy-fIIGXcxlb2jUIrXNDjKXs4eLbSJt4gJKLu'],
-    // ];
+    require "Slides.php";
 
     $productsDB = new Products();
     if (isset($_GET["category_id"])) {
@@ -21,6 +13,9 @@
 
     $categoriesDB = new Categories();
     $categories = $categoriesDB->fetchAll();
+
+    $slidesDB = new Slides();
+    $slides = $slidesDB->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,8 +30,7 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="style.css" rel="stylesheet" />
-
+        <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
     </head>
     <body>
@@ -51,7 +45,17 @@
                 </div>
             </div>
         </header>
+        
         <!-- Section-->
+        <?php require "slidesHTML.php" ?>
         <?php require "productsHTML.php" ?>
+
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <!-- Popper.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- Bootstrap 4.3.0 JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
     </body>
 </html>
