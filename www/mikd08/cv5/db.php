@@ -7,7 +7,7 @@ interface DatabaseOperations {
     public function delete();
 }
 
-abstract class Database implements DatabaseOperations {
+abstract class Database1 implements DatabaseOperations {
     protected $dbPath = '/db'; 
     protected $dbExtension = '.db';
     protected $seperator = ';';
@@ -22,7 +22,7 @@ abstract class Database implements DatabaseOperations {
 
 }
 
-class UsersDB extends Database {
+class UsersDB extends Database1 {
     public function create($args){
         echo "User $args[name] age: $args[age] was created".PHP_EOL; 
     }
@@ -36,7 +36,7 @@ class UsersDB extends Database {
         echo 'A user was deleted'.PHP_EOL;
     }
 }
-class ProductsDB extends Database {
+class ProductsDB extends Database1 {
     public function create($args){
         echo "Product $args[name] price: $args[price] was created".PHP_EOL;
     }
@@ -50,7 +50,7 @@ class ProductsDB extends Database {
         echo 'A product was deleted'.PHP_EOL;
     }
 }
-class OrdersDB extends Database {
+class OrdersDB extends Database1 {
     public function create($args){
         echo "Order $args[number] was created".PHP_EOL;
     }
