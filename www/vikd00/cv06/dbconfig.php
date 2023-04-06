@@ -1,0 +1,5 @@
+<?php 
+const DB_HOST = 'localhost';
+const DB_NAME = 'DB_NAME_PLACEHOLDER';
+const DB_USERNAME = 'DB_USERNAME_PLACEHOLDER';
+const DB_PASSWORD = 'DB_PASSWORD_PLACEHOLDER';
