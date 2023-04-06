@@ -46,6 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['pass'] == $_POST['passAgain'
         $errors['email'] = "Email already exists";
     } else {
         registerNewUser($name, $email, $password);
+
+        $to = $email;
+        $subject = 'Registration successful';
+        $message = 'You have successfully registered on our website.';
+        $headers = 'From: waid00@vse.cz';
+        mail($to, $subject, $message, $headers);
     }
 }
 ?>
