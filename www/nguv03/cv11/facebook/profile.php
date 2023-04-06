@@ -11,8 +11,8 @@ require __DIR__ . '/config.php';
 
 $fb = new \JanuSoftware\Facebook\Facebook(array_merge(CONFIG_FACEBOOK, ['default_access_token' => $_SESSION['fb_access_token']]));
 try {
-    $me = $fb->get('/me')->getGraphUser();
-    $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphUser();
+    $me = $fb->get('/me')->getGraphNode();
+    $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphNode();
 } catch(\JanuSoftware\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;
