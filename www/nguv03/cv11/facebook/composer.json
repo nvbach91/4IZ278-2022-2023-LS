@@ -1,5 +1,12 @@
 {
     "require": {
-        "facebook/graph-sdk": "^5.7"
+        "janu-software/facebook-php-sdk": "^0.1.13",
+        "symfony/http-client": "^6.2",
+        "nyholm/psr7": "^1.5"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }

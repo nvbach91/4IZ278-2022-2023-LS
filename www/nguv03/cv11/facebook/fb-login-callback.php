@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
-$fb = new \Facebook\Facebook(CONFIG_FACEBOOK);
+$fb = new \JanuSoftware\Facebook\Facebook(CONFIG_FACEBOOK);
 
 $helper = $fb->getRedirectLoginHelper();
 
@@ -19,10 +19,10 @@ if (isset($_GET['state'])) {
 <?php
 try {
     $accessToken = $helper->getAccessToken();
-} catch(\Facebook\Exceptions\FacebookResponseException $e) {
+} catch(\JanuSoftware\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;
-} catch(\Facebook\Exceptions\FacebookSDKException $e) {
+} catch(\JanuSoftware\Facebook\Exceptions\FacebookSDKException $e) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
 }
@@ -75,7 +75,7 @@ if (!$accessToken->isLongLived()) {
     // Exchanges a short-lived access token for a long-lived one
     try {
         $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-    } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+    } catch (\JanuSoftware\Facebook\Exceptions\FacebookSDKException $e) {
         echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
         exit;
     }

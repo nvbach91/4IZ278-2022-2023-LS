@@ -9,14 +9,14 @@ if (!isset($_SESSION['fb_access_token'])) {
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config.php';
 
-$fb = new \Facebook\Facebook(array_merge(CONFIG_FACEBOOK, ['default_access_token' => $_SESSION['fb_access_token']]));
+$fb = new \JanuSoftware\Facebook\Facebook(array_merge(CONFIG_FACEBOOK, ['default_access_token' => $_SESSION['fb_access_token']]));
 try {
     $me = $fb->get('/me')->getGraphUser();
     $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphUser();
-} catch(\Facebook\Exceptions\FacebookResponseException $e) {
+} catch(\JanuSoftware\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;
-} catch(\Facebook\Exceptions\FacebookSDKException $e) {
+} catch(\JanuSoftware\Facebook\Exceptions\FacebookSDKException $e) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
 }
