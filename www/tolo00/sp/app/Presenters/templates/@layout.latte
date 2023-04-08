@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>OndryFans</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.4/css/foundation.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation-prototype.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.5/css/foundation-float.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{$basePath}/styles.css">
+</head>
+<body>
+<header>
+    <div class="grid-x align-center">
+        <div class="cell large-shrink">
+            <img src="{$basePath}/img/profile/admin.png" alt="Logo" class="logo">
+        </div>
+
+        <div class="cell large-shrink">
+            <h1>Ondry<span>Fans</span><a href="#" data-open="admin-login-modal" class="color-black">.</a></h1>
+        </div>
+    </div>
+
+    <div class="grid-x login">
+        <div class="cell text-center">
+            {if !$user->isLoggedIn()}
+                <a href="#" data-open="user-login-modal">přihlásit se</a>
+            {elseif $user->isInRole(App\Model\Entity\UserAccount::ROLE_ADMIN)}
+                Vítej zpět <b>Ondřeji</b>, koukej přidat nějaký příspěvek.
+                Anebo se <a n:href="logOut">odhlaš</a>.
+            {else}
+                Přihlášen jako <b>{$user->identity->getData()['username']}</b>.
+                A tady se můžeš <a n:href="logOut">odhlásit</a>.
+            {/if}
+        </div>
+    </div>
+</header>
+
+{snippet flashes}
+    <script n:foreach="$flashes as $flash">
+        alert({$flash->message});
+    </script>
+{/snippet}
+
+{include content}
+	{block scripts}
+{/block}
+
+<footer>
+    <div class="text-center">
+        &copy; 2023 OndryFans. All rights reserved
+    </div>
+</footer>
+
+<div n:if="!$user->isLoggedIn()" class="reveal" id="user-login-modal" data-reveal>
+    <button class="close-button" data-close="" aria-label="Close modal" type="button">
+        <span aria-hidden="true">×</span>
+    </button>
+
+    <h1 class="text-center">Přihlášení</h1>
+
+    <p class="text-center">
+        Abyste mohli vyznávat lásku, hejtit nebo lajkovat, přihlašte se pomocí vašeho Facebook účtu.
+        Žádný zdržování s registrací.
+    </p>
+
+    <div class="text-center">
+        <a href="{App\Service\FacebookOauthService::getLoginUrl()}" class="button primary large">
+            <i class="fab fa-facebook-f"></i>
+            &nbsp;
+            Přihlásit přes Facebook
+        </a>
+    </div>
+</div>
+
+<div class="reveal" id="admin-login-modal" data-reveal>
+    <button class="close-button" data-close="" aria-label="Close modal" type="button">
+        <span aria-hidden="true">×</span>
+    </button>
+
+    <h1 class="text-center">Ondřeji, jsi to ty!?</h1>
+    <h3 class="text-center">tak to dokaž</h3>
+
+    {control adminLoginForm}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.10/what-input.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.7.4/js/foundation.min.js"></script>
+<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+<script src="{$basePath}/lib/Naja.js"></script>
+
+<script>
+  $(document).foundation();
+  naja.initialize({
+    history: false,
+    historyUiCache: false
+  });
+</script>
+
+<script src="{$basePath}/scripts.js"></script>
+
+</body>
+</html>

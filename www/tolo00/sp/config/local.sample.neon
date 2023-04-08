@@ -1,0 +1,19 @@
+parameters:
+
+nettrine.dbal:
+    debug:
+    	panel: true
+    connection:
+        driver: mysqli
+        user: root
+        password:
+        dbname: ondryfans
+
+#mail:
+#    smtp: true
+#    host: smtp.ebola.cz
+#    port: 465
+#    username: smtp@incolorstudio.cz
+#    password: Wiwpne9TTxV2ZGvQ2p
+#    secure: ssl
+#    timeout: 120

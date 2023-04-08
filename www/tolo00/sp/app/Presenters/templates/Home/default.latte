@@ -1,0 +1,259 @@
+{block scripts}
+    <script>
+        loadNextPostUrl = {plink loadNextPost!}
+    </script>
+{/block}
+
+{block content}
+
+<main class="grid-container">
+    <div n:if="$presenter->isAllowed()" class="grid-x admin-tools">
+        <div class="cell large-8">
+            <div>
+                {ifset $editedPost}
+                    <h3>
+                        Editace příspěvku #{$editedPost->getId()}
+                        <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
+                    </h3>
+                {else}
+                    <h3>Nový příspěvek</h3>
+                {/ifset}
+
+                {control postForm}
+            </div>
+        </div>
+
+        <div class="cell large-4">
+            <div>
+                <h3>Štítky</h3>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th class="text-right">Akce</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr n:foreach="$allTopics as $topic" style="background-color: {$topic->color|noescape};">
+                        <td class="color-white">{$topic->title}</td>
+                        <td class="text-right">
+                            <a n:href="editTopic!, $topic->getId()" class="edit-button">
+                                <i class="fa-regular fa-edit"></i>
+                            </a>
+
+                            <a n:href="deleteTopic!, $topic->getId()" class="delete-button">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                {ifset $editedTopic}
+                    <h4>
+                        Editace štítku #{$editedTopic->getId()}
+                        <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
+                    </h4>
+                {else}
+                    <h4>Nový štítek</h4>
+                {/ifset}
+
+                {control postLabelForm}
+            </div>
+        </div>
+    </div>
+
+    {snippetArea postsArea}
+        {ifset $updatedPost}
+            {include #post, $updatedPost}
+        {else}
+            <div class="posts-section">
+                {if $firstPost}
+                    {include #post, $firstPost}
+                {/if}
+            </div>
+
+            <div class="loader" id="loader">Loading...</div>
+        {/ifset}
+    {/snippetArea}
+</main>
+
+{define #post, $post}
+    <div class="post" n:snippet="post-{$post->getId()}">
+        <div class="grid-x">
+            <div class="cell post-image">
+                <img src="{$basePath}/img/post/{$post->postPhoto}" alt="Post Image">
+
+                <div class="grid-x post-info">
+                    <div class="cell large-9 post-labels">
+                        {foreach $post->topics as $topic}
+                            <span class="label" style="background-color: {$topic->color|noescape};">
+                                {$topic->title}
+                            </span>
+                        {/foreach}
+                    </div>
+
+                    <div class="cell large-3 post-date">
+                        <span class="post-date">{$post->dateCreated|date:'d.m.Y G:i'}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-x margin-top-1">
+            <div class="cell large-10 post-text"><b>#{$post->getId()}:</b> {$post->text}</div>
+            <div class="cell large-2 text-right">
+                {if $presenter->isAllowed()}
+                    <a n:href="editPost!, $post->getId()" class="edit-button">
+                        <i class="fa-regular fa-edit"></i>
+                    </a>
+
+                    <a n:href="deletePost!, $post->getId()" class="delete-button">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
+                {/if}
+
+                <a n:href="togglePostLike!, $post->getId()" class="like-button ajax">
+                    <span class="likes-count">{$post->likes->count()}</span>
+                    <i class="fa-regular fa-thumbs-up"></i>
+                </a>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="comments-section">
+            {var $comments = $post->comments->filter(fn ($comment) => !$comment->parentComment)}
+            {var $commentsCount = $comments->count()}
+            {var $commentsLimit = App\Model\Entity\Comment::LOADED_COMMENTS_DEFAULT_LIMIT}
+
+            <h3 class="comments-header">Komentáře <span class="comments-count">({$commentsCount})</span></h3>
+
+            {if $commentsCount}
+                {foreach $comments as $comment}
+                    {include #comment, $comment, false, !isset($loadedComments['comments'][$post->getId()]) && $iterator->counter > $commentsLimit}
+                {/foreach}
+
+                <div n:if="$commentsCount > $commentsLimit" class="grid-x margin-top-1 margin-bottom-1">
+                    <div class="cell text-center comment-show-more">
+                        <a n:href="toggleLoadedComments!, $post->getId()" class="show-more-comments ajax">
+                            {ifset $loadedComments['comments'][$post->getId()]}
+                                Skrýt komentáře
+                            {else}
+                                Zorazit další komentáře ({$commentsCount - $commentsLimit})
+                            {/ifset}
+                        </a>
+                    </div>
+                </div>
+            {/if}
+
+            <div class="grid-x margin-top-1 comment-add">
+                <div class="cell large-11">
+                    <b>Přidat komentář:</b>
+                    <textarea placeholder="Řekněte, co si o tom myslíte. Napište komentář..."></textarea>
+                </div>
+
+                <div class="cell large-1">
+                    <button data-href="{plink addComment!, id => $post->getId()}" class="button primary large">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{/define}
+
+{define #comment, $comment, $reply = false, $hidden = false}
+    <div n:class="'comment', $reply ? 'reply', $hidden ? 'hide'">
+        <div class="grid-x">
+            {if $reply}
+                <div class="cell large-1 reply-thread"></div>
+            {/if}
+
+            <div class="cell large-1">
+                <img
+                        class="user-image"
+                        src="{$basePath}/img/profile/{$comment->userAccount->profilePhoto}"
+                        alt="Profilová fotografie {$comment->userAccount->username}"
+                >
+            </div>
+
+            <div n:class="cell, $reply ? 'large-6' : 'large-auto'">
+                <div class="grid-x">
+                    <div class="cell large-shrink comment-user-name">
+                        {$comment->userAccount->username}
+                    </div>
+
+                    <div class="cell large-auto comment-date">
+                        {$comment->dateCreated|date:'d.m.Y G:i'}
+                    </div>
+                </div>
+
+                <div>
+                    {$comment->text}
+                </div>
+            </div>
+
+            <div class="cell large-3">
+                <div class="grid-y">
+                    <div class="cell text-right">
+                        {if $presenter->isAllowed('deleteComment', $comment->getId())}
+                            <a n:href="deleteComment! $comment->getId()" class="delete-button ajax-delete">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </a>
+                        {/if}
+
+                        <a n:href="toggleCommentLike!, $comment->getId()" class="like-button ajax">
+                            <span class="likes-count">{$comment->likes->count()}</span>
+                            <i class="fa-regular fa-thumbs-up"></i>
+                        </a>
+                    </div>
+
+                    <div class="cell text-right">
+                        <a href="#" data-username="{$comment->userAccount->username}" class="reply-button">
+                            <i class="fa-solid fa-reply"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {var $repliesCount = $comment->childrenComments->count()}
+            {var $repliesLimit = App\Model\Entity\Comment::LOADED_REPLIES_DEFAULT_LIMIT}
+
+            {if !$reply}
+                {foreach $comment->childrenComments as $childComment}
+                    {include #comment, $childComment, true, !isset($loadedComments['replies'][$comment->getId()]) && $iterator->counter > $repliesLimit}
+                {/foreach}
+            {/if}
+        </div>
+
+        {if !$reply}
+            <div n:if="$repliesCount > $repliesLimit" class="grid-x margin-top-1 margin-bottom-1">
+                <div class="cell text-center comment-show-more">
+                    <a n:href="toggleLoadedReplies!, $comment->getId()" class="show-more-replies ajax">
+                        {ifset $loadedComments['replies'][$comment->getId()]}
+                            Skrýt odpovědi
+                        {else}
+                            Zorazit další odpovědi ({$repliesCount - $repliesLimit})
+                        {/ifset}
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid-x margin-top-1 comment-add">
+                <div class="cell large-11">
+                    <b>Odpovědět na komentář:</b>
+                    <textarea rows="1" placeholder="Přidejte se do diskuse a rozohněte ji trochu..."></textarea>
+                </div>
+
+                <div class="cell large-1">
+                    <button data-href="{plink addComment!, id => $comment->post->getId(), parentId => $comment->getId()}" class="button primary large">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        {/if}
+    </div>
+{/define}
