@@ -1,6 +1,9 @@
 <?php
 
-include './database-functions.php';
+include './classes/Database.php';
+include './classes/OrdersDB.php';
+include './classes/ProductsDB.php';
+include './classes/UsersDB.php';
 
 include './header.php';
 ?>
