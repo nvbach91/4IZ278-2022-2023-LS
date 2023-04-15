@@ -1,14 +1,13 @@
-<!-- resources/views/cover-page.blade.php -->
 @extends('layouts.base')
 
 @section('title', 'Cover Page')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/cover.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 @endpush
 
 @section('content')
-<body class="d-flex h-100 text-center text-bg-dark">
+<body class="text-center">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
       <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -24,38 +23,27 @@
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
+<main class="form-signin w-100 m-auto">
+  <form>
+    <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <div>
-      <h3 class="float-md-start mb-0">Eucalyptus</h3>
-      <nav class="nav nav-masthead justify-content-center float-md-end">
-              <a class="nav-link active text-light" href="#">Home</a>
-              <a class="nav-link text-light" href="#">Features</a>
-              <a class="nav-link text-light" href="#">Contact</a>
-        @if (Route::has('login'))
-          @auth
-            <a href="{{ url('/dashboard') }}" class="nav-link fw-bold px-4 text-sm text-light">Dashboard</a>
-          @else
-            <a href="{{ route('login') }}" class="nav-link px-2 text-sm text-light">Login</a>
-            @if (Route::has('register'))
-              <a href="{{ route('register') }}" class="nav-link px-2 ml-4 text-sm text-light">Register</a>
-            @endif
-          @endauth
-        @endif
-      </nav>
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
     </div>
-  </header>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
 
-
-  <main class="px-3">
-    <h1>Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
-  </main>
-
-@endsection
-
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+  </form>
+</main>
+<!-- @endsection -->

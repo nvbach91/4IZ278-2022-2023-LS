@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\BasketController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +19,6 @@ use App\Http\Controllers\PanelController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,4 +33,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/panel', [PanelController::class, 'index'])->middleware('auth');
+
+Route::get('/', [CarouselController::class, 'index'])->name('carousel');
+Route::get('/store', [StoreController::class, 'index'])->name('store');
+Route::get('/basket', [BasketController::class, 'index'])->name('basket');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
