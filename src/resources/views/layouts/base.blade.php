@@ -14,12 +14,37 @@
     @stack('styles')
 </head>
 <body>
+<header class="p-3 bg-light">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <img src="{{ asset('https://img.icons8.com/office/512/kawaii-bread-1.png')}}" alt="Your Icon" width="40" height="40">
+        </a>
+
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2 text-dark">Home</a></li>
+                <li><a href="/store" class="nav-link px-2 text-dark">Store</a></li>
+                <li><a href="/#about-section" class="nav-link px-2 text-dark">About</a></li>
+            </ul>
+
+            <div class="text-end">
+                <a href="/login" class="btn btn-outline-dark me-2">Login</a>
+                <button type="button" class="btn btn-primary">Sign-up</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
 
 @yield('content')
 
-<footer class="mt-auto text-white-50">
-    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-</footer>
+<footer class="container">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>&copy; 2017–2023 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
 
 @stack('scripts')
 

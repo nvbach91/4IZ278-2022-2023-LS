@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Cover Page')
+@section('title', 'Login Page')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
