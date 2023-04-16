@@ -2,10 +2,6 @@
 
 @section('title', 'Eshop')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
-@endpush
-
 @section('content')
 <div class="container mt-5">
     <div class="row">
@@ -23,7 +19,7 @@
             </div>
         @endforeach
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center mt-4">
         {{ $products->links() }}
     </div>
 </div>
@@ -31,6 +27,4 @@
 
 
 
-@push('scripts')
-    <script src="{{ asset('js/checkout.js') }}"></script>
-@endpush
+

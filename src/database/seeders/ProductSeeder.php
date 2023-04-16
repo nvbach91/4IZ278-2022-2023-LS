@@ -30,6 +30,18 @@ class ProductSeeder extends Seeder
                 'price' => 2.49,
                 'image_url' => 'https://via.placeholder.com/150x150'
             ],
+            [
+                'name' => 'kruassan',
+                'description' => 'A classic French baguette with a crispy crust and soft interior.',
+                'price' => 10,
+                'image_url' => 'https://via.placeholder.com/150x150'
+            ],
+            [
+                'name' => 'Kulich',
+                'description' => 'A classic French baguette with a crispy crust and soft interior.',
+                'price' => 30,
+                'image_url' => 'https://via.placeholder.com/150x150'
+            ],
             // Add more if needed //
         ];
 
