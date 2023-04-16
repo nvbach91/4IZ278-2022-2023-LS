@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Cover Page')
+@section('title', 'Checkout')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
