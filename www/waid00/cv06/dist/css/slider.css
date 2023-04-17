@@ -1,0 +1,14 @@
+.fadein {
+    position: relative;
+    height: 332px;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.fadein img {
+    position: absolute;
+    width: calc(96%);
+    height: calc(94%);
+    object-fit: scale-down;
+}
