@@ -24,6 +24,11 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <a href="{{ route('auth.github') }}" class="btn btn-dark">
+            <i class="fab fa-github"></i> Login with GitHub
+        </a>
+
+
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">

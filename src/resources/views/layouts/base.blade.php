@@ -29,15 +29,20 @@
             </ul>
 
             <div class="text-end">
-                <a href="/login" class="btn btn-outline-dark me-2">Login</a>
-                <button type="button" class="btn btn-primary">Sign-up</button>
+                @if (Auth::check())
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-dark me-2">Logout</button>
+                    </form>
+                @else
+                    <a href="/login" class="btn btn-outline-dark me-2">Login</a>
+                    <button onclick="window.location.href='/register'" class="btn btn-primary">Sign-up</button>
+                @endif
             </div>
+
         </div>
     </div>
 </header>
-
-
-
 
 @yield('content')
 
@@ -50,4 +55,3 @@
 
 </body>
 </html>
-

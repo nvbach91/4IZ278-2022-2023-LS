@@ -13,7 +13,10 @@
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">{{ $product->description }}</p>
                         <p class="card-text">${{ $product->price }}</p>
-                        <a href="#" class="btn btn-primary">Buy</a>
+                        <div class="d-flex">
+                            <input type="number" min="1" value="1" class="form-control me-2 quantity-input">
+                            <button class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}">Add to Cart</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,7 +27,3 @@
     </div> -->
 </div>
 @endsection
-
-
-
-
