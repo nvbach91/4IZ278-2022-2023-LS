@@ -1,0 +1,18 @@
+.pagination-container {
+    display: flex;
+    list-style: none;
+}
+
+.pagination-container li{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgb(179, 179, 179);
+    margin-right: 5px;
+}
+
+.cards-wrapper {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
