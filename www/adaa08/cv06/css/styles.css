@@ -5936,6 +5936,7 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: 100% 100%;
+  background-color: #000000;
 }
 
 /* rtl:options: {

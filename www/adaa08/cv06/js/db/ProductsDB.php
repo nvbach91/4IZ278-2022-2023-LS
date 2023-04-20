@@ -42,13 +42,5 @@ class ProductsDB {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }    
-    
-    public function fetchSlides() {
-        $stmt = $this->pdo->query('SELECT * FROM cv06_slides'); 
-
-     return $stmt->fetchAll();
-    
-         
-    }
-    
+      
 }

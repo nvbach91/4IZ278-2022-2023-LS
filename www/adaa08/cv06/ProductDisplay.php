@@ -19,18 +19,41 @@ if ($category_id !== null) {
 $slides = $productsDB->fetchSlides();
 ?>
 
-<div class="slideshow-container">
-    <?php foreach ($slides as $index => $slide): ?>
-        <div class="mySlides fade <?php if ($index == 0) echo 'active'; ?>">
-            <img src="<?php echo $slide['img']; ?>" alt="<?php echo $slide['title']; ?>" style="width:1%">
-            <div class="text"><?php echo $slide['title']; ?></div>
-        </div>
-    <?php endforeach; ?>
+ 
 
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+   
+    <?php foreach ($slides as $index => $slide){?>
+
+    <div class="carousel-item <?php echo $index == 0? 'active':''; ?> ">
+      <img class="d-block w-100" style="height:600px" src="<?php echo $slide['img']; ?>" alt="Second slide">
+      <div class="text-center">
+                <?php echo $slide['title']; ?>
+            </div>
+    </div>
+    <?php }?>
+  
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next text-danger" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon " aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
 
+
+ 
 <br>
 
 
@@ -43,23 +66,27 @@ $slides = $productsDB->fetchSlides();
 
 
 <div class="row">
-    <?php foreach($products as $product): ?>
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100 product">
-            <a href="#">
-                <img class="card-img-top product-image" src="<?php echo $product['img']; ?>" alt="mango-product-image">
-            </a>
-            <div class="card-body">
-                <h4 class="card-title">
-                    <a href="#"><?php echo $product['name']; ?></a>
-                </h4>
-                <h5><?php echo number_format($product['price'], 2), ' ', GLOBAL_CURRENCY; ?></h5>
-                <p class="card-text">...</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+    <?php foreach ($products as $product): ?>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 product">
+                <a href="#">
+                    <img class="card-img-top product-image" src="<?php echo $product['img']; ?>" alt="mango-product-image">
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="#">
+                            <?php echo $product['name']; ?>
+                        </a>
+                    </h4>
+                    <h5>
+                        <?php echo number_format($product['price'], 2), ' ', GLOBAL_CURRENCY; ?>
+                    </h5>
+                    <p class="card-text">...</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
             </div>
         </div>
-    </div>
     <?php endforeach; ?>
 </div>
