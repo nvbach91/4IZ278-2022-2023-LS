@@ -1,0 +1,4 @@
+.fixed-height {
+    height: 200px; /* Or whatever height you want */
+    object-fit: cover;
+  }
