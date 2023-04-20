@@ -5,9 +5,9 @@ class ProductsDB {
 
     public function __construct() {
         $host = 'localhost';
-        $db   = 'adaa08';
-        $user = 'adaa08';
-        $pass = 'dahp7Eidien4iokoop';
+        $db   = '';
+        $user = '';
+        $pass = '';
         $charset = 'utf8mb4';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
