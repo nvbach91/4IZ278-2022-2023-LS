@@ -15,7 +15,7 @@
                         <p class="card-text">${{ $product->price }}</p>
                         <div class="d-flex">
                             <input type="number" min="1" value="1" class="form-control me-2 quantity-input">
-                            <button class="btn btn-primary add-to-cart" data-product-id="{{ $product->id }}">Add to Cart</button>
+                            <button class="btn btn-outline-dark add-to-cart" data-product-id="{{ $product->id }}">Add to Cart</button>
                         </div>
                     </div>
                 </div>
@@ -27,3 +27,32 @@
     </div> -->
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', addToCart);
+    });
+
+    function addToCart(event) {
+        const productId = event.target.getAttribute('data-product-id');
+        const quantity = event.target.parentElement.querySelector('.quantity-input').value;
+
+        fetch('/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            },
+            body: JSON.stringify({productId, quantity}),
+        }).then(response => {
+            if (response.ok) {
+                // Show a success message or update the cart counter
+            } else {
+                // Show an error message
+            }
+        });
+    }
+</script>
+@endpush
+

@@ -6,6 +6,49 @@
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
 @endpush
 
+@push('scripts')
+    <script>
+        // Function to get cookie value by name
+        function getCookie(name) {
+            const value = '; ' + document.cookie;
+            const parts = value.split('; ' + name + '=');
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Function to display cart items
+        function displayCartItems() {
+            const cartItems = JSON.parse(getCookie('cartItems'));
+            const cartList = document.getElementById('cartList');
+
+            cartItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-sm');
+
+                const itemInfo = document.createElement('div');
+                const itemName = document.createElement('h6');
+                itemName.classList.add('my-0');
+                itemName.textContent = item.name;
+                const itemDesc = document.createElement('small');
+                itemDesc.classList.add('text-body-secondary');
+                itemDesc.textContent = item.description;
+
+                itemInfo.appendChild(itemName);
+                itemInfo.appendChild(itemDesc);
+
+                const itemPrice = document.createElement('span');
+                itemPrice.classList.add('text-body-secondary');
+                itemPrice.textContent = '$' + item.price;
+
+                listItem.appendChild(itemInfo);
+                listItem.appendChild(itemPrice);
+                cartList.appendChild(listItem);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', displayCartItems);
+    </script>
+@endpush
+
 @section('content')
 <body class="bg-body-tertiary">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -63,51 +106,33 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="{{ asset('images/big_logo.jpg') }}" alt="" width="72" height="57">
       <h2>Checkout form</h2>
       <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
 
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-pill">3</span>
-        </h4>
-        <ul class="list-group mb-3">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-primary">Your cart</span>
+        <span class="badge bg-primary rounded-pill">{{ count($cart) }}</span>
+      </h4>
+      <ul class="list-group mb-3">
+          @foreach($cart as $item)
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Product name</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$12</span>
+              <div>
+                  <h6 class="my-0">{{ $item['name'] }}</h6>
+                  <small class="text-body-secondary">Brief description</small>
+              </div>
+              <span class="text-body-secondary">${{ $item['price'] }}</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Second product</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Third item</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">Promo code</h6>
-              <small>EXAMPLECODE</small>
-            </div>
-            <span class="text-success">−$5</span>
-          </li>
+          @endforeach
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong>$20</strong>
+              <span>Total (USD)</span>
+              <strong>${{ number_format(array_sum(array_column($cart, 'price')), 2) }}</strong>
           </li>
-        </ul>
+      </ul>
+
 
         <form class="card p-2">
           <div class="input-group">

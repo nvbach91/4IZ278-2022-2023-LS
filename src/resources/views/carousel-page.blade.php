@@ -30,9 +30,9 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{{ asset('images/carousel/carousel1.jpeg') }}" class="d-block w-100" alt="Your Image Description">
+        <img src="{{ asset('images/carousel/bratu-low.png') }}" class="d-block w-100" alt="Your Image Description">
         <div class="container">
-          <div class="carousel-caption text-start">
+          <div class="carousel-caption">
             <h1>Example headline.</h1>
             <p>Some representative placeholder content for the first slide of the carousel.</p>
             <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <img src="{{ asset('images/carousel/bratu-mid.png') }}" class="d-block w-100" alt="Your Image Description">
         <div class="container">
           <div class="carousel-caption">
             <h1>Another example headline.</h1>
@@ -50,9 +50,9 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <img src="{{ asset('images/carousel/bratu-top.png') }}" class="d-block w-100" alt="Your Image Description"
         <div class="container">
-          <div class="carousel-caption text-end">
+          <div class="carousel-caption">
             <h1>One more for good measure.</h1>
             <p>Some representative placeholder content for the third slide of this carousel.</p>
             <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
@@ -80,14 +80,14 @@
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-4">
-        <img src="{{ asset('images/vova_fuck.jpg') }}" alt="Your Custom Image" class="rounded-circle" width="140" height="140">
+        <img src="{{ asset('images/circle/vova_fuck.jpg') }}" alt="Your Custom Image" class="rounded-circle" width="140" height="140">
         <h2 class="fw-normal">Шеф</h2>
         <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <h2 class="fw-normal">Heading</h2>
+      <img src="{{ asset('images/circle/koshka_muz.jpg') }}" alt="Your Custom Image" class="rounded-circle" width="140" height="140">
+        <h2 class="fw-normal">Кошка-муж</h2>
         <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
@@ -110,7 +110,7 @@
         <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
       </div>
       <div class="col-md-5">
-        <img src="{{ asset('images/features/vova_croissant_1.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="{{ asset('images/features/feature2.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
       </div>
     </div>
 
@@ -122,7 +122,7 @@
         <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
       </div>
       <div class="col-md-5">
-        <img src="{{ asset('images/features/feature2.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="{{ asset('images/features/vova_croissant_1.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
       </div>
 
     </div>

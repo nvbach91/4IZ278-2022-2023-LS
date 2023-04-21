@@ -38,9 +38,10 @@ Route::get('/panel', [PanelController::class, 'index'])->middleware('auth');
 Route::get('/', [CarouselController::class, 'index'])->name('carousel');
 Route::get('/store', [StoreController::class, 'index'])->name('store');
 Route::get('/basket', [BasketController::class, 'index'])->name('basket');
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [CartController::class, 'addItem'])->name('cart.add');
+
 
 Route::get('auth/github', [LoginController::class, 'redirectToGitHub'])->name('auth.github');
 Route::get('auth/github/callback', [LoginController::class, 'handleGitHubCallback']);
