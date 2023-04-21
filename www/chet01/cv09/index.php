@@ -1,5 +1,9 @@
 <?php
 
+var_dump($_COOKIE);
+session_start();
+var_dump($_SESSION);
+
 if (!empty($_POST)) {
     $minPrice = $_POST['minPrice'];
 
@@ -33,6 +37,9 @@ if (!empty($_POST)) {
         <input type="number" name="minPrice" placeholder="minPrice">
         <button>Submit</button>
     </form>
+
+    <a href="./buy.php?product_id=1">Buy product</a>
+    <a href="./drop_cart.php">Clear cart</a>
 </body>
 
 </html>
