@@ -1,6 +1,6 @@
 @extends('layouts.base')
 
-@section('title', 'Carousel Page')
+@section('title', 'Eucalyptus')
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
@@ -30,7 +30,7 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+        <img src="{{ asset('images/carousel/carousel1.jpeg') }}" class="d-block w-100" alt="Your Image Description">
         <div class="container">
           <div class="carousel-caption text-start">
             <h1>Example headline.</h1>
@@ -110,7 +110,7 @@
         <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
       </div>
       <div class="col-md-5">
-        <img src="{{ asset('images/vova_croissant_1.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="{{ asset('images/features/vova_croissant_1.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
       </div>
     </div>
 
@@ -122,7 +122,7 @@
         <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
       </div>
       <div class="col-md-5">
-        <img src="{{ asset('images/vova_angry.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="{{ asset('images/features/feature2.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
       </div>
 
     </div>
@@ -135,7 +135,7 @@
         <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
       </div>
       <div class="col-md-5">
-        <img src="{{ asset('images/vova_3.webp') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="{{ asset('images/features/feature3.jpg') }}" alt="Your Image" class="featurette-image img-fluid mx-auto" width="500" height="500">
       </div>
     </div>
 
