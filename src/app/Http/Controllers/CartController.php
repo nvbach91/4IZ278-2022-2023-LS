@@ -78,5 +78,19 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('status', 'Cart has been flushed successfully');
     }
 
+    public static function cartItemCount()
+    {
+        $cart = request()->cookie('cart') ? json_decode(request()->cookie('cart'), true) : [];
+    
+        $totalItems = 0;
+    
+        foreach ($cart as $item) {
+            $totalItems += $item['quantity'];
+        }
+    
+        return $totalItems;
+    }
+
+
 }
 
