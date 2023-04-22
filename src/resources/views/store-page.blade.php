@@ -2,8 +2,22 @@
 
 @section('title', 'Eshop')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/store.css') }}">
+@endpush
+
 @section('content')
 <div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            @if(session('status'))
+                <div class="alert alert-success text-center custom-alert" role="alert">
+                    {{ session('status') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+    </div>
     <div class="row">
         @foreach($products as $product)
             <div class="col-md-4 mb-4">
@@ -13,10 +27,12 @@
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">{{ $product->description }}</p>
                         <p class="card-text">${{ $product->price }}</p>
-                        <div class="d-flex">
-                            <input type="number" min="1" value="1" class="form-control me-2 quantity-input">
-                            <button class="btn btn-outline-dark add-to-cart" data-product-id="{{ $product->id }}">Add to Cart</button>
-                        </div>
+                        <form action="{{ route('cart.add') }}" method="post" class="d-flex">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="number" min="1" value="1" name="quantity" class="form-control me-2">
+                            <button type="submit" class="btn btn-outline-dark">Add to Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -27,32 +43,3 @@
     </div> -->
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', addToCart);
-    });
-
-    function addToCart(event) {
-        const productId = event.target.getAttribute('data-product-id');
-        const quantity = event.target.parentElement.querySelector('.quantity-input').value;
-
-        fetch('/cart/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            },
-            body: JSON.stringify({productId, quantity}),
-        }).then(response => {
-            if (response.ok) {
-                // Show a success message or update the cart counter
-            } else {
-                // Show an error message
-            }
-        });
-    }
-</script>
-@endpush
-

@@ -37,10 +37,13 @@ Route::get('/panel', [PanelController::class, 'index'])->middleware('auth');
 
 Route::get('/', [CarouselController::class, 'index'])->name('carousel');
 Route::get('/store', [StoreController::class, 'index'])->name('store');
-Route::get('/basket', [BasketController::class, 'index'])->name('basket');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add', [CartController::class, 'addItem'])->name('cart.add');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/flush', [CartController::class, 'flush'])->name('cart.flush');
 
 
 Route::get('auth/github', [LoginController::class, 'redirectToGitHub'])->name('auth.github');
