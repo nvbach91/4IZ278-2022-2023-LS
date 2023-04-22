@@ -47,6 +47,11 @@
             <x-primary-button class="ml-4">
                 {{ __('Register') }}
             </x-primary-button>
+            <x-primary-button class="ml-3">
+                <a href="{{ route('auth.github') }}" class="btn btn-dark w-full text-center">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </x-primary-button>
         </div>
     </form>
 </x-guest-layout>

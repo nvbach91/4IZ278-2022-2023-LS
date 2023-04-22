@@ -24,10 +24,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <a href="{{ route('auth.github') }}" class="btn btn-dark">
-            <i class="fab fa-github"></i> Login with GitHub
-        </a>
-
 
         <!-- Remember Me -->
         <div class="block mt-4">
@@ -40,13 +36,20 @@
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                    {{ __('Forgot password?') }}
                 </a>
             @endif
+
 
             <x-primary-button class="ml-3">
                 {{ __('Log in') }}
             </x-primary-button>
+            <x-primary-button class="ml-3">
+                <a href="{{ route('auth.github') }}" class="btn btn-dark w-full text-center">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </x-primary-button>
         </div>
     </form>
+
 </x-guest-layout>
