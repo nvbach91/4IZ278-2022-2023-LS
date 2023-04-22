@@ -22,6 +22,7 @@
         <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
       </symbol>
     </svg>
+<div class="carousel-container">
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -30,17 +31,17 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{{ asset('images/carousel/bratu-low.png') }}" class="d-block w-100" alt="Your Image Description">
+        <img src="{{ asset('images/carousel/bratu-low.jpg') }}" class="d-block w-100" alt="Your Image Description">
         <div class="container">
           <div class="carousel-caption">
             <h1>Example headline.</h1>
             <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+            <p><a class="btn btn-lg btn-success" href="#">Sign up today</a></p>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{{ asset('images/carousel/bratu-mid.png') }}" class="d-block w-100" alt="Your Image Description">
+        <img src="{{ asset('images/carousel/bratu-mid.jpg') }}" class="d-block w-100" alt="Your Image Description">
         <div class="container">
           <div class="carousel-caption">
             <h1>Another example headline.</h1>
@@ -50,7 +51,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="{{ asset('images/carousel/bratu-top.png') }}" class="d-block w-100" alt="Your Image Description"
+        <img src="{{ asset('images/carousel/bratu-top.jpg') }}" class="d-block w-100" alt="Your Image Description"
         <div class="container">
           <div class="carousel-caption">
             <h1>One more for good measure.</h1>
@@ -69,6 +70,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+</div>
 
 
   <!-- Marketing messaging and featurettes
@@ -92,8 +94,8 @@
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <h2 class="fw-normal">Heading</h2>
+        <img src="{{ asset('images/circle/mango.jpeg') }}" alt="Your Custom Image" class="rounded-circle" width="140" height="140">
+        <h2 class="fw-normal">Mango Lover</h2>
         <p>And lastly this, the third column of representative placeholder content.</p>
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
