@@ -9,6 +9,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -44,5 +48,38 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    /**
+     * Redirect to GitHub for authentication.
+     */
+    public function redirectToGitHub()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+
+    /**
+     * Handle the GitHub callback.
+     */
+    public function handleGitHubCallback()
+    {
+        $githubUser = Socialite::driver('github')->user();
+
+        // If the email is null, set a default one
+        $email = $githubUser->getEmail() ?? 'no-email-' . $githubUser->getId() . '@example.com';
+
+        // Find the user in the database or create a new one
+        $user = User::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => $githubUser->getName(),
+                'password' => Hash::make(Str::random(24)), // Random password, as it won't be used
+            ]
+        );
+
+        // Log the user in
+        Auth::login($user, true);
+
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

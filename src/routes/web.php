@@ -6,7 +6,7 @@ use App\Http\Controllers\PanelController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\BasketController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 
@@ -45,10 +45,8 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/cart/flush', [CartController::class, 'flush'])->name('cart.flush');
 
-
-Route::get('auth/github', [LoginController::class, 'redirectToGitHub'])->name('auth.github');
-Route::get('auth/github/callback', [LoginController::class, 'handleGitHubCallback']);
-Route::post('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+Route::get('auth/github', [AuthenticatedSessionController::class, 'redirectToGitHub'])->name('auth.github');
+Route::get('auth/github/callback', [AuthenticatedSessionController::class, 'handleGitHubCallback'])->name('auth.github.callback');
 
 
 
