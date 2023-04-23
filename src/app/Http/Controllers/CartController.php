@@ -81,13 +81,13 @@ class CartController extends Controller
     public static function cartItemCount()
     {
         $cart = request()->cookie('cart') ? json_decode(request()->cookie('cart'), true) : [];
-    
+
         $totalItems = 0;
-    
+
         foreach ($cart as $item) {
             $totalItems += $item['quantity'];
         }
-    
+
         return $totalItems;
     }
 

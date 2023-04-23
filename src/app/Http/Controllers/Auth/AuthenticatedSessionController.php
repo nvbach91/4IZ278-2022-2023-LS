@@ -47,7 +47,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        $clearCartCookie = cookie('cart', null, -1);
+
+
+        return redirect('/')->withCookie($clearCartCookie);;
     }
 
     /**

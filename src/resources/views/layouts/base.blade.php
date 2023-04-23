@@ -37,13 +37,14 @@
                 </span>
             </button>
                 @if (Auth::check())
+                    <button onclick="window.location.href='/profile'" class="btn btn-outline-dark me-2">Profile</button>
                     <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
-                        <button type="submit" class="btn btn-outline-dark me-2">Logout</button>
+                        <button type="submit" class="btn btn-outline-dark me-2">Log-out</button>
                     </form>
                 @else
-                    <a href="/login" class="btn btn-outline-dark me-2">Login</a>
-                    <button onclick="window.location.href='/register'" class="btn btn-primary">Sign-up</button>
+                    <a href="/login" class="btn btn-outline-dark me-2">Log-in</a>
+                    <button onclick="window.location.href='/register'" class="btn btn-success">Sign-up</button>
                 @endif
             </div>
 
