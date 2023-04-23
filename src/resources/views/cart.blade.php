@@ -26,6 +26,10 @@
                 <td>${{ isset($item['price']) && isset($item['quantity']) ? $item['price'] * $item['quantity'] : 0 }}</td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="3" class="text-end"><strong>Sum:</strong></td>
+                <td>${{ number_format($totalSum, 2) }}</td>
+            </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-end">

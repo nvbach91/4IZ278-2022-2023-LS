@@ -6,49 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/checkout.css') }}">
 @endpush
 
-@push('scripts')
-    <script>
-        // Function to get cookie value by name
-        function getCookie(name) {
-            const value = '; ' + document.cookie;
-            const parts = value.split('; ' + name + '=');
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-
-        // Function to display cart items
-        function displayCartItems() {
-            const cartItems = JSON.parse(getCookie('cartItems'));
-            const cartList = document.getElementById('cartList');
-
-            cartItems.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-sm');
-
-                const itemInfo = document.createElement('div');
-                const itemName = document.createElement('h6');
-                itemName.classList.add('my-0');
-                itemName.textContent = item.name;
-                const itemDesc = document.createElement('small');
-                itemDesc.classList.add('text-body-secondary');
-                itemDesc.textContent = item.description;
-
-                itemInfo.appendChild(itemName);
-                itemInfo.appendChild(itemDesc);
-
-                const itemPrice = document.createElement('span');
-                itemPrice.classList.add('text-body-secondary');
-                itemPrice.textContent = '$' + item.price;
-
-                listItem.appendChild(itemInfo);
-                listItem.appendChild(itemPrice);
-                cartList.appendChild(listItem);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', displayCartItems);
-    </script>
-@endpush
-
 @section('content')
 <body class="bg-body-tertiary">
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -86,14 +43,14 @@
                   <li class="list-group-item d-flex justify-content-between lh-sm">
                       <div>
                           <h6 class="my-0">{{ isset($item['name']) ? $item['name'] : 'Unknown Product' }}</h6>
-                          <small class="text-body-secondary">Brief description</small>
+                          <small class="text-body-secondary">Quantity: {{ isset($item['quantity']) ? $item['quantity'] : 0 }}</small>
                       </div>
-                      <span class="text-body-secondary">${{ $item['price'] }}</span>
+                      <span class="text-body-secondary">${{ $item['price'] * $item['quantity'] }}</span>
                   </li>
               @endforeach
               <li class="list-group-item d-flex justify-content-between">
                   <span>Total (USD)</span>
-                  <strong>${{ number_format(\Cookie::get('total', 0), 2) }}</strong>
+                  <strong>${{ $total }}</strong>
               </li>
           </ul>
 

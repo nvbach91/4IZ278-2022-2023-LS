@@ -10,7 +10,8 @@ class CartController extends Controller
     public function index()
     {
         $cart = json_decode(Cookie::get('cart'), true) ?? [];
-        return view('cart', ['cart' => $cart]);
+        $totalSum = $this->calculateTotalSum($cart);
+        return view('cart', ['cart' => $cart, 'totalSum' => $totalSum]);
     }
 
     public function add(Request $request)
@@ -91,6 +92,17 @@ class CartController extends Controller
         return $totalItems;
     }
 
+    protected function calculateTotalSum($cart)
+    {
+        $totalSum = 0;
+        foreach ($cart as $item) {
+            if (isset($item['price']) && isset($item['quantity'])) {
+                $totalSum += $item['price'] * $item['quantity'];
+            }
+        }
+
+        return $totalSum;
+    }
 
 }
 
