@@ -12,6 +12,8 @@ class StoreController extends Controller
         // Fetch products from the database
         $products = Product::paginate(9);
 
-        return view('store-page', compact('products'));
+        return view('store-page', [
+            'products' => $products,
+        ]);
     }
 }

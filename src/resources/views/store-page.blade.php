@@ -38,8 +38,8 @@
             </div>
         @endforeach
     </div>
-    <!-- <div class="d-flex justify-content-center mt-4">
-        {{ $products->links() }}
-    </div> -->
+    <div class="d-flex justify-content-center mt-4">
+        {{ $products->links('vendor.pagination.simple-tailwind') }}
+    </div>
 </div>
 @endsection
