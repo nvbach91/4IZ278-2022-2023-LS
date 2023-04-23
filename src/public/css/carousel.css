@@ -8,18 +8,28 @@ body {
   color: rgb(var(--bs-tertiary-color-rgb));
 }
 
-
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
+  width: 100%;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
   height: 32rem;
+  position: relative;
+}
+
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Since positioning the image, we need to help out the caption */
