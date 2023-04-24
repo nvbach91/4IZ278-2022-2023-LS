@@ -1,15 +1,15 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
     public function index()
     {
-        $cart = json_decode(Cookie::get('cart'), true) ?? [];
+        $cart = session('cart', []);
         $totalSum = $this->calculateTotalSum($cart);
         return view('cart', ['cart' => $cart, 'totalSum' => $totalSum]);
     }
@@ -24,7 +24,7 @@ class CartController extends Controller
         $product = Product::findOrFail($request->input('product_id'));
         $quantity = $request->input('quantity');
 
-        $cart = json_decode($request->cookie('cart'), true) ?? [];
+        $cart = session('cart', []);
 
         if (array_key_exists($product->id, $cart)) {
             $cart[$product->id]['quantity'] += $quantity;
@@ -36,24 +36,23 @@ class CartController extends Controller
             ];
         }
 
-        $cookie = cookie('cart', json_encode($cart), 60 * 24 * 7);
+        session(['cart' => $cart]);
 
-        return redirect()->back()->cookie($cookie)->with('status', 'Product added to cart successfully!');
+        return redirect()->back()->with('status', 'Product added to cart successfully!');
     }
-
 
     public function update(Request $request)
     {
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
 
-        $cart = json_decode(Cookie::get('cart'), true) ?? [];
+        $cart = session('cart', []);
 
         if (isset($cart[$product_id])) {
             $cart[$product_id]['quantity'] = $quantity;
         }
 
-        Cookie::queue('cart', json_encode($cart), 60 * 24 * 30); // 30 days
+        session(['cart' => $cart]);
 
         return redirect()->route('cart.index');
     }
@@ -62,26 +61,26 @@ class CartController extends Controller
     {
         $product_id = $request->input('product_id');
 
-        $cart = json_decode(Cookie::get('cart'), true) ?? [];
+        $cart = session('cart', []);
 
         if (isset($cart[$product_id])) {
             unset($cart[$product_id]);
         }
 
-        Cookie::queue('cart', json_encode($cart), 60 * 24 * 30); // 30 days
+        session(['cart' => $cart]);
 
         return redirect()->route('cart.index');
     }
 
     public function flush()
     {
-        Cookie::queue(Cookie::forget('cart'));
+        session()->forget('cart');
         return redirect()->route('cart.index')->with('status', 'Cart has been flushed successfully');
     }
 
     public static function cartItemCount()
     {
-        $cart = request()->cookie('cart') ? json_decode(request()->cookie('cart'), true) : [];
+        $cart = session('cart', []);
 
         $totalItems = 0;
 
@@ -103,6 +102,4 @@ class CartController extends Controller
 
         return $totalSum;
     }
-
 }
-
