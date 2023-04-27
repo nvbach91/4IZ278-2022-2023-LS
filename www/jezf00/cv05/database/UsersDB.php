@@ -1,4 +1,5 @@
 <?php
+require_once './database.php';
 class UsersDB extends Database
 {
   public function create($args)

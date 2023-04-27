@@ -1,4 +1,5 @@
 <?php
+require_once './database.php';
 class ProductsDB extends Database
 {
   public function create($args)
