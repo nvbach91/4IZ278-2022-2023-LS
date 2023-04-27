@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,16 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
 Route::get('auth/github', [AuthenticatedSessionController::class, 'redirectToGitHub'])->name('auth.github');
 Route::get('auth/github/callback', [AuthenticatedSessionController::class, 'handleGitHubCallback'])->name('auth.github.callback');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products.index');
+    Route::get('/admin/products/create', [ProductController::class, 'create'])->name('admin.products.create');
+    Route::post('/admin/products', [ProductController::class, 'store'])->name('admin.products.store');
+    Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+    Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+});
+
 
 
 

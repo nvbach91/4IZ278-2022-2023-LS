@@ -24,9 +24,11 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('profile.edit')">
-                        {{ __('Admin Panel') }}
-                    </x-nav-link>
+                    @if(Gate::allows('manage-products'))
+                        <x-nav-link :href="route('admin.products.index')">
+                            {{ __('Admin Panel') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -53,6 +55,12 @@
                         <x-dropdown-link :href="route('orders')">
                             {{ __('Orders') }}
                         </x-dropdown-link>
+
+                        @if(Gate::allows('manage-products'))
+                            <x-dropdown-link :href="route('admin.products.index')">
+                                {{ __('Admin Panel') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
