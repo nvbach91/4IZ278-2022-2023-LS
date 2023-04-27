@@ -32,6 +32,39 @@ body {
   object-fit: cover;
 }
 
+/* Fix carousel sliders */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control-prev {
+  left: 10px;
+}
+
+.carousel-control-next {
+  right: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+}
+
+/* End of Fix carousel sliders */
+
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   bottom: 3rem;
@@ -53,7 +86,6 @@ body {
 }
 /* rtl:end:ignore */
 
-
 /* Featurettes
 ------------------------- */
 
@@ -66,7 +98,6 @@ body {
 .featurette-heading {
   letter-spacing: -.05rem;
 }
-
 /* rtl:end:remove */
 
 /* RESPONSIVE CSS
