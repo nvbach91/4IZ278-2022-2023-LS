@@ -56,7 +56,7 @@
     <nav aria-label="...">
         <ul class="pagination">
             <?php for($i = 0; $i < $numPages; $i++){?>
-                <li class="page-item"><a class="page-link" href="<?php echo ".?limitFrom=".$i*$limit?>"><?php echo $i + 1 ?></a></li>
+                <li class="page-item"><a class="page-link" href="<?php echo "eshop.php?limitFrom=".$i*$limit?>"><?php echo $i + 1 ?></a></li>
             <?php }?>
         </ul>
     </nav>
