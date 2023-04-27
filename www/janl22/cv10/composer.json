@@ -1,0 +1,8 @@
+{
+  "name": "4iz278-janl22/cv07",
+  "description": "cv07",
+  "minimum-stability": "stable",
+  "require": {
+    "firebase/php-jwt": "*"
+  }
+}
