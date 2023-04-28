@@ -1,3 +1,4 @@
+@section('title', 'Admin Panel')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -23,7 +24,12 @@
                                     <td class="border-b border-gray-200 p-2 text-center">{{ $product->name }}</td>
                                     <td class="border-b border-gray-200 p-2 text-center">{{ $product->price }}</td>
                                     <td class="border-b border-gray-200 p-2 text-center">
-                                        <a href="{{ route('admin.products.edit', $product->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                                        <a href="{{ route('admin.products.edit', $product->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">Edit</a>
+                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

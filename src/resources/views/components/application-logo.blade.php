@@ -1,1 +1,1 @@
-<img src="{{ asset('images/big_logo.png') }}" alt="..." x-application-logo>
+<img src="{{ asset('images/mid_logo.png') }}" alt="..." x-application-logo>
