@@ -17,7 +17,7 @@ if (!$product) {
     exit('Unable to find product!');
 }
 
-$pessimisticLockTime = 30;
+$pessimisticLockTime = 30; // 30 minut
 
 // pokud nekdo zrovna edituje (otevrel editacni stranku pred nami)
 //      pokud to nejsem ja
@@ -25,9 +25,9 @@ $pessimisticLockTime = 30;
 //              neotevreme editacni stranku
 // pokud nic neplati tak otevru editaci
 
-if ($product['edit_by']) {
-    if ($product['edit_by'] != $_COOKIE['user_id']) {
-        if (time() - time($product['opened_at']) < 30 * 60) {
+if ($product['edited_by']) {
+    if ($product['edited_by'] != $_COOKIE['user_id']) {
+        if (time() - strtotime($product['opened_at']) < $pessimisticLockTime * 60) {
             exit("Some else is still editing this record");
         }
     }

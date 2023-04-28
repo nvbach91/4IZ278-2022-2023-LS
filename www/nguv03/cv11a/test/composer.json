@@ -1,0 +1,16 @@
+{
+    "name": "dev/test-1",
+    "autoload": {
+        "psr-4": {
+            "Dev\\Test1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bach"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.3"
+    }
+}

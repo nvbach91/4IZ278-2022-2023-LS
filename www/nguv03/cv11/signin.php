@@ -16,6 +16,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $existing_user = @$stmt->fetchAll()[0];
 
     if (password_verify($password, $existing_user['password'])) {
+        setcookie('user_id', $existing_user['user_id'], time() + 60*60);
         $_SESSION['user_id'] = $existing_user['user_id'];
         $_SESSION['user_email'] = $existing_user['email'];
 

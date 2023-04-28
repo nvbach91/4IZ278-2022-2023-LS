@@ -29,14 +29,13 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         # tady by idealne mel byt navrat na formular s oznacenymi daty, 
         # co se zmenilo a nabidnout prepis nebo ponechani dat, nebo zobrazit rozdily
         # pro zjednoduseni ted jen umiram
-        die ("The product was updated by someone else in the meantime!");
+        exit ("The product was updated by someone else in the meantime!");
     }
-    $stmt = $db->prepare("
-        UPDATE cv11_products SET name = :name, 
+    $stmt = $db->prepare('UPDATE cv11_products SET name = :name, 
                             description = :description, 
                             price = :price, 
                             last_updated_at = now() 
-                        WHERE product_id = :product_id");
+                        WHERE product_id = :product_id');
     $stmt->execute([
         'name' => $_POST['name'], 
         'description' => $_POST['description'], 

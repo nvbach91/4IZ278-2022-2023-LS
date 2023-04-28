@@ -1,0 +1,24 @@
+{
+    "name": "bach/testx",
+    "autoload": {
+        "psr-4": {
+            "Bach\\Testx\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nvbach91",
+            "email": "nvbach91@outlook.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.3",
+        "janu-software/facebook-php-sdk": "^0.2.0",
+        "symfony/http-client": "^6.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
