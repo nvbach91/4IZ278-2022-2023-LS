@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+
+.slide {
+    text-align: center;
+}
+
+.slide-image {
+    max-height: 200px;
+    margin: 0 auto;
+}
+
+.slide-text {
+    color: #000000;
+    text-shadow: 1px 1px 0 #FFFFFF,
+    -1px 1px 0 #FFFFFF,
+    1px -1px 0 #FFFFFF,
+    -1px -1px 0 #FFFFFF,
+    0px 1px 0 #FFFFFF,
+    0px -1px 0 #FFFFFF,
+    -1px 0px 0 #FFFFFF,
+    1px 0px 0 #FFFFFF,
+    2px 2px 0 #FFFFFF,
+    -2px 2px 0 #FFFFFF,
+    2px -2px 0 #FFFFFF,
+    -2px -2px 0 #FFFFFF,
+    0px 2px 0 #FFFFFF,
+    0px -2px 0 #FFFFFF,
+    -2px 0px 0 #FFFFFF,
+    2px 0px 0 #FFFFFF,
+    1px 2px 0 #FFFFFF,
+    -1px 2px 0 #FFFFFF,
+    1px -2px 0 #FFFFFF,
+    -1px -2px 0 #FFFFFF,
+    2px 1px 0 #FFFFFF,
+    -2px 1px 0 #FFFFFF,
+    2px -1px 0 #FFFFFF,
+    -2px -1px 0 #FFFFFF;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3rem; /* Footer height */
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.img-products-list {
+    max-height: 20px;
+    max-width: 40px;
+    object-fit: contain;
+}
