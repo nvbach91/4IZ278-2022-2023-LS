@@ -1,0 +1,76 @@
+  .users {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+
+ .users h2 {
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .users ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .users li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+
+  .users .row {
+    display: flex;
+  }
+  
+  .users label {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .users select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .users button[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 3px;
+    background-color: black;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .users button[type="submit"]:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  @media (min-width: 768px) {
+    /* Styles for screens with a minimum width of 768px */
+    .users li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  
+    .users form {
+      display: flex;
+      align-items: center;
+    }
+  
+    .users button[type="submit"] {
+      margin-left: 10px;
+    }
+  }
+  
