@@ -12,14 +12,20 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
-                        {{ __('Your Orders') }}
+                    <x-nav-link :href="route('store')" :active="request()->routeIs('store')">
+                        {{ __('Store') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
+                        {{ __('Your Orders') }}
                     </x-nav-link>
                 </div>
 

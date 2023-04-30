@@ -15,7 +15,7 @@
                         @method('PUT')
 
                         <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
+                            <label for="name" class="block text-sm font-bold mb-2">Product Name:</label>
                             <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('name', $product->name) }}" required>
                             @error('name')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Product Price:</label>
+                            <label for="price" class="block text-sm font-bold mb-2">Product Price:</label>
                             <input type="number" step="0.01" name="price" id="price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('price', $product->price) }}" required>
                             @error('price')
                                 <span class="text-red-500 text-xs">{{ $message }}</span>
@@ -31,9 +31,9 @@
                         </div>
 
                         <div class="flex items-center justify-between">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                Update Product
-                            </button>
+                            <x-primary-button class="ml-0">
+                                {{ __('Update Product') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>
