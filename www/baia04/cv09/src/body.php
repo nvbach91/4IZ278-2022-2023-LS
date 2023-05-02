@@ -78,6 +78,10 @@
                                 <input type='button' name='card_button' value='Add to Cart'>
                             </a>
                         </div>
+                        <div class = 'additional_buttons'>
+                            <a href = './edit.php?productID=<?php echo $product['product_id']; ?>'>Edit | </a>
+                            <a href = './delete.php?productID=<?php echo $product['product_id']; ?>'>Delete</a>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
