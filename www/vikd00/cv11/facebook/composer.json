@@ -1,0 +1,10 @@
+{
+    "name": "vikd00/fblogin",
+    "description": "Simple FB login",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "facebook/graph-sdk": "^5.1"
+    }
+}
