@@ -1,0 +1,15 @@
+.my-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+    margin: 50px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+
+}
+th {
+    background-color: #ddd;
+}
