@@ -17,17 +17,24 @@ if (!empty($_POST)) {
 
     if ($password != $passwordR) $errors[] = "passwords do not match";
 
-//    if (empty($errors))
-
     if (empty($errors)) {
         require "db/UserDatabase.php";
         $db = new UserDatabase();
-        $result = $db->register($email, password_hash($password, PASSWORD_DEFAULT));
-        if ($result === 0) {
-            header("Location: index.php?registered");
-        } else if ($result === 1) {
-            $errors[] = "email already registered";
-        } else $errors[] = "Unknown login error";
+        $passHash = password_hash($password, PASSWORD_DEFAULT);
+        $result = $db->register($email, $passHash);
+        $login = $db->login($email);
+        $loginCount = count($login);
+        $loginHash = $login[0]["hash"];
+        if ($loginCount === 1 && $passHash === $loginHash) {
+            if ($result === 0) {
+                setcookie("session", $email, time() + (86400), "/");
+                $_SESSION["email"] = $email;
+                $_SESSION["userType"] = $db->getUserType($email);
+
+                header("Location: index.php?registered");
+            } else if ($result === 1) $errors[] = "Email already registered";
+            else $errors[] = "Unknown login error";
+        } else $errors[] = "Database error";
     }
 }
 

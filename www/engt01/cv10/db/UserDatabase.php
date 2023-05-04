@@ -15,11 +15,11 @@ class UserDatabase extends Database {
         return $statement->execute(["email" => $email, "hash" => $passHash]) ? 0 : -1;
     }
 
-    public function login(string $email): int {
+    public function login(string $email): false|array {
         $query = "SELECT hash FROM users WHERE email = :email";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["email" => $email]);
-        return count($statement->fetchAll());
+        return $statement->fetchAll();
     }
 
     public function getUserType(string $email): int {

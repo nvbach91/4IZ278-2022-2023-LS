@@ -16,15 +16,15 @@ if (!empty($_POST)) {
     if (empty($errors)) {
         require "db/UserDatabase.php";
         $db = new UserDatabase();
-        $login = $db->login($email);
-        if ($login === 1) {
+        $loginResult = count($db->login($email));
+        if ($loginResult === 1) {
             setcookie("session", $email, time() + (86400), "/");
             $_SESSION["email"] = $email;
             $_SESSION["userType"] = $db->getUserType($email);
 
             header("Location: index.php");
             exit();
-        } else if ($login === 0) $errors[] = "No login found";
+        } else if ($loginResult === 0) $errors[] = "No login found";
         else $errors[] = "Unknown login error";
     }
 }
