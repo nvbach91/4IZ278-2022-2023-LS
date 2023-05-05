@@ -8,10 +8,10 @@ $query = "SELECT o.*, p.name AS product_name, c.name AS category_name, u.name AS
           LEFT JOIN products p ON o.product_id = p.product_id
           LEFT JOIN categories c ON p.category_id = c.category_id
           LEFT JOIN users u ON o.user_id = u.user_id
-          WHERE u.name = :username";
+          WHERE o.user_id = :user_id";
 
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+$stmt->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
