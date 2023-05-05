@@ -1,0 +1,11 @@
+{
+  "name": "4iz278-janl22/cv11",
+  "description": "cv11",
+  "minimum-stability": "stable",
+  "require": {
+    "firebase/php-jwt": "*",
+    "janu-software/facebook-php-sdk": "*",
+    "guzzlehttp/guzzle": "*",
+    "php-http/guzzle7-adapter": "*"
+  }
+}
