@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
             $max_user_id = $result['max_user_id'];
             $new_user_id = $max_user_id + 1;
 
-            $stmt = $pdo->prepare("INSERT INTO `users` (user_id, name) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO `users` (user_id, name, privilege) VALUES (?, ?, 0)");
             $stmt->execute([$new_user_id, $username]);
             $_SESSION['login'] = $username;
             $_SESSION['id'] = $new_user_id;
