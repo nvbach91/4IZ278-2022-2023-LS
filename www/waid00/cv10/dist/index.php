@@ -12,7 +12,7 @@ if (isset($_GET['add'])) {
     $product_id = $_GET['add'];
 
     $stmt = $pdo->prepare("INSERT INTO orders (date, discount, user_id, product_id) VALUES (?, ?, ?, ?)");
-    $stmt->execute([date('Y-m-d H:i:s'), 0, $_SESSION['id'], $product_id]);
+    $stmt->execute([date('Y-m-d H:i:s'), 0, $_SESSION['user_id'], $product_id]);
 
     echo "Product added to cart successfully!";
     header('Location: index.php');
@@ -52,7 +52,7 @@ $query = "SELECT COUNT(o.order_id) AS order_count
           LEFT JOIN users u ON o.user_id = u.user_id
           WHERE o.user_id = :user_id";
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_STR);
+$stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_STR);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);?>
 <!DOCTYPE html>

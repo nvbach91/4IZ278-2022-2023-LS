@@ -44,7 +44,7 @@
                         </a>
     <?php ; } ?>
 
-                        <a class="btn btn-outline-dark mt-auto" href="?add=<?php echo $e_product['product_id']; ?>&user_id=<?php echo $_SESSION['id']; ?>&date=<?php echo date('Y-m-d H:i:s'); ?>&discount=0">
+                        <a class="btn btn-outline-dark mt-auto" href="?add=<?php echo $e_product['product_id']; ?>&user_id=<?php echo $_SESSION['user_id']; ?>&date=<?php echo date('Y-m-d H:i:s'); ?>&discount=0">
                             Add to cart
                         </a>
 

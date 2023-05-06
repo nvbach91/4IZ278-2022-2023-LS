@@ -11,7 +11,7 @@ $query = "SELECT o.*, p.name AS product_name, c.name AS category_name, u.name AS
           WHERE o.user_id = :user_id";
 
 $stmt = $pdo->prepare($query);
-$stmt->bindParam(':user_id', $_SESSION['id'], PDO::PARAM_INT);
+$stmt->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
