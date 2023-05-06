@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,9 +12,9 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'total_sum',
         'user_id',
-        'product_id',
+        'order_num',
+        'status'
     ];
 
     public function user()
@@ -20,8 +22,15 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('quantity', 'price')->withTimestamps();
+    }
+
+    public function getTotalSumAttribute()
+    {
+        return $this->products->sum(function ($product) {
+            return $product->pivot->quantity * $product->pivot->price;
+        });
     }
 }

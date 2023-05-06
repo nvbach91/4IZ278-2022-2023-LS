@@ -33,8 +33,8 @@ class OrderSeeder extends Seeder
 
                 $order = new Order([
                     'user_id' => $user->id,
-                    'product_id' => $product->id,
-                    'total_sum' => $total_sum,
+                    'status' => 'processing',
+                    'order_num' => 'ORD-' . rand(100000, 999999),
                 ]);
 
                 $order->save();

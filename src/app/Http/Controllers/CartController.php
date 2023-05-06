@@ -57,20 +57,18 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
-    public function remove(Request $request)
+    public function remove($id)
     {
-        $product_id = $request->input('product_id');
-
         $cart = session('cart', []);
-
-        if (isset($cart[$product_id])) {
-            unset($cart[$product_id]);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
         }
 
         session(['cart' => $cart]);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cart.index')->with('status', 'Product removed from cart successfully!');
     }
+
 
     public function flush()
     {
