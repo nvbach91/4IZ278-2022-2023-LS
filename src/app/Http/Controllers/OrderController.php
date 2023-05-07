@@ -67,12 +67,12 @@ class OrderController extends Controller
     public function adminOrders(Request $request)
     {
         $this->authorize('manage-orders');
-
+    
         $search_order = $request->input('search_order');
         $search_email = $request->input('search_email');
         $sortBy = $request->input('sort_by', 'created_at');
         $sortOrder = $request->input('sort_order', 'desc');
-
+    
         $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
                 ->select('orders.*', 'users.email as user_email')
                 ->when($search_order, function ($query, $search_order) {
@@ -81,37 +81,21 @@ class OrderController extends Controller
                 ->when($search_email, function ($query, $search_email) {
                     return $query->where('users.email', 'like', '%' . $search_email . '%');
                 })
-                ->orderBy($sortBy, $sortOrder)
+                ->with('products')
                 ->get();
-
-
-                if ($sortBy === 'total_sum') {
-                    $orders = $sortOrder === 'desc' ? $orders->sortByDesc('total_sum') : $orders->sortBy('total_sum');
-                } else {
-                    $orders = $sortOrder === 'desc' ? $orders->sortByDesc($sortBy) : $orders->sortBy($sortBy);
-                }
-
+            
+        $orders->each(function ($order) {
+            $order->setAttribute('total_sum', $order->total_sum);
+        });
+    
+        if ($sortBy === 'total_sum') {
+            $orders = $sortOrder === 'desc' ? $orders->sortByDesc('total_sum') : $orders->sortBy('total_sum');
+        } else {
+            $orders = $sortOrder === 'desc' ? $orders->sortByDesc($sortBy) : $orders->sortBy($sortBy);
+        }
+    
         return view('admin.orders.index', compact('orders', 'search_order', 'search_email', 'sortBy', 'sortOrder'));
     }
-
-    // public function adminOrders(Request $request)
-    // {
-    //     $this->authorize('manage-orders');
-
-    //     $sortBy = $request->input('sort_by', 'created_at');
-    //     $sortOrder = $request->input('sort_order', 'desc');
-    //     $search = $request->input('search');
-
-    //     $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
-    //         ->select('orders.*', 'users.email as user_email')
-    //         ->when($search, function ($query, $search) {
-    //             return $query->where('order_num', 'like', '%' . $search . '%');
-    //         })
-    //         ->orderBy($sortBy, $sortOrder)
-    //         ->get();
-
-    //     return view('admin.orders.index', compact('orders', 'sortBy', 'sortOrder', 'search'));
-    // }
 
 
 

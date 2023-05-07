@@ -19,6 +19,21 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12 mb-3 d-flex">
+            <form action="{{ route('store') }}" method="get" class="d-flex">
+                <input type="text" name="search" value="{{ $search }}" placeholder="Search" class="form-control me-2">
+                <button type="submit" class="btn btn-outline-dark">Search</button>
+            </form>
+            <form action="{{ route('store') }}" method="get" class="d-flex ms-auto">
+                <input type="hidden" name="search" value="{{ $search }}">
+                <select name="sort_order" class="form-select me-2" onchange="this.form.submit()">
+                    <option value="asc" {{ $sortOrder === 'asc' ? 'selected' : '' }}>Cheapest to Expensive</option>
+                    <option value="desc" {{ $sortOrder === 'desc' ? 'selected' : '' }}>Expensive to Cheapest</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="row">
         @foreach($products as $product)
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
