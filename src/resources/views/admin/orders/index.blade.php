@@ -58,7 +58,11 @@
                                     </td>
                                     <td class="border-b border-gray-200 p-2 text-center">{{ $order->created_at->format('Y-m-d') }}</td>
                                     <td class="border-b border-gray-200 p-2 text-center">
-                                        <a href="{{ route('admin.orders.show', $order->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">More</a>
+                                        <a href="{{ route('admin.orders.show', $order->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        <x-primary-button class="ml-2">
+                                            {{ __('More') }}
+                                        </x-primary-button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
