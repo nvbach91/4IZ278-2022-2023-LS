@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             @if(is_array($cart) || is_object($cart))
-                @foreach($cart as $id => $item) <!-- Update the loop to include the product id -->
+                @foreach($cart as $id => $item)
                 <tr>
                     <td>{{ isset($item['name']) ? $item['name'] : 'Unknown Product' }}</td>
                     <td>${{ isset($item['price']) ? $item['price'] : 0 }}</td>
@@ -44,7 +44,12 @@
     </table>
     <div class="d-flex justify-content-end">
         <a href="{{ route('cart.flush') }}" class="btn btn-outline-danger me-2">Flush Cart</a>
-        <a href="/checkout" class="btn btn-primary" {{ $totalSum > 0 ? '' : 'disabled' }}>Proceed to Checkout</a>
+        @if ($totalSum > 0)
+            <a href="/checkout" class="btn btn-primary">Proceed to Checkout</a>
+        @else
+            <a href="/checkout" class="btn btn-primary disabled">Proceed to Checkout</a>
+        @endif
     </div>
+
 </div>
 @endsection

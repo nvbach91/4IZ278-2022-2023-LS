@@ -40,6 +40,7 @@ Route::get('/panel', [PanelController::class, 'index'])->middleware('auth');
 Route::get('/', [CarouselController::class, 'index'])->name('carousel');
 Route::get('/store', [StoreController::class, 'index'])->name('store');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');

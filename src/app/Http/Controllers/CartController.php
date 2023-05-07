@@ -30,6 +30,7 @@ class CartController extends Controller
             $cart[$product->id]['quantity'] += $quantity;
         } else {
             $cart[$product->id] = [
+                'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => $quantity
@@ -68,7 +69,6 @@ class CartController extends Controller
 
         return redirect()->route('cart.index')->with('status', 'Product removed from cart successfully!');
     }
-
 
     public function flush()
     {

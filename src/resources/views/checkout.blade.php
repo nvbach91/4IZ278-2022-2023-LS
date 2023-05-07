@@ -58,7 +58,8 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" action="{{ route('checkout.store') }}" method="post" novalidate>
+        @csrf
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
@@ -182,8 +183,11 @@
           </div>
 
           <hr class="my-4">
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          @if ($total > 0)
+            <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="validateAndSubmit()">Continue to checkout</button>
+          @else
+            <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="validateAndSubmit()" disabled>Continue to checkout</button>
+          @endif
         </form>
       </div>
     </div>
