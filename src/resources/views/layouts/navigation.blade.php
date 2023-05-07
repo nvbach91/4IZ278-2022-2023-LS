@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('orders')" :active="request()->routeIs('orders')">
+                    <x-nav-link :href="route('user.orders')" :active="request()->routeIs('user.orders')">
                         {{ __('Your Orders') }}
                     </x-nav-link>
                 </div>
@@ -32,7 +32,15 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @if(Gate::allows('manage-products'))
                         <x-nav-link :href="route('admin.products.index')">
-                            {{ __('Admin Panel') }}
+                            {{ __('Admin Panel - Products') }}
+                        </x-nav-link>
+                    @endif
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if(Gate::allows('manage-products'))
+                        <x-nav-link :href="route('admin.orders.index')">
+                            {{ __('Admin Panel - Orders') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -58,13 +66,19 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('orders')">
+                        <x-dropdown-link :href="route('user.orders')">
                             {{ __('Orders') }}
                         </x-dropdown-link>
 
                         @if(Gate::allows('manage-products'))
                             <x-dropdown-link :href="route('admin.products.index')">
-                                {{ __('Admin Panel') }}
+                                {{ __('Admin Panel - Products') }}
+                            </x-dropdown-link>
+                        @endif
+
+                        @if(Gate::allows('manage-products'))
+                            <x-dropdown-link :href="route('admin.orders.index')">
+                                {{ __('Admin Panel - Orders') }}
                             </x-dropdown-link>
                         @endif
 

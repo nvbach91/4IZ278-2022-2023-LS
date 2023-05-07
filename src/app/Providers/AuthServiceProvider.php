@@ -26,5 +26,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-products', function ($user) {
             return $user->role === 1;
         });
+
+        // Add the manage-orders gate here
+        Gate::define('manage-orders', function ($user) {
+            return $user->role === 1;
+        });
     }
 }

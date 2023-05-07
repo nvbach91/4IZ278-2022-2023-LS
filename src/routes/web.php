@@ -49,7 +49,7 @@ Route::get('/cart/flush', [CartController::class, 'flush'])->name('cart.flush');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+Route::get('/orders', [OrderController::class, 'index'])->name('user.orders');
 Route::get('/orders/{id}', [OrderController::class, 'show'])->name('show');
 
 Route::get('auth/github', [AuthenticatedSessionController::class, 'redirectToGitHub'])->name('auth.github');
@@ -62,6 +62,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
     Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::get('/admin/orders', [OrderController::class, 'adminOrders'])->name('admin.orders.index');
+    // Add this line for updating order status
+    Route::put('/admin/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+    Route::get('admin/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
 });
 
 
