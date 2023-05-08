@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'waid00';
 $username = 'waid00';
-$password = 'xXxlmat21dav15';
+$password = '';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
