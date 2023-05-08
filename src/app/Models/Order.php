@@ -33,4 +33,9 @@ class Order extends Model
             return $product->pivot->quantity * $product->pivot->price;
         });
     }
+
+    public function guest()
+    {
+        return $this->hasOne(Guest::class);
+    }
 }

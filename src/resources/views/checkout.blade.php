@@ -63,7 +63,7 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -71,15 +71,15 @@
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
             </div>
 
             <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -87,7 +87,7 @@
 
             <div class="col-12">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -184,9 +184,9 @@
 
           <hr class="my-4">
           @if ($total > 0)
-            <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="validateAndSubmit()">Continue to checkout</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
           @else
-            <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="validateAndSubmit()" disabled>Continue to checkout</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit" disabled>Continue to checkout</button>
           @endif
         </form>
       </div>

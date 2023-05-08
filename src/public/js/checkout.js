@@ -17,18 +17,3 @@
     }, false)
   })
 })()
-
-function validateAndSubmit() {
-  const form = document.querySelector(".needs-validation");
-  const cartItemCount = parseInt('{{ \App\Http\Controllers\CartController::cartItemCount() }}');
-
-  if (cartItemCount > 0) {
-    if (form.checkValidity()) {
-      form.submit();
-    } else {
-      form.classList.add("was-validated");
-    }
-  } else {
-    alert("Your cart is empty. Please add items to your cart before proceeding to checkout.");
-  }
-}
