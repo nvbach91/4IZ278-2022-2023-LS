@@ -1,21 +1,25 @@
 <?php
-  
-    $username = '';
-    $password = 'í';
-    $connection_string = '';
+    $host = 'localhost';
+    $db   = 'adaa08';
+    $user = 'adaa08';
+    $pass = 'dahp7Eidien4iokoop';
+    $charset = 'utf8mb4';
 
+    $conn = new mysqli($host, $user, $pass, $db);
 
-    $conn = oci_connect($username, $password, $connection_string);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My E-shop</title>
+    <title>E-shop</title>
 </head>
 <body>
     <header>
-        <h1>Welcome to My E-shop!</h1>
+        <h1>Vitaje v mojom E-shope!</h1>
     </header>
 
     <nav>
@@ -34,17 +38,14 @@
 
         <?php
             $query = 'SELECT product_id, name, price FROM products LIMIT 3';
-            $stid = oci_parse($conn, $query);
-            oci_execute($stid);
+            $result = $conn->query($query);
 
-            while (($row = oci_fetch_array($stid, OCI_BOTH)) != false) {
+            while ($row = $result->fetch_assoc()) {
                 echo "<div>\n";
-                echo "<h3>" . $row['NAME'] . "</h3>\n";
-                echo "<p>Price: " . $row['PRICE'] . "</p>\n";
+                echo "<h3>" . $row['name'] . "</h3>\n";
+                echo "<p>Price: " . $row['price'] . "</p>\n";
                 echo "</div>\n";
             }
-
-            oci_free_statement($stid);
         ?>
     </main>
 
@@ -55,6 +56,5 @@
 </html>
 
 <?php
-    // Close the connection
-    oci_close($conn);
+    $conn->close();
 ?>
