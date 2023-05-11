@@ -1,6 +1,8 @@
 <?php
 require_once('./config.php');
 require_once('./UserModel.php');
+require_once('./ReservationModel.php');
+require_once('./BlocksModel.php');
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -9,7 +11,9 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 class API
 {
     private $db;
-    private $userModel;
+    public $userModel;
+    public $reservationModel;
+    public $blocksModel;
 
     function __construct()
     {
@@ -33,6 +37,8 @@ class API
             $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
             $this->userModel = new UserModel();
+            $this->reservationModel = new ReservationModel();
+            $this->blocksModel = new BlocksModel();
         } catch (PDOException $e) {
             exit("Connection failed: " . $e->getMessage());
         }
@@ -60,12 +66,21 @@ class API
             $requestData = json_decode(file_get_contents('php://input'), true);
             if (method_exists($this->userModel, $action)) {
                 call_user_func(array($this->userModel, $action), $this, $requestData);
+            } else if (method_exists($this->reservationModel, $action)) {
+                call_user_func(array($this->reservationModel, $action), $this, $requestData);
+            } else if (method_exists($this->blocksModel, $action)) {
+                call_user_func(array($this->blocksModel, $action), $this, $requestData);
             } else {
                 echo "Unknown action: $action";
             }
         } else {
+            $action = explode('?', $action)[0];
             if (method_exists($this->userModel, $action)) {
-                call_user_func(array($this->userModel, $action), $_GET);
+                call_user_func(array($this->userModel, $action), $this, $_GET);
+            } else if (method_exists($this->reservationModel, $action)) {
+                call_user_func(array($this->reservationModel, $action), $this, $_GET);
+            } else if (method_exists($this->blocksModel, $action)) {
+                call_user_func(array($this->blocksModel, $action), $this, $_GET);
             } else {
                 echo "Unknown action: $action";
             }
@@ -73,8 +88,6 @@ class API
     }
     function sendOutput($data = array(), $httpHeaders = array())
     {
-        header_remove('Set-Cookie');
-
         if (is_array($httpHeaders) && count($httpHeaders)) {
             foreach ($httpHeaders as $httpHeader) {
                 header($httpHeader);

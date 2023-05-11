@@ -35,7 +35,7 @@ class UserModel
 
         if (!$strErrorDesc) {
             $api->sendOutput(
-                array(),
+                json_encode(array()),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {
@@ -66,7 +66,7 @@ class UserModel
             if ($user) {
                 return true;
             } else {
-                setcookie('token', '', time() - 3600, '/');
+                // setcookie('token', '', time() - 3600, '/');
             }
         }
         return false;
@@ -107,9 +107,11 @@ class UserModel
                     $query = "UPDATE users SET salt = ?, password = ? WHERE id = ?";
                     $api->executeQuery($query, [$newsalt, $newpass, $user['id']]);
 
+                    $isAdmin = $user['isAdmin'];
+
                     setcookie('token', $newsalt, time() + (86400 * 30), '/');
                 } else {
-                    $strErrorDesc = 'Invalid email or password';
+                    $strErrorDesc = 'Invalid password';
                     $strErrorHeader = 'HTTP/1.1 401 Unauthorized ';
                 }
             } else {
@@ -120,7 +122,7 @@ class UserModel
 
         if (!$strErrorDesc) {
             $api->sendOutput(
-                array(),
+                json_encode(array('perm' => $isAdmin)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {

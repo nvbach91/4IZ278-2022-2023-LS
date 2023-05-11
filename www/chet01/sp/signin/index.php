@@ -3,28 +3,19 @@
 
 <head>
     <?php include_once('../req/metadata.php') ?>
-    <title>Sign Up | SuperCafé</title>
+    <title>Sign In | SuperCafé</title>
 </head>
 
 <body>
-    <?php $activePage = "signup";
+    <?php $activePage = "signin";
     include_once("../req/header.php") ?>
-    <main id='signup'>
+    <main id='signin'>
         <form @submit.prevent='sendForm'>
-            <label>
-                <p>Firstname</p><input type="text" v-model='user.firstname'>
-            </label>
-            <label>
-                <p>Surname</p><input type="text" v-model='user.surname'>
-            </label>
             <label>
                 <p>Email</p><input type="email" v-model='user.email'>
             </label>
             <label>
                 <p>Password</p><input type="text" v-model='user.password'>
-            </label>
-            <label>
-                <p>Phone</p><input type="text" v-model='user.phone'>
             </label>
             <button type="submit">Signup</button>
         </form>

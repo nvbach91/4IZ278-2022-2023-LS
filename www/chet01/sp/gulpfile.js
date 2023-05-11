@@ -31,7 +31,7 @@ function reload() {
 function watch() {
   browserSync.init({
     injectChanges: true,
-    proxy: "http://localhost:8080/semestralka/index.php",
+    proxy: "http://localhost/semestralka/index.php",
     port: 8080,
   });
 
