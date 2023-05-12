@@ -1,0 +1,22 @@
+CREATE TABLE stanice (
+    id         NUMBER NOT NULL,
+    name       VARCHAR2(255),
+    gps        VARCHAR2(255),
+    img        CLOB,
+    galaxie_id NUMBER
+);
+
+ALTER TABLE stanice ADD CONSTRAINT stanice_pk PRIMARY KEY ( id );
+
+ALTER TABLE stanice
+    ADD CONSTRAINT stanice_galaxie_fk FOREIGN KEY ( galaxie_id )
+        REFERENCES galaxie ( id );
+
+CREATE TABLE galaxie (
+    id     NUMBER NOT NULL,
+    name   VARCHAR2(255),
+    "size" NUMBER,
+    img    CLOB
+);
+
+ALTER TABLE galaxie ADD CONSTRAINT galaxie_pk PRIMARY KEY ( id );
