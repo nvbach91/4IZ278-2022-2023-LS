@@ -1,0 +1,23 @@
+{
+    "name": "dev/cv12a",
+    "autoload": {
+        "psr-4": {
+            "Dev\\Cv12a\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "nvbach91",
+            "email": "nvbach91@outlook.com"
+        }
+    ],
+    "require": {
+        "janu-software/facebook-php-sdk": "^0.2.0",
+        "symfony/http-client": "^6.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
