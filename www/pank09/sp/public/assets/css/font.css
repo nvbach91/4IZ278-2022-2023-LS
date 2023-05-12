@@ -1,0 +1,151 @@
+.fs-1 {
+    font-size: 3rem!important
+}
+
+.fs-2 {
+    font-size: 2.75rem!important
+}
+
+.fs-3 {
+    font-size: 2.5rem!important
+}
+
+.fs-4 {
+    font-size: 2.25rem!important
+}
+
+.fs-5 {
+    font-size: 2rem!important
+}
+
+.fs-6 {
+    font-size: 1.75rem!important
+}
+
+.fs-7 {
+    font-size: 1.5rem!important
+}
+
+.fs-8 {
+    font-size: 1.2rem!important
+}
+
+.fs-9 {
+    font-size: 1rem!important
+}
+
+.fs-10 {
+    font-size: .9rem!important
+}
+
+.fs-11 {
+    font-size: .8rem!important
+}
+
+.fs-12 {
+    font-size: .75rem!important
+}
+
+.fs-13 {
+    font-size: .65rem!important
+}
+
+.fs-14 {
+    font-size: .55rem!important
+}
+
+.fw-l {
+    font-weight: 300!important
+}
+
+.fw-r {
+    font-weight: 400!important
+}
+
+.fw-m {
+    font-weight: 500!important
+}
+
+.fw-sb {
+    font-weight: 600!important
+}
+
+.fw-bo {
+    font-weight: 700!important
+}
+
+.fw-bl {
+    font-weight: 900!important
+}
+
+.is-text-center {
+    text-align: center!important
+}
+
+.is-text-left {
+    text-align: left!important
+}
+
+.is-text-right {
+    text-align: right!important
+}
+
+.lh-lg {
+    line-height: 1.8!important
+}
+
+.lh-md {
+    line-height: 1.5!important
+}
+
+.lh-sm {
+    line-height: 1.25!important
+}
+
+.opacity-10 {
+    opacity: .1
+}
+
+.opacity-20 {
+    opacity: .2
+}
+
+.opacity-30 {
+    opacity: .3
+}
+
+.opacity-40 {
+    opacity: .4
+}
+
+.opacity-50 {
+    opacity: .5
+}
+
+.opacity-60 {
+    opacity: .6
+}
+
+.opacity-70 {
+    opacity: .7
+}
+
+.opacity-80 {
+    opacity: .8
+}
+
+.opacity-90 {
+    opacity: .9
+}
+
+.opacity-100 {
+    opacity: 1
+}
+
+.text-error {
+    color: rgb(184, 0, 0);
+}
+
+.text-success {
+    color: rgb(89, 184, 0);
+}
