@@ -29,7 +29,6 @@ body{
 .last{
     margin-right: 50px;
 }
-/* SHIFT */
 nav.shift ul li a {
     position: relative;
     z-index: 1;
@@ -80,7 +79,6 @@ nav ul li a:before {
 .upper .last{
     margin-right: 1Opx;
 }
-/* stroke */
 nav.stroke ul li a,
 nav.fill ul li a {
     position: relative;
@@ -133,6 +131,44 @@ nav.fill ul li a:hover:after {
 .white{
     color: white !important;
 }
+
+/*INDEX PAGE*/
+.main-image{
+    background-image: url(../pictures/bee_on_flower.jpg);
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding-top: 300px;
+    
+}
+.main-image h1{
+    font-size: 5em;
+}
+.article{
+    padding: 30px 200px 20px 200px !important;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+.article p{
+    font-size: 1.2em;
+}
+.article div{
+    margin-top: 20px;
+}
+.last-article div{
+    margin-bottom: 30px;
+}
+
 
 /* REGISTRATION PAGE*/
 .registration-form{
