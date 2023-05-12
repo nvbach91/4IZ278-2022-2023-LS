@@ -1,0 +1,192 @@
+:root{
+    --lavender-blush: #f3e8eeff;
+    --dark-pastel-green: #1bc54eff;
+    --aureolin: #f9f110ff;
+    --smoky-black: #0d090aff;
+}
+body{
+    margin: 0;
+    box-sizing: border-box;
+    background-color: var(--lavender-blush);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*HEADER*/
+
+.upper{
+    background-color: var(--aureolin);
+}
+.bottom{
+    background-color: var(--lavender-blush);
+}
+.logo{
+    width: 45px;
+    margin-left: 50px;
+}
+.last{
+    margin-right: 50px;
+}
+/* SHIFT */
+nav.shift ul li a {
+    position: relative;
+    z-index: 1;
+}
+
+nav.shift ul li a:hover {
+    color: var(--lavender-blush);
+}
+
+nav.shift ul li a:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    content: '.';
+    color: transparent;
+    background: var(--dark-pastel-green);
+    visibility: none;
+    opacity: 0;
+    z-index: -1;
+}
+
+nav.shift ul li a:hover:after {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+}
+.shift ul{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.shift{
+    border: solid 1px var(--smoky-black);
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+    transition: all .5s;
+}
+.shift li{
+    margin-right: 5px;
+}
+.upper .last{
+    margin-right: 1Opx;
+}
+/* stroke */
+nav.stroke ul li a,
+nav.fill ul li a {
+    position: relative;
+}
+
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: var(--smoky-black);
+    height: 1px;
+}
+
+nav.stroke ul li a:hover:after {
+    width: 100%;
+}
+
+nav.fill ul li a {
+    transition: all 2s;
+}
+
+nav.fill ul li a:after {
+    text-align: left;
+    content: '.';
+    margin: 0;
+    opacity: 0;
+}
+
+nav.fill ul li a:hover {
+    color: var(--smoky-black);
+    z-index: 1;
+}
+
+nav.fill ul li a:hover:after {
+    z-index: -10;
+    animation: fill 1s forwards;
+    -webkit-animation: fill 1s forwards;
+    -moz-animation: fill 1s forwards;
+    opacity: 1;
+}
+.stroke li{
+    margin: 0 5px 0 5px;
+}
+.white{
+    color: white !important;
+}
+
+/* REGISTRATION PAGE*/
+.registration-form{
+    padding: 50px 31% 50px 31%;
+}
+label{
+    text-align: left !important;
+}
+.registration-form div {
+    margin-top: 5px;
+}
+/*LOGIN PAGE*/
+.login-form {
+    padding: 50px 21% 50px 21%;
+    margin-top: 100px;
+}
+
+label {
+    text-align: left !important;
+}
+.inner{
+    padding: 50px 10% 50px 10%;
+    background-color: var(--smoky-black);
+}
+
+.login-form div {
+    margin-top: 5px;
+}
+.login-form label{
+    color: white;
+}
+
+/*FOOTER*/
+footer {
+    background-color: var(--smoky-black);
+    height: 220px;
+    margin-top: auto;
+    color: var(--lavender-blush);
+    padding-top: 20px;
+    padding-left: 100px;
+}
+footer .contact{
+    text-align: right;
+}
+footer .logo a{
+    position: relative;
+    left: 110px;
+    top: 50px;
+}
+footer .links i{
+    width: 50px;
+    font-size: 30px;
+}
+footer .links{
+    line-height: 80px;
+}
+
