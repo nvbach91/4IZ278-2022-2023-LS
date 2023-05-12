@@ -1,0 +1,504 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "poppins", sans-serif;
+}
+
+/* ! LOGIN PAGE */
+.errors {
+  background-color: rgba(80, 70, 70, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.errors li {
+  margin-top: 0.5vh;
+  color: rgb(209, 102, 102);
+}
+.errors h2 {
+  margin-top: 0.5vh;
+  color: rgb(209, 102, 102);
+}
+body {
+  background: url(background.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+
+  background: url(background.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.form-box {
+  position: relative;
+  width: 28vw;
+  height: 100%;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  margin: 10vh auto; /* Updated */
+  /* margin-top: 10vh; */
+
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.form-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+.inputbox {
+  position: relative;
+  margin: 1.5vw 0;
+  width: 100%;
+  border-bottom: 2px solid #fff;
+}
+.inputbox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 1em;
+  pointer-events: none;
+  transition: 0.2s;
+}
+.inputbox input::-webkit-input-placeholder {
+  opacity: 0;
+}
+input:not(:placeholder-shown) ~ label,
+input:focus ~ label {
+  top: -1vh;
+}
+
+.inputbox input {
+  width: 100%;
+  height: 8vh;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: #fff;
+}
+.inputbox ion-icon {
+  position: absolute;
+  right: 8px;
+  color: #fff;
+  font-size: 1.2em;
+  top: 20px;
+}
+.remember {
+  margin: -15px 0 15px;
+  font-size: 0.9em;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.forgot {
+  margin: -35px 0 15px;
+  right: 45px;
+  font-size: 0.9em;
+  color: #fff;
+  display: flex;
+  position: absolute;
+}
+.forgot a {
+  color: #fff;
+  text-decoration: none;
+}
+.forgot a:hover {
+  text-decoration: underline;
+}
+button {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.register a {
+  color: #fff;
+  text-decoration: none;
+}
+.register a:hover {
+  text-decoration: underline;
+}
+.register {
+  margin: 25px 0 10px;
+  font-size: 0.9em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+}
+/* ! MAIN PAGE HEADER */
+.header {
+  height: fit-content;
+  width: 100%;
+
+  background-color: rgba(80, 70, 70, 0.9);
+  backdrop-filter: blur(10px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+.header a {
+  color: #fff;
+  font-size: 2vw;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.header a:hover {
+  color: blue;
+}
+.cart {
+  display: flex;
+  font-size: 1.5em;
+  margin: 5px 80px 0;
+  right: 60px;
+  justify-content: center;
+  align-items: center;
+}
+.cart p {
+  font-size: 0.7em;
+  margin: 5px 35px;
+  position: absolute;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  margin: 0px 30px 0 5px;
+  left: 50px;
+}
+.title img {
+  margin-top: 1vh;
+
+  width: 3vw;
+  height: 100%;
+  min-height: 30px;
+  min-width: 30px;
+}
+.title a {
+  text-decoration: none;
+}
+.title a:hover {
+  color: #fff;
+}
+.aboutUs {
+  margin: 0px 30px 0 150px;
+}
+.ourProducts {
+  margin: 0px 30px;
+}
+.contacts {
+  margin: 0px 30px;
+}
+
+/* !MAIN PAGE */
+
+.mainPage {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: rebeccapurple;
+  z-index: 0;
+  position: absolute;
+}
+/* !OUR PRODUCTS */
+.containerOurProducts {
+  justify-content: center;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  background: transparent;
+
+  height: fit-content;
+  width: 100%;
+}
+.containerOurProducts nav {
+  align-items: end;
+}
+.productBox {
+  margin: 5vh 4vh 0;
+  padding-bottom: 10px;
+
+  display: grid;
+  position: relative;
+  justify-content: center;
+
+  width: 17.4vw;
+  height: 41vh;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+.productImg {
+  border-radius: 10px;
+  display: flex;
+  position: absolute;
+  margin: 0.3vh 0.3vw;
+  width: 16.8vw;
+  height: 17vh;
+  background: #fff;
+}
+.productImg img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+}
+.productTitle {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.productTitle h2 {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: rgb(25, 25, 25);
+  margin-top: 18vh;
+}
+.productPrice h2 {
+  text-align: center;
+  font-size: 1em;
+  color: rgb(25, 25, 25);
+  margin: 1vh;
+}
+.productDescription {
+  width: 16.8vw;
+  height: fit-content;
+
+  display: flex;
+  position: relative;
+  justify-content: center;
+
+  margin: 0.3vh 0.3vw;
+}
+.productDescription p {
+  color: rgb(25, 25, 25);
+
+  text-align: left;
+  font-size: 0.8em;
+
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.buyButtonDiv {
+  display: flex;
+
+  margin-bottom: 0.5vh;
+
+  justify-content: center;
+  text-align: center;
+}
+button:hover {
+  transition: 0.3s;
+
+  font-size: 1.6em;
+  width: 80%;
+  height: calc(height+10%);
+
+  background-color: rgba(80, 70, 70, 0.7);
+}
+.buyButton {
+  /* margin: 0.5vh 0.3vw; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  width: 70%;
+
+  border-radius: 10px;
+
+  color: rgb(25, 25, 25);
+  font-size: 1.3em;
+}
+
+.pagesOurProducts {
+  margin-top: 5vh;
+}
+
+/* !CART */
+
+.cartContainer {
+  margin-right: 0px;
+
+  height: 100vh;
+  width: 100%;
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.productList {
+  justify-content: center;
+  position: relative;
+  display: flex;
+
+  width: 72%;
+  height: 100%;
+
+  animation: anileft 2.5s forwards;
+}
+.checkout {
+  width: 28%;
+  height: fit-content;
+
+  padding-bottom: 5%;
+
+  border-radius: 10px;
+
+  position: relative;
+
+  animation: aniright 2.5s forwards;
+
+  background-color: rgba(80, 70, 70, 0.7);
+  backdrop-filter: blur(10px);
+}
+@keyframes aniright {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes anileft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.continueText {
+  height: fit-content;
+  width: 100%;
+  display: block;
+
+  padding-top: 50%;
+  margin-right: 0;
+
+  position: relative;
+  text-align: center;
+  justify-content: center;
+}
+.continueText h2 {
+  font-size: 1em;
+  color: rgb(229, 221, 221);
+}
+.continueText span {
+  font-size: 1em;
+  color: blue;
+}
+.continueButton {
+  display: flex;
+  position: relative;
+
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.continueButton button {
+  width: 85%;
+
+  border: black solid 1px;
+  border-radius: 20px;
+  transition: 0.1s;
+}
+.continueButton button:hover {
+  width: 90%;
+
+  border: black solid 3px;
+  font-size: 1.1em;
+}
+
+/* !About us GRID page */
+
+.grid-container {
+  margin-left: 1vh;
+  margin-right: 1vh;
+  margin-top: 5vh;
+
+  gap: 3vw;
+
+  grid-template-columns: 35% 60%;
+
+  display: grid;
+}
+.photos {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.photos img {
+  border-radius: 10px;
+}
+.photos img + img {
+  margin-top: 5vh;
+
+  max-width: 100%;
+  max-height: 40%;
+}
+.aboutusText {
+  background-color: rgba(80, 70, 70, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+
+  height: fit-content;
+}
+.aboutusText h2 {
+  margin: 3vh 1.5vw;
+
+  font-size: 1.2vw;
+  text-indent: 3vw;
+  text-align: left;
+
+  color: rgb(237, 237, 237);
+}
