@@ -59,8 +59,8 @@ class API
         $uri = $_SERVER['REQUEST_URI'];
         $uriParts = explode('/', $uri);
 
-        // !!! v produkci nastavit podle finalni url 
-        $action = $uriParts[4];
+        // !!! local 4 prod 5
+        $action = $uriParts[5];
 
         if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $requestData = json_decode(file_get_contents('php://input'), true);

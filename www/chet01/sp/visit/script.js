@@ -1,16 +1,14 @@
 Vue.createApp({
   data() {
     return {
-      user: {
-        email: "",
-        password: "",
-      },
+      blocks: null,
     };
   },
   methods: {
     getBlocksForDay(date) {
       axios.get(API_URL + "/getBlocksForDate?date=" + date).then((response) => {
         console.log(response);
+        this.blocks = response.data;
       });
     },
   },

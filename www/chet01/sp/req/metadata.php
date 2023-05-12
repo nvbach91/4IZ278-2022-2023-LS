@@ -1,5 +1,5 @@
 <?php
-define("BASE_URL", "http://localhost:8080/semestralka");
+define("BASE_URL", "https://esotemp.vse.cz/~chet01/sp");
 define("API_URL", BASE_URL . '/api/index.php')
 ?>
 
