@@ -1,0 +1,22 @@
+Options +Indexes
+
+IndexOptions FancyIndexing
+
+DirectoryIndex app.php
+
+<FilesMatch "(db|test|remove)\.php">
+    deny from all
+</FilesMatch>
+
+
+# https://xxx.com/abc/def/123
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ main.php?path=$1 [QSA,L]
+
+
+

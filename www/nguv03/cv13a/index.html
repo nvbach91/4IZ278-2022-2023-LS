@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // GET = READ
+        fetch('./data.php')
+            .then((resp) => resp.json())
+            .then((data) => {
+                const elements = data.map((person) => {
+                    const element =  document.createElement('div');
+                    element.innerText = person.name;
+                    return element;
+                });
+                document.body.append(...elements);
+            });
+
+        // CREATE = POST
+        fetch({
+            method: 'POST',//...
+        });
+        // UPDATE = PUT
+        fetch({
+            method: 'PUT',//...
+        })
+        // DELETE = DELETE
+        fetch({
+            method: 'DELETE',//...
+        })
+    </script>
+</body>
+</html>
