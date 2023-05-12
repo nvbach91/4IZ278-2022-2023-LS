@@ -1,0 +1,18 @@
+{
+    "name": "bigc00/htdocs",
+    "autoload": {
+        "psr-4": {
+            "Blue5\\Htdocs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bigc00",
+            "email": "bigc00@vse.cz"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^3.3",
+        "janu-software/facebook-php-sdk": "*"
+    }
+}
