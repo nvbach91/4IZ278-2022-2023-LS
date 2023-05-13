@@ -1,0 +1,110 @@
+/* crossmile @LXSX file:www-html/css/main.css */
+
+/* @import url(https://fonts.googleapis.com/css?family=Roboto:700,400,300,200,100,100italic,200italic,300italic,400italic,700italic); */
+/* roboto-regular - latin_latin-ext */
+/*@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/roboto-v30-latin_latin-ext-regular.woff2') format('woff2');
+}*/
+
+/* roboto-regular - latin */
+/*@font-face {
+  font-display: swap;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/roboto-v30-latin-regular.woff2') format('woff2');
+}*/
+
+body {
+	padding-top: 3rem;
+	color: #5a5a5a;
+	font-family: 'Roboto', sans-serif;
+}
+a {
+	color: #325d88;
+}
+a:hover {
+	color: #1e3852;
+}
+.dotted-underline {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	cursor: help;
+}
+
+.pre-scrollable {
+	max-height: 300px;
+	overflow-y: scroll;
+}
+.btn-group-xs > .btn, .btn-xs {
+	padding: 1px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+
+.main-min-width {
+	min-height: 20rem;
+}
+
+/* hide page */
+.blur {
+	background: rgba(70, 72, 82, 0.5);
+	-webkit-filter: blur(5px); /* Chrome, Safari, Opera */
+	filter: blur(5px);
+}
+
+/* back to top */
+.back-to-top {
+	cursor: pointer;
+	position: fixed;
+	bottom: 1.25rem;
+	right: 1.25rem;
+}
+
+/* footer */
+footer {
+	background-color: #343a40;
+	color: white;
+	padding-top: 0.75rem;
+	margin-top: 1rem;
+	text-align: center;
+}
+footer .footer-copyright {
+	background-color: #333333;
+	padding-top: 0.05rem;
+	padding-bottom: 0.075rem;
+	font-size: 0.75rem;
+}
+footer .footer-copyright p {
+	margin: 0.5rem;
+	color: #ccc;
+}
+footer .row {
+	margin-bottom: 0.75rem;
+}
+footer a {
+	color: #d2d1d1;
+	text-decoration: none;
+}
+footer a:hover,
+footer a:focus {
+	text-decoration: none;
+	color: white;
+}
+footer .social-networks {
+	padding-top: 0;
+}
+footer .social-networks a {
+	color: #f9f9f9;
+	padding: 0.5rem;
+	transition: 0.2s;
+}
+footer .social-networks a:hover {
+	text-decoration: none;
+	color: #0077e2;
+}
