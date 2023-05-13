@@ -51,7 +51,7 @@ footer {
     }
 }
 
-.hp_header {
+header {
     width: 100%;
     background-color: white;
     position: absolute;
@@ -69,16 +69,12 @@ footer {
             text-decoration: none;
             width: 20%;
             text-align: center;
-            &:hover {
+            &:hover, &.active {
                 background-color: $maingreen;
                 color: white;
             }
             &:first-of-type {
                 margin-right: auto;
-                &:hover {
-                    background-color: transparent;
-                    color: $maingreen;
-                }
             }
         }
     }

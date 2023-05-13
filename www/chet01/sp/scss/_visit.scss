@@ -1,0 +1,49 @@
+.visit {
+    padding-top: 150px;
+    &__box {
+        border: 1px solid $maingreen;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2 {
+            color: $maingreen;
+        }
+        div {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+            span {
+                padding-bottom: 1em;
+            }
+            label {
+                min-width: 100%;
+                span {
+                    display: block;
+                    min-width: 100%;
+                    text-align: center;
+                    padding: 1em 1.5em;
+                }
+                input {
+                    display: none;
+                    &:checked + span {
+                        background-color: $maingreen;
+                        color: white;
+                    }
+                }
+            }
+        }
+        button {
+            all: unset;
+            cursor: pointer;
+            width: 100%;
+            background-color: $maingreen;
+            padding: 1em 1.5em;
+            text-align: center;
+            color: white;
+            margin-top: 2em;
+        }
+    }
+}
