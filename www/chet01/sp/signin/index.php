@@ -15,7 +15,7 @@
                 <p>Email</p><input type="email" v-model='user.email'>
             </label>
             <label>
-                <p>Password</p><input type="text" v-model='user.password'>
+                <p>Password</p><input type="password" v-model='user.password'>
             </label>
             <button type="submit">Signup</button>
         </form>

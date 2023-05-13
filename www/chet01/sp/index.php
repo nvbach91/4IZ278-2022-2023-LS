@@ -8,8 +8,13 @@
 
 <body>
     <?php include_once("./req/header.php") ?>
-    <main id='home'>
+    <main id='home' class="home">
+        <div class="home__head">
+            <h1>Welcome to SuperCafé</h1>
+            <a href="./visit/">Book your visit</a>
+        </div>
     </main>
+    <?php include_once("./req/footer.php") ?>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ if (!isset($activePage))
     $activePage = "";
 ?>
 
-<header>
+<header class="hp_header">
     <div>
         <a href="<?= BASE_URL ?>">Home</a>
         <a class="<?= ($activePage == 'signin') ? 'active' : '' ?>" href="<?= BASE_URL ?>/signin">Sign In</a>

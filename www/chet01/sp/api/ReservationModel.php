@@ -8,7 +8,7 @@ class ReservationModel
         if ($api->isAdmin($api)) {
             $query = "SELECT * FROM reservations WHERE date = ?";
             $result = $api->executeQuery($query, [$date]);
-            $reservations = $result->fetch(PDO::FETCH_ASSOC);
+            $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $strErrorDesc = 'No permission';
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
@@ -24,5 +24,15 @@ class ReservationModel
                 array('Content-Type: application/json', $strErrorHeader)
             );
         }
+    }
+    function getCafeData($api)
+    {
+        $query = "SELECT * FROM cafeData";
+        $result = $api->executeQuery($query);
+        $data = $result->fetch(PDO::FETCH_ASSOC);
+        $api->sendOutput(
+            json_encode($data),
+            array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+        );
     }
 }

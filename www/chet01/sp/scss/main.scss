@@ -1,8 +1,18 @@
 @import "mixins";
+@import "home";
+@import "signup";
 
 * {
     margin: 0 auto;
     padding: 0;
     position: relative;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
 }

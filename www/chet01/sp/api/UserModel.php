@@ -66,7 +66,7 @@ class UserModel
             if ($user) {
                 return true;
             } else {
-                // setcookie('token', '', time() - 3600, '/');
+                setcookie('token', '', time() - 3600, '/');
             }
         }
         return false;
