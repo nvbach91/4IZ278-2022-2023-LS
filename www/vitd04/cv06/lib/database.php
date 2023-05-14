@@ -27,11 +27,15 @@ abstract class Database
         }
     }
 
-    public function fetchAll(): false|array
+    public function fetchAll($page = 1, $limit = 30): false|array
     {
-        $query = $this->pdo->query('SELECT * FROM ' . $this->tableName . ';');
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $skip = ($page - 1) * $limit;
+        $query = $this->pdo->prepare('SELECT * FROM ' . $this->tableName . ' OFFSET :offset LIMIT :limit' . ';');
+        $query->execute(['offset' => $skip, 'limit' => $limit]);
+        return $query->fetchAll();
     }
+
+    public function 
 
     public function fetchRaw($sql, $params): false|array
     {
