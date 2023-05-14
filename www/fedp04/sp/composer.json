@@ -1,0 +1,15 @@
+{
+    "name": "fedp04/frog-store",
+    "autoload": {
+        "psr-4": {
+            "Fedp04\\FrogStore\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Polina Fediaeva",
+            "email": "fedp04@vse.cz"
+        }
+    ],
+    "require": {}
+}
