@@ -1,0 +1,26 @@
+.card {
+    margin: 6px !important;
+}
+
+.navbar {
+    background-color: #ff0078;
+}
+
+.pagination {
+    padding: 3px;
+    background-color: lightskyblue;
+    border-style: solid;
+    border-radius: 5px;
+    border-color:lightblue;
+    min-width:18px;
+    flex:0 0 25px;
+    justify-content:center;
+}
+
+.pagination-column {
+    display:flex;
+    flex-direction: row;
+    text-align:center;
+    justify-content: center;
+    gap:3px;
+}
