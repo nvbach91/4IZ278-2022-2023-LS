@@ -1,0 +1,51 @@
+.sidenav {
+    width: 270px !important;
+}
+
+@media (min-width: 1200px) {
+    main,
+    header,
+    footer,
+    #main-navbar {
+        padding-left: 270px;
+    }
+}
+
+.restaurant-logo {
+    width: 200px;
+    height: 155px;
+}
+
+.custom-color-blue {
+    background-color: #0078D7 !important;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .navbar-expand-lg .navbar-toggler {
+        display: block !important;
+    }
+}
+
+body {
+    background-color: #eee !important;
+    color: black;
+}
+
+nav {
+    background-color: white !important;
+}
+
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.font-small {
+    font-size: .9rem;
+}
+
+.badge-grey {
+    background-color: #dddddd;
+    color: #404040;
+}
