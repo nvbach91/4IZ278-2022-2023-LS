@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: purple;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav a {
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    top: 5px;
+    transition: color 200ms ease-out 100ms;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a:hover {
+    color: gray;
+}
