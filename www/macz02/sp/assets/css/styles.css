@@ -1,0 +1,62 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.success, .errors {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+
+.errors {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
