@@ -1,0 +1,13 @@
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
+
+
+
+services:
+	- App\Router\RouterFactory::createRouter
+	- App\Models\PropertyFactory
+	- App\Models\UserFactory
