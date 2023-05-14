@@ -1,0 +1,1 @@
+<!-- seznam všech registrovaných uživatelů -->

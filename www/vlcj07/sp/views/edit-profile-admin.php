@@ -1,0 +1,1 @@
+<!-- správa účtu adminem /jakýkoliv účet/ -->
