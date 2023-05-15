@@ -5,10 +5,34 @@ class ReservationModel
     function getReservationsForDate($api, $get)
     {
         $strErrorDesc = '';
-        if ($api->isAdmin($api)) {
+        if ($api->userModel->isAdmin($api)) {
             $query = "SELECT * FROM reservations WHERE date = ?";
             $date = $get["date"];
             $result = $api->executeQuery($query, [$date]);
+            $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode($reservations),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    function getUsersReservations($api)
+    {
+        $strErrorDesc = '';
+        if ($api->userModel->isAuthenticated($api)) {
+            $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
+            $query = " SELECT reservations.id, reservations.table_id, tables.name, tables.capacity, reservations.date, reservations.note FROM reservations INNER JOIN tables ON reservations.table_id=tables.id WHERE user_id = ?";
+            $result = $api->executeQuery($query, [$userId]);
             $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $strErrorDesc = 'No permission';
@@ -41,6 +65,65 @@ class ReservationModel
         } else if ($api->userModel->isAuthenticated($api)) {
             $query = "INSERT INTO reservations (user_id, table_id, date, note) VALUES (?, ?, ?, ?)";
             $api->executeQuery($query, [$userId, $table, $date, $note]);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode(array()),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    function editReservation($api, $post)
+    {
+        $strErrorDesc = '';
+        $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
+        $query = "SELECT * from reservations WHERE id = ?";
+        $result = $api->executeQuery($query, [$post['id']]);
+        $res = $result->fetch(PDO::FETCH_ASSOC);
+        if (!$res) {
+            $strErrorDesc = 'Reservation not found';
+            $strErrorHeader = 'HTTP/1.1 404 Not Found ';
+        } else if ($api->userModel->isAdmin($api) || ($api->userModel->isAuthenticated($api) && $res['user_id'] === $userId)) {
+            $query = "UPDATE reservations SET date = ?, table_id = ?, note = ? WHERE id = ?";
+            $date = $api->userModel->isAdmin($api) ? $post['date'] : $res['date'];
+            $result = $api->executeQuery($query, [$date, $post['table_id'], $post['note'], $post['id']]);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode(array()),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    function deleteReservation($api, $post)
+    {
+        $strErrorDesc = '';
+        $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
+        $query = "SELECT user_id from reservations WHERE id = ?";
+        $result = $api->executeQuery($query, [$post['id']]);
+        $res = $result->fetch(PDO::FETCH_ASSOC);
+        if (!$res) {
+            $strErrorDesc = 'Reservation not found';
+            $strErrorHeader = 'HTTP/1.1 404 Not Found ';
+        } else if ($api->userModel->isAdmin($api) || ($api->userModel->isAuthenticated($api) && $res['user_id'] === $userId)) {
+            $query = "DELETE FROM reservations WHERE id = ?";
+            $result = $api->executeQuery($query, [$post['id']]);
         } else {
             $strErrorDesc = 'No permission';
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';

@@ -37,6 +37,7 @@
         }
         button {
             all: unset;
+            box-sizing: border-box;
             cursor: pointer;
             width: 100%;
             background-color: $maingreen;
@@ -44,6 +45,41 @@
             text-align: center;
             color: white;
             margin-top: 2em;
+            &:disabled {
+                filter: saturate(0);
+                cursor: default;
+            }
+        }
+
+        table {
+            min-width: 100%;
+            padding: 25px 5%;
+            * {
+                border: none;
+            }
+            th, td {
+                padding: 15px;
+                text-align: center;
+                a {
+                    font-weight: 600;
+                    font-size: 1.5em;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+            tr:nth-child(even){
+                background-color: $lightgreen;
+            }
+        } 
+        form {
+            width: 100%;
+            label, input {
+                width: 100%;
+                padding: 5px;
+            }
+            .err {
+                color: red;
+            }
         }
     }
 }

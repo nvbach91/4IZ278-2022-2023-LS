@@ -32,7 +32,7 @@ Vue.createApp({
           this.note = "";
         })
         .catch((e) => {
-          alert(e.response.error.data);
+          alert(e.response.data.error);
         });
     },
   },

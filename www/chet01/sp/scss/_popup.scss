@@ -1,0 +1,43 @@
+.popup {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    .close {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 1.5em;
+        cursor: pointer;
+        width: auto !important;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 15px;
+        min-width: 30vw;
+        min-height: 200px;
+        background-color: white;
+        padding: 40px 25px;
+        * {
+            width: 100%;
+        }
+        button {
+            all: unset;
+            cursor: pointer;
+            background-color: $maingreen;
+            padding: 0.5em 1em;
+            text-align: center;
+            color: white;
+            &.delete {
+                background-color: rgb(150, 0, 0);
+            }
+        }
+    }
+}

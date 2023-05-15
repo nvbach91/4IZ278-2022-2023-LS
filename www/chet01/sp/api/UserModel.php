@@ -58,6 +58,94 @@ class UserModel
         $result = $api->executeQuery($query, [$token]);
         return $result->fetch(PDO::FETCH_ASSOC);
     }
+    function getUserProfile($api)
+    {
+        $strErrorDesc = '';
+        if ($api->userModel->isAuthenticated($api)) {
+            $token = $_COOKIE['token'];
+            $query = "SELECT firstname, surname, email, phone FROM users WHERE salt = ?";
+            $result = $api->executeQuery($query, [$token]);
+            $user = $result->fetch(PDO::FETCH_ASSOC);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode($user),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    function setUserProfile($api, $post)
+    {
+        $strErrorDesc = '';
+        if ($api->userModel->isAuthenticated($api)) {
+            $token = $_COOKIE['token'];
+            $query = "UPDATE users SET firstname = ?, surname = ?, phone = ? WHERE salt = ?";
+            $api->executeQuery($query, [$post['firstname'], $post['surname'], $post['phone'], $token]);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode(array()),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+    function changePassword($api, $post)
+    {
+        $strErrorDesc = '';
+        if ($api->userModel->isAuthenticated($api)) {
+            if (!$post['newPass'] || !$post['oldPass']) {
+                $strErrorDesc = 'Missing parameters';
+                $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            } else {
+                $token = $_COOKIE['token'];
+                $user = $this->getUserByToken($api, $token);
+                $hashed_password = hash('sha256', $post['oldPass'] . $token);
+
+                if ($hashed_password == $user['password']) {
+
+                    $newsalt = bin2hex(random_bytes(16));
+                    $newpass = hash('sha256', $post['newPass'] . $newsalt);
+                    $query = "UPDATE users SET salt = ?, password = ? WHERE id = ?";
+                    $api->executeQuery($query, [$newsalt, $newpass, $user['id']]);
+                    setcookie('token', $newsalt, time() + (86400 * 30), '/');
+                } else {
+                    $strErrorDesc = 'Invalid password';
+                    $strErrorHeader = 'HTTP/1.1 401 Unauthorized ';
+                }
+            }
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode(array()),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
     function isAuthenticated($api)
     {
         if (isset($_COOKIE['token'])) {
@@ -134,22 +222,34 @@ class UserModel
     }
     function toggleAdmin($api, $email)
     {
+        $strErrorDesc = '';
         if ($api->isAdmin($api)) {
             $user = $this->getUserByEmail($api, $email);
             if ($user) {
                 $query = "UPDATE users SET isAdmin = ? WHERE id = ?";
                 $api->executeQuery($query, [$user['isAdmin'] === 1 ? 0 : 1, $user['id']]);
-                echo 'User updated';
             } else {
-                echo 'User not found';
+                $strErrorDesc = 'User not found';
+                $strErrorHeader = 'HTTP/1.1 404 Not Found ';
             }
         } else {
-            echo 'No permission';
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode(array()),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
         }
     }
-    function logout()
+    function logout($api)
     {
         setcookie('token', '', time() - 3600, '/');
-        echo 'Logged out';
     }
 }
