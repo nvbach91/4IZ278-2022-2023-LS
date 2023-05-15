@@ -30,6 +30,11 @@ class DBConnection{
         return;
     }
 
+    function loginUser($username,$password){
+        return $this->conn -> query("CALL phpetlowner.LOG_IN_USER('doorkeeper','".$username."','".password_hash($password, PASSWORD_DEFAULT)."','session_id');");
+        // returns false if connection unsucessfull
+    }
+
     function registerUser($username,$password,$email){
         return $this->conn -> query("CALL phpetlowner.REGISTER_USER('".$username."','".$email."','".password_hash($password, PASSWORD_DEFAULT)."','doorkeeper_reg_page');");
         // returns false if connection unsucessfull

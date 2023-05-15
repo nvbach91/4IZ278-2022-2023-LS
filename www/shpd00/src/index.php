@@ -1,21 +1,24 @@
 <?php
-require_once 'DBConnection.php';
-
-// class Person{
-// public $name;
-// public $age;
-// public function __construct($name,$age){
-//     $this->name = $name;
-//     $this->age = $age;
-// }
-// }
-require 'registration-form-check.php';
-if($registrationIsSuccesful){
-    header("Location: registration-success.php");
-} 
-else{
+require 'login-form-check.php';
+if ($loginIsSuccesful):
+    header("Location: app", true, 301); 
+    die;
+endif;
     require 'templates/html-start.php';
-    include 'registration-form.php';
+?>
+<div>
+    <div>
+        <div class='logo'>
+            logo
+        </div>
+        <div class='welcome-title'>
+            Welcome to Doorkeeper
+        </div>
+    </div>    
+</div>
+<div>
+<?php require 'login-form.php' ?>
+<div>
+<?php
     require 'templates/html-end.php';
-}
 ?>
