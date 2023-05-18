@@ -1,0 +1,37 @@
+.fadein {
+    position: relative;
+    height: 332px;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.fadein img {
+    position: absolute;
+    width: calc(96%);
+    height: calc(94%);
+    object-fit: scale-down;
+}
+
+/* Define styles for pagination links */
+.pagination-link {
+    margin-bottom: 100px !important;
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #ccc;
+    color: #000;
+    text-decoration: none;
+    border-radius: 3px;
+
+}
+
+/* Define styles for active pagination link */
+.pagination-link.active {
+    background-color: #007bff;
+    color: #fff;
+}
+/* CSS for active page link */
+.active {
+    font-weight: bold;
+    color: #ff0000; /* Change the color to your desired color */
+}
