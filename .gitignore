@@ -1,5 +1,6 @@
 .vscode/
 vendor/
+node_modules/
 
 
 # Logs
@@ -110,3 +111,17 @@ dist
 .DS_Store
 
 .idea/
+
+.editorconfig
+
+# images
+*.png
+*.jpg
+*.jpeg
+*.ico
+*.tiff
+*.giff
+*.svg
+*.webp
+*.raw
+*.bmp
