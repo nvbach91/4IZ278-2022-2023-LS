@@ -1,8 +1,8 @@
 <?php
-$host = 'https://esotemp.vse.cz/myadmin/';
+$host = 'root';
 $db   = 'semestral';
-$user = 'nezn00';
-$pass = 'eeti9Cheiyiebu4aij';
+$user = '';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
