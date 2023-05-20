@@ -1,0 +1,16 @@
+.image-container {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-content {
+    background-color: #90a4ae;
+    min-height: 100vh;
+}
