@@ -36,7 +36,7 @@ Vue.createApp({
         });
     },
   },
-  beforeMount() {
+  created() {
     this.date = new Date().toISOString().split("T")[0];
     this.getTablesForDate(this.date);
   },

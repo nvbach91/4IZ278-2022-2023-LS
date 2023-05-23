@@ -3,7 +3,7 @@
 
 <head>
     <?php include_once('../../req/metadata.php') ?>
-    <title>My Reservations | SuperCafé</title>
+    <title>Profile | SuperCafé</title>
 </head>
 
 <body>

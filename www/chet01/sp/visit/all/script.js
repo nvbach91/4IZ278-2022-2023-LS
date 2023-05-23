@@ -8,7 +8,7 @@ Vue.createApp({
       newNote: null,
     };
   },
-  beforeMount() {
+  created() {
     this.getRes();
   },
   methods: {

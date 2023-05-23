@@ -46,7 +46,7 @@ Vue.createApp({
         });
     },
   },
-  beforeMount() {
+  created() {
     this.loadUserData();
   },
 }).mount("#profile");

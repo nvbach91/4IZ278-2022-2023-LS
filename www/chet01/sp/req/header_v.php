@@ -15,7 +15,8 @@ if (!isset($activePage))
 
 <script>
     document.getElementById('logout').addEventListener('click', () => {
-        axios.post(API_URL + '/logout');
-        window.location = BASE_URL;
+        axios.get(API_URL + '/logout').then(resp => {
+            window.location = BASE_URL;
+        });
     })
 </script>

@@ -12,7 +12,7 @@
     <main id='all' class="visit">
         <div class="visit__box">
             <h2>My reservations</h2>
-            <table cellspacing="0" cellpadding="0">
+            <table v-if='reservations&&reservations.length>0' cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Date</th>
                     <th>Table</th>
@@ -26,6 +26,7 @@
                     <td><a v-if='r.date>new Date().toISOString().split("T")[0]' @click='editRes(r)'>&rarr;</a></td>
                 </tr>
             </table>
+            <p v-else>No reservations found.</p>
         </div>
         <div class="popup" v-if='edit!==null'>
             <form @submit.prevent='saveRes'>

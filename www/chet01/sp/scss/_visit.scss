@@ -3,11 +3,13 @@
     &__box {
         border: 1px solid $maingreen;
         padding: 50px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         h2 {
             color: $maingreen;
+            padding: 10px 0;
         }
         div {
             min-width: 100%;
@@ -79,6 +81,51 @@
             }
             .err {
                 color: red;
+            }
+            textarea {
+                width: 100%;
+                resize: vertical;
+            }
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .table {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 25px 0;
+            gap: 25px;
+            &.hidden {
+                opacity: 0.5;
+            }
+
+            label {
+                display: flex;
+                gap: 15px;
+                min-width: unset;
+                input {
+                    display: block;
+                    margin: 0;
+                }
+            }
+            span {
+                padding: 0;
+            }
+            .capacity {
+                min-width: unset;
+                padding: 0;
+                width: auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+                button {
+                    margin: 0;
+                    padding: 0.7em 1em;
+                }
             }
         }
     }

@@ -223,7 +223,7 @@ class UserModel
     function toggleAdmin($api, $email)
     {
         $strErrorDesc = '';
-        if ($api->isAdmin($api)) {
+        if ($api->userModel->isAdmin($api)) {
             $user = $this->getUserByEmail($api, $email);
             if ($user) {
                 $query = "UPDATE users SET isAdmin = ? WHERE id = ?";
@@ -248,8 +248,35 @@ class UserModel
             );
         }
     }
+    function getAllUsers($api)
+    {
+        $strErrorDesc = '';
+        if ($api->userModel->isAdmin($api)) {
+            $query = "SELECT id, firstname, surname, email, phone FROM users WHERE isAdmin = 0";
+            $result = $api->executeQuery($query);
+            $users = $result->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode($users),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
     function logout($api)
     {
         setcookie('token', '', time() - 3600, '/');
+        $api->sendOutput(
+            json_encode(array()),
+            array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+        );
     }
 }

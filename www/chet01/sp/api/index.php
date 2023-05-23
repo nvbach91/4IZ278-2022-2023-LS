@@ -3,6 +3,7 @@ require_once('./config.php');
 require_once('./UserModel.php');
 require_once('./ReservationModel.php');
 require_once('./BlocksModel.php');
+require_once('./CafeModel.php');
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -14,6 +15,7 @@ class API
     public $userModel;
     public $reservationModel;
     public $blocksModel;
+    public $cafeModel;
 
     function __construct()
     {
@@ -39,6 +41,7 @@ class API
             $this->userModel = new UserModel();
             $this->reservationModel = new ReservationModel();
             $this->blocksModel = new BlocksModel();
+            $this->cafeModel = new CafeModel();
         } catch (PDOException $e) {
             exit("Connection failed: " . $e->getMessage());
         }
@@ -70,6 +73,8 @@ class API
                 call_user_func(array($this->reservationModel, $action), $this, $requestData);
             } else if (method_exists($this->blocksModel, $action)) {
                 call_user_func(array($this->blocksModel, $action), $this, $requestData);
+            } else if (method_exists($this->cafeModel, $action)) {
+                call_user_func(array($this->cafeModel, $action), $this, $requestData);
             } else {
                 echo "Unknown action: $action";
             }
@@ -81,6 +86,8 @@ class API
                 call_user_func(array($this->reservationModel, $action), $this, $_GET);
             } else if (method_exists($this->blocksModel, $action)) {
                 call_user_func(array($this->blocksModel, $action), $this, $_GET);
+            } else if (method_exists($this->cafeModel, $action)) {
+                call_user_func(array($this->cafeModel, $action), $this, $_GET);
             } else {
                 echo "Unknown action: $action";
             }
