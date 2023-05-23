@@ -54,7 +54,7 @@ class ReservationModel
     {
         $strErrorDesc = '';
 
-        $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
+        $user = $api->userModel->getUserByToken($api, $_COOKIE['token']);
         $date = $data['date'];
         $table = $data['table'];
         $note = $data['note'] ? $data['note'] : '';
@@ -64,12 +64,18 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         } else if ($api->userModel->isAuthenticated($api)) {
             $query = "INSERT INTO reservations (user_id, table_id, date, note) VALUES (?, ?, ?, ?)";
-            $api->executeQuery($query, [$userId, $table, $date, $note]);
+            $api->executeQuery($query, [$user['id'], $table, $date, $note]);
         } else {
             $strErrorDesc = 'No permission';
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
+            mail(
+                $user['email'],
+                'Your new Supercafé reservation for ' . $date,
+                'Your reservation for ' . $date . ' for table #' . $table . ' was created.',
+                "From: chet01@vse.cz"
+            );
             $api->sendOutput(
                 json_encode(array()),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -101,6 +107,16 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
+            if ($userId > 1) {
+                $query = "SELECT email from users WHERE id = ?";
+                $userEmail = $api->executeQuery($query, [$userId]);
+                mail(
+                    $userEmail,
+                    'Your new Supercafé reservation for ' . $date,
+                    'Your reservation for ' . $date . ' for table #' . $table . ' was created.',
+                    "From: chet01@vse.cz"
+                );
+            }
             $api->sendOutput(
                 json_encode(array()),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -132,6 +148,16 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
+            $query = "SELECT email from users WHERE id = ?";
+            $userEmail = $api->executeQuery($query, [$res['user_id']]);
+            if ($userEmail) {
+                mail(
+                    $userEmail,
+                    'Updates on your Supercafé reservation for ' . $date,
+                    'Your reservation from ' . $date . ' was updated. Please check its state in your profile.',
+                    "From: chet01@vse.cz"
+                );
+            }
             $api->sendOutput(
                 json_encode(array()),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -147,7 +173,7 @@ class ReservationModel
     {
         $strErrorDesc = '';
         $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
-        $query = "SELECT user_id from reservations WHERE id = ?";
+        $query = "SELECT user_id, date from reservations WHERE id = ?";
         $result = $api->executeQuery($query, [$post['id']]);
         $res = $result->fetch(PDO::FETCH_ASSOC);
         if (!$res) {
@@ -161,6 +187,16 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
+            $query = "SELECT email from users WHERE id = ?";
+            $userEmail = $api->executeQuery($query, [$res['user_id']]);
+            if ($userEmail) {
+                mail(
+                    $userEmail,
+                    'Supercafé reservation deleted',
+                    'Your reservation from ' . $res['date'] . ' was deleted.',
+                    "From: chet01@vse.cz"
+                );
+            }
             $api->sendOutput(
                 json_encode(array()),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
