@@ -6,7 +6,7 @@ class ReservationModel
     {
         $strErrorDesc = '';
         if ($api->userModel->isAdmin($api)) {
-            $query = " SELECT reservations.id, reservations.note, tables.name, tables.capacity, users.firstname, users.surname, users.email, users.phone FROM reservations INNER JOIN tables ON reservations.table_id=tables.id INNER JOIN users ON reservations.user_id = users.id WHERE date = ?";
+            $query = " SELECT reservations.id, reservations.note, reservations.table_id, tables.name, tables.capacity, users.firstname, users.surname, users.email, users.phone FROM reservations INNER JOIN tables ON reservations.table_id=tables.id INNER JOIN users ON reservations.user_id = users.id WHERE date = ?";
             $date = $get["date"];
             $result = $api->executeQuery($query, [$date]);
             $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -70,14 +70,14 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
-            mail(
+            $msg = mail(
                 $user['email'],
                 'Your new Supercafé reservation for ' . $date,
                 'Your reservation for ' . $date . ' for table #' . $table . ' was created.',
-                "From: chet01@vse.cz"
+                $api->emailHeaders
             );
             $api->sendOutput(
-                json_encode(array()),
+                json_encode(array('message' => $msg)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {
@@ -107,18 +107,19 @@ class ReservationModel
             $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
         }
         if (!$strErrorDesc) {
+            $msg = '';
             if ($userId > 1) {
                 $query = "SELECT email from users WHERE id = ?";
                 $userEmail = $api->executeQuery($query, [$userId])->fetch(PDO::FETCH_ASSOC);
-                mail(
-                    $userEmail,
+                $msg = mail(
+                    $userEmail['email'],
                     'Your new Supercafé reservation for ' . $date,
                     'Your reservation for ' . $date . ' for table #' . $table . ' was created.',
-                    "From: chet01@vse.cz"
+                    $api->emailHeaders
                 );
             }
             $api->sendOutput(
-                json_encode(array()),
+                json_encode(array('message' => $msg)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {
@@ -150,16 +151,17 @@ class ReservationModel
         if (!$strErrorDesc) {
             $query = "SELECT email from users WHERE id = ?";
             $userEmail = $api->executeQuery($query, [$res['user_id']])->fetch(PDO::FETCH_ASSOC);
+            $msg = '';
             if ($userEmail) {
-                mail(
-                    $userEmail,
+                $msg = mail(
+                    $userEmail['email'],
                     'Updates on your Supercafé reservation for ' . $date,
                     'Your reservation from ' . $date . ' was updated. Please check its state in your profile.',
-                    "From: chet01@vse.cz"
+                    $api->emailHeaders
                 );
             }
             $api->sendOutput(
-                json_encode(array()),
+                json_encode(array('message' => $msg)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {
@@ -189,16 +191,17 @@ class ReservationModel
         if (!$strErrorDesc) {
             $query = "SELECT email from users WHERE id = ?";
             $userEmail = $api->executeQuery($query, [$res['user_id']])->fetch(PDO::FETCH_ASSOC);
+            $msg = '';
             if ($userEmail) {
-                mail(
-                    $userEmail,
+                $msg = mail(
+                    $userEmail['email'],
                     'Supercafé reservation deleted',
                     'Your reservation from ' . $res['date'] . ' was deleted.',
-                    "From: chet01@vse.cz"
+                    $api->emailHeaders
                 );
             }
             $api->sendOutput(
-                json_encode(array()),
+                json_encode(array('message' => $msg)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {

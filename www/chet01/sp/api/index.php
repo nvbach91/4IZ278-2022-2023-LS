@@ -12,6 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 class API
 {
     private $db;
+    public $emailHeaders;
     public $userModel;
     public $reservationModel;
     public $blocksModel;
@@ -42,6 +43,13 @@ class API
             $this->reservationModel = new ReservationModel();
             $this->blocksModel = new BlocksModel();
             $this->cafeModel = new CafeModel();
+            $this->emailHeaders = implode("\r\n", [
+                'MIME-Version: 1.0',
+                'Content-type: text/html; charset=utf-8',
+                'From: chet01@vse.cz',
+                'Reply-To: chet01@vse.cz',
+                'X-Mailer: PHP/' . phpversion()
+            ]);
         } catch (PDOException $e) {
             exit("Connection failed: " . $e->getMessage());
         }
