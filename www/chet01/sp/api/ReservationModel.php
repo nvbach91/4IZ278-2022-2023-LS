@@ -109,7 +109,7 @@ class ReservationModel
         if (!$strErrorDesc) {
             if ($userId > 1) {
                 $query = "SELECT email from users WHERE id = ?";
-                $userEmail = $api->executeQuery($query, [$userId]);
+                $userEmail = $api->executeQuery($query, [$userId])->fetch(PDO::FETCH_ASSOC);
                 mail(
                     $userEmail,
                     'Your new Supercafé reservation for ' . $date,
@@ -149,7 +149,7 @@ class ReservationModel
         }
         if (!$strErrorDesc) {
             $query = "SELECT email from users WHERE id = ?";
-            $userEmail = $api->executeQuery($query, [$res['user_id']]);
+            $userEmail = $api->executeQuery($query, [$res['user_id']])->fetch(PDO::FETCH_ASSOC);
             if ($userEmail) {
                 mail(
                     $userEmail,
@@ -188,7 +188,7 @@ class ReservationModel
         }
         if (!$strErrorDesc) {
             $query = "SELECT email from users WHERE id = ?";
-            $userEmail = $api->executeQuery($query, [$res['user_id']]);
+            $userEmail = $api->executeQuery($query, [$res['user_id']])->fetch(PDO::FETCH_ASSOC);
             if ($userEmail) {
                 mail(
                     $userEmail,
