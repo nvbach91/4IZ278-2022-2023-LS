@@ -42,7 +42,7 @@ $messages = $utils -> getAllMessages($users);
                 ?>
                 <div class = '<?php echo ($message['author_id'] !== intval($_GET['companionID'])) ? 'right' : 'left'?>_message'>
                     <img src = '<?php echo $sender['avatar']; ?>' style="max-height: 40px">
-                    <p class = 'message_text'><?php echo $message['message'] ?></p>
+                    <p class = 'message_text'><?php echo htmlspecialchars($message['message']); ?></p>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -50,8 +50,7 @@ $messages = $utils -> getAllMessages($users);
             <form 
                 class = 'chat_send' 
                 method = 'POST' 
-                action = '../utils/sendMessage.php?companionID=
-                    <?php echo $_GET['companionID']; ?>&userID=<?php echo $_COOKIE['userID'];?>'
+                action = '../utils/sendMessage.php?companionID=<?php echo $_GET['companionID']; ?>&userID=<?php echo $_COOKIE['userID'];?>'
             >
                 <textarea class = 'message_area' name = 'text'></textarea>
                 <label for ='send_btn' class = 'send_btn'>

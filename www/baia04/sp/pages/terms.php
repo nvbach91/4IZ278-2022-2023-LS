@@ -10,7 +10,7 @@ $language = isset($_SESSION['language']) ? $_SESSION['language'] : 'CZ';
     <?php require realpath(__DIR__ . '/..') . '/includes/navbar.php'; ?>
     <main class='container'>
         <form class='registration<?php echo $theme ?>'>
-            <h4 class='register_title'><?php echo $messages['termsOfUse'][$language]; ?></h4>
+            <h4 class='register_title'><?php echo $messages[$language]['termsOfUse']; ?></h4>
             <textarea class = 'terms_container' disabled>
                 <?php foreach($messages['termsOfUseText'][$language] as $line) {
                     echo PHP_EOL . $line;

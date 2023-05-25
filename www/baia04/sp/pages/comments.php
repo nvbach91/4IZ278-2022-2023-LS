@@ -65,13 +65,13 @@ $db = $utils -> getDB();
                         <h5 class = 'comment_title'><?php echo $author['name'] . ' ' . $author['surname']; ?></h5>
                     </div>
                     <div class = 'comment_content'>
-                        <p class='comment_text'><?php echo $comment['text']; ?></p><br>
+                        <p class='comment_text'><?php echo htmlspecialchars($comment['text']); ?></p><br>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
         <form class='new_comment<?php echo $theme; ?>' method="POST" action="../utils/addComment.php?postID=<?php echo $post['post_id'] ?>&userID=<?php echo $_COOKIE['userID']; ?>" enctype="multipart/form-data">
-                <textarea rows = 10 cols = 80 class='newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages['youthink'][$language]; ?>" name='text' ></textarea>
+                <textarea rows = 10 cols = 80 class='newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages[$language]['youthink']; ?>" name='text' ></textarea>
             <input type='submit' value='Comment' class='publish_button'>
         </form>
     </main>

@@ -51,7 +51,6 @@ $utils = Utils::getInstance();
         <div class='comments'>
             <?php
             $comments = $db->getComments($post['post_id']);
-            var_dump($post);
             foreach ($comments as $comment):
                 $author = $utils -> getUser($post['author_id']);
             ?>
@@ -67,7 +66,7 @@ $utils = Utils::getInstance();
             <?php endforeach; ?>
         </div>
         <form class='new_comment<?php echo $theme; ?>' method="POST" action="../utils/addComment.php?postID=<?php echo $post['post_id'] ?>&userID=<?php echo $_COOKIE['userID']; ?>" enctype="multipart/form-data">
-                <textarea rows = 10 cols = 80 class='newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages['youthink'][$language]; ?>" name='text' ></textarea>
+                <textarea rows = 10 cols = 80 class='newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages[$language]['youthink']; ?>" name='text' ></textarea>
             <input type='submit' value='Comment' class='publish_button'>
         </form>
     </main>

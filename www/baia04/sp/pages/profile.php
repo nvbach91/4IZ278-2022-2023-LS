@@ -14,7 +14,7 @@ $language = isset($_SESSION['language']) ? $_SESSION['language'] : 'CZ';
 
 $utils = Utils::getInstance();
 $db = $utils -> getDB();
-$profileID = $_SESSION['profileID'];
+$profileID = isset($_GET['profileID']) ? $_GET['profileID'] : $_COOKIE['userID'];
 $user = $utils->getUser($profileID);
 ?>
 

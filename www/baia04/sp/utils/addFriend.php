@@ -9,7 +9,7 @@ $sql = "SELECT * FROM `friends` WHERE (`user1_id` = :user1ID AND `user2_id` = :u
 $existsFrendShip = $db -> execute($sql, $users);
 if (count($existsFrendShip)) {
     header('Location: ../pages/profile.php?companionID=' . $_SESSION['profileID']);
-    return;
+    exit();
 }
 $sql = "INSERT INTO `friends`(`user1_id`, `user2_id`) VALUES (:user1ID, :user2ID)";
 $db -> execute($sql, $users);

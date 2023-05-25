@@ -5,7 +5,6 @@ require realpath(__DIR__ . '/..') . '/messages.php';
 require_once realpath(__DIR__ . '/..') . '/utils/Utils.php';
 $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
 $language = isset($_SESSION['language']) ? $_SESSION['language'] : 'CZ';
-
 $utils = Utils::getInstance();
 $submittedForm = !empty($_POST);
 if (isset($_COOKIE['userID'])) {
@@ -30,7 +29,7 @@ if ($submittedForm) {
         <div class = 'left_side'>
             <div class = 'welcome'>
                 <h3 class = 'welcome_title<?php echo $theme ?>'>
-                    <?php echo $messages['welcomeMessage'][$language]; ?>
+                    <?php echo $messages[$language]['welcomeMessage']; ?>
                 </h3>
                 <div class = 'welcome_photos'>
                     <div class = 'welcome_photo_container'>
@@ -53,41 +52,41 @@ if ($submittedForm) {
         </div>
         <div class = 'right_side'>
             <form class = 'login<?php echo $theme ?>' method = 'POST' action="main.php">
-                <h4 class = 'login_title'><?php echo $messages['login'][$language]; ?></h4>
+                <h4 class = 'login_title'><?php echo $messages[$language]['login']; ?></h4>
                 <div class = 'field'>
-                    <p class = 'field_p'><?php echo $messages['phoneNumberOrEmail'][$language]; ?></p>
+                    <p class = 'field_p'><?php echo $messages[$language]['phoneNumberOrEmail']; ?></p>
                     <input 
                         type = 'text' 
                         id = 'login_field' 
-                        placeholder="<?php echo $messages['inputPhoneNumberOrEmail'][$language]; ?>"
+                        placeholder="<?php echo $messages[$language]['inputPhoneNumberOrEmail']; ?>"
                         name = 'emailOrPhone'
                     >
                 </div>
                 <div class = 'field'>
-                    <p class = 'field_p'><?php echo $messages['password'][$language]; ?></p>
+                    <p class = 'field_p'><?php echo $messages[$language]['password']; ?></p>
                     <input 
                         type = 'password' 
                         id = 'login_field' 
-                        placeholder="<?php echo $messages['inputPassword'][$language]; ?>"
+                        placeholder="<?php echo $messages[$language]['inputPassword']; ?>"
                         name = 'password'
                     >
                 </div>
-                <label for = 'submit_btn_id' class = 'submit_btn'><?php echo $messages['loginButton'][$language]; ?></label>
+                <label for = 'submit_btn_id' class = 'submit_btn'><?php echo $messages[$language]['loginButton']; ?></label>
                 <input id = 'submit_btn_id' type = 'submit' style = 'display:none'></input>
                 <?php if (isset($errors)): ?>
                     <div class = 'login_error'>
-                        <p class = 'login_error_p'><?php echo $messages[$errors[0]][$language] ?></p>
+                        <p class = 'login_error_p'><?php echo $messages[$language][$errors[0]] ?></p>
                     </div>
                 <?php endif; ?>
             </form>
             <div class = 'register<?php echo $theme ?>'>
                 <div class = 'register_btn'>
                     <a href = '../utils/setSession.php?page=registration'>
-                        <p><?php echo $messages['register'][$language]; ?></p>
+                        <p><?php echo $messages[$language]['register']; ?></p>
                     </a>
                 </div>
                 <div class = 'register_text'>
-                    <p class = 'register_text'><?php echo $messages['registerMessage'][$language]; ?></p>
+                    <p class = 'register_text'><?php echo $messages[$language]['registerMessage']; ?></p>
                 </div>
             </div>
         </div>

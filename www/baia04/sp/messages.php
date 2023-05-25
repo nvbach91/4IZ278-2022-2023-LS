@@ -1,176 +1,97 @@
 <?php
 $messages = [
-    'welcomeMessage' => [
-        'ENG' => 'Register now and be in touch with your friends everywhere', 
-        'CZ' => 'Zaregistrujte se hned teď a buďte v kontaktu se svými přáteli všude'
+    "ENG" => [
+        "send_message" => "Send Message",
+        "welcomeMessage" => "Register now and be in touch with your friends everywhere",
+        "login" => "Login",
+        "loginButton" => "Login",
+        "phoneNumberOrEmail" => "Phone number or e-mail:",
+        "inputPhoneNumberOrEmail" => "Input your phone or e-mail",
+        "password" => "Password:",
+        "inputPassword" => "Input your password",
+        "register" => "Register",
+        "registerMessage" => "Don’t you have an account yet? <br>You can register now!",
+        "registration" => "Registration",
+        "inputEmail" => "Input your e-mail",
+        "phoneNumber" => "Phone Number*:", 
+        "inputPhone" => "Input your Phone Number",
+        "firstName" => "First Name*:",
+        "inputFirstName" => "Input your first name",
+        "lastName" => "Last Name*:",
+        "inputLastName" => "Input your last name",
+        "dateOfBirth" => "Date of birth*:",
+        "passwordConfirmation" => "Confirm Password*:",
+        "inputPasswordConfirmation" => "Input your password again",
+        "termsOfUse" => "Terms of Use",
+        "termsOfUseText" => file('../src/termsOfUse_eng.txt'),
+        "incorrectEmail" => "Please input a correct e-mail",
+        "emptyEmail" => "Please inter your email",
+        "emptyPhoneNumber" => "Please input your phone number",
+        "incorrectPhoneNumber" => "Please enter a correct phone number",
+        "emptyFirstName" => "Please enter your name",
+        "emptyLastName" => "Please enter your last name",
+        "emptyDate" => "Please input your date of birth",
+        "incorrectDate" => "Please input a correct date",
+        "tooYoung" => "You must be at least 14 y.o",
+        "emptyPassword" => "Please input a password",
+        "tooShortPassword" => "Password must be at least 8 characters",
+        "notMatch" => "Passwords don't match",
+        "notAccepted" => "You have to accept terms of use",
+        "alreadyExists" => "This e-mail is already registered",
+        "goToLoginPage" => "Go to Login",
+        "userNotFound" => "User was not found",
+        "wrongPassword" => "Password is incorrect",
+        "whatNews" => "What's the news?",
+        "youthink" => "What do you think about that?",
+        "deleteFriend" => "Delete friend",
+        "sendMessage" => "Send Message"
     ],
-    'login' => [
-        'ENG' => 'Login', 
-        'CZ' => 'Login'
-    ],
-    'loginButton' => [
-        'ENG' => 'Login', 
-        'CZ' => 'Přihlášení'
-    ],
-    'phoneNumberOrEmail' => [
-        'ENG' => 'Phone number or e-mail:', 
-        'CZ' => 'Telefonní číslo nebo e-mail:'
-    ],
-    'inputPhoneNumberOrEmail' => [
-        'ENG' => 'Input your phone or e-mail', 
-        'CZ' => 'Zadejte svůj telefon nebo e-mail'
-    ],
-    'password' => [
-        'ENG' => 'Password:', 
-        'CZ' => 'Heslo:'
-    ],
-    'inputPassword' => [
-        'ENG' => 'Input your password', 
-        'CZ' => 'Zadejte své heslo'
-    ],
-    'register' => [
-        'ENG' => 'Register', 
-        'CZ' => 'Zaregistrovat'
-    ],
-    'registerMessage' => [
-        'ENG' => 'Don’t you have an account yet? <br>You can register now!', 
-        'CZ' => 'Ještě nemáte účet? <br>Zaregistrujte se teď!'
-    ],
-    'registration' => [
-        'ENG' => 'Registration',
-        'CZ' => 'Registrace'
-    ],
-    'inputEmail' => [
-        'ENG' => 'Input your e-mail',
-        'CZ' => 'Zadejte svůj e-mail'
-    ],
-    'phoneNumber' => [
-        'ENG' => 'Phone Number*:',
-        'CZ' => 'Telefonní Číslo*:'
-    ],
-    'inputPhone' => [
-        'ENG' => 'Input your Phone Number',
-        'CZ' => 'Zadejte své Telefonní Číslo'
-    ],
-    'firstName' => [
-        'ENG' => 'First Name*:',
-        'CZ' => 'Jméno*:'
-    ],
-    'inputFirstName' => [
-        'ENG' => 'Input your first name',
-        'CZ' => 'Zadejte své křestní jméno'
-    ],
-    'lastName' => [
-        'ENG' => 'Last Name*:',
-        'CZ' => 'Příjmení*:'
-    ],
-    'inputLastName' => [
-        'ENG' => 'Input your last name',
-        'CZ' => 'Zadejte své příjmení'
-    ],
-    'dateOfBirth' => [
-        'ENG' => 'Date of birth*:',
-        'CZ' => 'Datum narození*:'
-    ],
-    'passwordConfirmation' => [
-        'ENG' => 'Confirm Password*:',
-        'CZ' => 'Potvrďte Heslo*:'
-    ],
-    'inputPasswordConfirmation' => [
-        'ENG' => 'Input your password again',
-        'CZ' => 'Zadejte znovu své heslo'
-    ],
-    'termsOfUse' => [
-        'ENG' => 'Terms of Use',
-        'CZ' => 'Podmínky Používání'
-    ],
-    'termsOfUseText' => [
-        'ENG' => file('../src/termsOfUse_eng.txt'),
-        'CZ' => file('../src/termsOfUse_cz.txt')
-    ],
-    'incorrectEmail' => [
-        'ENG' => 'Please input a correct e-mail',
-        'CZ' => 'Zadejte správný e-mail'
-    ],
-    'emptyEmail' => [
-        'ENG' => 'Please inter your email',
-        'CZ' => 'Zadejte prosím svůj e-mail'
-    ],
-    'emptyPhoneNumber' => [
-        'ENG' => 'Please input your phone number',
-        'CZ' => 'Zadejte prosím své telefonní číslo'
-    ],
-    'incorrectPhoneNumber' => [
-        'ENG' => 'Please enter a correct phone number',
-        'CZ' => 'Zadejte prosím správné telefonní číslo'
-    ],
-    'emptyFirstName' => [
-        'ENG' => 'Please enter your name',
-        'CZ' => 'Zadejte prosím své jméno'
-    ],
-    'emptyLastName' => [
-        'ENG' => 'Please enter your last name',
-        'CZ' => 'Zadejte prosím své příjmení'
-    ],
-    'emptyDate' => [
-        'ENG' => 'Please input your date of birth',
-        'CZ' => 'Zadejte prosím své datum narození'
-    ],
-    'incorrectDate' => [
-        'ENG' => 'Please input a correct date',
-        'CZ' => 'Zadejte prosím správné datum'
-    ],
-    'tooYoung' => [
-        'ENG' => 'You must be at least 14 y.o',
-        'CZ' => 'musí Vam být aspoň 14 let'
-    ],
-    'emptyPassword' => [
-        'ENG' => 'Please input a password',
-        'CZ' => 'Zadejte prosím heslo'
-    ],
-    'tooShortPassword' => [
-        'ENG' => 'Password must be at least 8 characters',
-        'CZ' => 'Heslo musí mít alespoň 8 znaků'
-    ],
-    'notMatch' => [
-        'ENG' => "Passwords don't match",
-        'CZ' => 'Hesla se neshodují'
-    ],
-    'notAccepted' => [
-        'ENG' => 'You have to accept terms of use',
-        'CZ' => 'Musíte přijmout podmínky'
-    ],
-    'alreadyExists' => [
-        'ENG' => 'This e-mail is already registered',
-        'CZ' => 'Tento e-mail je již zaregistrován'
-    ],
-    'goToLoginPage' => [
-        'ENG' => 'Go to Login',
-        'CZ' => 'Přejít na přihlášení'
-    ],
-    'userNotFound' => [
-        'ENG' => 'User was not found',
-        'CZ' => 'Uživatel nebyl nalezen'
-    ],
-    'wrongPassword' => [
-        'ENG' => 'Password is incorrect',
-        'CZ' => 'Heslo je nesprávné'
-    ],
-    'whatNews' => [
-        'ENG' => "What's the news?",
-        'CZ' => 'Co je nového?'
-    ],
-    'youthink' => [
-        'ENG' => "What do you think about that?",
-        'CZ' => 'Co si o tom myslíte?'
-    ],
-    'deleteFriend' => [
-        'ENG' => "Delete friend",
-        'CZ' => 'Smazat přítele'
-    ],
-    'sendMessage' => [
-        'ENG' => "Send Message",
-        'CZ' => 'Odeslat Zprávu'
-    ],
+    
+    "CZ" => [
+        "send_message" => "Odeslat Zprávu",
+        "welcomeMessage" => "Zaregistrujte se hned teď a buďte v kontaktu se svými přáteli všude",
+        "login" => "Login",
+        "loginButton" => "Přihlášení",
+        "phoneNumberOrEmail" => "Telefonní číslo nebo e-mail:",
+        "inputPhoneNumberOrEmail" => "Zadejte svůj telefon nebo e-mail",
+        "password" => "Heslo:",
+        "inputPassword" => "Zadejte své heslo",
+        "register" => "Zaregistrovat",
+        "registerMessage" => "Ještě nemáte účet? <br>Zaregistrujte se teď!",
+        "registration" => "Registrace",
+        "inputEmail" => "Zadejte svůj e-mail",
+        "phoneNumber" => "Telefonní Číslo*:",
+        "inputPhone" => "Zadejte své Telefonní Číslo",
+        "firstName" => "Jméno*:",
+        "inputFirstName" => "Zadejte své křestní jméno",
+        "lastName" => "Příjmení*:",
+        "inputLastName" => "Zadejte své příjmení",
+        "dateOfBirth" => "Datum narození*:",
+        "passwordConfirmation" => "Potvrďte Heslo*:",
+        "inputPasswordConfirmation" => "Zadejte znovu své heslo",
+        "termsOfUse" => "Podmínky Používání",
+        "termsOfUseText" => file('../src/termsOfUse_cz.txt'),
+        "incorrectEmail" => "Zadejte správný e-mail",
+        "emptyEmail" => "Zadejte prosím svůj e-mail",
+        "emptyPhoneNumber" => "Zadejte prosím své telefonní číslo",
+        "incorrectPhoneNumber" => "Zadejte prosím správné telefonní číslo",
+        "emptyFirstName" => "Zadejte prosím své jméno",
+        "emptyLastName" => "Zadejte prosím své příjmení",
+        "emptyDate" => "Zadejte prosím své datum narození",
+        "incorrectDate" => "Zadejte prosím správné datum",
+        "tooYoung" => "Musí Vam být aspoň 14 let",
+        "emptyPassword" => "Zadejte prosím heslo",
+        "tooShortPassword" => "Heslo musí mít alespoň 8 znaků",
+        "notMatch" => "Hesla se neshodují",
+        "notAccepted" => "Musíte přijmout podmínky",
+        "alreadyExists" => "Tento e-mail je již zaregistrován",
+        "goToLoginPage" => "Přejít na přihlášení",
+        "userNotFound" => "Uživatel nebyl nalezen",
+        "wrongPassword" => "Heslo je nesprávné",
+        "whatNews" => "Co je nového?",
+        "youthink" => "Co si o tom myslíte?",
+        "deleteFriend" => "Smazat přítele",
+        "sendMessage" => "Odeslat Zprávu"
+    ]
 ];
 ?>

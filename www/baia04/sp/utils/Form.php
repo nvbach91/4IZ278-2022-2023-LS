@@ -71,54 +71,54 @@ class Form {
         
         $email = $this -> email;
         if (!$email) {
-            $errors['email'] = $messages['emptyEmail'][$language];
+            $errors['email'] = $messages[$language]['emptyEmail'];
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = $messages['incorrectEmail'][$language];
+            $errors['email'] = $messages[$language]['incorrectEmail'];
         }
 
         $phoneNumber = $this -> phoneNumber;
         if (!$phoneNumber) {
-            $errors['phoneNumber'] = $messages['emptyPhoneNumber'][$language];
+            $errors['phoneNumber'] = $messages[$language]['emptyPhoneNumber'];
         } else if (!is_numeric($phoneNumber)) {
-            $errors['phoneNumber'] = $messages['incorrectPhoneNumber'][$language];
+            $errors['phoneNumber'] = $messages[$language]['incorrectPhoneNumber'];
         }
 
         if (!$this -> firstName) {
-            $errors['firstName'] = $messages['emptyFirstName'][$language];
+            $errors['firstName'] = $messages[$language]['emptyFirstName'];
         }
         if (!$this -> lastName) {
-            $errors['lastName'] = $messages['emptyLastName'][$language];
+            $errors['lastName'] = $messages[$language]['emptyLastName'];
         }
 
         $dateOfBirth = $this -> dateOfBirth;
         if (!$dateOfBirth) {
-            $errors['dateOfBirth'] = $messages['emptyDate'][$language];
+            $errors['dateOfBirth'] = $messages[$language]['emptyDate'];
         } else {
             $date = new DateTime($dateOfBirth);
             $now = new DateTime();
             $difference = date_diff($date, $now) -> y;
             if ($now <= $date) {
-                $errors['dateOfBirth'] = $messages['incorrectDate'][$language];
+                $errors['dateOfBirth'] = $messages[$language]['incorrectDate'];
             } else if ($difference < 14) {
-                $errors['dateOfBirth'] = $messages['tooYoung'][$language];
+                $errors['dateOfBirth'] = $messages[$language]['tooYoung'];
             }
         }
 
         $password = $this -> password;
         if (!$password) {
-            $errors['password'] = $messages['emptyPassword'][$language];
+            $errors['password'] = $messages[$language]['emptyPassword'];
         } else if (strlen($password) < 8) {
-            $errors['password'] = $messages['tooShortPassword'][$language];
+            $errors['password'] = $messages[$language]['tooShortPassword'];
         }
 
         $confirm = $this -> passwordConfirmation;
         if ($password !== $confirm) {
-            $errors['passwordConfirmation'] = $messages['notMatch'][$language];
+            $errors['passwordConfirmation'] = $messages[$language]['notMatch'];
         }
 
         $accept = $this -> accept;
         if (!$accept) {
-            $errors['terms'] = $messages['notAccepted'][$language];
+            $errors['terms'] = $messages[$language]['notAccepted'];
         }
         return $errors;
     }

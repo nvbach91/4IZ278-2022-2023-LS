@@ -6,5 +6,5 @@ $users = [
     'user2ID' => $_GET['user2ID']
 ];
 Utils::getInstance() -> getDB() -> execute($sql, $users);
-header('Location: /../pages/friends.php');
+header('Location: ../setSession.php?page=friends');
 ?>

@@ -18,7 +18,6 @@ if (!empty($_POST)) {
 }
 if (!is_null($errors) && !count($errors)) {
     $status = $utils -> saveUser($form);
-    var_dump($status);
     if ($status) {
         $user = $db -> getUserByEmail($form -> getEmail());
         setcookie('userID', $user[0]['user_id'], time() + 3600);
@@ -33,14 +32,14 @@ if (!is_null($errors) && !count($errors)) {
     <?php require realpath(__DIR__ . '/..') . '/includes/navbar.php'; ?>
     <main class='container'>
         <form class='registration<?php echo $theme ?>' method='POST' action="registration.php">
-            <h4 class='register_title'><?php echo $messages['registration'][$language]; ?></h4>
+            <h4 class='register_title'><?php echo $messages[$language]['registration']; ?></h4>
             <div class='line'>
                 <div class='field' style='padding-right: 55px'>
                     <p class='field_p'>E-mail*:</p>
                     <input 
                         type='text' 
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputEmail'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputEmail']; ?>" 
                         name='e-mail'
                         value = '<?php echo $form ? $form -> getEmail() : '' ?>'
                     >
@@ -51,12 +50,12 @@ if (!is_null($errors) && !count($errors)) {
                     </div>
                 <?php endif; ?>
                 <div class='field'>
-                    <p class='field_p'><?php echo $messages['phoneNumber'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['phoneNumber']; ?></p>
                     <input 
                         type='text'
                         inputmode='numeric'
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputPhone'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputPhone']; ?>" 
                         name='phoneNumber'
                         value = '<?php echo $form ? $form -> getPhoneNumber() : '' ?>'
                     />
@@ -69,11 +68,11 @@ if (!is_null($errors) && !count($errors)) {
             </div>
             <div class='line'>
                 <div class='field' style='padding-right: 55px'>
-                    <p class='field_p'><?php echo $messages['firstName'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['firstName']; ?></p>
                     <input 
                         type='text' 
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputFirstName'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputFirstName']; ?>" 
                         name='firstName'
                         value = '<?php echo $form ? $form -> getFirstName() : '' ?>'
                     >
@@ -84,11 +83,11 @@ if (!is_null($errors) && !count($errors)) {
                     </div>
                 <?php endif; ?>
                 <div class='field'>
-                    <p class='field_p'><?php echo $messages['lastName'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['lastName']; ?></p>
                     <input 
                         type='text' 
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputLastName'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputLastName']; ?>" 
                         name='lastName'
                         value = '<?php echo $form ? $form -> getLastName() : '' ?>'
                     >
@@ -101,7 +100,7 @@ if (!is_null($errors) && !count($errors)) {
             </div>
             <div class='line'>
                 <div class='field'>
-                    <p class='field_p'><?php echo $messages['dateOfBirth'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['dateOfBirth']; ?></p>
                     <input 
                         type='date' 
                         id='login_field' 
@@ -117,11 +116,11 @@ if (!is_null($errors) && !count($errors)) {
             </div>
             <div class='line'>
                 <div class='field' style='padding-right: 55px'>
-                    <p class='field_p'><?php echo $messages['password'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['password']; ?></p>
                     <input 
                         type='password' 
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputPassword'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputPassword']; ?>" 
                         name='password'
                         value = '<?php echo $form ? $form -> getPassword() : '' ?>'
                     >
@@ -132,11 +131,11 @@ if (!is_null($errors) && !count($errors)) {
                     </div>
                 <?php endif; ?>
                 <div class='field'>
-                    <p class='field_p'><?php echo $messages['passwordConfirmation'][$language]; ?></p>
+                    <p class='field_p'><?php echo $messages[$language]['passwordConfirmation']; ?></p>
                     <input 
                         type='password' 
                         id='login_field' 
-                        placeholder="<?php echo $messages['inputPasswordConfirmation'][$language]; ?>" 
+                        placeholder="<?php echo $messages[$language]['inputPasswordConfirmation']; ?>" 
                         name='passwordConfirmation'
                         value = '<?php echo $form ? $form -> getPasswordConfirmation() : '' ?>'
                     >
@@ -151,8 +150,8 @@ if (!is_null($errors) && !count($errors)) {
 
                 <?php if ($errors && isset($errors['user'])): ?>
                     <div class = 'exists_error'>
-                        <p class = 'exists_error_p'><?php echo $messages['alreadyExists'][$language]; ?>
-                            <a class = 'blue' href = '../utils/setSession.php?page=main'><?php echo $messages['goToLoginPage'][$language]; ?> 
+                        <p class = 'exists_error_p'><?php echo $messages[$language]['alreadyExists']; ?>
+                            <a class = 'blue' href = '../utils/setSession.php?page=main'><?php echo $messages[$language]['goToLoginPage']; ?> 
                             </a>
                         </p>
                     </div>
@@ -179,7 +178,7 @@ if (!is_null($errors) && !count($errors)) {
                 type='submit' 
                 class = 'registration_button'
                 style = 'padding-left: <?php echo $language === 'CZ' ? '105px' : '135px';?>'
-                value = <?php echo $messages['register'][$language]; ?>
+                value = <?php echo $messages[$language]['register']; ?>
             >
             </input>
 

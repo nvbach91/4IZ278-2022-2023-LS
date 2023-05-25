@@ -72,6 +72,9 @@ class Utils implements IUtils {
 
     public function newPost(int $userID) {
         $db = Utils::$db;
+        if (!$_POST['text']) {
+            return;
+        }
         $text = htmlspecialchars(trim($_POST['text']));
         $now = new DateTime();
         $post = [

@@ -11,7 +11,6 @@ if (isset($_SESSION['logout']) || !isset($_COOKIE['userID'])) {
 }
 $theme = isset($_SESSION['theme']) ? $_SESSION['theme'] : '';
 $language = isset($_SESSION['language']) ? $_SESSION['language'] : 'CZ';
-
 $utils = Utils::getInstance();
 $db = $utils -> getDB();
 ?>
@@ -31,7 +30,7 @@ $db = $utils -> getDB();
             action="../utils/uploadPhoto.php?userID=<?php echo $_COOKIE['userID']; ?>"
             enctype="multipart/form-data"
         >
-            <textarea class = 'newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages['whatNews'][$language]; ?>" name = 'text'></textarea>
+            <textarea class = 'newPost_text<?php echo $theme; ?>' placeholder="<?php echo $messages[$language]['whatNews']; ?>" name = 'text'></textarea>
             <div class = 'photo'>
                 <label for = 'fileToUpload'>
                     <img class = 'file_input_hover' src = '../images/icons/photo.svg'>
@@ -41,7 +40,7 @@ $db = $utils -> getDB();
                     class = 'input_photo' 
                     name = 'fileToUpload' 
                     id = 'fileToUpload' 
-                    accept="image/png, image/gif, image/jpeg"
+                    accept = "image/png, image/gif, image/jpeg"
                 > 
             </div>
             <input type = 'submit' value = 'Publish' class = 'publish_button'>
@@ -56,7 +55,7 @@ $db = $utils -> getDB();
                 <a name = 'section<?php echo $post['post_id']; ?>'></a>
                 <div class = 'post<?php echo $theme; ?>'>
                     <div class = 'post_header'>
-                        <a href = '../utils/setSession.php?page=profile&profileID=<?php echo $post['author_id']; ?>'>
+                        <a href = '../pages/profile.php?profileID=<?php echo $post['author_id']; ?>'>
                         <div class = 'post_avatar'>
                             <img class = 'post_avatar' src = '<?php echo $user['avatar']; ?>' style = 'border-radius: 999px;'>
                         </div>
@@ -88,7 +87,7 @@ $db = $utils -> getDB();
                         </div>
                     </div>
                     <div class = 'post_content'>
-                        <p class = 'post_text'><?php echo $post['text']; ?></p>
+                        <p class = 'post_text'><?php echo htmlspecialchars($post['text']); ?></p>
                         <br><br>
                         <?php 
                             $file = $utils -> getPostImage($post['post_id']);
