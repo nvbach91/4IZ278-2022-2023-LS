@@ -31,7 +31,7 @@ class ReservationModel
         $strErrorDesc = '';
         if ($api->userModel->isAuthenticated($api)) {
             $userId = $api->userModel->getUserByToken($api, $_COOKIE['token'])['id'];
-            $query = " SELECT reservations.id, reservations.table_id, tables.name, tables.capacity, reservations.date, reservations.note FROM reservations INNER JOIN tables ON reservations.table_id=tables.id WHERE user_id = ?";
+            $query = " SELECT reservations.id, reservations.table_id, tables.name, tables.capacity, reservations.date, reservations.note FROM reservations INNER JOIN tables ON reservations.table_id=tables.id WHERE user_id = ? ORDER BY reservations.date DESC";
             $result = $api->executeQuery($query, [$userId]);
             $reservations = $result->fetchAll(PDO::FETCH_ASSOC);
         } else {
@@ -202,6 +202,51 @@ class ReservationModel
             }
             $api->sendOutput(
                 json_encode(array('message' => $msg)),
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $api->sendOutput(
+                json_encode(array('error' => $strErrorDesc)),
+                array('Content-Type: application/json', $strErrorHeader)
+            );
+        }
+    }
+
+
+    function getUnavailableDaysInMonth($api, $get)
+    {
+        // vypise ktere dny v mesici nejsou dostupne pro kontretni stul, ty dny pak budou zablokovany v calendar inputu 
+        // (defaultni html kalendar to neumi takze je potreba vyuzit nejakou knihovnu)
+
+        $strErrorDesc = '';
+        if ($api->userModel->isAuthenticated($api)) {
+            if (!$get['table'] || !$get['month'] || !$get['year']) {
+                $strErrorDesc = 'Missing parameters';
+                $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            } else {
+                $table = $get['table'];
+                $month = $get['month'];
+                $year = $get['year'];
+
+                $query1 =  "SELECT date from reservations WHERE table_id= ? AND YEAR(date) = ? AND MONTH(date) = ? ORDER BY date DESC";
+                $result1 = $api->executeQuery($query1, [$table, $year, $month]);
+                $reservations = $result1->fetch(PDO::FETCH_ASSOC);
+                $arr1 = array_column($reservations, 'date');
+
+                $query2 = "SELECT date from blocks WHERE table_id= ? AND YEAR(date) = ? AND MONTH(date) = ? ORDER BY date DESC";
+                $result2 = $api->executeQuery($query1, [$table, $year, $month]);
+                $blocks = $result1->fetch(PDO::FETCH_ASSOC);
+                $arr2 = array_column($blocks, 'date');
+
+                $unavailable = array_merge($arr1, $arr2);
+            }
+        } else {
+            $strErrorDesc = 'No permission';
+            $strErrorHeader = 'HTTP/1.1 403 Forbidden ';
+        }
+        if (!$strErrorDesc) {
+            $api->sendOutput(
+                json_encode($unavailable),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {
