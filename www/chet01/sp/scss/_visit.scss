@@ -1,0 +1,138 @@
+.visit {
+    padding-top: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    &__box {
+        border: 1px solid $maingreen;
+        padding: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &.half {
+            width: 45%;
+        }
+        h2 {
+            color: $maingreen;
+            padding: 10px 0;
+        }
+        div {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+            span {
+                padding-bottom: 1em;
+            }
+            label {
+                min-width: 100%;
+                span {
+                    display: block;
+                    min-width: 100%;
+                    text-align: center;
+                    padding: 1em 1.5em;
+                }
+                input {
+                    display: none;
+                    &:checked + span {
+                        background-color: $maingreen;
+                        color: white;
+                    }
+                }
+            }
+        }
+        button {
+            all: unset;
+            box-sizing: border-box;
+            cursor: pointer;
+            width: 100%;
+            background-color: $maingreen;
+            padding: 1em 1.5em;
+            text-align: center;
+            color: white;
+            margin-top: 2em;
+            &:disabled {
+                filter: saturate(0);
+                cursor: default;
+            }
+        }
+
+        table {
+            min-width: 100%;
+            padding: 25px 5%;
+            * {
+                border: none;
+            }
+            th, td {
+                padding: 15px;
+                text-align: center;
+                a {
+                    font-weight: 600;
+                    font-size: 1.5em;
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+            tr:nth-child(even){
+                background-color: $lightgreen;
+            }
+        } 
+        form {
+            width: 100%;
+            label, input {
+                width: 100%;
+                padding: 5px;
+            }
+            .err {
+                color: red;
+            }
+            textarea {
+                width: 100%;
+                resize: vertical;
+            }
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .table {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 25px 0;
+            gap: 25px;
+            &.hidden {
+                opacity: 0.5;
+            }
+
+            label {
+                display: flex;
+                gap: 15px;
+                min-width: unset;
+                input {
+                    display: block;
+                    margin: 0;
+                }
+            }
+            span {
+                padding: 0;
+            }
+            .capacity {
+                min-width: unset;
+                padding: 0;
+                width: auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+                button {
+                    margin: 0;
+                    padding: 0.7em 1em;
+                }
+            }
+        }
+    }
+}

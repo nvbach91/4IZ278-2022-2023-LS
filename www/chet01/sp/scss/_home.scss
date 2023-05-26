@@ -1,0 +1,82 @@
+.home {
+    width: 100%;
+    min-height: 75vh;
+    background-image: url(../assets/bg.png);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__head {
+        text-align: center;
+        h1 {
+            font-size: 2.25em;
+            color: white;
+            padding-bottom: 2em;
+            font-weight: 200;
+        }
+        a {
+            padding: 1em 4em;
+            background-color: white;
+            color: $maingreen;
+            font-size: 1.5em;
+            text-decoration: none;
+        }
+        
+    }
+}
+footer {
+    width: 100%;
+    margin-top: auto;
+    .message {
+        width: 100%;
+        color: $maingreen;
+        font-size: 1.25em;
+        font-weight: 600;
+        text-align: center;
+        padding: 2em 0;
+    }
+    .footer {
+        width: 100%;
+        background-color: $maingreen;
+        color: white;
+        padding: 2em;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        h4 {
+            padding-top: 1em;
+        }
+    }
+}
+
+header {
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        a {
+            color: $maingreen;
+            padding: 1em 0;
+            margin: unset;
+            text-decoration: none;
+            cursor: pointer;
+            width: 20%;
+            text-align: center;
+            &:hover, &.active {
+                background-color: $maingreen;
+                color: white;
+            }
+            &:first-of-type {
+                margin-right: auto;
+            }
+        }
+    }
+}
