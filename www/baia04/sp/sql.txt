@@ -1,0 +1,55 @@
+CREATE TABLE users (
+user_id INT NOT NULL AUTO_INCREMENT,
+email VARCHAR(255) NOT NULL, 
+phoneNumber VARCHAR(20) NOT NULL,
+password VARCHAR(1000) NOT NULL,
+is_admin BOOLEAN NOT NULL
+     PRIMARY KEY (user_id)
+);
+
+CREATE TABLE profiles (
+user_id INT NOT NULL,
+name VARCHAR(100) NOT NULL, 
+surname VARCHAR(100) NOT NULL,
+description VARCHAR(1000) NOT NULL,
+date_birth DATE NOT NULL,
+     PRIMARY KEY (user_id)
+);
+
+CREATE TABLE posts (
+post_id INT NOT NULL AUTO_INCREMENT,
+author_id INT NOT NULL, 
+text VARCHAR(2000),
+date DATETIME NOT NULL,
+     PRIMARY KEY (post_id)
+);
+
+CREATE TABLE likes (
+	user_id INT NOT NULL,
+	post_id INT NOT NULL,
+);
+
+CREATE TABLE comments (
+	post_id INT NOT NULL,
+	author_id INT NOT NULL,
+	text VARCHAR(500)
+);
+
+CREATE TABLE chats (
+	chat_id INT NOT NULL AUTO_INCREMENT,
+	user1_id INT NOT NULL,
+	user2_id INT NOT NULL,
+	PRIMARY KEY (chat_id)
+);
+
+CREATE TABLE messages (
+	chat_id INT NOT NULL,
+	author_id INT NOT NULL,
+	message VARCHAR(500),
+	is_read BOOLEAN
+);
+
+CREATE TABLE friends (
+	user1_id INT NOT NULL,
+	user2_id INT NOT NULL
+);
