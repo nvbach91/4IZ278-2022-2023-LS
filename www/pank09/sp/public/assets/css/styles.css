@@ -1,0 +1,248 @@
+/* NORMALIZE */
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+a {
+	font-weight: 600;
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+ul {
+	list-style: none;
+}
+
+[multiple],
+[type=date],
+[type=datetime-local],
+[type=email],
+[type=month],
+[type=number],
+[type=password],
+[type=search],
+[type=tel],
+[type=text],
+[type=time],
+[type=url],
+[type=week],
+button,
+select,
+textarea {
+	outline: none;
+	-webkit-appearance: none;
+       -moz-appearance: none;
+    		appearance: none;
+
+	font-size: .875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	padding: 0.625rem;
+	
+	border-radius: 0.5rem;
+
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	background-color: #FFFFFF;
+}
+
+[type="checkbox"] {
+	width: 1rem;
+	height: 1rem;
+	border: 1px solid rgba(0, 0, 0, 1);
+	border-radius: 0.25rem;
+}
+
+button:focus,
+input:focus,
+textarea:focus {
+	border: 1px solid rgba(0, 0, 0, 1) !important;
+}
+
+button {
+	cursor: pointer;
+	padding-left: 1.25rem;
+    padding-right: 1.25rem;
+	background-color: #000;
+	color: #FFF;
+	font-weight: 600;
+}
+
+button:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+input:hover,
+textarea:hover {
+	border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.button {
+    cursor: pointer;
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 3.125rem;
+    line-height: 1.5;
+    background-color: #9bc3e8;
+    border: 1px solid hsl(0deg,0%,0%);
+    outline: 0;
+    border-radius: 10px;
+    box-shadow: 7px 7px #000;
+    padding: 1.75rem 1.5rem;
+    position: relative;
+    transition: box-shadow .25s
+}
+/* HEADER */
+
+header {
+	background-color: #FFFFFF;
+}
+
+header nav {
+	padding: 1.5rem 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header nav ul {
+	display: flex;
+	align-items: center;
+}
+
+header nav ul a {
+	padding: 0.5rem;
+}
+
+/* EVENT */
+
+.events {
+	max-width: 800px;
+	margin: auto;
+}
+
+.events .event {
+	position: relative;
+	border-radius: 10px;
+	transition: background-color 0.5s;
+}
+
+.events .event:hover {
+	background-color: rgba(0, 0, 0, 0.035);
+}
+
+.events .event__image {
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.1);
+	background-position: center center;
+	background-size: cover;
+}
+
+.events .event__details-column {
+	min-width: 150px;
+}
+
+.events .event a {
+	content: "";
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+}
+
+.event.is-single .event__image {
+	position: relative;
+	width: 100%;
+	padding-top: 350px;
+	border-radius: 10px;
+	background-color: rgba(0, 0, 0, 0.1);
+	background-position: center center;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.event.is-single .event__image::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+}
+
+.event.is-single .event__image h2 {
+	position: absolute;
+	left: 30px;
+	bottom: 30px;
+	color: #FFFFFF;
+}
+
+/* PAGINATION */
+
+.pagination .pagination__link {
+	display: block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-right: 5px;
+	text-align: center;
+	border-radius: 4px;
+	transition: background-color 0.5s;
+}
+
+.pagination .pagination__link.disabled {
+	opacity: 0.25;
+	pointer-events: none;
+}
+
+.pagination .pagination__link.active {
+	color: #FFFFFF;
+	background-color: rgba(0, 0, 0, 1);
+}
+
+.pagination .pagination__link:hover {
+	text-decoration: none;
+	color: #000000;
+	background-color: rgba(0, 0, 0, 0.035);
+}
+
+.pagination .pagination__link svg {
+	width: 20px;
+	height: 40px;
+}
+
+/* NOTIFICATION */
+
+.notification {
+	border-radius: 0.25rem;
+	color: rgb(0, 38, 63);
+	background-color: rgba(22, 120, 200, 0.3);
+}
+
+.notification.success {
+	color: rgb(0, 63, 0);
+	background-color: rgba(22, 200, 22, 0.3);
+}
+
+.notification.error {
+	color: rgb(63, 0, 0);
+	background-color: rgba(200, 22, 22, 0.3);
+}
