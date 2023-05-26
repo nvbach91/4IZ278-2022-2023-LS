@@ -23,9 +23,9 @@
                 @foreach($cart as $id => $item)
                 <tr>
                     <td>{{ isset($item['name']) ? $item['name'] : 'Unknown Product' }}</td>
-                    <td>${{ isset($item['price']) ? $item['price'] : 0 }}</td>
+                    <td>{{ env('CURRENCY', '$') }}{{ isset($item['price']) ? $item['price'] : 0 }}</td>
                     <td>{{ isset($item['quantity']) ? $item['quantity'] : 0 }}</td>
-                    <td>${{ isset($item['price']) && isset($item['quantity']) ? $item['price'] * $item['quantity'] : 0 }}</td>
+                    <td>{{ env('CURRENCY', '$') }}{{ isset($item['price']) && isset($item['quantity']) ? $item['price'] * $item['quantity'] : 0 }}</td>
                     <td>
                         <form action="{{ route('cart.remove', $id) }}" method="post">
                             @csrf
@@ -38,16 +38,16 @@
             @endif
             <tr>
                 <td colspan="4" class="text-end"><strong>Sum:</strong></td>
-                <td>${{ number_format($totalSum, 2) }}</td>
+                <td>{{ env('CURRENCY', '$') }}{{ number_format($totalSum, 2) }}</td>
             </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-end">
         <a href="{{ route('cart.flush') }}" class="btn btn-outline-danger me-2">Flush Cart</a>
         @if ($totalSum > 0)
-            <a href="/checkout" class="btn btn-primary">Proceed to Checkout</a>
+            <a href="/checkout" class="btn btn-dark">Proceed to Checkout</a>
         @else
-            <a href="/checkout" class="btn btn-primary disabled">Proceed to Checkout</a>
+            <a href="/checkout" class="btn btn-dark disabled">Proceed to Checkout</a>
         @endif
     </div>
 

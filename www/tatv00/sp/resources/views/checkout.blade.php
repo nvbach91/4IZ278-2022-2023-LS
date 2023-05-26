@@ -45,12 +45,12 @@
                           <h6 class="my-0">{{ isset($item['name']) ? $item['name'] : 'Unknown Product' }}</h6>
                           <small class="text-body-secondary">Quantity: {{ isset($item['quantity']) ? $item['quantity'] : 0 }}</small>
                       </div>
-                      <span class="text-body-secondary">${{ $item['price'] * $item['quantity'] }}</span>
+                      <span class="text-body-secondary">{{ env('CURRENCY', '$') }}{{ $item['price'] * $item['quantity'] }}</span>
                   </li>
               @endforeach
               <li class="list-group-item d-flex justify-content-between">
                   <span>Total (USD)</span>
-                  <strong>${{ $total }}</strong>
+                  <strong>{{ env('CURRENCY', '$') }}{{ $total }}</strong>
               </li>
           </ul>
 
@@ -63,7 +63,7 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="{{ $user->name ?? '' }}" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -79,7 +79,7 @@
 
             <div class="col-12">
               <label for="email" class="form-label">Email <span class="text-body-secondary"></span></label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+              <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="{{ $user->email ?? '' }}" required>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -150,7 +150,7 @@
           <div class="row gy-3">
             <div class="col-md-6">
               <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <input type="text" class="form-control" id="cc-name" placeholder="" value="{{ $user->name ?? '' }}" required>
               <small class="text-body-secondary">Full name as displayed on card</small>
               <div class="invalid-feedback">
                 Name on card is required
@@ -159,7 +159,8 @@
 
             <div class="col-md-6">
               <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
+              <input type="text" class="form-control" id="cc-number" placeholder="" pattern="\d{16}" required>
+
               <div class="invalid-feedback">
                 Credit card number is required
               </div>
@@ -167,7 +168,7 @@
 
             <div class="col-md-3">
               <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+              <input type="text" class="form-control" id="cc-expiration" placeholder="" pattern="^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$" required>
               <div class="invalid-feedback">
                 Expiration date required
               </div>
@@ -175,7 +176,7 @@
 
             <div class="col-md-3">
               <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+              <input type="text" class="form-control" id="cc-cvv" placeholder="" pattern="^\d{3}" required>
               <div class="invalid-feedback">
                 Security code required
               </div>

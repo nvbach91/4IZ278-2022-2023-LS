@@ -41,7 +41,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $product->name }}</h5>
                         <p class="card-text">{{ $product->description }}</p>
-                        <p class="card-text">${{ $product->price }}</p>
+                        <p class="card-text">{{ env('CURRENCY', '$') }} {{ $product->price }}</p>
                         <form action="{{ route('cart.add') }}" method="post" class="d-flex">
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
