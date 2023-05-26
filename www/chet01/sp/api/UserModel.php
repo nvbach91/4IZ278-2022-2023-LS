@@ -30,7 +30,7 @@ class UserModel
             $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         } else {
 
-            $valid = preg_match("/^[a-zA-z]*$/", $firstname) && preg_match("/^[a-zA-z]*$/", $surname) && preg_match("/^[0-9]*$/", $phone) && preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email);
+            $valid = preg_match("/^[a-zA-Z]*$/", $firstname) && preg_match("/^[a-zA-Z]*$/", $surname) && preg_match("/^[0-9]*$/", $phone) && preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $email);
             if (!$valid) {
                 $strErrorDesc = 'Wrong input format';
                 $strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

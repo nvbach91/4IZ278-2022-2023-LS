@@ -230,15 +230,28 @@ class ReservationModel
 
                 $query1 =  "SELECT date from reservations WHERE table_id= ? AND YEAR(date) = ? AND MONTH(date) = ? ORDER BY date DESC";
                 $result1 = $api->executeQuery($query1, [$table, $year, $month]);
-                $reservations = $result1->fetch(PDO::FETCH_ASSOC);
-                $arr1 = array_column($reservations, 'date');
+                $reservations = $result1->fetchAll(PDO::FETCH_ASSOC);
+                if ($reservations) {
+                    $arr1 = array_column($reservations, 'date');
+                } else {
+                    $arr1 = array();
+                }
 
                 $query2 = "SELECT date from blocks WHERE table_id= ? AND YEAR(date) = ? AND MONTH(date) = ? ORDER BY date DESC";
-                $result2 = $api->executeQuery($query1, [$table, $year, $month]);
-                $blocks = $result1->fetch(PDO::FETCH_ASSOC);
-                $arr2 = array_column($blocks, 'date');
+                $result2 = $api->executeQuery($query2, [$table, $year, $month]);
+                $blocks = $result2->fetchAll(PDO::FETCH_ASSOC);
+                if ($blocks) {
+                    $arr2 = array_column($blocks, 'date');
+                } else {
+                    $arr2 = array();
+                }
 
                 $unavailable = array_merge($arr1, $arr2);
+                $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+                $full = false;
+                if (count($unavailable) >= $days) {
+                    $full = true;
+                }
             }
         } else {
             $strErrorDesc = 'No permission';
@@ -246,7 +259,7 @@ class ReservationModel
         }
         if (!$strErrorDesc) {
             $api->sendOutput(
-                json_encode($unavailable),
+                json_encode(array('blocks' => $unavailable, 'full' => $full,)),
                 array('Content-Type: application/json', 'HTTP/1.1 200 OK')
             );
         } else {

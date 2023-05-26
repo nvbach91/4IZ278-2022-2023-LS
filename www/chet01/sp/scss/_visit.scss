@@ -1,5 +1,8 @@
 .visit {
     padding-top: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     &__box {
         border: 1px solid $maingreen;
         padding: 50px;
@@ -7,6 +10,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        &.half {
+            width: 45%;
+        }
         h2 {
             color: $maingreen;
             padding: 10px 0;
