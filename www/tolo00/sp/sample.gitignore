@@ -1,0 +1,7 @@
+config/local.neon
+config/deploy/deployment.dev.php
+vendor
+temp
+log
+/www/img
+!/www/img/profile/admin.png

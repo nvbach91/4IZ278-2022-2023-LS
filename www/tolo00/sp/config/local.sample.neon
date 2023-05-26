@@ -1,0 +1,24 @@
+#parameters:
+#    facebook:
+#        clientId: '1361239341381320'
+#        clientSecret: '05bc0014b0069aea3b04aa38f976c987'
+#        redirectUri: 'https://js-semestralka.incolorstudio.cz/home/log-in'
+#        graphApiVersion: 'v2.10'
+
+nettrine.dbal:
+    debug:
+    	panel: true
+    connection:
+        driver: mysqli
+        user: root
+        password:
+        dbname: ondryfans
+
+#mail:
+#    smtp: true
+#    host: smtp.ebola.cz
+#    port: 465
+#    username: smtp@incolorstudio.cz
+#    password: Wiwpne9TTxV2ZGvQ2p
+#    secure: ssl
+#    timeout: 120

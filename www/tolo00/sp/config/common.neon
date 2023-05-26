@@ -1,0 +1,58 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+    # Contributte
+    contributte.console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+    # Nettrine
+    nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+    nettrine.cache: Nettrine\Cache\DI\CacheExtension
+    nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
+
+    nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+    nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
+
+    nettrine.orm: Nettrine\ORM\DI\OrmExtension
+    nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
+    nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension
+    nettrine.orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+
+nettrine.orm:
+    entityManagerDecoratorClass: Nettrine\ORM\EntityManagerDecorator
+
+nettrine.orm.annotations: #for orm:schema-tool:update
+    mapping:
+        App\Model\Entity: %appDir%/Model/Entity
+
+services:
+    - App\Model\UserAccountModel
+    - App\Model\PostModel
+    - App\Model\PostTopicModel
+    - App\Model\PostLikeModel
+    - App\Model\CommentModel
+    - App\Model\CommentLikeModel
+
+    - App\Service\EmailService
+    - App\Service\FacebookOauthService(config: %facebook%)
+
+    contributte.console.application: Contributte\Console\Application
+
+    commands.update:
+        class: Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand
+        tags: [console.command: orm:schema-tool:update]
