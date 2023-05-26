@@ -49,7 +49,7 @@ services:
     - App\Model\CommentLikeModel
 
     - App\Service\EmailService
-    - App\Service\FacebookOauthService
+    - App\Service\FacebookOauthService(config: %facebook%)
 
     contributte.console.application: Contributte\Console\Application
 

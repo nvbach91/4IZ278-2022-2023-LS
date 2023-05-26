@@ -16,10 +16,13 @@ class FacebookOauthService
 
     private UserAccountModel $userAccountModel;
 
-    public function __construct(User $user, UserAccountModel $userAccountModel)
+    private array $config;
+
+    public function __construct(User $user, UserAccountModel $userAccountModel, array $config)
     {
         $this->user = $user;
         $this->userAccountModel = $userAccountModel;
+        $this->config = $config;
     }
 
     //////////////////////////////////////////////////////// Public

@@ -13,4 +13,13 @@ class CommentModel extends BaseModel
         parent::__construct($entityManager, Comment::class);
     }
 
+    public function findAllPostCommentsCount()
+    {
+        $qb = $this->getQueryBuilder('pc');
+        $qb->select('COUNT(pc) as postsCommentsCount');
+        $qb->andWhere('pc.parentComment IS NULL');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

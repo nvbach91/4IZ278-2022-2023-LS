@@ -15,7 +15,7 @@ class PostLike
     /** @ORM\ManyToOne(targetEntity="Post", inversedBy="likes") */
     public Post $post;
 
-    /** @ORM\ManyToOne(targetEntity="UserAccount") */
+    /** @ORM\ManyToOne(targetEntity="UserAccount", inversedBy="postLikes") */
     public UserAccount $userAccount;
 
     /** @ORM\Column(type="datetime") */

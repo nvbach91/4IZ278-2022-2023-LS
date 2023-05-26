@@ -7,61 +7,158 @@
 {block content}
 
 <main class="grid-container">
-    <div n:if="$presenter->isAllowed()" class="grid-x admin-tools">
-        <div class="cell large-8">
-            <div>
-                {ifset $editedPost}
-                    <h3>
-                        Editace příspěvku #{$editedPost->getId()}
-                        <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
-                    </h3>
-                {else}
-                    <h3>Nový příspěvek</h3>
-                {/ifset}
+    <div n:if="$presenter->isAllowed()" class="admin-tools">
+        <ul class="tabs" data-tabs id="admin-tabs">
+            <li class="tabs-title is-active"><a data-tabs-target="edit" href="#edit">Editace</a></li>
+            <li class="tabs-title"><a data-tabs-target="stats" href="#stats">Statistiky</a></li>
+        </ul>
 
-                {control postForm}
+        <div class="tabs-content" data-tabs-content="admin-tabs">
+            <div class="tabs-panel is-active" id="edit">
+                <div class="grid-x">
+                    <div class="cell large-8">
+                        <div>
+                            {ifset $editedPost}
+                                <h3>
+                                    Editace příspěvku #{$editedPost->getId()}
+                                    <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
+                                </h3>
+                            {else}
+                                <h3>Nový příspěvek</h3>
+                            {/ifset}
+
+                            {control postForm}
+                        </div>
+                    </div>
+
+                    <div class="cell large-4">
+                        <div>
+                            <h3>Štítky</h3>
+
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Název</th>
+                                    <th class="text-right">Akce</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr n:foreach="$allTopics as $topic" style="background-color: {$topic->color|noescape};">
+                                    <td class="color-white">{$topic->title}</td>
+                                    <td class="text-right">
+                                        <a n:href="editTopic!, $topic->getId()" class="edit-button">
+                                            <i class="fa-regular fa-edit"></i>
+                                        </a>
+
+                                        <a n:href="deleteTopic!, $topic->getId()" class="delete-button">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            {ifset $editedTopic}
+                                <h4>
+                                    Editace štítku #{$editedTopic->getId()}
+                                    <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
+                                </h4>
+                            {else}
+                                <h4>Nový štítek</h4>
+                            {/ifset}
+
+                            {control postLabelForm}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs-panel" id="stats">
+                <div class="grid-x">
+                    <div class="cell medium-4">
+                        <h3>Obecné</h3>
+
+                        <table class="text-left">
+                            <tr>
+                                <th>Počet příspěvků</th>
+                                <td>{$postsCount}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Počet liků</th>
+                                <td>{$postLikesCount}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Počet kometářů u příspěvků</th>
+                                <td>{$postCommentsCount}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="cell medium-8">
+                        <h3>Uživatelé</h3>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Jméno</th>
+                                    <th>Datum připojení</th>
+                                    <th class="text-right">Liků dáno</th>
+                                    <th class="text-right">Komentů dáno</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr n:foreach="$allUserAccounts as $userAccount">
+                                    <td>{$userAccount->username}</td>
+                                    <td>{$userAccount->dateCreated|date:'d.m.Y G:i'}</td>
+                                    <td class="text-right">{$userAccount->postLikes->count()}</td>
+                                    <td class="text-right">{$userAccount->comments->filter(fn($comment) => !$comment->parentComment)->count()}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="cell large-4">
-            <div>
-                <h3>Štítky</h3>
+        <div class="grid-x margin-top-1">
+            <div class="cell medium-4">
+                <h3>Příspěvky u tématů</h3>
 
                 <table>
                     <thead>
-                    <tr>
-                        <th>Název</th>
-                        <th class="text-right">Akce</th>
-                    </tr>
+                        <tr>
+                            <th>Téma</th>
+                            <th>Poč. přís.</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr n:foreach="$allTopics as $topic" style="background-color: {$topic->color|noescape};">
-                        <td class="color-white">{$topic->title}</td>
-                        <td class="text-right">
-                            <a n:href="editTopic!, $topic->getId()" class="edit-button">
-                                <i class="fa-regular fa-edit"></i>
-                            </a>
-
-                            <a n:href="deleteTopic!, $topic->getId()" class="delete-button">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr n:foreach="$allTopics as $topic">
+                            <td>{$topic->title}</td>
+                            <td>{$topic->posts->count()}</td>
+                        </tr>
                     </tbody>
                 </table>
-
-                {ifset $editedTopic}
-                    <h4>
-                        Editace štítku #{$editedTopic->getId()}
-                        <a n:href="default"><small class="color-red"><i class="fa-solid fa-xmark"></i></small></a>
-                    </h4>
-                {else}
-                    <h4>Nový štítek</h4>
-                {/ifset}
-
-                {control postLabelForm}
             </div>
+        </div>
+    </div>
+
+    <div class="grid-x align-right">
+        <div class="cell medium-4">
+            <select class="topics-filter">
+                <option value="">--- Filtrovat podle štítku ---</option>
+                <option
+                        n:foreach="$allTopics as $topic"
+                        value="{$topic->getId()}"
+                        {if $presenter->topic == $topic->getId()}selected{/if}
+                >
+                    {$topic->title}
+                </option>
+            </select>
         </div>
     </div>
 
@@ -87,16 +184,22 @@
                 <img src="{$basePath}/img/post/{$post->postPhoto}" alt="Post Image">
 
                 <div class="grid-x post-info">
-                    <div class="cell large-9 post-labels">
+                    <div class="cell large-8 post-labels">
                         {foreach $post->topics as $topic}
-                            <span class="label" style="background-color: {$topic->color|noescape};">
+                            <a n:href="this, topic => $topic->getId()" class="label" style="background-color: {$topic->color|noescape};">
                                 {$topic->title}
-                            </span>
+                            </a>
                         {/foreach}
                     </div>
 
-                    <div class="cell large-3 post-date">
-                        <span class="post-date">{$post->dateCreated|date:'d.m.Y G:i'}</span>
+                    <div class="cell large-4 post-date">
+                        <div class="post-date">
+                            {$post->dateCreated|date:'d.m.Y G:i'}
+                        </div>
+
+                        <small n:if="$post->dateUpdated" class="post-edit-date">
+                            upr. {$post->dateUpdated|date:'d.m.Y G:i'}
+                        </small>
                     </div>
                 </div>
             </div>
@@ -115,7 +218,10 @@
                     </a>
                 {/if}
 
-                <a n:href="togglePostLike!, $post->getId()" class="like-button ajax">
+                <a
+                        n:href="togglePostLike!, $post->getId()"
+                        n:class="'like-button ajax', $post->hasUserLiked($user->getId()) ? 'liked'"
+                >
                     <span class="likes-count">{$post->likes->count()}</span>
                     <i class="fa-regular fa-thumbs-up"></i>
                 </a>
@@ -205,7 +311,10 @@
                             </a>
                         {/if}
 
-                        <a n:href="toggleCommentLike!, $comment->getId()" class="like-button ajax">
+                        <a
+                                n:href="toggleCommentLike!, $comment->getId()"
+                                n:class="'like-button ajax', $comment->hasUserLiked($user->getId()) ? 'liked'"
+                        >
                             <span class="likes-count">{$comment->likes->count()}</span>
                             <i class="fa-regular fa-thumbs-up"></i>
                         </a>

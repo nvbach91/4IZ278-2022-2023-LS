@@ -1,4 +1,9 @@
-parameters:
+#parameters:
+#    facebook:
+#        clientId: '1361239341381320'
+#        clientSecret: '05bc0014b0069aea3b04aa38f976c987'
+#        redirectUri: 'https://js-semestralka.incolorstudio.cz/home/log-in'
+#        graphApiVersion: 'v2.10'
 
 nettrine.dbal:
     debug:

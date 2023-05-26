@@ -20,6 +20,7 @@ use App\Service\EmailService;
 use App\Service\FacebookOauthService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Nette;
+use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\DI\Attributes\Inject;
 use Nette\Http\FileUpload;
@@ -66,6 +67,9 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
     private ?PostTopic $editedTopic = null;
 
+    #[Persistent]
+    public $topic = null;
+
     //////////////////////////////////////////////////////// Startup
 
     public function startup()
@@ -96,11 +100,17 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         $this->template->loadedComments = $this->loadedComments;
 
         if (!isset($this->template->updatedPost)) {
-            $firstPost = $this->postModel->findBy([], ['dateCreated' => 'DESC'], 1);
+            $firstPost = $this->postModel->findForHomepage($this->topic, 1);
             $firstPost = reset($firstPost);
 
             $this->template->firstPost = $firstPost;
         }
+
+        $this->template->postsCount = $this->postModel->findAllCount();
+        $this->template->postLikesCount = $this->postLikeModel->findAllCount();
+        $this->template->postCommentsCount = $this->commentModel->findAllPostCommentsCount();
+
+        $this->template->allUserAccounts = $this->userAccountModel->findBy([], [], 10);
     }
 
     public function actionLogIn(string $code = null, string $state = null): void
@@ -126,9 +136,8 @@ final class HomePresenter extends Nette\Application\UI\Presenter
     {
         $this->loadedPostsCount++;
 
-        $nextPost = $this->postModel->findBy(
-            [],
-            ['dateCreated' => 'DESC'],
+        $nextPost = $this->postModel->findForHomepage(
+            $this->topic,
             $this->loadedPostsCount,
             $this->loadedPostsCount - 1
         );
@@ -425,6 +434,10 @@ final class HomePresenter extends Nette\Application\UI\Presenter
 
             $post->text = $values->text;
             $post->topics = $topics;
+
+            if ($post->getId()) {
+                $post->dateUpdated = new DateTime;
+            }
 
             $this->postModel->save($post);
 

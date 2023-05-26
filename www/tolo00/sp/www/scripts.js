@@ -29,11 +29,30 @@ $(function () {
 
     var $textarea = $(this).closest('.comment:not(.reply)').find('textarea');
 
-    $textarea.val(
-      '@' + $(this).data('username') + ' ' + $textarea.val()
-    );
+    var value = $textarea.val();
+    var handle = '@' + $(this).data('username');
+
+    if (!value.includes(handle)) {
+      $textarea.val(
+        handle + ' ' + value
+      );
+    }
 
     $textarea.focus();
+  });
+
+  $(document).on('change', '.topics-filter', function () {
+    var value = $(this).val();
+
+    var url = new URL(window.location.href);
+
+    if (value) {
+      url.searchParams.set('topic', value);
+    } else {
+      url.searchParams.delete('topic');
+    }
+
+    window.location.href = url.toString();
   });
 
   (function () {

@@ -23,7 +23,7 @@ class Comment
     /** @ORM\OneToMany(targetEntity="CommentLike", mappedBy="comment", cascade={"remove"}) */
     public Collection $likes;
 
-    /** @ORM\ManyToOne(targetEntity="UserAccount") */
+    /** @ORM\ManyToOne(targetEntity="UserAccount", inversedBy="comments") */
     public UserAccount $userAccount;
 
     /** @ORM\ManyToOne(targetEntity="Comment", inversedBy="childrenComments") */
@@ -42,6 +42,19 @@ class Comment
     {
         $this->likes = new ArrayCollection;
         $this->childrenComments = new ArrayCollection;
+    }
+
+    public function hasUserLiked(?int $userId)
+    {
+        if (!$userId) {
+            return false;
+        }
+
+        $like = $this->likes->filter(
+            fn (CommentLike $like) => $like->userAccount->getId() === $userId
+        );
+
+        return $like->count();
     }
 
 }

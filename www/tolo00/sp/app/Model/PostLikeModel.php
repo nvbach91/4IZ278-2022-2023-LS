@@ -13,4 +13,12 @@ class PostLikeModel extends BaseModel
         parent::__construct($entityManager, PostLike::class);
     }
 
+    public function findAllCount()
+    {
+        $qb = $this->getQueryBuilder('pl');
+        $qb->select('COUNT(pl) as postsLikesCount');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

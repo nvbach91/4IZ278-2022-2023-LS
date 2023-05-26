@@ -12,10 +12,26 @@ use Nettrine\ORM\Entity\Attributes\Id;
 class Post
 {
 
-    use Id;
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=FALSE)
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     */
+    private $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function __clone()
+    {
+        $this->id = null;
+    }
 
     /**
-     * @ORM\ManyToMany(targetEntity="PostTopic")
+     * @ORM\ManyToMany(targetEntity="PostTopic", inversedBy="posts")
      * @ORM\JoinTable(name="post_to_topic")
      */
     public Collection $topics;
@@ -38,11 +54,27 @@ class Post
     /** @ORM\Column(type="datetime") */
     public DateTimeInterface $dateCreated;
 
+    /** @ORM\Column(type="datetime", nullable=true) */
+    public ?DateTimeInterface $dateUpdated = null;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection;
         $this->comments = new ArrayCollection;
         $this->likes = new ArrayCollection;
+    }
+
+    public function hasUserLiked(?int $userId)
+    {
+        if (!$userId) {
+            return false;
+        }
+
+        $like = $this->likes->filter(
+            fn (PostLike $like) => $like->userAccount->getId() === $userId
+        );
+
+        return $like->count();
     }
 
 }
