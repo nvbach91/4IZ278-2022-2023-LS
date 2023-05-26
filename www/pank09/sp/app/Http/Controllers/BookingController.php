@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingCancellation;
 use App\Mail\BookingConfirmation;
 use App\Models\Booking;
 use App\Models\Event;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
+    protected $limit_per_user = 10;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -34,6 +37,9 @@ class BookingController extends Controller
             'amount'  => 'required|integer|min:1',
         ]);
 
+        if ($request->get('amount') > $this->limit_per_user)
+            return redirect()->back()->withError(__('Only :limit tickets per person can be booked.', ['limit' => $this->limit_per_user]));
+
         if ($request->get('amount') > $ticket->remaining_amount)
             return redirect()->back()->withError(__('We have only :remaining of :type tickets.', ['remaining' => $ticket->remaining_amount, 'type' => $ticket->type]));
 
@@ -49,6 +55,8 @@ class BookingController extends Controller
 
     public function destroy(Booking $booking)
     {
+        Mail::to($booking->owner->email)->queue(new BookingCancellation($booking));
+
         $this->authorize('delete', $booking);
 
         $booking->delete();

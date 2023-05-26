@@ -13,11 +13,22 @@ class EventController extends Controller
         $this->middleware('is.admin')->only(['store', 'edit', 'update', 'destroy']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('home', [
-            'events' => Event::nearest()->relevant()->paginate(5)
-        ]);
+        $params = [];
+
+        if ($request->has('search_query') && !empty($request->get('search_query'))) {
+            $params = [
+                'events' => Event::where('title', 'LIKE', '%'. $request->get('search_query') .'%')->nearest()->relevant()->paginate(5),
+                'search_query' => $request->get('search_query')
+            ];
+        } else {
+            $params = [
+                'events' => Event::nearest()->relevant()->paginate(5)
+            ];
+        }
+
+        return view('home', $params);
     }
 
     public function show(Event $event)

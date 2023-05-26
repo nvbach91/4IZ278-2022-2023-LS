@@ -40,7 +40,7 @@ class Event extends Model
 
     public function getDateAttribute()
     {
-        return $this->datetime->format('M jS');
+        return $this->datetime->format('M jS, Y');
     }
 
     public function getTimeAttribute()

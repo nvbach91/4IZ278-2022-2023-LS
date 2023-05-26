@@ -3,6 +3,8 @@
 @section('content')
 <section class="container is-narrow">
     <div class="event is-single mb-15">
+        @include('flash-message')
+
         <figure class="event__image" style="background-image: url({{ $event->image }});">
             <h2>{{ $event->title }}</h2>
         </figure>
@@ -22,7 +24,6 @@
 
         <h2 class="my-8">{{ __('Tickets') }}</h2>
 
-        @include('flash-message')
         @if (auth()->check() && auth()->user()->is_admin)
         @include('ticket.form')
         @endif

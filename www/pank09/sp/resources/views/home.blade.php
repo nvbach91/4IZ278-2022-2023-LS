@@ -11,6 +11,8 @@
         @include('event.form')
         @endif
 
+        @include('event.search-form')
+
         <div class="list">
             @if ($events->isEmpty())
                 <p class="fw-m fs-8">{{ __('No concerts available') }}</p>

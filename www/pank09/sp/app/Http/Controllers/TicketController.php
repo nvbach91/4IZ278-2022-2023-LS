@@ -7,7 +7,7 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
-{
+{    
     public function __construct()
     {
         $this->middleware('auth');
@@ -52,6 +52,9 @@ class TicketController extends Controller
 
     public function destroy(Event $event, Ticket $ticket)
     {
+        if ($ticket->remaining_amount !== $ticket->available_amount)
+            return redirect()->back()->withError('The ticket has been already booked and cannot be deleted.');
+
         $ticket->delete();
         return redirect()->back()->withSuccess('The ticket was successfully removed!');
     }

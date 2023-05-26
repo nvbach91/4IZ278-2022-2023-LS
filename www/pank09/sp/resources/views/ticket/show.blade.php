@@ -8,7 +8,7 @@
             <div class="columns is-align-items-center">
                 <div class="column">
                     <h4 class="fs-8 fw-sb mb-2">{{ $ticket->type }}</h4>
-                    <div class="fs-11 opacity-50">{{ $ticket->remaining_amount }} available</div>
+                    <div class="fs-11 opacity-50" @if($ticket->remaining_amount == 0) style="color:red;" @endif>{{ $ticket->remaining_amount }} available</div>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                         <span class="fs-10 fw-sb mx-2">x</span>
                         <input type="number" value="1" min="1" name="amount" class="quantity" style="width: 80px;">
                         <span class="fs-11 fw-sb opacity-50 ml-1">{{ __('tickets') }}</span>
-                        <button class="ml-2">{{ __('Book now') }}</button>
+                        <button class="ml-2" @if($ticket->remaining_amount == 0) style="cursor: not-allowed;opacity: 0.3;" type="button" @endif>{{ __('Book now') }}</button>
                     </div>
                 </form>
                 @if (auth()->check() && auth()->user()->is_admin)
