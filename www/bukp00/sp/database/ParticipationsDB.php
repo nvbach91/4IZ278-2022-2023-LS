@@ -3,32 +3,16 @@
 
 <?php
 
-class ParticipationsDB extends Database
+class ParticipationsDB extends Resource
 {
-  public function list($user_id, $limit = null, $offset = null)
-  {
-    if ($limit !== null && $offset !== null) {
-      $query = "SELECT * FROM participations WHERE user_id=:user_id LIMIT :limit OFFSET :offset";
-      $statement = $this->pdo->prepare($query);
-      $statement->bindValue('user_id', $user_id, PDO::PARAM_INT);
-      $statement->bindValue('limit', $limit, PDO::PARAM_INT);
-      $statement->bindValue('offset', $offset, PDO::PARAM_INT);
-    } else {
-      $query = "SELECT * FROM participations WHERE user_id=:user_id";
-      $statement = $this->pdo->prepare($query);
-      $statement->bindValue('user_id', $user_id, PDO::PARAM_INT);
-    }
+  protected $tableName = 'participations';
 
+  function getParticipantsSum($eventId) {
+    $sql = 'SELECT SUM(seats) AS total FROM participations WHERE event_id = :event_id';
+    $statement = $this->pdo->prepare($sql);
+    $statement->bindValue(':event_id', $eventId, PDO::PARAM_INT);
     $statement->execute();
-    return $statement->fetchAll();
-  }
-
-  public function create($args)
-  {
-  }
-
-  public function delete($id)
-  {
+    return $statement->fetchAll()[0]['total'];
   }
 }
 

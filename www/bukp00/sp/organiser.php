@@ -11,7 +11,7 @@ $url = end($url_array);
 ?>
 
 <main class="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-  <?php require './components/events-list.php'; ?>
+  <?php require './components/my-events.php'; ?>
 </main>
 
 <?php include './components/footer.php'; ?>

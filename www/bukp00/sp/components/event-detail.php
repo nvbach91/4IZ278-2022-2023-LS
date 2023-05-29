@@ -1,20 +1,68 @@
-<?php require_once './database/EventsDB.php' ?>
-<?php require_once './database/FeedbacksDB.php' ?>
 <?php
+
+require_once './database/EventsDB.php';
+require_once './database/FeedbacksDB.php';
+require_once './database/ParticipationsDB.php';
+
+require_once './components/modals/add-feedback-modal.php';
+require_once './components/modals/sign-up-modal.php';
+require_once './components/modals/event-form-modal.php';
+
+require_once './handlers/participation-handlers.php';
+require_once './handlers/feedback-handlers.php';
+require_once './handlers/event-handlers.php';
+
+require_once './utils.php';
+
+$loggedUserId = getLoggedUserId();
 
 $eventsDB = new EventsDB();
 $feedbacksDB = new FeedbacksDB();
+$participationsDB = new ParticipationsDB();
 
+// Get event data and feedbacks
 if (isset($_GET['event_id'])) {
   $event_id = $_GET['event_id'];
-  $event = $eventsDB->get($event_id)[0];
-  $feedbacks = $feedbacksDB->list($event_id);
+  $event = $eventsDB->getBy('event_id', $event_id)[0];
+  $feedbacks = $feedbacksDB->getBy('event_id', $event_id);
+
+  // Event not found
+  if ($event == null) {
+    header('Location: index.php');
+    exit();
+  }
 } else {
   header('Location: index.php');
   exit();
 }
 
+$owner = $event['organiser'] == $loggedUserId;
+$availableSeats = $event['capacity'] - $participationsDB->getParticipantsSum($event_id);
+
+$canAddFeedback = false;
+
+if ($loggedUserId !== null && !$owner) {
+  $canAddFeedback = true;
+}
+
+$formSubmitted = !empty($_POST['form']);
+
+if ($formSubmitted) {
+  $form = $_POST['form'];
+  if ($form == 'signUp') {
+    // Handle sign up form
+    handleAddParticipation($_POST, $event);
+  } else if ($form == 'editEvent') {
+    // Handle event edit
+    handleEditEvent($_POST);
+  } else if ($form == 'addFeedback') {
+    // Handle add feedback
+    handleAddFeedback($_POST, $event);
+  }
+}
+
 ?>
+
 <div class="flex flex-col items-center justify-center gap-8 py-2 text-left">
   <div class="block rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -26,6 +74,13 @@ if (isset($_GET['event_id'])) {
     <p class="font-normal">
       <?php echo $event["description"]; ?>
     </p>
+    <p class="mt-2 italic">
+      Available seats: <?php echo $availableSeats; ?>
+    </p>
+    <div class="flex flex-column justify-between">
+      <?php $event['organiser'] === $loggedUserId ? eventFormModal($event) : ''; ?>
+      <?php $availableSeats > 0 ? signUpModal($availableSeats) : ''; ?>
+    </div>
   </div>
   <div class="block w-full rounded-lg rounded-b-none border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
     <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -47,5 +102,10 @@ if (isset($_GET['event_id'])) {
         </p>
       </li>
     <?php endforeach; ?>
+    <?php if ($canAddFeedback) : ?>
+      <li class="mb-5 mt-4 flex justify-center">
+        <?php addFeedbackModal($event); ?>
+      </li>
+    <?php endif; ?>
   </ol>
 </div>

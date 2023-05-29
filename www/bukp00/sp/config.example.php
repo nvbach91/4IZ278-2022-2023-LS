@@ -18,5 +18,3 @@ const FB_CLIENT_ID = '';
 const CONFIG_PROTOCOL = 'http://';
 const CONFIG_DOMAIN = 'localhost';
 const CONFIG_PATH = '';
-
-?>

@@ -1,21 +1,35 @@
 <?php require_once './database/EventsDB.php' ?>
+<?php require_once './components/modals/event-form-modal.php' ?>
+<?php require_once './handlers/event-handlers.php' ?>
+
 <?php
-$selectedCategory = $_GET['category_id'];
+
+session_start();
+
+if (!isset($_SESSION['access_token'])) {
+  header('Location: index.php');
+  exit();
+}
 
 $eventsDB = new EventsDB();
 
 $limit =  10;
 if (isset($_GET['offset'])) {
-  $offset = (int)$_GET['offset'];
+  $offset = intval($_GET['offset']);
 } else {
   $offset = 0;
 }
 
-if ($selectedCategory) {
-  $events = $eventsDB->getBy('category', $selectedCategory);
-} else {
-  $events = $eventsDB->get($limit, $offset);
-  $totalPages = $eventsDB->getPages($limit);
+$events = $eventsDB->getBy('organiser', $_SESSION['user_id'], $limit, $offset);
+$totalPages = $eventsDB->getPages($limit);
+
+/** Handle form submission */
+$formSubmitted = !empty($_POST);
+
+if ($formSubmitted) {
+  $formErrors = handleAddEvent($_POST);
+  var_dump($formErrors);
+  // ToDo: Show error message somewhere in case of some errors
 }
 
 ?>
@@ -23,9 +37,9 @@ if ($selectedCategory) {
 <div class="flex flex-col items-center justify-center py-2 text-left">
   <div class="flex flex-row justify-between w-full rounded-lg rounded-b-none border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
     <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-      Seznam nejnovějších událostí
+      Organised events
     </h5>
-    <?php include './components/category-filter.php' ?>
+    <?php eventFormModal(); ?>
   </div>
   <ol class="relative border-l border-gray-200 pt-4 dark:border-gray-700">
     <?php foreach ($events as $event) : ?>

@@ -4,6 +4,8 @@ error_reporting(E_ERROR | E_PARSE);
 
 $user = @$_COOKIE['username'];
 
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +28,7 @@ $user = @$_COOKIE['username'];
     <div class="flex h-full w-full flex-col justify-between px-4 sm:px-6 xl:max-w-5xl xl:px-0">
         <header class="flex flex-col w-full items-center justify-between p-8">
             <div class="flex">
-                <a href="/">
+                <a href="./">
                     <div class="flex items-center justify-between">
                         <div class="mr-3">
                             <img src="./assets/logo.png" alt="Page logo" width=200 height=80 />
@@ -44,8 +46,14 @@ $user = @$_COOKIE['username'];
                 <a class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4" href="./organiser.php">
                     My events
                 </a>
-                <a class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4" href="./login.php">
-                    Login
-                </a>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <a class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4" href="./profile.php">
+                        Profile
+                    </a>
+                <?php else : ?>
+                    <a class="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4" href="./login.php">
+                        Login
+                    </a>
+                <?php endif; ?>
             </div>
         </header>
