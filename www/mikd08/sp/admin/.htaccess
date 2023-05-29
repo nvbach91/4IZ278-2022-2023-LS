@@ -1,0 +1,4 @@
+<FilesMatch (adminForms).php>
+    order allow,deny
+    deny from all
+</FilesMatch>

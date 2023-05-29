@@ -1,0 +1,17 @@
+# DirectoryIndex main.php
+<FilesMatch (products|nav|userForms|head|funcs|db).php>
+    order allow,deny
+    deny from all
+</FilesMatch>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ /%1 [R=301,NE,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ /www/mikd08/sp/index.php [QSA,L]

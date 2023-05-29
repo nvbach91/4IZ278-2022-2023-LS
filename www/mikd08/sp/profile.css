@@ -1,0 +1,26 @@
+#orders table {
+    width: 100%;
+    font-size: larger;
+}
+
+#orders :is(td,th) {
+    padding-left: 40px;
+}
+
+#orders tbody tr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#orderDetails :is(td,th) {
+    padding: 8px 40px;
+}
+
+
+#total {
+    text-align: right;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-right: 10px;
+}
