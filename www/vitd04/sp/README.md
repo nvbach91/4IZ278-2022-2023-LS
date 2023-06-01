@@ -2,16 +2,14 @@
 
 Setup and run nextjs
 ```
-cd apps/nextjs
-cp .env.example .env
+cd nextjs
+cp .env.example .env.local
 pnpm i
 pnpm dev
 ```
 
 Setup and run laravel
 ```
-cd apps/laravel
-cp .env.example .env
 php composer.phar update
 php artisan serve
 ```

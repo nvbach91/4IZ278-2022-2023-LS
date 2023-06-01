@@ -168,7 +168,7 @@ export function RestaurantEditor({ restaurant }: Props) {
                             <div className="absolute inset-0 bg-black bg-opacity-20 rounded-lg" />
                           </>
                         )}
-                        <div className="z-50 flex items-center justify-center flex-col">
+                        <div className="z-20 flex items-center justify-center flex-col">
                           <PhotoIcon className="h-5 w-5 text-white text-sm text-elipsis font-medium" />
                           <span className="text-white text-sm text-elipsis font-medium">
                             Zvolit náhledový obrázek

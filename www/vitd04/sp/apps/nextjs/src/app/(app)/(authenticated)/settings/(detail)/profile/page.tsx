@@ -8,7 +8,7 @@ function Page({}: Props) {
   return (
     <>
       <PageHeader>
-        <PageHeader.BackButton href="/settings" />
+        <PageHeader.BackButton mobileOnly href="/settings" />
         <PageHeader.Title title="Profil" />
       </PageHeader>
       <Container paddingClassName="mt-6 px-4">

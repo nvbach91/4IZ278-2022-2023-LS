@@ -86,17 +86,10 @@ export function AddMenuItemModal({ open, onClose, onAdded, sectionId }: Props) {
   const handleOnCreateMenuItem = async (
     values: typeof createMenuItemInitialValues
   ) => {
-    console.log({
-      name: values.name,
-      description: values.description,
-      kcal: values.kcal || 0,
-      protein: values.protein || 0,
-      carbs: values.carbs || 0,
-      fat: values.fat || 0,
-      amount_in_grams: values.amountInGrams || 0,
-      menu_section_id: sectionId,
-      thumbnail_id: thumbnail?.id,
-    });
+    if (!thumbnail) {
+      toast.error("Vyberte náhledový obrázek.");
+      return;
+    }
     await createMenuItem({
       name: values.name,
       description: values.description,

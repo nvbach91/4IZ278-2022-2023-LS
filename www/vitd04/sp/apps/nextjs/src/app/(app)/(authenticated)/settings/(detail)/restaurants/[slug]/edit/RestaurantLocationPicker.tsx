@@ -21,7 +21,7 @@ export const RestaurantLocationPicker = withScriptjs(
       defaultZoom={DefaultZoom}
       defaultCenter={location || DefaultLocation}
       onClick={(e) => {
-        onLocationChange(e.latLng.lat(), e.latLng.lng());
+        onLocationChange(e?.latLng?.lat() || 0, e?.latLng?.lng() || 0);
       }}
       yesIWantToUseGoogleMapApiInternals
     >

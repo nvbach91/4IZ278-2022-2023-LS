@@ -17,13 +17,16 @@ async function Restaurants({}: Props) {
     <>
       <SettingsRestaurantsHeader />
       <Container paddingClassName="mt-6 px-3">
-        {restaurants &&
-          restaurants.map((restaurant) => (
-            <SettingsRestaurantCard
-              key={restaurant.id}
-              restaurant={restaurant}
-            />
-          ))}
+        <div className="flex flex-col space-y-3">
+          {restaurants &&
+            restaurants.map((restaurant, index) => (
+              <SettingsRestaurantCard
+                key={restaurant.id}
+                restaurant={restaurant}
+                index={index}
+              />
+            ))}
+        </div>
       </Container>
     </>
   );

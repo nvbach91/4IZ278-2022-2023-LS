@@ -18,7 +18,7 @@ export function SettingsRestaurantsHeader({}: Props) {
   return (
     <>
       <PageHeader>
-        <PageHeader.BackButton href="/settings" />
+        <PageHeader.BackButton mobileOnly href="/settings" />
         <PageHeader.Title title="Restaurace" />
         <Button
           icon={PlusIcon}

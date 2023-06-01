@@ -9,6 +9,8 @@ specifiers:
   '@tanstack/query-core': ^4.29.5
   '@tanstack/react-query': ^4.29.5
   '@tanstack/react-query-devtools': ^4.29.6
+  '@types/google.maps': ^3.53.2
+  '@types/googlemaps': ^3.43.3
   '@types/node': 20.1.1
   '@types/react': 18.2.6
   '@types/react-dom': 18.2.4
@@ -57,7 +59,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-google-autocomplete: 2.7.3_react@18.2.0
-  react-google-maps: 9.4.5_tqcjxml4rosq5qpg5cznikfcd4
+  react-google-maps: 9.4.5_ax6jgftu4sexmgwylxgifgmvfi
   react-toastify: 9.1.2_biqbaboplfbrettd7655fr4n2y
   set-cookie-parser: 2.6.0
   swr: 2.1.5_react@18.2.0
@@ -70,6 +72,8 @@ devDependencies:
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.3.2
   '@tanstack/eslint-plugin-query': 4.29.4
   '@tanstack/react-query-devtools': 4.29.6_6ufraba7zs65ngvban5jjen7be
+  '@types/google.maps': 3.53.2
+  '@types/googlemaps': 3.43.3
   '@types/set-cookie-parser': 2.4.2
   eslint-config-prettier: 8.8.0_eslint@8.40.0
   eslint-plugin-prettier: 4.2.1_mnhdxnhvwtt24ndv5d2pwtkrna
@@ -513,6 +517,14 @@ packages:
       '@types/qs': 6.9.7
       '@types/serve-static': 1.15.1
     dev: false
+
+  /@types/google.maps/3.53.2:
+    resolution: {integrity: sha512-rgTa3R5DyFTcjX4hmuGs0XR+kD4M5tZ14lcyYzDDJGr5h0JYj7DbbNZRZNJKDzZOGH3fOXWpIbZGj3BxZbpmjw==}
+    dev: true
+
+  /@types/googlemaps/3.43.3:
+    resolution: {integrity: sha512-ZWNoz/O8MPEpiajvj7QiqCY8tTLFNqNZ/a+s+zTV58wFVNAvvqV4bdGfnsjTb5Cs4V6wEsLrX8XRhmnyYJ2Tdg==}
+    deprecated: 'Types for the Google Maps browser API have moved to @types/google.maps. Note: these types are not for the googlemaps npm package, which is a Node API.'
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
@@ -2822,7 +2834,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-google-maps/9.4.5_tqcjxml4rosq5qpg5cznikfcd4:
+  /react-google-maps/9.4.5_ax6jgftu4sexmgwylxgifgmvfi:
     resolution: {integrity: sha512-8z5nX9DxIcBCXuEiurmRT1VXVwnzx0C6+3Es6lxB2/OyY2SLax2/LcDu6Aldxnl3HegefTL7NJzGeaKAJ61pOA==}
     peerDependencies:
       '@types/googlemaps': ^3.0.0
@@ -2831,6 +2843,7 @@ packages:
       react: ^15.0.0 || ^16.0.0
       react-dom: ^15.0.0 || ^16.0.0
     dependencies:
+      '@types/googlemaps': 3.43.3
       '@types/react': 18.2.6
       babel-runtime: 6.26.0
       can-use-dom: 0.1.0

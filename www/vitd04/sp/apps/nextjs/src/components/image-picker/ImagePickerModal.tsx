@@ -117,7 +117,7 @@ export function ImagePickerModal({ open, onClose, onImageSelected }: Props) {
                 <img
                   src={asset.path}
                   alt={asset.name}
-                  className="w-full aspect-square"
+                  className="w-full aspect-square object-cover"
                 />
               </button>
             ))}
