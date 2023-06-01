@@ -4,8 +4,8 @@ import React from "react";
 import { EditMenuHeader } from "./EditMenuHeader";
 import { getCookie } from "@/utils/getCookie";
 import { api } from "@/lib/api";
-import { MenuEditor } from "./MenuEditor";
 import { notFound } from "next/navigation";
+import LoadingPagePlaceholder from "@/components/common/LoadingPagePlaceholder";
 
 type Props = {
   params: {
@@ -13,26 +13,13 @@ type Props = {
   };
 };
 
-async function SettingsRestaurantEditMenu({ params }: Props) {
-  const restaurant = await api.restaurants.getDetail.useServerQuery(
-    {
-      slug: params.slug,
-    },
-    getCookie()
-  );
-
-  if (!restaurant) {
-    return notFound();
-  }
-
+export default function Loading({ params }: Props) {
   return (
     <>
       <EditMenuHeader />
       <Container paddingClassName="mt-6 px-4 flex-1">
-        <MenuEditor restaurant={restaurant} />
+        <LoadingPagePlaceholder />
       </Container>
     </>
   );
 }
-
-export default SettingsRestaurantEditMenu;

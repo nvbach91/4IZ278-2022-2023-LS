@@ -43,8 +43,8 @@ export default function Login() {
           toast.error(error?.response?.data?.message || "Nastala chyba.");
         },
         onSuccess: () => {
-          router.refresh();
           router.push("/");
+          router.refresh();
         },
       }
     );

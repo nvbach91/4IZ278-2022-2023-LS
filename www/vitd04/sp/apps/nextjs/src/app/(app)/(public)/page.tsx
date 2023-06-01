@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/common/Button";
 import { Container } from "@/components/common/Container";
 import LandingAutocompleteInput from "@/app/(app)/(public)/LandingAutocompleteInput";

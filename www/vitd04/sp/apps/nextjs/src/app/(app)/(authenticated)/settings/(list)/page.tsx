@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { SettingsMenu } from "../SettingsMenu";
 import { PageHeader } from "@/components/common/page-header/PageHeader";
