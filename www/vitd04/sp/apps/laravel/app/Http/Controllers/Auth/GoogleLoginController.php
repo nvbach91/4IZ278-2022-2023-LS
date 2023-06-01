@@ -25,15 +25,19 @@ class GoogleLoginController extends Controller
     public function handleGoogleCallback(Request $request): RedirectResponse
     {
         try {
+
+
             //create a user using socialite driver google
             $user = Socialite::driver('google')->user();
             // if the user exits, use that user and login
             $finduser = User::where('google_id', $user->id)->first();
             $finduser_email = User::where('email', $user->email)->first();
+
             if ($finduser) {
                 //if the user exists, login and show dashboard
                 Auth::login($finduser);
                 $request->session()->regenerate();
+
                 return redirect(env('FRONTEND_URL', '/'));
             } else if ($finduser_email) {
                 //if the user exists, login and show dashboard
@@ -43,19 +47,26 @@ class GoogleLoginController extends Controller
                 $request->session()->regenerate();
                 return redirect(env('FRONTEND_URL', '/'));
             } else {
+
                 //user is not yet created, so create first
                 $newUser = User::create([
                     'email' => $user->email,
                     'password' => encrypt(''),
                     'google_id' => $user->id
                 ]);
-                // save the team and add the team to the user.
-
                 $newUser->save();
+
+                // Login
+                $finduser_email = User::where('email', $user->email)->first();
+                if ($finduser_email) {
+
+                }
+                Auth::login($finduser_email);
+                $request->session()->regenerate();
+
+                Mail::to($newUser->email)->send(new UserCreated());
                 event(new Registered($newUser));
-                Mail::to($request->user())->send(new UserCreated());
                 //login as the new user
-                Auth::login($newUser);
                 // go to the dashboard
                 return redirect(env('FRONTEND_URL', '/'));
             }
@@ -64,6 +75,6 @@ class GoogleLoginController extends Controller
             Log::error($e->getMessage());
         }
 
-        return redirect(env('FRONTEND_URL', '/auth'));
+        return redirect(env('FRONTEND_URL', '/login'));
     }
 }

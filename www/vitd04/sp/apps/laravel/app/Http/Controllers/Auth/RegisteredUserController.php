@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules;
 
@@ -35,8 +36,14 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        Mail::to($request->user())->send(new UserCreated());
-        Auth::login($user);
+        Auth::loginUsingId($user->id);
+        $request->session()->regenerate();
+
+        try {
+            Mail::to($user->email)->send(new UserCreated());
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
 
         return response()->noContent();
     }
