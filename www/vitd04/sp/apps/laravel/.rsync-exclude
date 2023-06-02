@@ -1,0 +1,13 @@
+bootstrap/cache/*
+.env
+.env.local
+.idea
+.git*
+node_modules
+storage/framework/cache/*
+storage/framework/session/*
+storage/framework/views/*
+storage/logs/*
+storage/app/*
+.rsync-exclude
+publish.sh
