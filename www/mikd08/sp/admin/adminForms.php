@@ -1,7 +1,12 @@
+<?php
+
+
+?>
+
 <div id="addCategory" class="overlay">
     <form id="addCategoryForm">
         <h1>New category</h1>
-        <input type="hidden" name="token" value="<?php echo $_SESSION["token"] ?>">
+        <input type="hidden" name="token" value="<?php echo $_SESSION["token"]; ?>">
         <input type="text" name="category_name" placeholder="category name" required>
         <button type="submit" name="add_category">Add</button>
     </form>
@@ -26,6 +31,7 @@
         <input type="hidden" name="product_id" required>
         <input type="text" name="name" placeholder="name" required>
         <input type="number" name="price" placeholder="price"  required>
+        <img src="" alt="img" style="height: 100px;">
         <textarea name="img" placeholder="image URL" cols="23" rows="8" required></textarea>
         <input type="text" name="category" placeholder="category" required>
         <button type="submit" name="edit_product">Edit</button>

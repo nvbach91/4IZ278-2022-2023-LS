@@ -92,6 +92,14 @@ document.querySelector("#registerForm").addEventListener("submit", e => {
             diplayErrors("#registerForm p", "#registerForm", errors)
         }
     }
-    
+
 })
+
+
+// document.querySelectorAll(".page-link").forEach(link => {
+//     e.preventDefault();
+//     link.addEventListener("click", () => {
+//         link.classList.add("active");
+//     })
+// })
 

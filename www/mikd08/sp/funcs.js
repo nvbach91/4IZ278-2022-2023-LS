@@ -17,3 +17,4 @@ export function diplayErrors(formPara, form, errors) {
 export function noTokenErr(response) {
     if (response == "noToken") {window.location.href = "/www/mikd08/sp/index.php"}
 }
+

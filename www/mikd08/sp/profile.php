@@ -149,7 +149,7 @@
             <?php foreach($orders as $order):?>
                 <tr>
                     <td><a class="orderDetails-btn" href="/www/mikd08/sp/customer/orderDetails.php?order_id=<?php echo htmlentities($order["order_id"]); ?>"><?php echo htmlentities($order["order_id"]); ?></a></td>
-                    <td><?php echo htmlentities($order["price"]); ?> Kč</td>
+                    <td><?php echo htmlentities(number_format($order["price"],2,","," ")); ?> Kč</td>
                     <td><?php echo htmlentities($order["payment_method"]); ?></td>
                     <td><?php echo htmlentities(date("d.m.Y H:i:s", strtotime($order["date"]))); ?></td>
                 </tr>

@@ -42,13 +42,22 @@ document.querySelectorAll(".orderDetails-btn").forEach(orderDetailsBtn => {
                     tableBody.insertAdjacentHTML("beforeend", `
                     <tr>
                         <td>${productDetails.name}</td>
-                        <td>${productDetails.product_price + "Kč"}</td>
+                        <td>${productDetails.product_price.toLocaleString("cs-CZ",{
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          }) + "Kč"}</td>
                         <td>${productDetails.amount + "ks"}</td>
-                        <td>${productDetails.order_product_price + "Kč"}</td>
+                        <td>${productDetails.order_product_price.toLocaleString("cs-CZ",{
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          }) + "Kč"}</td>
                     </tr>
                     `)
                 });
-                document.querySelector("#orderDetails #total").textContent = "Total: "+orderDetails[0].order_price + "Kč";
+                document.querySelector("#orderDetails #total").textContent = "Total: "+orderDetails[0].order_price.toLocaleString("cs-CZ",{
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }) + "Kč";
                 document.querySelector("#orderDetails").style.display = "flex";
                 body.style.overflow = "hidden"; 
             }

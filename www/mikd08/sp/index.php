@@ -5,11 +5,16 @@
 
     $facebook = new \JanuSoftware\Facebook\Facebook(FB_CONF);
     $helper = $facebook->getRedirectLoginHelper();
-
+    const LINK = "http://localhost/www/mikd08/";
     $permissions = ["email"];
     $redirectURL = $helper->getLoginUrl(
-        "http://localhost/www/mikd08/sp/fb/fb-login-callback.php", $permissions
+        LINK."sp/fb/fb-login-callback.php", $permissions
     );
+//TODO active link ,
+// konstanta na localhost, 
+//edit product img, 
+//active sloupec db,
+// search bar
 ?>
 
 <!DOCTYPE html>

@@ -4,21 +4,33 @@
     $limitFrom = $_GET["limitFrom"] ?? 0;
     $limit = isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == "true" ? 5 : 6;
 
-    if(empty($_GET["category"])) {
-
-        $query = "SELECT COUNT(*) AS count FROM `product`";
-        $numRecords = PDO->query($query)->fetchAll()[0]["count"];
+    if (!empty($_GET["searchReq"])) {
+        $searchReq = $_GET["searchReq"];
+        $query = "SELECT COUNT(*) AS count FROM `product` WHERE name LIKE CONCAT('%', ?, '%') AND active=1";
+        $stmt = CONNECT_PDO->prepare($query);
+        $stmt->bindValue(1, $searchReq, PDO::PARAM_STR);
+        $stmt->execute();
+        $numRecords = $stmt->fetchAll()[0]["count"];
         $numPages = ceil($numRecords/$limit);
 
-        $query = "SELECT * FROM `product` LIMIT ?,?;";
-        $stmt = PDO->prepare($query);
+
+        $products = customFetch("SELECT * FROM `product` WHERE name LIKE CONCAT('%', ?, '%') AND active=1 LIMIT ?,?",[$searchReq => PDO::PARAM_STR, $limitFrom => PDO::PARAM_INT, $limit => PDO::PARAM_INT]);
+
+    } else if(empty($_GET["category"]) && empty($_GET["searchReq"])) {
+
+        $query = "SELECT COUNT(*) AS count FROM `product` WHERE active=1";
+        $numRecords = CONNECT_PDO->query($query)->fetchAll()[0]["count"];
+        $numPages = ceil($numRecords/$limit);
+
+        $query = "SELECT * FROM `product` WHERE active=1 LIMIT ?,?;";
+        $stmt = CONNECT_PDO->prepare($query);
         $stmt->bindValue(1, $limitFrom, PDO::PARAM_INT);
         $stmt->bindValue(2, $limit, PDO::PARAM_INT);
         $stmt->execute();
         $products = $stmt->fetchAll();
     } else {
         
-        $query = "SELECT COUNT(*) AS count FROM `product` WHERE category_name=?";
+        $query = "SELECT COUNT(*) AS count FROM `product` WHERE category_name=? AND active=1";
         $numProducts = customFetch($query, [$_GET["category"] => PDO::PARAM_STR], false)["count"];
         // $stmt = PDO->prepare($query);
         // $stmt->bindValue(1, $_GET["category"], PDO::PARAM_STR);
@@ -27,8 +39,8 @@
 
         $numPages = ceil($numProducts/$limit);
 
-        $query = "SELECT * FROM `product` WHERE category_name=? LIMIT ?,?;";
-        $stmt = PDO->prepare($query);
+        $query = "SELECT * FROM `product` WHERE category_name=? AND active=1 LIMIT ?,?;";
+        $stmt = CONNECT_PDO->prepare($query);
         $stmt->bindValue(2, $limitFrom, PDO::PARAM_INT);
         $stmt->bindValue(3, $limit, PDO::PARAM_INT);
         $stmt->bindValue(1, $_GET["category"], PDO::PARAM_STR);
@@ -38,7 +50,7 @@
     }
 
     $query = "SELECT * FROM `category`";
-    $stmt = PDO->prepare($query);
+    $stmt = CONNECT_PDO->prepare($query);
     $stmt->execute();
     $categories = $stmt->fetchAll();
 
@@ -48,8 +60,14 @@
     $params = http_build_query($_GET);
     
 ?>
+    <div>
+        <form action="index.php" method="get">
+            <input type="text" placeholder="search" name="searchReq">
+            <button type="submit" name="search">Search</button>
+        </form>
+    </div>  
 
-<main>
+    <main>
     <div id="categories">
         <h2>Categories</h2>
         <div class="category">
@@ -94,7 +112,7 @@
             <img class="card-img-top" src="<?php echo htmlentities($product["img"]); ?>" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"><?php echo htmlentities($product["name"]); ?></h5>
-                <p class="card-text"><?php echo htmlentities($product["price"]); ?>Kč</p>
+                <p class="card-text"><?php echo htmlentities(number_format($product["price"],2,","," ")); ?>Kč</p>
             </div>
             <div class="card-body">
                 <?php if(isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == "true"):?>
@@ -102,7 +120,6 @@
                     <form action="/www/mikd08/sp/admin/deleteProduct.php" method="POST" id="delete_product<?php echo htmlentities($product["product_id"]) ?>" style="display:none;">
                         <input type="hidden" name="token" value="<?php echo $_SESSION["token"] ?>">    
                         <input type="hidden" name="product_id" value="<?php echo htmlentities($product["product_id"]) ?>">
-                        <input type="hidden" name="token" value="<?php echo $_SESSION["token"] ?>">
                     </form>
                     <button name="delete_product" form="delete_product<?php echo htmlentities($product["product_id"]) ?>" class="card-link">Delete</button>              
                 <?php  else:?>
@@ -121,7 +138,11 @@
 <nav aria-label="...">
     <ul class="pagination">
         <?php for($i = 0; $i < $numPages; $i++){?>
+            <?php if($i == ($limitFrom)/6 || $i == ($limitFrom)/5): ?>
+                <li class="page-item"><a class="page-link active" href="<?php echo "/www/mikd08/sp/index.php?limitFrom=".$i*$limit.(count($_GET) > 0 ? "&$params": "")?>"><?php echo $i + 1 ?></a></li>
+            <?php else: ?> 
             <li class="page-item"><a class="page-link" href="<?php echo "/www/mikd08/sp/index.php?limitFrom=".$i*$limit.(count($_GET) > 0 ? "&$params": "")?>"><?php echo $i + 1 ?></a></li>
+            <?php endif ?> 
         <?php }?>
     </ul>
 </nav>

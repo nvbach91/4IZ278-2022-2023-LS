@@ -143,4 +143,7 @@ img.card-img-top {
     height: 300px;
 }
 
+.active {
+    background-color: grey;
+}
   

@@ -1,7 +1,7 @@
 # DirectoryIndex main.php
 Options -Indexes
 
-<FilesMatch (products|nav|userForms|head|funcs|db).php>
+<FilesMatch (nav|userForms|head|funcs|db).php>
     order allow,deny
     deny from all
 </FilesMatch>

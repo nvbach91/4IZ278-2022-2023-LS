@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     //username to unique db
-    $stmt = PDO->prepare('SELECT * FROM user WHERE username = :username LIMIT 1'); 
+    $stmt = CONNECT_PDO->prepare('SELECT * FROM user WHERE username = :username LIMIT 1'); 
     $stmt->execute([
         'username' => $username
     ]);

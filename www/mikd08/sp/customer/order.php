@@ -21,6 +21,16 @@
         }
         $_SESSION["cart"] = [];
         $_SESSION["ordered"] = "Thank you for your order \^o^/";
+        
+        $userEmail = customFetch("SELECT email FROM user WHERE user_id=?", [$_SESSION["user_id"] => PDO::PARAM_INT],false)["email"];
+        $headers = [
+        'MIME-Version' => '1.0',
+        'Content-type' => 'text/html; charset=utf-8',
+        'From' => 'mikd08@vse.cz',
+        'Reply-To' => 'mikd08@vse.cz',
+        ];
+        
+        mail($userEmail,"Order","Thank you for your order :)",$headers);
     }
     header("Location: /www/mikd08/sp/cart.php");
 
