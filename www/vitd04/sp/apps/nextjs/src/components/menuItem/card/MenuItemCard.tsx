@@ -1,6 +1,7 @@
 import { MenuItem, MenuItemWithRelations } from "@/types/menuItem";
 import React from "react";
 import { MenuItemCardActions } from "./MenuItemCardActions";
+import MenuItemAddToCalculatorButton from "./MenuItemAddToCalculatorButton";
 
 type Props = {
   menuItem: MenuItemWithRelations;
@@ -30,3 +31,4 @@ export function MenuItemCard({ menuItem, children }: Props) {
 }
 
 MenuItemCard.Actions = MenuItemCardActions;
+MenuItemCard.AddToCalculatorButton = MenuItemAddToCalculatorButton;

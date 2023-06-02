@@ -6,6 +6,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ReactQueryProviders } from "@/lib/reactQuery";
 import { AuthSessionContextProvider } from "@/components/auth/AuthSessionContext";
 import { getUser } from "@/services/user";
+import { NutritionalCalculatorContextProvider } from "@/components/calculator/NutritionalCalculatorContextProvider";
+import { NutritionalCalculatorSlideOver } from "@/components/calculator/NutritionalCalculatorSlideOver";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,12 +25,15 @@ export default async function RootLayout({
   return (
     <ReactQueryProviders>
       <AuthSessionContextProvider user={user}>
-        <html lang="en" className="h-full bg-white">
-          <body className={"h-full " + inter.className}>
-            {children}
-            <ToastContainer />
-          </body>
-        </html>
+        <NutritionalCalculatorContextProvider>
+          <html lang="en" className="h-full bg-white">
+            <body className={"h-full " + inter.className}>
+              {children}
+              <ToastContainer />
+              <NutritionalCalculatorSlideOver />
+            </body>
+          </html>
+        </NutritionalCalculatorContextProvider>
       </AuthSessionContextProvider>
     </ReactQueryProviders>
   );

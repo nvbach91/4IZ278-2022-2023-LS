@@ -2,6 +2,7 @@
 import { Button } from "@/components/common/Button";
 import { FormikTextArea } from "@/components/common/formik/FormikTextArea";
 import { FormikTextInput } from "@/components/common/formik/FormikTextInput";
+import FormikToggle from "@/components/common/formik/FormikToggle";
 import { Modal } from "@/components/common/modal/Modal";
 import { ImagePickerModal } from "@/components/image-picker/ImagePickerModal";
 import { api } from "@/lib/api";
@@ -61,6 +62,7 @@ const createMenuItemInitialValues = {
   carbs: null,
   fat: null,
   amountInGrams: null,
+  visible: false,
 };
 
 export function AddMenuItemModal({ open, onClose, onAdded, sectionId }: Props) {
@@ -100,6 +102,7 @@ export function AddMenuItemModal({ open, onClose, onAdded, sectionId }: Props) {
       amount_in_grams: values.amountInGrams || 0,
       menu_section_id: sectionId,
       thumbnail_id: thumbnail?.id,
+      visible: values.visible,
     });
   };
 
@@ -177,21 +180,34 @@ export function AddMenuItemModal({ open, onClose, onAdded, sectionId }: Props) {
                       </button>
                     </div>
                   </div>
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Název
-                    </label>
-                    <div className="mt-2">
-                      <FormikTextInput
-                        autoFocus
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="např. Pho Bo"
-                      />
+                  <div className="flex space-x-4">
+                    <div className="flex-1">
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Název
+                      </label>
+                      <div className="mt-2">
+                        <FormikTextInput
+                          autoFocus
+                          id="name"
+                          name="name"
+                          type="text"
+                          placeholder="např. Pho Bo"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="visible"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Viditelná
+                      </label>
+                      <div className="mt-2">
+                        <FormikToggle name="visible" label="Viditelná" />
+                      </div>
                     </div>
                   </div>
                   <div>

@@ -1,7 +1,12 @@
 "use client";
 import { Fragment, MouseEventHandler } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  BellIcon,
+  CalculatorIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { Logo } from "@/components/common/Logo";
 import classNames from "clsx";
 import { Button } from "@/components/common/Button";
@@ -10,6 +15,7 @@ import { useAuthSession } from "@/hooks/useAuthSession";
 import { api } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useNutritionalCalculatorContext } from "@/components/calculator/CalculatorContext";
 
 export type HeaderProps = {
   mobileHidden?: boolean;
@@ -40,6 +46,11 @@ export function Header({ mobileHidden = false }: HeaderProps) {
     { name: "Nastavení", href: "/settings" },
     { name: "Odhlásit se", href: "#", as: "button", onClick: handleLogout },
   ];
+
+  const { open, menuItems } = useNutritionalCalculatorContext();
+  const handleOpenCalculator = () => {
+    open();
+  };
 
   return (
     <Disclosure
@@ -75,9 +86,20 @@ export function Header({ mobileHidden = false }: HeaderProps) {
                                         </button> */}
 
                 {/* Profile dropdown */}
-                {!user && (
-                  <Button as={Link} title="Přihlásit se" href="/login" />
-                )}
+                <span className="flex space-x-3">
+                  <Button
+                    icon={CalculatorIcon}
+                    look="secondary"
+                    title={
+                      "Kalkulačka" +
+                      (menuItems.length > 0 ? ` (${menuItems.length})` : "")
+                    }
+                    onClick={handleOpenCalculator}
+                  />
+                  {!user && (
+                    <Button as={Link} title="Přihlásit se" href="/login" />
+                  )}
+                </span>
                 {user && (
                   <Menu as="div" className="relative ml-3">
                     <div>

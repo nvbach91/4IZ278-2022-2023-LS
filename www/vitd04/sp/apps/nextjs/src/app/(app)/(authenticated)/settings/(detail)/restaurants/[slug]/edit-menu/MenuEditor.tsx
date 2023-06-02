@@ -71,10 +71,12 @@ export function MenuEditor({ restaurant }: Props) {
 
   const router = useRouter();
   const handleDeleteItem = (menuItem: number) => {
-    deleteItem({
-      id: menuItem,
-    });
-    router.refresh();
+    if (confirm("Opravdu chcete smazat tuto položku?")) {
+      deleteItem({
+        id: menuItem,
+      });
+      router.refresh();
+    }
   };
 
   // Delete section

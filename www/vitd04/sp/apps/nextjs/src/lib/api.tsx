@@ -104,6 +104,7 @@ export const api = {
         amount_in_grams: number;
         menu_section_id: number;
         thumbnail_id?: string;
+        visible: boolean;
       },
       MenuItem
     >("menu-items", "POST"),

@@ -4,6 +4,7 @@ import React from "react";
 import { AddRatingModal } from "./AddRatingModal";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
+import { StarIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   existingRating: Rating | null;
@@ -22,7 +23,15 @@ function AddRatingButton({ existingRating, restaurantId }: Props) {
 
   return (
     <>
-      <Button look="primary" title="Přidat hodnocení" onClick={handleOpen} />
+      {existingRating != null && Object.keys(existingRating).length > 0 ? (
+        <Button
+          look="secondary"
+          title={existingRating.rating + "* (Upravit)"}
+          onClick={handleOpen}
+        />
+      ) : (
+        <Button look="primary" title="Přidat hodnocení" onClick={handleOpen} />
+      )}
       <AddRatingModal
         open={open}
         onClose={handleClose}

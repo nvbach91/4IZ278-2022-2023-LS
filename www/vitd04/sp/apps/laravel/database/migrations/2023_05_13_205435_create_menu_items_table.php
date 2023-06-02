@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->foreignIdFor(MenuSection::class)->constrained()->onDelete('cascade');
             $table->unique(['menu_section_id', 'position']);
             $table->string('thumbnail_id');
-            $table->foreign('thumbnail_id')->references('id')->on('assets')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('thumbnail_id')->references('id')->on('assets')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

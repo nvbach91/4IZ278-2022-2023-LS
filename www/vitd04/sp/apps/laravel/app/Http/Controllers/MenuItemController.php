@@ -28,7 +28,8 @@ class MenuItemController extends Controller
             'fat' => ['required', 'numeric', 'min:0'],
             'amount_in_grams' => ['required', 'numeric', 'min:0'],
             'menu_section_id' => ['required', 'numeric', 'exists:' . MenuSection::class . ',id'],
-            'thumbnail_id' => ['string', 'exists:' . Asset::class . ',id']
+            'thumbnail_id' => ['string', 'exists:' . Asset::class . ',id'],
+            'visible' => ['required', 'boolean']
         ]);
 
         $user = Auth::user();
@@ -55,7 +56,8 @@ class MenuItemController extends Controller
             'amount_in_grams' => $request->amount_in_grams,
             'menu_section_id' => $request->menu_section_id,
             'thumbnail_id' => $request->thumbnail_id,
-            'position' => $getMaxPosition + 1
+            'position' => $getMaxPosition + 1,
+            'visible' => $request->visible
         ]);
 
         return response()->json($menuItem);

@@ -117,14 +117,22 @@ class RestaurantController extends Controller
     public function getRestaurantDetail(Request $request): JsonResponse
     {
         $slug = $request->input('slug');
-        $restaurant = Restaurant::with(['menuSections.menuItems.thumbnail', 'thumbnail'])->withAvg('ratings', 'rating')
+        $user = Auth::user();
+        $restaurant = Restaurant::with([
+            'menuSections.menuItems' => function ($query) {
+                $query->where('visible', true)->orWhereHas('menuSection.restaurant', function ($query) {
+                    $query->where('user_id', Auth::id());
+                });
+            },
+            'menuSections.menuItems.thumbnail',
+            'thumbnail'
+        ])->withAvg('ratings', 'rating')
             ->withCount('ratings')->where('slug', $slug)->first();
 
         if ($restaurant === null) {
             return response()->json(['error' => 'Restaurant not found'], 404);
         }
 
-        $user = Auth::user();
         if ($user === null) {
             $restaurant->isOwner = false;
         } else {

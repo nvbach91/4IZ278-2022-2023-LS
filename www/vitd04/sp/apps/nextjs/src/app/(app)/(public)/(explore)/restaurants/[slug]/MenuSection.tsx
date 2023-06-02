@@ -14,7 +14,9 @@ export function MenuSectionView({ menuSection, index }: Props) {
       <h2 className="font-semibold text-2xl mt-12 mb-4">{menuSection.name}</h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-8">
         {menuSection.menu_items.map((menuItem) => (
-          <MenuItemCard key={menuItem.id} menuItem={menuItem} />
+          <MenuItemCard key={menuItem.id} menuItem={menuItem}>
+            <MenuItemCard.AddToCalculatorButton menuItem={menuItem} />
+          </MenuItemCard>
         ))}
       </div>
     </div>

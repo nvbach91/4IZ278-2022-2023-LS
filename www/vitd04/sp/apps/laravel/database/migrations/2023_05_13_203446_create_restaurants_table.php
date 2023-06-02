@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->boolean('visible')->default(false);
             $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
             $table->string('thumbnail_id')->nullable();
-            $table->foreign('thumbnail_id')->references('id')->on('assets')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('thumbnail_id')->references('id')->on('assets')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
             $table->index(['slug']);
         });
