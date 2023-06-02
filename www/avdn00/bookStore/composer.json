@@ -1,0 +1,15 @@
+{
+    "require": {
+        "janu-software/facebook-php-sdk": "^0.2.0",
+        "symfony/http-client": "^6.2",
+        "php-http/message-factory": "^1.1",
+        "phpmailer/phpmailer": "^6.8",
+        "google/apiclient": "2.12.1",
+        "league/oauth2-github": "^3.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
