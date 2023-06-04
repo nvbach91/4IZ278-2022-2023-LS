@@ -16,61 +16,77 @@ if (isset($_POST['order-button'])) {
     $address = mysqli_real_escape_string($connection, $_POST['address']);
     $placed_on = date('d-M-Y');
 
-    if ($name == '') {
-        $message[] = 'name is empty';
+    $message = array();
+
+    if (empty($name)) {
+        $message[] = 'Name is empty';
     }
-    if ($email == '') {
-        $message[] = 'email is empty';
+    if (empty($email)) {
+        $message[] = 'Email is empty';
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $message[] = 'email is not valid';
+        $message[] = 'Email is not valid';
     }
-
-    if ($number == '') {
-        $message[] = 'number is empty';
+    if (empty($number)) {
+        $message[] = 'Number is empty';
     } else if (strlen($number) != 9) {
-        $message[] = 'number does not have 9 numbers';
+        $message[] = 'Number does not have 9 digits';
+    }
+    if (empty($address)) {
+        $message[] = 'Address is empty';
     }
 
-    if ($address == '') {
-        $message[] = 'address is empty';
-    }
+    if (empty($message)) {
+        $cart_total = 0;
+        $cart_products = array();
 
+        $query = "SELECT * FROM `cart` WHERE user_id = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    $cart_total = 0;
-    $cart_products[] = '';
-
-    $query = "SELECT * FROM `cart` WHERE user_id = '$user_id'";
-    $cart_guery = mysqli_query($connection, $query) or die('query failed');
-    if (mysqli_num_rows($cart_guery) > 0) {
-        while ($cart_item = mysqli_fetch_assoc($cart_guery)) {
-            $cart_products[] = $cart_item['name'] . ' (' . $cart_item['quantity'] . ') ';
-            $sub_total = ($cart_item['price'] * $cart_item['quantity']);
-            $cart_total += $sub_total;
+        if ($result->num_rows > 0) {
+            while ($cart_item = $result->fetch_assoc()) {
+                $cart_products[] = $cart_item['name'] . ' (' . $cart_item['quantity'] . ') ';
+                $sub_total = ($cart_item['price'] * $cart_item['quantity']);
+                $cart_total += $sub_total;
+            }
         }
-    }
 
-    $total_products = implode(', ', $cart_products);
+        $total_products = implode(', ', $cart_products);
 
-    $query = "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' 
-    AND email = '$email' AND payment_method = '$method' AND address ='$address'
-    AND total_products = '$total_products'  AND total_price = '$cart_total'";
-    $order_guery = mysqli_query($connection, $query) or die('query failed');
+        $query = "SELECT * FROM `orders` WHERE name = ? AND number = ? 
+        AND email = ? AND payment_method = ? AND address = ? AND total_products = ? AND total_price = ?";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("sssssss", $name, $number, $email, $method, $address, $total_products, $cart_total);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($cart_total == 0) {
-        $message[] = 'your cart is empty';
+        if ($cart_total == 0) {
+            $message[] = 'Your cart is empty';
+        } else {
+            if ($result->num_rows > 0) {
+                $message[] = 'Order already placed';
+            } else {
+                $query = "INSERT INTO `orders` (user_id, name, number, email, payment_method, address, total_products, total_price, placed_on)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("sssssssss", $user_id, $name, $number, $email, $method, $address, $total_products, $cart_total, $placed_on);
+                $stmt->execute();
+                $message[] = 'Order was placed successfully';
+
+                $query = "DELETE FROM `cart` WHERE user_id = ?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("s", $user_id);
+                $stmt->execute();
+            }
+        }
     } else {
-        if (mysqli_num_rows($order_guery) > 0) {
-            $message[] = 'order already placed';
-        } else if (empty($message)) {
-            $query = "INSERT INTO `orders`(user_id,name,number,email,payment_method,address,total_products,total_price,placed_on)
-            VALUES ('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')";
-            mysqli_query($connection, $query) or die('query failed');
-            $message[] = 'order was placed successfully';
-            mysqli_query($connection, "DELETE FROM `cart` WHERE user_id='$user_id'") or die('query failed');
-        } else  $message[] = 'order was not finished';
+        $message[] = 'Order was not finished';
     }
 }
+
 ?>
 
 
@@ -96,8 +112,11 @@ if (isset($_POST['order-button'])) {
     <section class="display-order">
         <?php
         $grand_total = 0;
-        $query = "SELECT * FROM `cart` WHERE user_id = '$user_id'";
-        $select_cart = mysqli_query($connection, $query) or die('query failed');
+        $query = "SELECT * FROM `cart` WHERE user_id = ?";
+        $statement = mysqli_prepare($connection, $query);
+        mysqli_stmt_bind_param($statement, "i", $user_id);
+        mysqli_stmt_execute($statement);
+        $select_cart = mysqli_stmt_get_result($statement);
 
         if (mysqli_num_rows($select_cart) > 0) {
             while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
@@ -110,9 +129,12 @@ if (isset($_POST['order-button'])) {
         } else {
             echo '<p class="empty">No products in your cart yet</p>';
         }
+
+        mysqli_stmt_close($statement);
         ?>
         <div class="grand-total">Grand total: <span>$<?php echo htmlspecialchars($grand_total); ?>/-</span></div>
     </section>
+
 
     <section class="checkout">
         <form action="" method="post">

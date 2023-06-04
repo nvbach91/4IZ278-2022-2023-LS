@@ -4,23 +4,7 @@ include '../config.php';
 session_start();
 
 if (isset($_POST['add_to_cart'])) {
-    $product_name = $_POST['product_name'];
-    $product_author = $_POST['product_author'];
-    $product_price = $_POST['product_price'];
-    $product_image = $_POST['product_image'];
-    $product_quantity = $_POST['product_quantity'];
-
-    $query = "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'";
-    $check_cart_numbers = mysqli_query($connection, $query) or die('query failed');
-
-    if (mysqli_num_rows($check_cart_numbers) > 0) {
-        $message[] = 'Already added to cart';
-    } else {
-        $query = "INSERT INTO `cart`(user_id,name,price,quantity, image, author) 
-        VALUES ('$user_id','$product_name', '$product_price','$product_quantity','$product_image','$product_author')";
-        mysqli_query($connection, $query) or die('query failed');
-        $message[] = 'Book was added to cart';
-    }
+    $message[] = 'To add book to cart you need to log in or register';
 }
 ?>
 

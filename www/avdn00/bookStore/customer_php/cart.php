@@ -13,24 +13,44 @@ if (isset($_POST['update_cart'])) {
     $cart_id = $_POST['cart_id'];
     $cart_quantity = $_POST['cart_quantity'];
 
-    $query = "UPDATE `cart` SET quantity = '$cart_quantity' WHERE id = '$cart_id'";
-    mysqli_query($connection, $query) or die('query failed');
-    $message[] = 'Cart was updated successfully';
+    $query = "UPDATE `cart` SET quantity = ? WHERE id = ?";
+    $statement = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($statement, "ii", $cart_quantity, $cart_id);
+    mysqli_stmt_execute($statement);
+    $affected_rows = mysqli_stmt_affected_rows($statement);
+    mysqli_stmt_close($statement);
+
+    if ($affected_rows > 0) {
+        $message[] = 'Cart was updated successfully';
+    } else {
+        die('Update query failed');
+    }
 }
 
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    $query = "DELETE FROM `cart` WHERE id = '$delete_id'";
-    mysqli_query($connection, $query) or die('query failed');
-    header('location:./cart.php');
-}
 
+    $query = "DELETE FROM `cart` WHERE id = ?";
+    $statement = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($statement, "i", $delete_id);
+    mysqli_stmt_execute($statement);
+    $affected_rows = mysqli_stmt_affected_rows($statement);
+    mysqli_stmt_close($statement);
+
+    header('location: ./cart.php');
+}
 
 if (isset($_GET['delete_all'])) {
-    $query = "DELETE FROM `cart` WHERE user_id='$user_id'";
-    mysqli_query($connection, $query) or die('query failed');
-    header('location:./cart.php');
+    $query = "DELETE FROM `cart` WHERE user_id = ?";
+    $statement = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($statement, "i", $user_id);
+    mysqli_stmt_execute($statement);
+    $affected_rows = mysqli_stmt_affected_rows($statement);
+    mysqli_stmt_close($statement);
+
+    header('location: ./cart.php');
 }
+
 
 ?>
 
@@ -58,36 +78,46 @@ if (isset($_GET['delete_all'])) {
     <section class="shopping-cart">
         <h1 class="title">products added</h1>
         <div class="box-container">
-
             <?php
             $grand_total = 0;
-            $query = "SELECT * FROM `cart` WHERE user_id = '$user_id'";
-            $select_cart = mysqli_query($connection, $query) or die('query failed');
+            $query = "SELECT * FROM `cart` WHERE user_id = ?";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("s", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-            if (mysqli_num_rows($select_cart) > 0) {
-                while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
+            if ($result->num_rows > 0) {
+                while ($fetch_cart = $result->fetch_assoc()) {
+                    $cart_id = htmlspecialchars($fetch_cart['id']);
+                    $image = htmlspecialchars($fetch_cart['image']);
+                    $name = htmlspecialchars($fetch_cart['name']);
+                    $author = htmlspecialchars($fetch_cart['author']);
+                    $price = htmlspecialchars($fetch_cart['price']);
+                    $quantity = htmlspecialchars($fetch_cart['quantity']);
+                    $sub_total = ($quantity * $price);
+                    $grand_total += $sub_total;
             ?>
                     <div class="box">
-                        <a href="./cart.php?delete=<?php echo htmlspecialchars($fetch_cart['id']) ?>" class="fas fa-times" onclick="return confirm ('Delete this book from cart?');"></a>
-                        <img src="../uploaded_img/<?php echo htmlspecialchars($fetch_cart['image']) ?>" alt="">
-                        <div class="name"><?php echo htmlspecialchars($fetch_cart['name']) ?></div>
-                        <div class="author"><?php echo htmlspecialchars($fetch_cart['author']) ?></div>
-                        <div class="price">$<?php echo htmlspecialchars($fetch_cart['price']) ?>/-</div>
+                        <a href="./cart.php?delete=<?php echo $cart_id; ?>" class="fas fa-times" onclick="return confirm ('Delete this book from cart?');"></a>
+                        <img src="../uploaded_img/<?php echo $image; ?>" alt="">
+                        <div class="name"><?php echo $name; ?></div>
+                        <div class="author"><?php echo $author; ?></div>
+                        <div class="price">$<?php echo $price; ?>/-</div>
                         <form action="" method="post">
-                            <input type="hidden" name="cart_id" value="<?php echo htmlspecialchars($fetch_cart['id']) ?>">
-                            <input type="number" name="cart_quantity" min="1" value="<?php echo htmlspecialchars($fetch_cart['quantity']) ?>">
+                            <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
+                            <input type="number" name="cart_quantity" min="1" value="<?php echo $quantity; ?>">
                             <input type="submit" name="update_cart" value="update" class="option-button">
                         </form>
-                        <div class="sub-total">sub total: <span>$<?php echo $sub_total = ($fetch_cart['quantity'] * $fetch_cart['price']); ?>/-</span></div>
+                        <div class="sub-total">sub total: <span>$<?php echo $sub_total; ?>/-</span></div>
                     </div>
             <?php
-                    $grand_total += $sub_total;
                 }
             } else {
                 echo '<p class="empty">No products in your cart yet</p>';
             }
             ?>
         </div>
+
 
         <div style="margin-top: 2rem; text-align:center;">
             <a href="./cart.php?delete_all" class="delete-button <?php echo ($grand_total > 1) ? '' : 'disabled'; ?>" onclick="return confirm ('Delete all books from cart?');">delete all</a>

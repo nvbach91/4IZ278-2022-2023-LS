@@ -114,6 +114,7 @@ $registrationController->registerUser();
                 <input type="password" name="confirm_password" placeholder="Confirm your password" required class="box">
                 <select name="user_type" class="box">
                     <option value="user">User</option>
+                    <option value="admin">Admin</option>
                 </select>
                 <input type="submit" name="submit" value="Register now" class="button">
                 <p>Already have an account? <a href="login.php">Login now</a></p>

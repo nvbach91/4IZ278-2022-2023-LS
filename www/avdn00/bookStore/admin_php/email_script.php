@@ -22,7 +22,7 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 
 $mail->Username = "help.bookworms@gmail.com";
-$mail->Password = "urqfzgtodxglktbf";
+$mail->Password = "";
 
 $mail->setFrom($fromEmail);
 $mail->addAddress($toMail);

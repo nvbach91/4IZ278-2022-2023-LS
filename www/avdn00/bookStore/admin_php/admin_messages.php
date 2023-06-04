@@ -26,9 +26,11 @@ class AdminMessages
         $messages = [];
 
         $query = "SELECT * FROM `message`";
-        $result = mysqli_query($this->connection, $query);
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
-        if (mysqli_num_rows($result) > 0) {
+        if ($result) {
             while ($fetch_message = mysqli_fetch_assoc($result)) {
                 $messages[] = $fetch_message;
             }

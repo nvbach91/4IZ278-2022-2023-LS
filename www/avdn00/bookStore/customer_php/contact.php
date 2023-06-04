@@ -12,40 +12,43 @@ if (!isset($user_id)) {
     header('location:../login.php');
 }
 
-
-
 if (isset($_POST['send'])) {
     $name = mysqli_real_escape_string($connection, $_POST['name']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $number =  $_POST['number'];
     $message_contact = mysqli_real_escape_string($connection, $_POST['message']);
-    if ($name == '') {
-        $message[] = 'name is empty';
+    $message = array();
+
+    if (empty($name)) {
+        $message[] = 'Name is empty';
     }
-    if ($email == '') {
-        $message[] = 'email is empty';
+    if (empty($email)) {
+        $message[] = 'Email is empty';
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $message[] = 'email is not valid';
+        $message[] = 'Email is not valid';
     }
-
-    if ($number == '') {
-        $message[] = 'number is empty';
+    if (empty($number)) {
+        $message[] = 'Number is empty';
     } else if (strlen($number) != 9) {
-        $message[] = 'number does not have 9 numbers';
+        $message[] = 'Number does not have 9 digits';
     }
-
-    if ($message_contact == '') {
-        $message[] = 'message is empty';
+    if (empty($message_contact)) {
+        $message[] = 'Message is empty';
     }
 
     if (empty($message)) {
-        $query = "INSERT INTO `message` (user_id,name,number,email,message) 
-    VALUES ('$user_id','$name','$number','$email','$message_contact')";
-        mysqli_query($connection, $query) or die('query failed');
-        $message[] = 'message was send successfully';
-    } else $message[] = 'message was not send';
+        $query = "INSERT INTO `message` (user_id, name, number, email, message) 
+        VALUES (?, ?, ?, ?, ?)";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("sssss", $user_id, $name, $number, $email, $message_contact);
+        $stmt->execute();
+        $message[] = 'Message was sent successfully';
+    } else {
+        $message[] = 'Message was not sent';
+    }
 }
+
 ?>
 
 
@@ -68,9 +71,7 @@ if (isset($_POST['send'])) {
         <p><a href="./home.php">home</a> / contact</p>
     </div>
 
-
     <section class="contact">
-
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <h3>Send us a message</h3>
             <input type="text" name="name" required placeholder="enter your name" class="box" value="<?php echo isset($name) ? htmlspecialchars($name) : ''; ?>">
@@ -80,9 +81,6 @@ if (isset($_POST['send'])) {
             <input type="submit" value="send message" name="send" class="button">
         </form>
     </section>
-
-
-
 
     <?php include 'footer.php'; ?>
     <script src="../js/script.js"></script>

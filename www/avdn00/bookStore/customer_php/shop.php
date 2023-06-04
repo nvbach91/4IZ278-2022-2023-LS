@@ -18,18 +18,28 @@ if (isset($_POST['add_to_cart'])) {
     $product_image = mysqli_real_escape_string($connection, $_POST['product_image']);
     $product_quantity = $_POST['product_quantity'];
 
-    $query = "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'";
-    $check_cart_numbers = mysqli_query($connection, $query) or die('query failed');
+    $query = "SELECT * FROM `cart` WHERE name = ? AND user_id = ?";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ss", $product_name, $user_id);
+    $stmt->execute();
+    $check_cart_numbers = $stmt->get_result();
 
-    if (mysqli_num_rows($check_cart_numbers) > 0) {
+    if ($check_cart_numbers->num_rows > 0) {
         $message[] = 'Already added to cart';
     } else {
-        $query = "INSERT INTO `cart`(user_id,name,price,quantity, image, author) 
-        VALUES ('$user_id','$product_name', '$product_price','$product_quantity','$product_image','$product_author')";
-        mysqli_query($connection, $query) or die('query failed');
-        $message[] = 'Book was added to cart';
+        $query = "INSERT INTO `cart` (user_id, name, price, quantity, image, author) 
+        VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $connection->prepare($query);
+        $stmt->bind_param("ssdiss", $user_id, $product_name, $product_price, $product_quantity, $product_image, $product_author);
+
+        if ($stmt->execute()) {
+            $message[] = 'Book was added to cart';
+        } else {
+            $message[] = 'Failed to add book to cart';
+        }
     }
 }
+
 
 
 ?>

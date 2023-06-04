@@ -36,12 +36,14 @@ if (!isset($user_id)) {
 
         <div class="box-container">
             <?php
+            $query = "SELECT * FROM `orders` WHERE user_id = ?";
+            $stmt = $connection->prepare($query);
+            $stmt->bind_param("s", $user_id);
+            $stmt->execute();
+            $order_query = $stmt->get_result();
 
-            $query = "SELECT * FROM `orders` WHERE user_id = '$user_id'";
-            $order_query = mysqli_query($connection, $query) or die('query failed');
-
-            if (mysqli_num_rows($order_query) > 0) {
-                while ($fetch_orders = mysqli_fetch_assoc($order_query)) {
+            if ($order_query->num_rows > 0) {
+                while ($fetch_orders = $order_query->fetch_assoc()) {
             ?>
                     <div class="box">
                         <p>Placed on: <span><?php echo htmlspecialchars($fetch_orders['placed_on']); ?></span></p>
@@ -63,6 +65,7 @@ if (!isset($user_id)) {
             }
             ?>
         </div>
+
     </section>
 
 

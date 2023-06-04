@@ -16,9 +16,13 @@ class AdminDashboard
 
     private function fetchData($query)
     {
-        $result = mysqli_query($this->connection, $query);
-        if ($result) {
-            return mysqli_fetch_assoc($result);
+        $statement = mysqli_prepare($this->connection, $query);
+        if ($statement) {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            $data = mysqli_fetch_assoc($result);
+            mysqli_stmt_close($statement);
+            return $data;
         }
         return false;
     }
@@ -27,7 +31,6 @@ class AdminDashboard
     {
         return isset($value) ? htmlspecialchars($value) : '0';
     }
-
 
     public function getTotalPendings()
     {
@@ -71,6 +74,7 @@ class AdminDashboard
         return $data ? $data['number_of_messages'] : 0;
     }
 }
+
 
 $admin_id = $_SESSION['admin_id'];
 

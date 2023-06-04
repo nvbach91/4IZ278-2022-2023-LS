@@ -39,17 +39,15 @@ class AdminUsersPage
         while ($fetch_users = mysqli_fetch_assoc($select_users)) {
             $name = htmlspecialchars($fetch_users['name']);
             $email = htmlspecialchars($fetch_users['email']);
-            $user_type = $fetch_users['user_type'];
+            $user_type = htmlspecialchars($fetch_users['user_type']);
             $user_color = ($user_type == 'admin') ? 'var(--orange)' : '';
 
-            echo <<<HTML
-                <div class="box">
-                    <p>username: <span>$name</span></p>
-                    <p>email: <span>$email</span></p>
-                    <p>user type: <span style="color: $user_color">$user_type</span></p>
-                    <a href="admin_users.php?delete=$fetch_users[id]" onclick="return confirm('Delete this user?')" class="delete-button">Delete</a>
-                </div>
-            HTML;
+            echo '<div class="box">';
+            echo '<p>username: <span>' . $name . '</span></p>';
+            echo '<p>email: <span>' . $email . '</span></p>';
+            echo '<p>user type: <span style="color: ' . $user_color . '">' . $user_type . '</span></p>';
+            echo '<a href="admin_users.php?delete=' . $fetch_users['id'] . '" onclick="return confirm(\'Delete this user?\')" class="delete-button">Delete</a>';
+            echo '</div>';
         }
     }
 }

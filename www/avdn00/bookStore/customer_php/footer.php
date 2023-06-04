@@ -21,7 +21,7 @@
             <h3>contact information</h3>
             <p><i class="fas fa-phone"> +420 987 654 321</i></p>
             <p><i class="fas fa-phone"> +420 123 456 789</i></p>
-            <p><i class="fas fa-envelope"> bookworms@gmail.com</i></p>
+            <p><i class="fas fa-envelope"> help.bookworms@gmail.com</i></p>
             <p><i class="fas fa-map-marker-alt"> Prague, Czechia</i></p>
         </div>
 
