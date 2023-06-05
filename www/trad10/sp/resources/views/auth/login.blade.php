@@ -50,7 +50,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -65,6 +64,16 @@
                             </div>
                         </div>
                     </form>
+                    <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="google-btn" style="max-width: 192px;">
+                                <div class="google-icon-wrapper">
+                                    <img class="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                                </div>
+                                <a class="btn-text" href="{{ url('/login/google') }}"><b>Continue with Google</b></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
