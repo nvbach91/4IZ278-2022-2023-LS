@@ -14,7 +14,10 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" >
+    
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -27,9 +30,9 @@
                     </a>
                 </div>
 
-                <div class="search-bar">
-                    <form action="{{ route('search') }}" method="GET">
-                        <input type="text" name="query" placeholder="Search...">
+                <div class="search-bar" id="search-bar">
+                    <form action="{{ route('search') }}" method="GET" id="search-form">
+                        <input type="text" name="query" id="search-input" placeholder="Search...">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
