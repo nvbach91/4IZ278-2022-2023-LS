@@ -1,0 +1,107 @@
+:root {
+  /* MAIN PALLETTE */
+  --color-bg: rgb(241, 240, 235);
+  --color-bg-shadow: rgba(241, 240, 235, 0.5);
+  --color-bg-shadow-l: rgba(241, 240, 235, 0.25);
+  --color-bg-dark: rgb(214, 212, 207);
+  --color-ac: rgb(63, 84, 165);
+  --color-ac-dark: rgb(44, 58, 115); 
+
+  /* TEXT COLORS */
+  --color-tx: rgb(81, 73, 70);
+  --color-tx-shadow: rgba(81, 73, 70, 0.5);
+  --color-tx-action: rgb(191, 125, 3);
+
+  /* INDICATORS */
+  --color-red: rgba(255, 99, 71, 0.8);
+  --color-red-dark: rgba(255, 99, 71, 0.9);
+  --color-green: rgba(34, 139, 34, 0.8);
+  --color-yellow: rgba(191, 125, 3, 0.7);
+  --color-blue: rgba(63, 84, 165, 0.9);
+
+  --transition: 300ms ease;
+}
+
+.button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  background: var(--color-blue);
+}
+
+.button.delete {
+  background: var(--color-red-dark);
+}
+
+.button:hover {
+  background: var(--color-tx);
+}
+
+.dashboard {
+  margin-top: 5rem;
+}
+
+.dashboard-container {
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin-bottom: 5rem;
+  display: grid;
+  grid-template-columns: 14rem auto;
+  gap: 1rem;
+  background-color: var(--color-bg-dark);
+}
+
+.dashboard aside {
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-shadow);
+}
+
+.dashboard aside a {
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dashboard aside a:hover {
+  background-color: var(--color-blue);
+  color: var(--color-bg);
+}
+
+.dashboard img {
+  width: 2rem;
+}
+
+.dashboard aside .active {
+  background-color: var(--color-blue);
+  color: var(--color-bg);
+}
+
+.dashboard main {
+  margin-left: 1.2rem;
+}
+
+.dashboard main h2 {
+  margin: 0 0 2rem 0;
+  line-height: 1;
+}
+
+.dashboard main table {
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard main table th {
+  background: var(--color-bg-shadow);
+  padding: 0.5rem;
+}
+
+.dashboard main table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--color-tx-shadow);
+}
+
+.dashboard main table tr:hover td {
+  background-color: var(--color-bg-shadow-l);
+  transition: var(--transition);
+}

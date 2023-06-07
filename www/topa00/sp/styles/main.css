@@ -2,12 +2,19 @@
   /* MAIN PALLETTE */
   --color-bg: #F1F0EB;
   --color-bg-dark: #D6D4CF;
-  --color-ac: #3F54A5;
+  --color-ac: #3f54a5;
   --color-ac-dark: #2C3A73; 
 
   /* TEXT COLORS */
   --color-tx: #514946;
-  --color-tx-action: #C07E03;
+  --color-tx-action: #bf7d03;
+
+  /* INDICATORS */
+  --color-red: rgba(255, 99, 71, 0.8);
+  --color-red-dark: rgba(255, 99, 71, 0.9);
+  --color-green: rgba(34, 139, 34, 0.8);
+  --color-yellow: rgba(191, 125, 3, 0.7);
+  --color-blue: rgba(63, 84, 165, 0.9);
 
   --transition: 300ms ease;
 }
@@ -41,6 +48,10 @@ body {
 .section {
   margin-top: 3 rem;
   width: 100vw;
+}
+
+.section-margin {
+  margin-top: 5rem;
 }
 
 h1,h2,h3,h4,h5 {
@@ -174,6 +185,8 @@ navigation button {
   grid-template-columns: repeat(3, 1fr);
   gap: 5rem;
   margin-left: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 
@@ -221,3 +234,201 @@ navigation button {
 .featured:hover .post_title a {
   color: var(--color-tx-action)
 }
+
+/* ======================= CATEGORY BUTTONS ======================= */
+.category-buttons {
+  padding: 4rem 0;
+  border-top: 2px solid var(--color-bg-dark);
+  border-bottom: 2px solid var(--color-bg-dark);
+}
+
+.category-buttons_container {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* ======================= FOOTER ======================= */
+footer {
+  background: var(--color-bg-dark);
+  padding: 1rem;
+  box-shadow: inset 0 1.5rem 1.5rem rgba(0, 0, 0, 0.2);
+}
+
+.footer-details {
+  font-weight: 600;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ======================= SEARCH ======================= */
+.search-bar {
+  margin-top: 7rem;
+}
+
+.search-bar_container {
+  position: relative;
+  width: 30rem;
+  background: var(--color-bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.search-bar_container > div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input{
+  background: transparent;
+  margin-left: 0.5rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.search-bar input::placeholder{
+  color: var(--color-tx);
+}
+
+.search-bar img {
+  width: 1.5rem;
+}
+
+.search-bar button {  
+  background-color: var(--color-bg);
+  color: var(--color-tx);
+}
+
+/* ======================= BUTTONS ======================= */
+.button {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  background-color: rgba(191, 125, 3, 0.7);
+  resize: none;
+  color: var(--color-bg);
+}
+
+/* ======================= SINGLE POST ======================= */
+.single-post {
+  margin: 6rem 0 2rem;
+}
+
+.single-post_container {
+  padding: 1rem 2rem 2rem;
+}
+
+.single-post_container p{
+  margin-top: 1rem;
+  line-height: 1.7;
+}
+
+.single-post_thumbnail {
+  margin-top: 1.5rem;
+}
+
+.single-post_container .post_info {
+  background: var(--color-bg-dark);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+}
+
+/* ======================= CATEGORY POSTS ======================= */
+.category-title {
+  height: 10rem;
+  margin-top: 3.5rem;
+  background: var(--color-bg-dark);
+  display: grid;
+  place-items: center;
+}
+
+/* ======================= ABOUT ======================= */
+.about-contacts {
+  height: 10rem;
+  text-align: center;
+  margin-top: 3.5rem;
+  display: grid;
+  place-items: center;
+}
+
+/* ======================= FORM ======================= */
+.form-section {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.form-section_container {
+  width: 88%;
+}
+
+.alert-message {
+  color: var(--color-bg);
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.alert-message.error {
+  background: rgba(255, 99, 71, 0.8);
+}
+
+.alert-message.success {
+  background: rgba(34, 139, 34, 0.8)
+}
+
+.alert-message.lg {
+  text-align: center;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-control.inline {
+  flex-direction: row;
+  align-items: center;
+}
+
+input, textarea, select {
+  padding: 0.8rem 1.4rem;
+  background-color: var(--color-bg-dark);
+  border-radius: 0.5rem;
+  resize: none;
+  color: var(--color-tx);
+}
+
+.form-section small {
+  margin-top: 1rem;
+  display: block;
+}
+
+.form-section small a {
+  color: var(--color-ac);
+}
+
+.form-section button {
+  padding: 0.8rem 1.4rem;
+  background-color: rgba(191, 125, 3, 0.7);
+  border-radius: 0.5rem;
+  resize: none;
+  color: var(--color-bg);
+}
+
