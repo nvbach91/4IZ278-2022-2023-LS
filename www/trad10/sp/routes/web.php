@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +32,15 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 Auth::routes();
 
-Route::get('login/google', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle']);
-Route::get('login/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+Route::get('login/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('adminDashboard');
+    Route::post('/admin/dashboard/{user}', [AdminDashboardController::class, 'updateUserStatus'])->name('updateUserStatus');
+    Route::post('/admin/dashboard', [AdminDashboardController::class, 'storeCategory'])->name('admin.categories.store');
+    Route::delete('/admin/dashboard/categories/{category}', [AdminDashboardController::class, 'destroyCategory'])->name('admin.categories.destroy');
+});
+

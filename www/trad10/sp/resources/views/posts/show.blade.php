@@ -7,11 +7,8 @@
                 <h1 class="card-title">{{ $post->title }}</h1>
                 <p class="card-text">{{ $post->content }}</p>
 
-                @if(auth()->user()->id == $post->user_id || auth()->user()->isAdmin())
+                @if(auth()->check() && (auth()->user()->id == $post->user_id || auth()->user()->isAdmin()))
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary mr-2">Edit Post</a>
-                @endif
-
-                @if(auth()->user()->id == $post->user_id || auth()->user()->isAdmin())
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         Delete Post
                     </button>

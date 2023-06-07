@@ -16,14 +16,16 @@
                 <textarea id="content" name="content" class="form-control">{{ $post->content }}</textarea>
             </div>
 
-            <div class="form-group">
+            <div class="form-group my-3">
                 <label for="categories">Categories</label>
-                <select name="categories[]" id="categories" multiple class="form-control">
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ $post->categories->contains($category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
+                @foreach($categories as $category)
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category-{{ $category->id }}" name="categories[]" {{ $post->categories->contains($category->id) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="category-{{ $category->id }}">{{ $category->name }}</label>
+                    </div>
+                @endforeach
             </div>
+
             
             <div class="form-group">
                 <label for="tags">Tags</label>

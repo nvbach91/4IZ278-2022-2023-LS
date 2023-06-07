@@ -31,6 +31,12 @@ class User extends Authenticatable
 
     public function IsAdmin()
     {
-        return $this->role === 'admin';
+        return $this->role === 'Admin';
     }
+
+    public function IsArchived()
+    {
+        return $this->archived;
+    }
+    
 }
