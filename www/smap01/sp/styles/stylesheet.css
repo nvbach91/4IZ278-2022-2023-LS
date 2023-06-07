@@ -1,0 +1,381 @@
+.card {
+    margin: 6px !important;
+    transition: all 0.7s !important;
+}
+
+.card:hover {
+    scale: 1.03;
+}
+
+.navbar {
+    background-color: #ff0078;
+}
+
+.pagination {
+    padding: 3px;
+    background-color: lightskyblue;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: lightblue;
+    min-width: 18px;
+    flex: 0 0 25px;
+    justify-content: center;
+}
+
+.signup-2c {
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    max-width: 80% !important;
+}
+
+.container h1 {
+    margin-top: 30px;
+    text-align: center;
+}
+
+@media only screen and (min-width:981px) {
+    .detail-2c {
+        flex-direction: row;
+        gap: 20px;
+        width: 100% !important;
+        display: flex;
+    }
+}
+
+@media only screen and (max-width:980px) {
+    .detail-2c {
+        flex-direction: column;
+        gap: 20px;
+        width: 100% !important;
+        display: flex;
+    }
+}
+
+@media only screen and (min-width:981px) {
+    .detail-2c div {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width:980px) {
+    .detail-2c div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.fw input {
+    width: 100% !important;
+}
+
+.fw textarea {
+    width: 100% !important;
+}
+
+.r1-3c {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-direction: row !important;
+    width: 100% !important;
+    ;
+}
+
+.r1-3c div {
+    margin-top: auto;
+}
+
+.r1-3c img {
+    max-height: 300px;
+}
+
+review-btn.btn {
+    margin-top: 20px!important;
+}
+
+.cart{
+    width:100%!important;
+}
+
+.cart-item{
+    height:100px;
+    background-color: lightgrey;
+    margin-bottom:1px;
+}
+
+.cart-item table{
+    height:100%;
+}
+
+.cart-item div{
+    display:flex;
+    margin-left:25px;
+}
+
+.cart-item td:nth-child(1){
+    width:5%;
+}
+
+.cart-item td:nth-child(2){
+    width:65%;
+}
+
+.cart-item td:nth-child(3){
+    width:10%;
+}
+
+.cart-item td>a{
+    text-decoration: none;
+    color:blue;
+}
+
+.past-orders{
+    border:1px;
+    border-style:solid;
+}
+
+.order-legend tr:nth-child(1){
+    width:28%;
+}
+
+.order-btn{
+    margin-top:10px;
+    margin-left:auto;
+    width:auto;
+    background-color:blue;
+    transition: all 0.7s;
+    color:white;
+}
+
+.order-btn:hover{
+    width:auto;
+    background-color:rgb(148, 207, 226);
+    text-decoration: none;
+}
+
+.order-btn-wrapper{
+    width:100%!important;
+    display:flex;
+}
+
+.cart-item img{
+    max-height:90px;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.r1-3c div>span {
+    border: 1px;
+    border-style: solid;
+    display: flex;
+    height: 50px;
+    font-size: 30px;
+}
+
+.r1-3c div>span>a {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@media only screen and (min-width:981px) {
+    .review-1r {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row !important;
+        width: 100% !important;
+        margin-top: 195px;
+    }
+}
+
+@media only screen and (max-width:980px) {
+    .review-1r {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row !important;
+        width: 100% !important;
+        margin-top: 300px;
+    }
+}
+
+@media only screen and (min-width:981px) {
+    .review-2r {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row !important;
+        width: 100% !important;
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (max-width:980px) {
+    .review-2r {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row !important;
+        width: 100% !important;
+        margin-top: 100px;
+    }
+}
+
+.review-1r a {
+    font-size: 20px;
+    border: 1px;
+    border-style: solid;
+}
+
+.reviews {
+    border: 1px;
+    border-style: solid;
+    width: 100% !important;
+    margin-bottom: 50px;
+}
+
+.review:not(:last-child) {
+    border-top: 0px;
+    border-bottom: 1px;
+    border-right: 0px;
+    border-left: 0px;
+    border-style: solid;
+    border-color: lightgray;
+}
+
+.review {
+    width: 100% !important;
+}
+
+.buy-btn {
+    display: flex;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.buy-btn a {
+    padding: 15px;
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    margin-left: auto;
+    font-size: 30px;
+    font-family: 'Arial';
+    text-transform: uppercase;
+}
+
+.buy-btn a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.r2-1c {
+    height: 50px;
+    width: 100% !important;
+}
+
+.r2-1c div {
+    display: block;
+    width: 100%;
+}
+
+.r2-1c h3 {
+    border: 1px;
+    border-style: solid;
+}
+
+.signup-2c .btn {
+    height: 100px;
+    margin-bottom: auto;
+    margin-top: 35px;
+}
+
+.add-2c {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-2c div {
+    width: 45%;
+}
+
+.add-2 {
+    display: flex;
+    justify-content: center;
+}
+
+.add-2 .btn {
+    height: 50px;
+    margin-top: auto;
+    width: 60px;
+    position: revert;
+    margin-left: 5px;
+}
+
+.card-img-wrap {
+    height: 410px;
+    display: flex;
+}
+
+.card-img-wrap img {
+    width: auto;
+    height: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
+
+.pagination-column {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.fb-login {
+    background-color: #1877f2;
+    color: white;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #1877f2;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border: 0px;
+    padding-top: 5px;
+    padding-right: 10px;
+    display: table;
+}
+
+.fb-login a {
+    color: white;
+}
+
+.fb-log-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.fb-login a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.fb-login img {
+    height: 35px;
+}
+
+/*.fb-login::before {
+    background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
+    height: 25px;
+    width: 25px;
+    content: " ";
+    display: inline-block;
+    background-size: cover;
+}*/
