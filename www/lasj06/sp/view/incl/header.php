@@ -15,14 +15,15 @@
 
 <body>
     <div class="page">
-        <?php echo $_SESSION['user_email'];
-        echo $_SESSION['account_level'] ?>
         <div class="menu_bar">
             <a href="home.php" class="logo"><img src="./../img/logo.png" alt="website logo" width="180" height="65"></a>
             <form class="search_bar sb" method="POST">
-                <input name="search" type="search" class="search_bar" type="text" placeholder="Search Game Titles">
+                <input name="search" type="search" class="search_bar" placeholder="Search Game Titles">
             </form>
             <nav class="navigation_container">
+            <?php if (($_SESSION['user_email'] != "visitor")) : ?>
+                <p>Account: <?php echo $_SESSION['user_email'] ?></p>
+                <?php endif ?>
                 <ul class="navigation_menu">
                     <li class="navigation_item">
                         <a href="home.php">Home</a>

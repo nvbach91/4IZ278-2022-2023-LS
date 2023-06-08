@@ -24,6 +24,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     insertOrderItems($products);
 
+    mail($_SESSION['user_email'], "DiskShop Order", "Thank you for shopping at DiskShop",'From: info@diskshop.com');
+
     $_SESSION['cart'] = [];
     header('Location: home.php');
     exit();

@@ -10,7 +10,7 @@ require '../controller/user_required.php';
     <form class="category_select" method="POST">
         <?php foreach ($allCategories as $category) : ?>
             <div class="category">
-                <input type="checkbox" name="category[]" value="<?php echo $category['category'] ?>">
+                <input type="checkbox" id="category[]" name="category[]" value="<?php echo $category['category'] ?>">
                 <label for="category[]"><?php echo $category['category'] ?></label>
             </div>
         <?php endforeach ?>

@@ -1,5 +1,6 @@
 <?php
 require_once "../model/users.php";
+require "user_required.php";
 
 $users = fetchAllUsers();
 

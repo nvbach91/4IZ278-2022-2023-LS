@@ -11,19 +11,19 @@ authorize(2);
 <form class="form" method="POST">
     <div>
         <label for="name">Product name</label>
-        <input type="name" name="name" placeholder="product_name" value="<?php echo $product['name'] ?>" required autofocus>
+        <input type="text" id="name" name="name" placeholder="product_name" value="<?php echo $product['name'] ?>" required autofocus>
     </div>
     <div>
         <label for="price">Product price</label>
-        <input type="price" name="price" placeholder="product_price" value="<?php echo $product['price'] ?>" required>
+        <input type="text" id="price" name="price" placeholder="product_price" value="<?php echo $product['price'] ?>" required>
     </div>
     <div>
         <label for="description">Product description</label>
-        <input type="description" name="description" placeholder="product_description" value="<?php echo $product['description'] ?>" required>
+        <input type="text" id="description" name="description" placeholder="product_description" value="<?php echo $product['description'] ?>" required>
     </div>
     <div>
         <label for="image_link">Product image link</label>
-        <input type="image_link" name="image_link" placeholder="product_image" value="<?php echo $product['image'] ?>" required>
+        <input type="text" id="image_link" name="image_link" placeholder="product_image" value="<?php echo $product['image'] ?>" required>
     </div>
     <br>
     <button type="submit">Change product information</button>
