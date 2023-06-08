@@ -1,23 +1,26 @@
 <?php require_once __DIR__ . '/incl/header.php'; ?>
-<?php require_once __DIR__ . '/database/Database.php'; ?>
 <?php require_once __DIR__ . '/database/ProductsDB.php';?>
 <?php
-$productsDB=new ProductsDB();
+$productsDB=ProductsDB::getDatabase();
+$usersDB=UsersDB::getDatabase();
 $offset;
+
+//First enter and input tests
 if (isset($_GET['offset'])) {
     $offset = $_GET['offset'];
 } else {
     $offset = 0;
 }
 
+//Gets books pagination
 $itemsCountPerPage = 5;
-$database = new ProductsDB();
-$goods = $database->getItemByOffset($offset, $itemsCountPerPage);
-$paginationCount = ceil($database->getCountOfTotalRecord() / $itemsCountPerPage);
+$descrLen=100;
+$books = $productsDB->getItemByOffset($offset, $itemsCountPerPage);
+$paginationCount = ceil($productsDB->getCountOfTotalRecord() / $itemsCountPerPage);
 
 
 ?>
-<main class="container" style="max-width: 60% !important;">
+<main class="container">
     <?php if (isset($_GET['update']) && $_GET['update'] == 'success') {
         echo
         '<div style="margin-top:10px;background-color:green;padding:10px;text-align:center;">
@@ -33,17 +36,20 @@ $paginationCount = ceil($database->getCountOfTotalRecord() / $itemsCountPerPage)
     </div>
     <div class="row">
         <?php
-        foreach ($goods as $good) {
+        foreach ($books as $book) {
+            $descrTooLong=(strlen($book['book_description'])>50)?"...":"";
             echo "<div class='card' style='width: 18rem;padding-bottom:110px;'>
-            <img class='card-img-top' src='https://www.designingbuildings.co.uk/w/images/6/6f/Field-175959_640.jpg' alt='Card image cap'>
+            <div class='card-img-wrap'>
+            <img class='card-img-top' src='".$book['thumbnail_url']."' alt='Card image cap'>
+            </div>
             <div class='card-body'>
-              <h5 class='card-title'>" . $good["name"] . "</h5>
-              <p class='card-text'>" . $good["description"] . "</p>
-              <p class='card-text' style='bottom:70px !important;position:absolute;'>$" . $good["price"] . "</p>
+              <a href=book-detail.php?book_id=".$book['book_id']."><h5 class='card-title'>" . $book["book_name"] . "</h5></a>
+              <p class='card-text'>" . substr($book["book_description"], 0, $descrLen) . $descrTooLong ."</p>
+              <p class='card-text' style='bottom:70px !important;position:absolute;'>$" . $book["price"] . "</p>
               <div style='bottom: 20px !important; position: absolute;'>
-                <a href='buy.php?good_id=" . $good["good_id"] . "' style='margin-right:4px;' class='btn btn-primary'>Buy</a>";
-            echo (!empty($_COOKIE['user_email'])&&$database->getUserPrivilege($_COOKIE['user_email'])>1) ? ("<a href='edit-item.php?good_id=" . $good["good_id"] . "' class='btn btn-warning'><i class='fa-solid fa-pen'></i></a>
-                <a href='delete-item.php?good_id=" . $good["good_id"] . "' class='btn btn-danger'><i class='fa-solid fa-trash-can'></i></a>") : "";
+                <a href='actions/add-to-cart.php?book_id=" . $book["book_id"] . "' style='margin-right:4px;' class='btn btn-primary'>Buy</a>";
+            echo (!empty($_COOKIE['user_email'])&&$usersDB->getUserPrivilege($_COOKIE['user_email'])>1) ? ("<a href='edit-item.php?book_id=" . $book["book_id"] . "' class='btn btn-warning'><i class='fa-solid fa-pen'></i></a>
+                <a href='actions/delete-item.php?book_id=" . $book["book_id"] . "' class='btn btn-danger'><i class='fa-solid fa-trash-can'></i></a>") : "";
             echo "</div>
             </div>
           </div>";

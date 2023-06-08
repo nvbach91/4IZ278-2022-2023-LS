@@ -1,4 +1,19 @@
-<?php session_start(); ?>
+<?php session_start();
+
+//Function that returns number of items in the cart
+function countCart($book_cart){
+    $count=0;
+    try{
+        foreach($book_cart as $book){
+            $count+=$book['book_count'];
+        }
+    }catch(Exception $e){
+        $e="";
+        $count=0;
+    }
+    return $count;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +32,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="https://esotemp.vse.cz/~smap01/cv09/index.php">Book-shop</a>
+        <a class="navbar-brand" href="index.php">Book-shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,14 +43,14 @@
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="create-item.php">Create item</a>
+                    <a class="nav-link" href="add-a-book.php">Add a book</a>
                 </li>
                 <li>
                     <?php
                     
-                        require_once("./database/Database.php");
-                        $database=new Database();
-                        echo (!empty($_COOKIE)&&isset($_COOKIE['user_email'])&&$database->getUserPrivilege($_COOKIE['user_email'])>2)?
+                        require_once("./database/UsersDB.php");
+                        $users=UsersDB::getDatabase();
+                        echo (!empty($_COOKIE)&&isset($_COOKIE['user_email'])&&$users->getUserPrivilege($_COOKIE['user_email'])>2)?
                         '<a class="nav-link" href="users.php">All users</a>':'';
                     
                     ?>
@@ -44,7 +59,7 @@
             <a class="my-2 my-lg-0" href="profile.php" style="margin-right:5px;color:white;"><?php echo isset($_COOKIE['user_email']) ? $_COOKIE['user_email'] : ''; ?></a>
             <?php
 
-            $numGoods = isset($_SESSION['goods']) ? count($_SESSION['goods']) : 0;
+            $numGoods = isset($_SESSION['books']) ? countCart($_SESSION['books']) : 0;
             echo '<a href="cart.php" class="my-2 my-lg-0" style="margin-right:5px;color:white;"><i class="fa-sharp fa-solid fa-cart-shopping"></i> ' . $numGoods . '</a>';
 
             ?>

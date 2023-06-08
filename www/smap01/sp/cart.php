@@ -1,39 +1,58 @@
 <?php
-require_once __DIR__ . '/incl/header.php';
-require_once __DIR__ . '/database/Database.php';
-require_once __DIR__ . '/database/ProductsDB.php'; ?>
-<?php
-if(empty($_COOKIE)||!isset($_COOKIE['user_email'])){
+require_once './incl/header.php';
+require_once './database/ProductsDB.php';
+require_once './database/UsersDB.php';
+$usersDB = UsersDB::getDatabase();
+$productsDB = ProductsDB::getDatabase();
+
+//First enter and input tests
+if (!isset($_SESSION) || !isset($_COOKIE['user_email']) || !$usersDB->userExists(htmlspecialchars($_COOKIE['user_email']))) {
     header('Location: login.php');
     exit;
 }
-$database=new ProductsDB();
-$goods = isset($_SESSION['goods']) ? $_SESSION['goods'] : [];
 ?>
-<main class="container" style="max-width: 60% !important;">
-    <h1 style="text-align:center;">Shopping cart</h1>
-    <table>
-        <tbody>
-            <tr>
-                <td width=200></td>
-                <td style="width:10%;margin-left:20px;">ID</td>
-                <td style="width:60%;margin-left:5%;">Name</td>
-                <td style="margin-left:5%;text-align:center;">Price</td>
-                <td style="width:10%;"></td>
-            </tr>
-    <?php
-    $item;
-    foreach ($goods as $good) {
-        $item=$database->getItem($good);
-        echo
-        '<tr style="border-color:gray!important;border-style:solid!important;border-radius:7px;border:1px;height:70px;margin-bottom:10px;" class="container-fluid">
-            <td width=200><img src="https://www.designingbuildings.co.uk/w/images/6/6f/Field-175959_640.jpg" style="max-width:100px; max-height:100%;" alt="item_picture"></td>
-            <td style="width:10%;margin-left:20px;">ID: '.$good.'</td>
-            <td style="width:60%;margin-left:5%;">'.$item['name'].'</td>
-            <td style="margin-left:5%;">'.$item['price'].'</td>
-            <td style="width:10%;"><a href="remove-item.php?good_id='.$good.'" style="width:100%;display:block;text-align:center;"><i class="btn btn-danger fa-solid fa-trash-can"></i></a></td>
-        </tr>';
-    }
-    ?>
-</main>
-<?php require_once __DIR__ . '/incl/footer.php'; ?>
+<div class="container">
+    <h1>Shopping cart</h1>
+    <div class="cart">
+        <?php
+
+        if (isset($_SESSION['books']))
+            foreach ($_SESSION['books'] as $book) : ?>
+            <?php if (isset($book['book_id']) && isset($book['book_count']) && $productsDB->bookExists($book['book_id'])) : ?>
+                <div class="cart-item">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div><img src='<?php $book_rec = $productsDB->getBook($book['book_id']);
+                                                    echo $book_rec['thumbnail_url'] ?>' alt="book-image"></div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <h5><?php echo "<a href='book-detail.php?book_id=" . $book_rec['book_id'] . "'>" . substr($book_rec['book_name'], 0, 50); ?></h5>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        <a href='actions/add-to-cart.php?book_id=<?php echo $book_rec['book_id'] ?>'><b>+</b></a>
+                                        <a>&nbsp<?php echo $book['book_count'] ?>&nbsp</a>
+                                        <a href='actions/remove-from-cart.php?book_id=<?php echo $book_rec['book_id'] ?>'><b>-</b></a>
+                                        <a href="actions/remove-from-cart.php?book_id=<?php echo $book['book_id'] ?>&all=1" style="width:100%;display:block;text-align:center;"><i class="btn btn-danger fa-solid fa-trash-can"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <?php if (isset($_SESSION['books'])&&count($_SESSION['books']) > 0) : ?>
+        <div class="order-btn-wrapper">
+            <a href="actions/place-order.php" class="order-btn btn">Place the order</a>
+        </div>
+    <?php endif; ?>
+</div>
+<?php
+require_once './incl/footer.php';
+?>
