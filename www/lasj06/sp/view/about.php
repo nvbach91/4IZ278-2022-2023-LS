@@ -1,5 +1,4 @@
 <?php
-require '../model/db.php';
 require '../controller/user_required.php';
 
 ?>

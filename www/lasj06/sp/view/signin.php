@@ -1,7 +1,7 @@
 <?php include '../controller/signin_controller.php' ?>
+<?php require '../google/google.php'?>
 
 <?php require __DIR__ . "/incl/header.php"; ?>
-<h1>DiscShop</h1>
 <h2>Sign in</h2>
 <form class="form" method="POST">
     <div>
@@ -24,6 +24,6 @@
 </form>
 <br>
 <a href="signup.php">Don't have an account yet? Click here to register a new account.</a>
-
+<a href="?action=login">Login with your google account.</a>
 
 <?php require __DIR__ . "/incl/footer.php"; ?>

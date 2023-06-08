@@ -37,7 +37,7 @@
                     <?php endif ?>
                     <?php if (isset($_SESSION['account_level']) && $_SESSION['account_level'] == 3) : ?>
                         <li class="navigation_item">
-                            <a href="users.php">User Administration</a>
+                            <a href="user.php">User Administration</a>
                         </li>
                     <?php endif ?>
                     <?php if (isset($_SESSION['user_email']) && $_SESSION['user_email'] != 'visitor') : ?>

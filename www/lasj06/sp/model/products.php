@@ -89,3 +89,16 @@ function fetchProductsByName($search)
     $products = @$stmt->fetchAll();
     return $products;
 }
+
+function updateProduct($product_id)
+{
+    $db = newDB();
+    @$stmt = $db->prepare('UPDATE products SET name = :name, price = :price, description = :description, image = :image WHERE product_id = :product_id');
+    $stmt->execute([
+        "product_id" => $product_id,
+        "name" => $_POST['name'],
+        "price" => $_POST['price'],
+        "description" => $_POST['description'],
+        "image" => $_POST['image_link']
+    ]);
+}

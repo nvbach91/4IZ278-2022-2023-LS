@@ -6,7 +6,7 @@
 <form class="form" method="POST">
     <div>
         <label for="email">Email address</label>
-        <input type="email" name="email" placeholder="Email address" required>
+        <input type="email" name="email" placeholder="Email address" required autofocus>
     </div>
     <div>
         <label for="full_name">Full name</label>

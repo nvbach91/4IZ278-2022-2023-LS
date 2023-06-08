@@ -115,7 +115,19 @@ body {
 
 .footer {
     display: flex;
-    align-self: flex-end;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+.footer_item {
+    display: flex;
+    margin-left: 12px;
+}
+
+.footer_item_minor {
+    display: flex;
+    margin-left: 4px;
 }
 
 .form {
@@ -123,6 +135,20 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    padding-top: 16px;
+}
+
+.btn_link {
+    display: flex;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .product_page_top {
@@ -150,5 +176,38 @@ body {
 
 .product_description {
     display: flex;
+    margin-top: 24px;
+}
+
+.cart_products{
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.cart_line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cart_line_item {
+    display: flex;
+    margin-left: 12px;
+    font-size: 24px;
+}
+
+.order_address {
+    display: flex;
+    margin-left: 12px;
+    height: 24px;
+    width: 512px;
+    font-size: 12px;
+}
+
+.cart_info {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
     margin-top: 24px;
 }

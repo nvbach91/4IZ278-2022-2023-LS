@@ -9,7 +9,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $existing_user = signin($email);
+    $existing_user = signIn($email);
 
     if ($email == '') {
         $message = 'Please fill out your email';

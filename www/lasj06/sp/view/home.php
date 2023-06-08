@@ -29,12 +29,11 @@ require '../controller/user_required.php';
             <?php foreach ($products as $product) : ?>
                 <div class="product">
                     <p><?php echo $product['name'] ?></p>
-                    <a href='product.php?product_id=<?php echo $product['product_id']; ?>'><img src="<?php echo $product['image'] ?>" alt="<?php echo $product['name'] ?>" height="172" width="368"></a>
+                    <a href='product.php?product_id=<?php echo $product['product_id'] ?>'><img src="<?php echo $product['image'] ?>" alt="<?php echo $product['name'] ?>" height="172" width="368"></a>
                 </div>
             <?php endforeach ?>
         <?php endif ?>
     </div>
 </div>
-
 
 <?php require __DIR__ . "/incl/footer.php";

@@ -1,5 +1,5 @@
 <?php
-require "../model/db.php";
+require "../model/users.php";
 
 session_start();
 
@@ -35,20 +35,11 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt = $db->prepare('INSERT INTO users(email, full_name, password, account_level) VALUES (:email, :full_name, :password, 1)');
-    $stmt->execute([
-        'email' => $email,
-        'full_name' => $full_name,
-        'password' => $hashedPassword,
-    ]);
+    signUp($email, $full_name, $hashedPassword);
 
-    $stmt = $db->prepare('SELECT email FROM users WHERE email = :email LIMIT 1');
-    $stmt->execute([
-        'email' => $email
-    ]);
-    $user_id = (int) $stmt->fetchColumn();
-
-    $_SESSION['user_email'] = $email;
+    $user = signIn($email);
+    $_SESSION['user_email'] = $user['email'];
+    $_SESSION['account_level'] = $user['account_level'];
 
     header('Location: home.php');
 }
