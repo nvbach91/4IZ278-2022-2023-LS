@@ -1,4 +1,5 @@
 <?php
+require_once "../model/users.php";
 
 $googleClientID = '947648263897-34j401h4qd2svmltf2rh0m1a73lanns0.apps.googleusercontent.com';
 $googleClientSecret = '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';
@@ -56,6 +57,11 @@ if (isset($_GET['code'])) {
     $_SESSION['access_token'] = $data['access_token'];
     $_SESSION['id_token'] = $data['id_token'];
     $_SESSION['userinfo'] = $userinfo;
+
+    if (fetchUserByEmail($userinfo['email']) == null) {
+    $hashedPassword = password_hash($_SESSION['state'], PASSWORD_DEFAULT);
+    @signUp($userinfo['email'], "google_account", $hashedPassword);
+    }
 
     header('Location: home.php');
     die();
