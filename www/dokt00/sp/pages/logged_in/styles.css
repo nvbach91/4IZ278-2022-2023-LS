@@ -297,3 +297,30 @@ input[type=submit] {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+#cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cart-table th,
+#cart-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#cart-table th {
+    background-color: #f2f2f2;
+}
+
+#total-price {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.empty-cart-message {
+    font-size: 2em;  
+    text-align: center;   
+    margin: 50px 0; 
+}

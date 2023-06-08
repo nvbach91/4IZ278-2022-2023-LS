@@ -12,8 +12,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM product";
-$result = $conn->query($sql);
+$searchQuery = "%" . $_POST['query'] . "%";
+$sql = "SELECT * FROM product WHERE name LIKE ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $searchQuery);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 $productCounter = 0;
 
@@ -49,3 +54,4 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+?>

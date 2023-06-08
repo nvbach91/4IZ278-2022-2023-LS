@@ -29,7 +29,7 @@
         </nav>
         <div class="search">
             <input type="text" placeholder="Search" class="input-search">
-            <button action="cart.php">Search</button>
+            <button>Search</button>
         </div>
 
         <div class="login">

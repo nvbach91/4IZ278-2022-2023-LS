@@ -255,3 +255,13 @@ footer nav ul li a:hover {
 #register-form button:hover {
     background-color: #555;
 }
+
+.error-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}

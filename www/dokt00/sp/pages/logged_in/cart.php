@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT `order`.order_id, orderitem.quantity, product.price, product.name, product.image_url 
+$sql = "SELECT `order`.order_id, orderitem.quantity, product.price, product.name, product.image_url, product.product_id 
         FROM `order` 
         JOIN orderitem ON `order`.order_id = orderitem.order_id 
         JOIN product ON orderitem.product_id = product.product_id 
@@ -96,29 +96,36 @@ foreach ($cartItems as $item) {
         </aside>
         <main>
             <div class="cart">
-                <h2>Your Shopping Cart</h2>
-                <table id="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cartItems as $item) : ?>
+                <h2>Cart</h2>
+                <?php if (empty($cartItems)) : ?>
+                    <p class="empty-cart-message">Your shopping cart is empty!</p>
+                <?php else : ?>
+                    <table id="cart-table">
+                        <thead>
                             <tr>
-                                <td><img src="<?= htmlspecialchars($item["image_url"]); ?>" alt="<?= htmlspecialchars($item["name"]); ?>" width="100"></td>
-                                <td><?= htmlspecialchars($item["name"]); ?></td>
-                                <td><?= htmlspecialchars($item["quantity"]); ?></td>
-                                <td><?= htmlspecialchars($item["price"]); ?> CZK</td>
+                                <th>Image</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Action</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <div id="total-price">
-                    Cena celkem:<?= $totalPrice; ?> Kč
-                </div>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($cartItems as $item) : ?>
+                                <tr>
+                                    <td><img src="<?= htmlspecialchars($item["image_url"]); ?>" alt="" width="100"></td>
+                                    <td><?= htmlspecialchars($item["name"]); ?></td>
+                                    <td><input type="number" min="1" class="quantity" data-product-id="<?= $item["product_id"]; ?>" value="<?= htmlspecialchars($item["quantity"]); ?>"></td>
+                                    <td><?= htmlspecialchars($item["price"]); ?> CZK</td>
+                                    <td><button class="delete-item" data-product-id="<?= $item["product_id"]; ?>">Delete</button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <div id="total-price">
+                        Cena celkem:<?= $totalPrice; ?> Kč
+                    </div>
+                <?php endif; ?>
             </div>
         </main>
     </div>
@@ -132,6 +139,9 @@ foreach ($cartItems as $item) {
         </nav>
         <p>&copy; 2023 Tea E-Shop. All rights reserved.</p>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+
 </body>
 
 </html>

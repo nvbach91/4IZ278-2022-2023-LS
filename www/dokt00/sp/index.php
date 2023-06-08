@@ -25,7 +25,7 @@
         </nav>
         <div class="search">
             <input type="text" placeholder="Search" class="input-search">
-            <button>Search</button>
+            <button class="search-button">Search</button>
         </div>
         <div class="login">
             <form action="login.php" method="POST">
@@ -37,7 +37,7 @@
         </div>
 
         <div class="cart">
-            <button>Cart</button>
+            <button class="cart-button">Cart</button>
         </div>
     </header>
 

@@ -51,3 +51,51 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     event.preventDefault();
     registerUser();
 });
+
+var addToCartButtons = document.querySelectorAll('.add-to-cart');
+var viewCartButton = document.querySelector('.cart-button');
+
+function showErrorMessage() {
+    event.preventDefault();
+    console.log('showing error message');
+    var errorMessage = document.createElement('div');
+    errorMessage.textContent = 'You need to be logged in to use this functionality!';
+    errorMessage.classList.add('error-message');
+
+    document.body.appendChild(errorMessage);
+
+    setTimeout(function() {
+        document.body.removeChild(errorMessage);
+    }, 3000);
+}
+
+addToCartButtons.forEach(button => button.addEventListener('click', showErrorMessage));
+viewCartButton.addEventListener('click', showErrorMessage); 
+
+var searchButton = document.querySelector('.search-button');
+var searchInput = document.querySelector('.input-search');
+
+searchButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    var searchText = searchInput.value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'search.php',
+        data: {
+            query: searchText
+        },
+        success: function(response) {
+            var productsContainer = document.querySelector('main');
+            productsContainer.innerHTML = response;
+        }
+    });
+});
+
+//!TODO
+searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        performSearch();
+    }
+});
