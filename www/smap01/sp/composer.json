@@ -1,0 +1,11 @@
+{
+    "require": {
+        "janu-software/facebook-php-sdk": "^0.2.0",
+        "symfony/http-client": "^6.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
