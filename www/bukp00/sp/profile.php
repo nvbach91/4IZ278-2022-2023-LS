@@ -21,8 +21,10 @@ $eventsDB = new EventsDB();
 $usersDB = new UsersDB();
 $participationsDB = new ParticipationsDB();
 
+
 try {
   $me = $fb->get('/me')->getGraphNode();
+  var_dump($me);
   $picture = $fb->get('/me/picture?redirect=false&height=200')->getGraphNode();
 } catch (Exception $e) {
   echo 'Graph returned an error: ' . $e->getMessage();

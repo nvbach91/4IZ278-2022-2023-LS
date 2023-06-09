@@ -21,6 +21,7 @@ function handleAddParticipation($data, $event)
   if ($formSubmitted) {
     $note = htmlspecialchars(trim($data['note']));
     $seats = intval(trim($data['seats']));
+    // ToDo: Add timezone
     $createdAt = date('Y-m-d H:i:s');
     $participant = getLoggedUserId();
 

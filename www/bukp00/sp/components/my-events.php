@@ -45,6 +45,9 @@ if ($formSubmitted) {
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           <?php echo $event["name"]; ?>
         </h5>
+        <p class="font-normal text-gray-800 dark:text-gray-200">
+          <?php echo $event["date"]; ?>
+        </p>
         <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
           <?php echo $event["short_description"]; ?>
         </p>
