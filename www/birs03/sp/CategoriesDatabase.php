@@ -9,6 +9,11 @@ class CategoriesDatabase extends Database{
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function addCategory($name){
+        $statement=$this->pdo->prepare("INSERT INTO categories (name) VALUES (?)");
+        $statement->execute([$name]);
+    }
 }
 
 ?>

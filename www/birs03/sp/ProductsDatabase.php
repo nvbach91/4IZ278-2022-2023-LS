@@ -17,16 +17,16 @@ class ProductsDatabase extends Database{
         return $result;
     }
 
-    function fetchRecords($itemsCountPerPage,$offset){
-        $query = "SELECT * FROM products ORDER BY product_id ASC LIMIT $itemsCountPerPage OFFSET ?";
+    function fetchRecords($itemsCountPerPage,$offset,$sort){
+        $query = "SELECT * FROM products ORDER BY price $sort LIMIT $itemsCountPerPage OFFSET ?";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1,$offset,PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
     }
 
-    function fetchRecordsByCategory($itemsCountPerPage,$offset,$category_id){
-        $query = "SELECT * FROM products WHERE category_id = $category_id ORDER BY product_id ASC LIMIT $itemsCountPerPage OFFSET ?";
+    function fetchRecordsByCategory($itemsCountPerPage,$offset,$category_id,$sort){
+        $query = "SELECT * FROM products WHERE category_id = $category_id ORDER BY price $sort LIMIT $itemsCountPerPage OFFSET ?";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1,$offset,PDO::PARAM_INT);
         $statement->execute();

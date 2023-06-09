@@ -34,6 +34,7 @@ if(!empty($_POST)){
     }
 
     if(isset($email)){
+        $existingUser = $usersDatabase->getUser($email);
         if(!$existingUser==null){
             array_push($errors,'This email already exist');
         }

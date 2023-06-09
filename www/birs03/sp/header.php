@@ -25,6 +25,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
                         <?php if($_COOKIE['admin']==1){?>
                             <li class="nav-item"><a class="nav-link" href="addForm.php">Add item</a></li>
+                            <li class="nav-item"><a class="nav-link" href="categoryForm.php">Add Category</a></li>
                         <?php ;}?>
                         <?php if(isset($_COOKIE['username'])){?>
                             <li class="nav-item"><a class="nav-link" href="profile.php"><?php echo $_COOKIE['username']?></a></li>

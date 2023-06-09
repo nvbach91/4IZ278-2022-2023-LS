@@ -6,9 +6,14 @@ if(!empty($_GET)){
         $_SESSION['selected_product'] = array();
         $_SESSION['product_quantity'] = array();
     }
-    array_push($_SESSION['selected_product'],$_GET['product_id']);
-    array_push($_SESSION['product_quantity'],'1');
-    header('Location: cart.php');
+    if(in_array($_GET['product_id'],$_SESSION['selected_product'])){
+        $_SESSION['product_quantity'][array_search($_GET['product_id'], $_SESSION['selected_product'])]+=1;
+        header('Location: cart.php?stare');
+        exit;
+    }
+    array_push($_SESSION['selected_product'],$_GET['product_id']); 
+    array_push($_SESSION['product_quantity'],1);
+    header('Location: cart.php?nove');
 }
 
 

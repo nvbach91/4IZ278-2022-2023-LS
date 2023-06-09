@@ -3,7 +3,7 @@
 
 $productsDatabase = new ProductsDatabase();
 
-$itemsCountPerPage = 5;
+$itemsCountPerPage = 6;
 $i;
 
 if(!empty($_GET['offset'])){
@@ -16,20 +16,30 @@ if(isset($_GET['category_id'])&&!empty($_GET['category_id'])){
     $category_id = $_GET['category_id'];
     $totalRecords = $productsDatabase->getTotalRecortdsByCategory($category_id);
     $paginationCount = ceil($totalRecords/$itemsCountPerPage);
-    $records = $productsDatabase->fetchRecordsByCategory($itemsCountPerPage,$offset,$category_id);
+    if(isset($_GET['sort'])&&!empty($_GET['sort'])){
+        $records = $productsDatabase->fetchRecordsByCategory($itemsCountPerPage,$offset,$category_id,$_GET['sort']);
+    }else{
+    $records = $productsDatabase->fetchRecordsByCategory($itemsCountPerPage,$offset,$category_id,"ASC");}
 }else{
     $totalRecords = $productsDatabase->getTotalRecortds();
     $paginationCount = ceil($totalRecords/$itemsCountPerPage);
-    $records = $productsDatabase->fetchRecords($itemsCountPerPage,$offset);
+    if(isset($_GET['sort'])&&!empty($_GET['sort'])){
+        $records = $productsDatabase->fetchRecords($itemsCountPerPage,$offset,$_GET['sort']);
+    }else{
+        $records = $productsDatabase->fetchRecords($itemsCountPerPage,$offset,"ASC");
+    }
 }
 //<a style="text-decoration:none;<?php if($i == $_GET['offset']/$itemsCountPerPage){echo 'font-weight:bold;color:black';}?" 
 //href="<?php if(isset($_GET['category_id'])){ echo __DIR__.'/index.php?category_id=' . $_GET['category_id'] . '&offset=' . $i *$itemsCountPerPage;}
         //else{echo __DIR__.'/index.php?category_id=0&offset=' . $i *$itemsCountPerPage;;}
-
+$i = 0;
 ?>
-    <ul>
-        <?php for($i=0;$i<$paginationCount;$i++): ?>
-        <li style="display:inline;padding:5px 10px;margin-right:10px;" class="card"><a style="text-decoration:none;<?php if($i == $offset/$itemsCountPerPage){echo 'font-weight:bold;color:black';}?>" href="<?php if(isset($_GET['category_id'])){ echo 'index.php?category_id=' . $_GET['category_id'] . '&offset=' . $i *$itemsCountPerPage;}else{echo 'index.php?category_id=0&offset=' . $i *$itemsCountPerPage;;}?>">
+    <ul><li style="display:inline;padding:5px 10px;margin-right:10px;" class="card">
+        <a href="index.php?<?php if(isset($_GET['category_id'])&&!empty($_GET['category_id'])){ echo 'category_id=' . $_GET['category_id'] . '&offset=' . $i *$itemsCountPerPage;}else{echo '?category_id=0&offset=' . $i *$itemsCountPerPage;;}echo "&sort=ASC";?>">Low to High</a>
+        <a href="index.php?<?php if(isset($_GET['category_id'])&&!empty($_GET['category_id'])){ echo 'category_id=' . $_GET['category_id'] . '&offset=' . $i *$itemsCountPerPage;}else{echo '?category_id=0&offset=' . $i *$itemsCountPerPage;;}echo "&sort=DESC";?>">High to Low</a>
+        </li>
+        <?php for($i;$i<$paginationCount;$i++): ?>
+        <li style="display:inline;padding:5px 10px;margin-right:10px;" class="card"><a style="text-decoration:none;<?php if($i == $offset/$itemsCountPerPage){echo 'font-weight:bold;color:black';}?>" href="<?php if(isset($_GET['category_id'])&&!empty($_GET['category_id'])){ echo 'index.php?category_id=' . $_GET['category_id'] . '&offset=' . $i *$itemsCountPerPage;}else{echo 'index.php?category_id=0&offset=' . $i *$itemsCountPerPage;;}?>">
             <?php echo $i + 1; ?>
         </a></li>
         <?php endfor;?>
