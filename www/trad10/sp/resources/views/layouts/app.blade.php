@@ -10,6 +10,7 @@
     <title>{{ config('APP_NAME', 'Fumblr') }}</title>
 
     <!-- Fonts -->
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -26,7 +27,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a class="app-bar-logo-link" href="{{ url('/') }}">
-                        <img class="app-bar-logo" src="\imgs\full_logo.png"/>
+                        <img class="app-bar-logo" src="{{ asset('imgs/full_logo.png') }}"/>
                     </a>
                 </div>
 

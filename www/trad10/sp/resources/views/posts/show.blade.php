@@ -4,9 +4,13 @@
     <div class="container">
         <div class="card mb-4">
             <div class="card-body">
-                <h1 class="card-title">{{ $post->title }}</h1>
+                <div class="d-flex justify-content-between align-items-start">
+                    <h1 class="card-title">{{ $post->title }}</h1>
+                    <p class="text-muted mb-0">{{ $post->user->name }}</p>
+                </div>
+                <hr>
                 <p class="card-text">{{ $post->content }}</p>
-
+                <p class="text-muted">{{ $post->created_at->format('M d, Y') }}</p>
                 @if(auth()->check() && (auth()->user()->id == $post->user_id || auth()->user()->isAdmin()))
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary mr-2">Edit Post</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">

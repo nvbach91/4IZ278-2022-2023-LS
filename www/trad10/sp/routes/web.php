@@ -5,6 +5,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\TrendingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +46,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/dashboard/categories/{category}', [AdminDashboardController::class, 'destroyCategory'])->name('admin.categories.destroy');
 });
 
+Route::get('/trending', [TrendingController::class, 'index'])->name('trending');
