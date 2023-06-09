@@ -75,6 +75,7 @@ if (isset($_GET['delete'])) {
                                 </select>
                                 <input type="submit" value="update" name="update_order" class="option-button">
                                 <a href="admin_orders.php?delete=<?php echo $fetch_orders['id']; ?>" onclick="return confirm('Delete this order?')" class="delete-button">Delete</a>
+                                <a href="admin_orders.php?details=<?php echo htmlspecialchars($fetch_orders['id']); ?>" class="button">Details</a>
                             </form>
                         </div>
                 <?php
@@ -87,6 +88,67 @@ if (isset($_GET['delete'])) {
             </div>
 
 
+        </section>
+
+        <section class="details-form">
+            <div class="box-container">
+                <?php
+                if (isset($_GET['details'])) {
+                    $update_id = $_GET['details'];
+                    $query = "SELECT * FROM `orders` WHERE id = ?";
+                    $stmt = mysqli_prepare($connection, $query);
+                    mysqli_stmt_bind_param($stmt, "i", $update_id);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($fetch_details = mysqli_fetch_assoc($result)) {
+                ?>
+                            <div class="box">
+
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <h3 class="title">Order details</h3>
+                                    <?php
+
+                                    $books = $fetch_details['total_products'];
+                                    $array = explode(",", $books);
+
+                                    foreach ($array as $book) {
+                                        $name = trim($book);
+                                        $parts = explode("(", $book);
+                                        $title = trim($parts[0]);
+                                        $number = rtrim($parts[1], ")");
+                                        echo "<div class='book'>" . "Book name: " . $title . "<br>" . "</div>";
+                                        echo "<div class='book'>" . "Quantity: " . $number . "<br>" . "</div>";
+
+                                        $query = "SELECT * FROM `products` WHERE name = ?";
+                                        $stmt = mysqli_prepare($connection, $query);
+                                        mysqli_stmt_bind_param($stmt, "s", $title);
+                                        mysqli_stmt_execute($stmt);
+                                        $result = mysqli_stmt_get_result($stmt);
+
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $price = $row['price'];
+                                            echo "<div class='book'>" . "Price: " . $price . "<br>" . "</div>";
+                                        }
+                                    }
+                                    ?>
+                                    <div class="price">Total: $<?php echo htmlspecialchars($fetch_details['total_price']); ?>/-</div>
+
+                                    <a href="../admin_php/admin_orders.php" class="option-button">Close</a>
+                                </form>
+                            </div>
+
+                <?php
+                        }
+                    }
+                } else {
+                    echo ' <script>
+                document.querySelector(".details-form").style.display = "none"
+            </script>';
+                }
+                ?>
+            </div>
         </section>
     </div>
 

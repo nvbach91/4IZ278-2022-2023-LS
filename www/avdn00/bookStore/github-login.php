@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         '&scope=user';
 }
 var_dump(goToAuthUrl());
+
 goToAuthUrl();
 
 echo "operation failed";

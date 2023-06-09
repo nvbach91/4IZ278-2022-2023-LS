@@ -6,6 +6,7 @@ ob_start();
 session_start();
 require_once './vendor/autoload.php';
 
+// přesměrování uživatele na autorizační stránku GitHubu
 function goToAuthUrl()
 {
     $client_id = '';
@@ -18,15 +19,19 @@ function goToAuthUrl()
     }
 }
 
+//přístupový token a údaje o uživateli
 function fetchData()
 {
     $client_id = '';
     $redirect_url = '';
     var_dump($_SERVER['REQUEST_METHOD']);
     var_dump($_GET['code']);
+
+    // zda byl požadavek proveden metodou GET a zda obsahuje parametr code (autorizační kód) v dotazu.
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['code'])) {
         $code = filter_var($_GET['code'], FILTER_SANITIZE_STRING);
 
+        //řetězec dotazu s parametry, který bude odeslán na GitHub server pro získání přístupového tokenu.
         $post = http_build_query(array(
             'client_id' => $client_id,
             'redirect_uri' => $redirect_url,
@@ -42,6 +47,7 @@ function fetchData()
 
             $access_token = $exploded2[0];
 
+            //nastavení volby pro odesílání dalších požadavků na GitHub API
             $opts = [
                 'http' => [
                     'method' => 'GET',
@@ -54,7 +60,11 @@ function fetchData()
 
             $url = "https://api.github.com/user";
             $context = stream_context_create($opts);
+
+            //GET požadavek na URL, aby získal informace o uživateli.
             $data = file_get_contents($url, false, $context);
+
+            //dekóduje řetězec JSON v proměnné $data a převádí ho na asociativní pole
             $user_data = json_decode($data, true);
             $username = $user_data['login'];
 

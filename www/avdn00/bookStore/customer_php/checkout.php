@@ -14,7 +14,7 @@ if (isset($_POST['order-button'])) {
     $email = mysqli_real_escape_string($connection, $_POST['email']);
     $method = mysqli_real_escape_string($connection, $_POST['method']);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
-    $placed_on = date('d-M-Y');
+    $placed_on = date('d-M-Y H:i:s');
 
     $message = array();
 
@@ -148,9 +148,22 @@ if (isset($_POST['order-button'])) {
                     <span>your number:</span>
                     <input type="number" min="0" name="number" required placeholder="enter your number">
                 </div>
+                <?php
+                $default_email = '';
+                $query = "SELECT email FROM `users` WHERE id = ?";
+                $stmt = $connection->prepare($query);
+                $stmt->bind_param("s", $user_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $default_email = $row['email'];
+                }
+
+                ?>
                 <div class="inputBox">
                     <span>your email:</span>
-                    <input type="email" name="email" required placeholder="enter your email">
+                    <input type="email" name="email" required placeholder="enter your email" value="<?php echo $default_email; ?>">
                 </div>
                 <div class="inputBox">
                     <span>payment method:</span>

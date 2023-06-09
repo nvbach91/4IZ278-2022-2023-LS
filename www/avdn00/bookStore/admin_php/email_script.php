@@ -12,13 +12,22 @@ require "../vendor/autoload.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
+//new instance of the PHPMailer class
 $mail = new PHPMailer(true);
+
+// indicates that the script will use the SMTP server for sending the email
 $mail->isSMTP();
 
+//enable SMTP authentication
 $mail->SMTPAuth = true;
 
+//host name of Gmail's SMTP server
 $mail->Host = "smtp.gmail.com";
+
+// use STARTTLS encryption
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
+// port number for Gmail's SMTP server
 $mail->Port = 587;
 
 $mail->Username = "help.bookworms@gmail.com";

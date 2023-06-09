@@ -177,6 +177,7 @@ if (isset($_POST['update_product'])) {
                             <div class="price">$<?php echo htmlspecialchars($fetch_products['price']); ?>/-</div>
                             <a href="admin_products.php?update=<?php echo htmlspecialchars($fetch_products['id']); ?>" class="option-button">Update</a>
                             <a href="admin_products.php?delete=<?php echo htmlspecialchars($fetch_products['id']); ?>" class="delete-button" onclick="return confirm('Delete this product?')">Delete</a>
+
                         </div>
                 <?php
                     }

@@ -369,7 +369,8 @@ section {
   font-size: 2rem;
 }
 
-.edit-product-form {
+.edit-product-form,
+.details-form {
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -384,7 +385,8 @@ section {
   width: 100%;
 }
 
-.edit-product-form form {
+.edit-product-form form,
+.details-form form {
   width: 50rem;
   padding: 2rem;
   text-align: center;
@@ -397,7 +399,8 @@ section {
   margin-bottom: 1rem;
 }
 
-.edit-product-form form .box {
+.edit-product-form form .box,
+.details-form form .box {
   margin: 1rem 0;
   padding: 1.2rem 1.4rem;
   border: var(--border);
@@ -406,6 +409,18 @@ section {
   font-size: 1.8rem;
   color: var(--black);
   width: 100%;
+}
+
+.details-form form .book {
+  font-size: 2.2rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.details-form form .price {
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  color: var(--red);
 }
 
 .orders .box-container {
