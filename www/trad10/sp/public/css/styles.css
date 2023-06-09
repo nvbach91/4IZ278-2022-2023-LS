@@ -1,0 +1,124 @@
+.google-btn {
+    margin: 25px;
+    width: 80%;
+    min-width: 184px;
+    max-width: 184px;
+    height: 42px;
+    background-color: #fcfcfc;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
+    cursor: hand;
+    align-self: center;
+    user-select: none;
+    transition: all 400ms ease 0s;
+    display: flex;
+}
+.google-btn .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    user-select: none
+}
+.google-btn .google-icon-svg {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+    user-select: none
+}
+.google-btn .btn-text {
+    float: right;
+    margin: 11px 14px 40px 40px;
+    color: #757575;
+    font-size: 14px;
+    letter-spacing: .2px;
+    font-family: Roboto;
+    user-select: none
+}
+.google-btn:hover {
+    box-shadow: 0 3px 8px rgba(117, 117, 117, .5);
+    user-select: none
+}
+.google-btn:active {
+    box-shadow: 0 1px 1px #757575;
+    background: #F8F8F8;
+    color: #fff;
+    user-select: none
+}
+
+/* App Bar Logo Styles */
+.app-bar-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.app-bar-logo {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Search Bar Styles */
+.search-bar {
+    flex-grow: 1;
+    position: relative;
+    max-width: 400px; /* adjust as needed */
+}
+
+.search-bar form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 5px;
+    padding-right: 30px; /* make room for the search icon */
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.search-bar button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.post {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+body {
+    background: #f4f4f4;
+}
+
+.card {
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+}
+
+.card-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.card-title a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.btn-primary {
+    margin-right: 1em;
+}
