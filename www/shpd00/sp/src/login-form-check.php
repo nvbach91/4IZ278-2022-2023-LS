@@ -16,10 +16,15 @@ if(!empty($_POST)){
         $loginIsSuccesful = false;
     }
 
+    //login
     if($loginIsSuccesful){
-        $loginIsSuccesful = $dbcon -> loginUser($username,$password);
+        $loginResult = $dbcon -> loginUser($username,$password);
+        $loginIsSuccesful = $loginResult[0];
+        if($loginIsSuccesful == 0){
+            $loginError = $loginResult[1];
+        }
     }
-}    
+}
 else{
     $username='';
     $password='';

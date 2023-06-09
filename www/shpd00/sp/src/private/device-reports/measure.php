@@ -1,5 +1,5 @@
 <?php
-require_once '../DBConnection.php';
+require_once '../../DBConnection.php';
 
 $postData = file_get_contents('php://input');
 

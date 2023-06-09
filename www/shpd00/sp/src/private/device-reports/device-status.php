@@ -1,5 +1,5 @@
 <?php
-require_once '../DBConnection.php';
+require_once '../../DBConnection.php';
 
 $postData = file_get_contents('php://input');
 
@@ -10,7 +10,7 @@ if(!empty($xml->serial)){
     $serial = $xml->serial;
     $key = $xml->key;
     $reportOffset = $xml->statusoffset;
-    echo password_hash($key,PASSWORD_DEFAULT);
+    //echo password_hash($key,PASSWORD_DEFAULT);
     $dbcon -> pushDeviceStatus($serial,$key,$reportOffset);
 }
 ?>

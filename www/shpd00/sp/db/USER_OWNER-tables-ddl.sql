@@ -56,7 +56,7 @@ CREATE TABLE appuserowner.session (
 	session_key 		INT UNSIGNED	NOT NULL AUTO_INCREMENT 
 	,user_key 			INT UNSIGNED	NOT NULL
 	,app_key			INT UNSIGNED	NOT NULL
-	,session_id			varchar(63)		NOT NULL
+	,session_token		VARCHAR(63)		NOT NULL
 	,valid_from 		datetime 		NOT NULL DEFAULT  CURTIME()
 	,valid_to			datetime 		NOT NULL DEFAULT  DATE_ADD(CURTIME(), INTERVAL 1 DAY)
 	,deleted_flag		CHAR(1)			NOT NULL DEFAULT  'N'
@@ -67,3 +67,6 @@ ALTER TABLE appuserowner.application ADD CONSTRAINT fk_app_autoreg_role FOREIGN 
 ALTER TABLE appuserowner.registration_type ADD CONSTRAINT fk_reg_type_role FOREIGN KEY (default_role_key) REFERENCES appuserowner.role(role_key) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE appuserowner.user ADD CONSTRAINT fk_user_reg_type FOREIGN KEY (registration_type_key) REFERENCES appuserowner.registration_type(reg_type_key) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE appuserowner.session ADD CONSTRAINT fk_sess_user FOREIGN KEY (user_key) REFERENCES appuserowner.user(user_key) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+commit;

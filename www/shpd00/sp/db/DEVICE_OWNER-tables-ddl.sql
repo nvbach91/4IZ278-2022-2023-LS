@@ -48,5 +48,30 @@ CREATE TABLE `deviceowner`.`measure_type` (
     ,PRIMARY KEY(measure_type_key)
 );
 
+CREATE TABLE `deviceowner`.`device_settings` (
+	device_setting_key 	INT UNSIGNED NOT NULL AUTO_INCREMENT
+	,device_key 		INT UNSIGNED NOT NULL
+	,setting_type_key	INT UNSIGNED NOT NULL
+	,valid_from			DATETIME NOT NULL DEFAULT CURTIME()
+	,current_flag		char(1)	NOT NULL DEFAULT 'N'
+	,deleted_flag		char(1)	NOT NULL DEFAULT 'N'
+	,varchar_val		varchar(255)
+	,num_val			int
+	,float_val			float(24)
+	,bool_val			boolean
+	,datetime_val		datetime
+	,PRIMARY KEY(device_setting_key)
+);
+
+CREATE TABLE `deviceowner`.`setting_type` (
+	setting_type_key	INT UNSIGNED NOT NULL AUTO_INCREMENT
+	,setting_type_name	varchar(63)	NOT NULL UNIQUE
+	,setting_type_desc	varchar(120)
+    ,PRIMARY KEY(setting_type_key)
+);
+
 ALTER TABLE deviceowner.device_model ADD CONSTRAINT fk_dev_model_dev_type FOREIGN KEY (device_type_key) REFERENCES deviceowner.device_type(device_type_key) ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE deviceowner.measure ADD CONSTRAINT fk_measure_measure_type FOREIGN KEY (measure_type_key) REFERENCES deviceowner.measure_type(measure_type_key) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE deviceowner.device_settings ADD CONSTRAINT fk_device_settings_setting_type FOREIGN KEY (setting_type_key) REFERENCES deviceowner.setting_type(setting_type_key) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE deviceowner.device_settings ADD CONSTRAINT fk_device_settings_device FOREIGN KEY (device_key) REFERENCES deviceowner.device(device_key) ON DELETE CASCADE ON UPDATE CASCADE;

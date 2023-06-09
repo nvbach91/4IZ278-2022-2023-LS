@@ -21,15 +21,17 @@ if(!empty($_POST)){
     }
 
     //email check
-    if(strlen($email)<5){
-        $emailError='Please, enter your email address';
-        $registrationIsSuccesful = false;
-    }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $emailError='email address is not valid';
-        $registrationIsSuccesful = false;
-    }elseif($dbcon->checkEmail($email)){
-        $emailError='email is already in use';
-        $registrationIsSuccesful = false;
+    if($_SERVER['HTTP_REFERER']=='.'){
+        if(strlen($email)<5){
+            $emailError='Please, enter your email address';
+            $registrationIsSuccesful = false;
+        }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $emailError='email address is not valid';
+            $registrationIsSuccesful = false;
+        }elseif($dbcon->checkEmail($email)){
+            $emailError='email is already in use';
+            $registrationIsSuccesful = false;
+        }
     }
 
     if($registrationIsSuccesful){
