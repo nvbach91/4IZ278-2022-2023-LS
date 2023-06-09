@@ -4,12 +4,11 @@
 <div class="container">
     <div class="jumbotron text-center">
         @if(Auth::check())
-            
-                <h1>Welcome, {{ Auth::user()->name }}!</h1>
-                <p>Ready to share your thoughts?</p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="{{ route('posts.create') }}" role="button">Create a New Post</a>
-                </p>
+            <h1>Welcome, {{ Auth::user()->name }}!</h1>
+            <p>Ready to share your thoughts?</p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="{{ route('posts.create') }}" role="button">Create a New Post</a>
+            </p>
         @endif
         <p>
             <a class="btn btn-success btn-lg" href="{{ route('trending') }}" role="button">See Trending</a>
@@ -30,7 +29,7 @@
                     @endforeach
                 @endif
                 <p class="card-text">{{ Str::limit($post->content, 100) }}</p>
-                <p class="card-subtitle mb-2 text-muted">{{ $post->created_at->format('m/d/Y H:i:s') }}</p>
+                <p class="card-subtitle mb-2 text-muted">{{ $post->created_at->setTimezone('Europe/Prague')->format('m/d/Y H:i:s') }}</p>
                 <div>
                     @foreach($post->tags as $tag)
                         <span class="badge bg-secondary m-1 tag" style="cursor: pointer;">#{{ $tag->name }}</span>

@@ -10,7 +10,7 @@
                 </div>
                 <hr>
                 <p class="card-text">{{ $post->content }}</p>
-                <p class="text-muted">{{ $post->created_at->format('M d, Y') }}</p>
+                <p class="card-subtitle mb-2 text-muted">{{ $post->created_at->setTimezone('Europe/Prague')->format('m/d/Y H:i:s') }}</p>
                 @if(auth()->check() && (auth()->user()->id == $post->user_id || auth()->user()->isAdmin()))
                     <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary mr-2">Edit Post</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
