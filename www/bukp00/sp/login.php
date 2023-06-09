@@ -5,13 +5,13 @@
 error_reporting(E_ERROR | E_PARSE);
 
 require_once __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/config.php';
+require_once __DIR__ . '/config.php';
 
 $fb = new \JanuSoftware\Facebook\Facebook(FB_CONFIG);
 
 $helper = $fb->getRedirectLoginHelper();
 $permissions = ['email'];
-$loginUrl = $helper->getLoginUrl(CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH . '/login-callback.php', $permissions);
+$loginUrl = $helper->getLoginUrl(CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH . 'login-callback.php', $permissions);
 
 ?>
 

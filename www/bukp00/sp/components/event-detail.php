@@ -22,9 +22,9 @@ $participationsDB = new ParticipationsDB();
 
 // Get event data and feedbacks
 if (isset($_GET['event_id'])) {
-  $event_id = $_GET['event_id'];
-  $event = $eventsDB->getBy('event_id', $event_id)[0];
-  $feedbacks = $feedbacksDB->getBy('event_id', $event_id);
+  $eventId = $_GET['event_id'];
+  $event = $eventsDB->getBy('event_id', $eventId)[0];
+  $feedbacks = $feedbacksDB->getBy('event_id', $eventId);
 
   // Event not found
   if ($event == null) {
@@ -37,11 +37,12 @@ if (isset($_GET['event_id'])) {
 }
 
 $owner = $event['organiser'] == $loggedUserId;
-$availableSeats = $event['capacity'] - $participationsDB->getParticipantsSum($event_id);
+$availableSeats = $event['capacity'] - $participationsDB->getParticipantsSum($eventId);
+$userSigned = $participationsDB->checkUserParticipation($loggedUserId, $eventId);
 
 $canAddFeedback = false;
 
-if ($loggedUserId !== null && !$owner) {
+if ($loggedUserId !== null && !$owner && $userSigned) {
   $canAddFeedback = true;
 }
 
@@ -77,18 +78,19 @@ if ($formSubmitted) {
     <p class="mt-2 italic">
       Available seats: <?php echo $availableSeats; ?>
     </p>
-    <div class="flex flex-column justify-between">
+    <div class="flex flex-column justify-between mt-4">
       <?php $event['organiser'] === $loggedUserId ? eventFormModal($event) : ''; ?>
-      <?php $availableSeats > 0 ? signUpModal($availableSeats) : ''; ?>
+      <?php $availableSeats > 0 ? signUpModal($availableSeats, $userSigned) : ''; ?>
     </div>
   </div>
+  <?php if (!empty($feedbacks) || $canAddFeedback): ?>
   <div class="block w-full rounded-lg rounded-b-none border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
     <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
       Zpětná vazba:
     </h5>
   </div>
   <ol class="relative -mt-8 w-full border border-gray-200 pt-2 dark:border-gray-700">
-    <?php foreach ($feedbacks as $feedback) : ?>
+    <?php foreach ($feedbacks as $feedback): ?>
       <li class="mb-10 ml-4 flex flex-wrap gap-1">
         <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200 dark:border-gray-900 dark:bg-gray-700"></div>
         <div class="text-sm font-normal text-gray-400 dark:text-gray-500">
@@ -108,4 +110,5 @@ if ($formSubmitted) {
       </li>
     <?php endif; ?>
   </ol>
+  <?php endif; ?>
 </div>

@@ -44,16 +44,25 @@ abstract class Resource extends Database implements CrudOperations
   {
     $query = 'SELECT * FROM ' . $this->tableName;
 
-    if ($limit !== null && $offset !== null) {
+    if ($limit !== null) {
       // Limit the number of feedbacks
-      $query .= ' LIMIT :limit OFFSET :offset';
+      $query .= ' LIMIT :limit';
+    }
+
+    if ($offset !== null) {
+      // Offset the feedbacks
+      $query .= ' OFFSET :offset';
     }
 
     $statement = $this->pdo->prepare($query);
 
-    if ($limit !== null && $offset !== null) {
-      // Bind limit values
+    if ($limit !== null) {
+      // Bind limit value
       $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+    }
+
+    if ($offset !== null) {
+      // Bind offset value
       $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
     }
 
@@ -66,15 +75,23 @@ abstract class Resource extends Database implements CrudOperations
   {
     $sql = 'SELECT * FROM ' . $this->tableName . ' WHERE ' . $field . ' = :value';
 
-    if ($limit !== null && $offset !== null) {
+    if ($limit !== null) {
       // Limit the number of feedbacks
-      $sql .= ' LIMIT :limit OFFSET :offset';
+      $sql .= ' LIMIT :limit';
+    }
+    if ($offset !== null) {
+      // Offset the feedbacks
+      $sql .= ' OFFSET :offset';
     }
     $statement = $this->pdo->prepare($sql);
 
-    if ($limit !== null && $offset !== null) {
-      // Bind limit values
+    if ($limit !== null) {
+      // Bind limit value
       $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+    }
+
+    if ($offset !== null) {
+      // Bind offset value
       $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
     }
 

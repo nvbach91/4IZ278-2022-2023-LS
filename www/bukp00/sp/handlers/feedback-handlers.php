@@ -1,22 +1,31 @@
 <?php
 
 require_once './database/FeedbacksDB.php';
+require_once './database/ParticipationsDB.php';
 require_once './utils.php';
 
 $feedbacksDB = new FeedbacksDB();
+$participationsDB = new ParticipationsDB();
 
 function handleAddFeedback($data, $event)
 {
   global $feedbacksDB;
+  global $participationsDB;
   $formSubmitted = !empty($data);
   $invalidInputs = [];
   $alertMessages = [];
 
   if ($formSubmitted) {
     $content = htmlspecialchars(trim($data['content']));
-    // ToDo: Check if user is a participant
     $participant = getLoggedUserId();
     $createdAt = date('Y-m-d H:i:s');
+
+    $participation = $participationsDB->checkUserParticipation($participant, $event['event_id']);
+
+    if (empty($participation)) {
+      array_push($alertMessages, 'Only a participant can add a feedback.');
+      array_push($invalidInputs, 'participant');
+    }
 
     if (!$content) {
       array_push($alertMessages, 'Feedback content is required.');

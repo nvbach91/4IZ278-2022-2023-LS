@@ -1,24 +1,25 @@
 <?php include './components/header.php'; ?>
 
 <?php
-session_start();
 
-if (!isset($_SESSION['access_token'])) {
-  header('Location: index.php');
-  exit();
-}
+require_once __DIR__ . '/utils.php';
+
+requireLogin();
 
 require_once __DIR__ . '/vendor/autoload.php';
+
 require_once __DIR__ . '/database/EventsDB.php';
 require_once __DIR__ . '/database/UsersDB.php';
+require_once __DIR__ . '/database/ParticipationsDB.php';
+
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/utils.php';
 
 $accessToken = $_SESSION['access_token'];
 
 $fb = new \JanuSoftware\Facebook\Facebook(array_merge(FB_CONFIG, ['default_access_token' => $accessToken]));
 $eventsDB = new EventsDB();
 $usersDB = new UsersDB();
+$participationsDB = new ParticipationsDB();
 
 try {
   $me = $fb->get('/me')->getGraphNode();
@@ -33,10 +34,11 @@ try {
 
 $helper = $fb->getRedirectLoginHelper();
 
-$logoutUrl = $helper->getLogoutUrl($accessToken, './index.php');
+$logoutUrl = $helper->getLogoutUrl($accessToken, CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH . 'logout-callback.php');
 
 $organisedEvents = $eventsDB->getBy('organiser', getLoggedUserId(), $limit, $offset);
 $dbUser = $usersDB->getBy('user_id', getLoggedUserId());
+$participatedEvents = $participationsDB->getBy('participant', getLoggedUserId());
 
 /** Handle form submission */
 $formSubmitted = !empty($_POST['email']);
@@ -53,7 +55,7 @@ if ($formSubmitted) {
 ?>
 
 <main class="flex font-medium items-center justify-center h-full">
-  <form class="w-64 mx-auto bg-gray-800 rounded-2xl px-8 py-6 shadow-lg" method="POST" action="">
+  <form class="mx-auto bg-gray-800 rounded-2xl px-8 py-6 shadow-lg" method="POST" action="">
     <div class="flex items-center justify-between">
       <span class="text-gray-400 text-sm">Organised: <?php echo count($organisedEvents); ?> Events</span>
     </div>
@@ -74,15 +76,19 @@ if ($formSubmitted) {
     </p>
 
     <div class="flex items-center justify-between">
-      <span class="text-gray-400 text-sm">Visited: <?php echo count($organisedEvents); ?> Events</span>
+      <span class="text-gray-400 text-sm">Visited: <?php echo count($participatedEvents); ?> Events</span>
     </div>
 
-    <div class="pt-6 flex justify-center w-full">
+    <div class="pt-6 flex gap-2 w-full">
       <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Save email
       </button>
+      <a href="<?php echo $logoutUrl; ?>">
+        <button type="button" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+          Logout
+        </button>
+      </a>
     </div>
-
   </form>
 </main>
 

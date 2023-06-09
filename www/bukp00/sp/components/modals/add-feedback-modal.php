@@ -1,7 +1,10 @@
 <?php
 
+require_once './utils.php';
+
 function addFeedbackModal($event)
 {
+  requireLogin();
 ?>
   <div>
     <!-- Only this button is visible by default -->
@@ -23,7 +26,7 @@ function addFeedbackModal($event)
             <label class="mb-1 block text-xs font-bold capitalize text-gray-600">
               Feedback
             </label>
-            <textarea name="content" type="text" class="w-full rounded border-0 bg-white p-3 text-sm text-gray-700 shadow placeholder:text-gray-400 focus:outline-none focus:ring"></textarea>
+            <textarea name="content" type="text" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"></textarea>
           </div>
           <input type="hidden" name="form" value="addFeedback">
           <!-- Modal footer -->

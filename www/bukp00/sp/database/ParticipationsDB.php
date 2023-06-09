@@ -14,6 +14,16 @@ class ParticipationsDB extends Resource
     $statement->execute();
     return $statement->fetchAll()[0]['total'];
   }
+
+  /** Check whether the user is not already signed to the event */
+  function checkUserParticipation($userId, $eventId) {
+    $sql = 'SELECT * FROM participations WHERE event_id = :event_id AND participant = :participant';
+    $statement = $this->pdo->prepare($sql);
+    $statement->bindValue(':event_id', $eventId, PDO::PARAM_INT);
+    $statement->bindValue(':participant', $userId, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchAll();
+  }
 }
 
 ?>
