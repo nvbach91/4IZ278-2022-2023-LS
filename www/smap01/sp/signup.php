@@ -55,13 +55,13 @@ function verifyInput($name, $email, $password, $password_ver)
     <div style="margin-left:auto;margin-right:auto;width:60%;max-width:300px;">
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
             <h1 style="text-align:center;padding-bottom:30px;">Sign up page</h1>
-            <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="name" type="text" placeholder="Name">
-            <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="email" type="email" placeholder="Email">
+            <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="name" type="text" placeholder="Name" <?php echo (isset($_POST)&&isset($_POST['name'])&&preg_match("/^(([a-zA-ZÁÉÍÓÚÝÄČĎĚÏŇÖŘŠŤÜÛÝŽáéíóúýäčďěïňöřšťüûýž]+)( )?)+$/", $_POST['name']))?"value='".$_POST['name']."'":"";?>>
+            <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="email" type="email" placeholder="Email" <?php echo (isset($_POST)&&isset($_POST['email'])&&filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))?"value='".$_POST['email']."'":"";?>>
             <div class="signup-2c">
                 <div class="signup-1c">
                     <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="password" type="password" placeholder="Password">
                     <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="password_ver" type="password" placeholder="Verify password">
-                    <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="address" type="text" placeholder="Address">
+                    <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="address" type="text" placeholder="Address" <?php echo (isset($_POST)&&isset($_POST['address']))?"value='".htmlspecialchars($_POST['address'])."'":"";?>>
                 </div>
                 <button class="btn" style="display:block;margin-left:auto;margin-right:auto;">Sign up</button>
             </div>

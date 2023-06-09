@@ -36,7 +36,7 @@ $loginUrl = $helper->getLoginUrl(CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH .
 <div style="margin-left:auto;margin-right:auto;width:60%;max-width:300px;">
     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
         <h1 style="text-align:center;padding-bottom:30px;">Login page</h1>
-        <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="email" type="email" placeholder="Email">
+        <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="email" type="email" placeholder="Email" <?php echo (isset($_POST)&&isset($_POST['email'])&&filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))?"value='".$_POST['email']."'":"";?>>
         <input class="form-control mr-sm-2" required style="display:block;margin-left:auto;margin-right:auto;margin-bottom:30px;" name="password" type="password" placeholder="Password">
         <a style="display:block;margin-top:-30px;margin-bottom:30px;" href="signup.php">Don't have an account yet? Sign up here!</a>
         <button class="btn" style="display:block;margin-left:auto;margin-right:auto;">Login</button>

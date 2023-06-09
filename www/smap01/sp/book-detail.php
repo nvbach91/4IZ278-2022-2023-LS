@@ -14,8 +14,19 @@ if (!isset($_GET) || !$productsDB->bookExists(htmlspecialchars($_GET['book_id'])
     exit;
 }
 
+$reviewOffset = 0;
+if (isset($_GET) && isset($_GET['review_offset'])) {
+    $reviewOffset = filter_var($_GET['review_offset'], FILTER_VALIDATE_INT);
+    if ($reviewOffset == FALSE) {
+        $reviewOffset = 0;
+    }
+}
+
+$reviewCountPerPage = 5;
+
 $book = $productsDB->getBook($_GET['book_id']);
-$reviews = $reviewsDB->getReviews($_GET['book_id']);
+$reviews = $reviewsDB->getReviewsByOffset(htmlspecialchars($_GET['book_id']), $reviewOffset, $reviewCountPerPage);
+$paginationCount = ceil($reviewsDB->getCountOfTotalRecord($_GET['book_id']) / $reviewCountPerPage);
 
 ?>
 
@@ -55,18 +66,29 @@ $reviews = $reviewsDB->getReviews($_GET['book_id']);
                 <a href="add-review.php?book_id=<?php echo $book['book_id'] ?>">Add a review</a>
             </div>
             <div class="reviews">
-                <?php foreach ($reviews as $review) : ?>
-                    <div class="review">
-                        <p>
-                            <b><?php echo $review['review_title']; ?></b><br>
-                            <?php $user = $usersDB->getUser($review['review_user_id']); ?>
-                            <?php echo (isset($review['review_user_id']) && $usersDB->userExists($usersDB->getUser($review['review_user_id'])['user_email'])) ? "<a>By <a href='profile.php?user_id=" . $user['user_id'] . "'>" . $user['user_name'] . "</a></a><br>" : "" ?>
-                            <?php for ($i = 0; $i < $review['review_stars']; $i++) echo '<i class="fa-sharp fa-solid fa-star"></i>'; ?><br>
-                            <a><?php echo $review['review_text']; ?></a>
-                        </p>
-                    </div>
-                <?php endforeach; ?>
-                <?php if (count($reviews) == 0) echo "<div class='review'><a>There are no reviews yet :(</a></div>"; ?>
+                <?php if($paginationCount>1):?>
+                <div class="pagination-column pagination-column-wrap">
+                    <?php for ($i = 0; $i < $paginationCount; $i++) { ?>
+                        <div class="pagination"><a href="<?php echo './book-detail.php?book_id='.$book['book_id'].'&review_offset=' . $i * $reviewCountPerPage; ?>">
+                                <?php echo $i + 1; ?>
+                            </a></div>
+                    <?php } ?>
+                </div>
+                <?php endif;?>
+                <div class="reviews">
+                    <?php foreach ($reviews as $review) : ?>
+                        <div class="review">
+                            <p>
+                                <b><?php echo $review['review_title']; ?></b><br>
+                                <?php $user = $usersDB->getUser($review['review_user_id']); ?>
+                                <?php echo (isset($review['review_user_id']) && $usersDB->userExists($usersDB->getUser($review['review_user_id'])['user_email'])) ? "<a>By <a href='profile.php?user_id=" . $user['user_id'] . "'>" . $user['user_name'] . "</a></a><br>" : "" ?>
+                                <?php for ($i = 0; $i < $review['review_stars']; $i++) echo '<i class="fa-sharp fa-solid fa-star"></i>'; ?><br>
+                                <a><?php echo $review['review_text']; ?></a>
+                            </p>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php if (count($reviews) == 0) echo "<div class='review'><a>There are no reviews yet :(</a></div>"; ?>
+                </div>
             </div>
         </div>
     </div>

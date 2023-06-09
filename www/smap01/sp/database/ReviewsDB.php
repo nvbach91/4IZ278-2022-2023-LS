@@ -44,6 +44,25 @@ class ReviewsDB{
             return $e;
         }
     }
+
+    function getReviewsByOffset($book_id, $offset, $itemsCountPerPage)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM sp_reviews WHERE review_book_id=? ORDER BY review_id DESC LIMIT ? OFFSET ?");
+        $statement->bindParam(2, $itemsCountPerPage, PDO::PARAM_INT);
+        $statement->bindParam(3, $offset, PDO::PARAM_INT);
+        $statement->bindParam(1, $book_id, PDO::PARAM_INT);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    function getCountOfTotalRecord($book_id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM sp_reviews WHERE review_book_id=:book_id");
+        $statement->execute([':book_id'=>$book_id]);
+        $result = $statement->fetchAll();
+        return count($result);
+    }
 }
 
 

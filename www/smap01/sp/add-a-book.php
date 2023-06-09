@@ -55,32 +55,31 @@ function verifyInput($bookName, $bookAuthors, $bookDescription, $bookThumbnail, 
         echo "<h2 style='margin-top:50px;text-align:center'>You have to be logged in in order to create a new item.</h2>";
     } else if ($usersDB->getUserPrivilege(htmlspecialchars($_COOKIE['user_email'])) < 2) {
         echo "<h2 style='margin-top:50px;text-align:center'>You can't add new items.</h2>";
-    } else {
-        echo "<form action='add-a-book.php' method='POST'>
+    } else{
+        if(true):?>
+        <form action='add-a-book.php' method='POST'>
         <div class='add-2'>
             <div style='display:flex;flex-direction:column;'>
                 <label class='validationDefault01'>Book name</label>
-                <input class='form-control' id='validationDefault01' required type='text' name='name'>
+                <input class='form-control' id='validationDefault01' required type='text' name='name' <?php echo (isset($_POST)&&isset($_POST['name'])&&strcmp($_POST['name'],htmlspecialchars($_POST['name']))==0)?"value='".htmlspecialchars($_POST['name'])."'":"";?>>
                 <label class='validationDefault01'>Author/s</label>
-                <input class='form-control' id='validationDefault04' required type='text' name='authors'>
+                <input class='form-control' id='validationDefault04' required type='text' name='authors' <?php echo (isset($_POST)&&isset($_POST['authors'])&&preg_match("/^(([a-zA-ZÁÉÍÓÚÝÄČĎĚÏŇÖŘŠŤÜÛÝŽáéíóúýäčďěïňöřšťüûýž]+)(.)?(,)?( )?)+$/",$_POST['authors']))?"value='".htmlspecialchars($_POST['authors'])."'":"";?>>
                 <label id='validationDefault02'>Description</label>
-                <textarea class='form-control' type='text' id='validationDefault02' required name='description'></textarea>
+                <textarea class='form-control' type='text' id='validationDefault02' required name='description'><?php echo (isset($_POST)&&isset($_POST['description']))?htmlspecialchars($_POST['description']):"";?></textarea>
                 <div class='add-2c'>
                     <div>
                         <label class='validationDefault05'>Thumbnail url</label>
-                        <input class='form-control' type='text' id='validationDefault03' required name='thumbnail'>
+                        <input class='form-control' type='text' id='validationDefault03' required name='thumbnail' <?php echo (isset($_POST)&&isset($_POST['thumbnail'])&&filter_var($_POST['thumbnail'], FILTER_VALIDATE_URL))?"value='".$_POST['thumbnail']."'":"";?>>
                     </div>
                     <div>
                         <label class='validationDefault03'>Price</label>
-                        <input class='form-control' type='text' id='validationDefault03' required name='price'>
+                        <input class='form-control' type='text' id='validationDefault03' required name='price' <?php echo (isset($_POST)&&isset($_POST['price'])&&filter_var($_POST['price'], FILTER_VALIDATE_FLOAT))?"value='".$_POST['price']."'":"";?>>
                     </div>
                 </div>
             </div>
             <button class='btn'>Add</button>
         </div>
-    </form>";
-    }
-
-    ?>
+    </form>
+    <?php endif;}?>
 </main>
 <?php require_once './incl/footer.php'; ?>

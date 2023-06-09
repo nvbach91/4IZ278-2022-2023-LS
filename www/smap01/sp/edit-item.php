@@ -78,7 +78,7 @@ if (isset($_GET['book_id']) && $productsDB->getBook($_GET['book_id'])) {
     } else if ($usersDB->getUserPrivilege($_COOKIE['user_email']) < 2) {
         echo "<h2 style='margin-top:50px;text-align:center'>You can't edit new items.</h2>";
     } else {
-        echo "<form action='edit-item.php' method='POST'>
+        echo "<form action='edit-item.php".((isset($_GET)&&isset($_GET['book_id']))?"?book_id=".htmlspecialchars($_GET['book_id']):"")."' method='POST'>
         <div class='add-2'>
         <div style='display:flex;flex-direction:column;'>
         <label class='validationDefault04'>ID</label>

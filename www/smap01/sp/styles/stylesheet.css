@@ -235,7 +235,6 @@ review-btn.btn {
     border: 1px;
     border-style: solid;
     width: 100% !important;
-    margin-bottom: 50px;
 }
 
 .review:not(:last-child) {
@@ -255,6 +254,7 @@ review-btn.btn {
     display: flex;
     width: 100%;
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .buy-btn a {
@@ -331,10 +331,14 @@ review-btn.btn {
 
 .pagination-column {
     display: flex;
-    flex-direction: row;
+    flex-direction: row!important;
     text-align: center;
     justify-content: center;
     gap: 3px;
+}
+
+.pagination-column-wrap{
+    width:100%!important;
 }
 
 .fb-login {

@@ -48,7 +48,7 @@ class OrdersDB
     //Function that returns user_id's orders
     function getUsersOrders($user_id){
         try{
-            $statement=$this->pdo->prepare("SELECT * FROM sp_orders WHERE order_user_id=:user_id");
+            $statement=$this->pdo->prepare("SELECT * FROM sp_orders WHERE order_user_id=:user_id ORDER BY order_id DESC");
             $statement->execute([
                 ':user_id'=>htmlspecialchars($user_id)
             ]);
