@@ -211,3 +211,9 @@ body {
     align-self: flex-end;
     margin-top: 24px;
 }
+
+.order_msg {
+    display: flex;
+    font-size: 16px;
+    color: lightgreen;
+}

@@ -22,7 +22,7 @@
             </form>
             <nav class="navigation_container">
             <?php if (($_SESSION['user_email'] != "visitor")) : ?>
-                <p>Account: <?php echo $_SESSION['user_email'] ?></p>
+                <a href="user_desc.php"><p>Account: <?php echo $_SESSION['user_email'] ?></p></a>
                 <?php endif ?>
                 <ul class="navigation_menu">
                     <li class="navigation_item">
@@ -34,6 +34,11 @@
                     <?php if (isset($_SESSION['account_level']) && $_SESSION['account_level'] > 0) : ?>
                         <li class="navigation_item">
                             <a href="cart.php">Shopping Cart</a>
+                        </li>
+                    <?php endif ?>
+                    <?php if (isset($_SESSION['account_level']) && $_SESSION['account_level'] > 2) : ?>
+                        <li class="navigation_item">
+                            <a href="add_product.php">Add product</a>
                         </li>
                     <?php endif ?>
                     <?php if (isset($_SESSION['account_level']) && $_SESSION['account_level'] == 3) : ?>

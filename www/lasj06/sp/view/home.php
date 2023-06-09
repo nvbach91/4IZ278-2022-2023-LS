@@ -6,6 +6,12 @@ require '../controller/user_required.php';
 
 <?php require __DIR__ . "/incl/header.php"; ?>
 
+<div>
+    <?php if (isset($_GET['message'])) : ?>
+        <p class="order_msg"><?php echo $_GET['message'] ?></p>
+    <?php endif ?>
+</div>
+
 <div class="content">
     <form class="category_select" method="POST">
         <?php foreach ($allCategories as $category) : ?>

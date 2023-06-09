@@ -24,9 +24,25 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     insertOrderItems($products);
 
-    mail($_SESSION['user_email'], "DiskShop Order", "Thank you for shopping at DiskShop",'From: info@diskshop.com');
+    #mail
+    $to = $_SESSION['user_email'];
+
+    $subject = "DiskShop Order";
+
+    $message =
+    '<div>
+        <p>Thank you for ordering from DiskShop</p>
+        <br>
+        <p>We hope to see you again</p>
+    </div>';
+
+    $headers = "From: info@diskshop.com\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+    mail($to, $subject, $message, $headers);
 
     $_SESSION['cart'] = [];
-    header('Location: home.php');
+    header('Location: home.php?message=Thank you for your order, we hope to see you again.');
     exit();
 }

@@ -84,7 +84,7 @@ function fetchProductsByName($search)
     $db = newDB();
     @$stmt = $db->prepare('SELECT * FROM products WHERE name LIKE :search');
     $stmt->execute([
-        "search" => $search,
+        "search" => "%" . $search . "%",
     ]);
     $products = @$stmt->fetchAll();
     return $products;
@@ -101,4 +101,18 @@ function updateProduct($product_id)
         "description" => $_POST['description'],
         "image" => $_POST['image_link']
     ]);
+}
+
+function insertProduct()
+{
+    $db = newDB();
+    @$stmt = $db->prepare('INSERT INTO products (product_id, name, price, description, image) VALUES (:product_id, :name, :price, :description, :image)');
+    $stmt->execute([
+        "product_id" => $_POST['product_id'],
+        "name" => $_POST['new_name'],
+        "price" => $_POST['price'],
+        "description" => $_POST['description'],
+        "image" => $_POST['image_link'],
+    ]);
+    return $_POST['product_id'];
 }

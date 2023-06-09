@@ -51,9 +51,6 @@ if (isset($_GET['code'])) {
 
     $userinfo = json_decode(base64_decode($jwt[1]), true);
 
-    $_SESSION['user_email'] = $userinfo['email'];
-    $_SESSION['account_level'] = 1;
-
     $_SESSION['access_token'] = $data['access_token'];
     $_SESSION['id_token'] = $data['id_token'];
     $_SESSION['userinfo'] = $userinfo;
@@ -62,6 +59,11 @@ if (isset($_GET['code'])) {
     $hashedPassword = password_hash($_SESSION['state'], PASSWORD_DEFAULT);
     @signUp($userinfo['email'], "google_account", $hashedPassword);
     }
+
+    $google_user = signIn($userinfo['email']);
+
+    $_SESSION['user_email'] = $google_user['email'];
+    $_SESSION['account_level'] = $google_user['account_level'];
 
     header('Location: home.php');
     die();
