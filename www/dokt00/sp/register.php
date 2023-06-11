@@ -1,16 +1,8 @@
 <?php
-$db_host = 'localhost';
-$db_name = 'tea_shop';
-$db_user = 'root';
-$db_password = '';
+require_once 'db/Database.php';
+require_once 'db/UserDB.php';
 
-//connection to db
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-
-// checking connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$usersDB = new UsersDB();
 
 $username = $_POST['username'];
 $email = $_POST['email'];
@@ -21,19 +13,22 @@ $phone = $_POST['phone'];
 
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO Users (username, email, password, first_name, last_name, phone) VALUES (?, ?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ssssss", $username, $email, $hashed_password, $first_name, $last_name, $phone);
-$stmt->execute();
+$userData = [
+    'username' => $username,
+    'email' => $email,
+    'password' => $hashed_password,
+    'first_name' => $first_name,
+    'last_name' => $last_name,
+    'phone' => $phone
+];
 
-if ($stmt->affected_rows > 0) {
+$userId = $usersDB->insert($userData);
+
+if ($userId) {
     // registration successful
     echo 'success';
 } else {
     // registration failed
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: User could not be registered.";
 }
-
-$stmt->close();
-$conn->close();
 ?>

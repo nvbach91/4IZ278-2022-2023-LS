@@ -1,36 +1,16 @@
 <?php
 session_start();
 
-$db_host = 'localhost';
-$db_name = 'tea_shop';
-$db_user = 'root';
-$db_password = '';
+require_once '../../db/Database.php';
+require_once '../../db/OrderDB.php';
+require_once '../../db/UsersDB.php';
 
-//connection to db
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-
-// checking connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$orderDB = new OrderDB();
+$userDB = new UsersDB();
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT `order`.order_id, orderitem.quantity, product.price, product.name, product.image_url, product.product_id 
-        FROM `order` 
-        JOIN orderitem ON `order`.order_id = orderitem.order_id 
-        JOIN product ON orderitem.product_id = product.product_id 
-        WHERE `order`.user_id = ? AND `order`.status = 'pending'";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $user_id);
-$stmt->execute();
-
-$result = $stmt->get_result();
-$cartItems = [];
-while ($row = $result->fetch_assoc()) {
-    $cartItems[] = $row;
-}
+$cartItems = $orderDB->getPendingByUserId($user_id);
 
 $totalPrice = 0;
 foreach ($cartItems as $item) {
@@ -103,7 +83,6 @@ foreach ($cartItems as $item) {
                     <table id="cart-table">
                         <thead>
                             <tr>
-                                <th>Image</th>
                                 <th>Product</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
@@ -113,18 +92,26 @@ foreach ($cartItems as $item) {
                         <tbody>
                             <?php foreach ($cartItems as $item) : ?>
                                 <tr>
-                                    <td><img src="<?= htmlspecialchars($item["image_url"]); ?>" alt="" width="100"></td>
-                                    <td><?= htmlspecialchars($item["name"]); ?></td>
-                                    <td><input type="number" min="1" class="quantity" data-product-id="<?= $item["product_id"]; ?>" value="<?= htmlspecialchars($item["quantity"]); ?>"></td>
+                                    <td>
+                                        <div class="product-container">
+                                            <img src="../../<?= htmlspecialchars($item["image_url"]); ?>" alt="" width="100">
+                                            <span class="product-name"><?= htmlspecialchars($item["name"]); ?></span>
+                                        </div>
+                                    </td>
+                                    <td><input type="number" min="1" class="quantity-input" data-product-id="<?= $item["product_id"]; ?>" value="<?= htmlspecialchars($item["quantity"]); ?>"></td>
                                     <td><?= htmlspecialchars($item["price"]); ?> CZK</td>
                                     <td><button class="delete-item" data-product-id="<?= $item["product_id"]; ?>">Delete</button></td>
                                 </tr>
                             <?php endforeach; ?>
+
                         </tbody>
                     </table>
                     <div id="total-price">
                         Cena celkem:<?= $totalPrice; ?> Kč
                     </div>
+                    <a href="checkout_page.php">
+                        <button>Proceed to checkout</button>
+                    </a>
                 <?php endif; ?>
             </div>
         </main>
@@ -140,6 +127,7 @@ foreach ($cartItems as $item) {
         <p>&copy; 2023 Tea E-Shop. All rights reserved.</p>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="update.js"></script>
     <script src="main.js"></script>
 
 </body>

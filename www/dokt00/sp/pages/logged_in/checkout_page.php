@@ -62,8 +62,36 @@
         </aside>
         <main>
 
-            <?php include 'products.php'; ?>
-            
+            <h1>Doručení</h1>
+            <form id="billing-form" action="checkout.php" method="POST" onsubmit="event.preventDefault();">
+
+                <label for="first_name">Jméno:</label>
+                <input type="text" name="first_name" id="first_name">
+
+                <label for="last_name">Příjmení:</label>
+                <input type="text" name="last_name" id="last_name">
+
+                <label for="phone">Phone:</label>
+                <input type="tel" name="phone" id="phone">
+
+                <label for="city">Město:</label>
+                <input type="text" name="city" id="city" required>
+
+                <label for="street">Ulice:</label>
+                <input type="text" name="street" id="street" required>
+
+                <label for="password">PSČ:</label>
+                <input type="text" name="psc" id="psc" required>
+
+                <label for="payment_method">Typ platby:</label><br>
+                <select id="pay_method" name="payment_method">
+                    <option value="dobirka">Platba dobírkou</option>
+                    <option value="prevod">Platba převodem</option>
+                </select><br>
+
+                <button type="submit">Checkout</button>
+            </form>
+
         </main>
     </div>
     <footer>

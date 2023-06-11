@@ -93,9 +93,20 @@ searchButton.addEventListener('click', function(e) {
 });
 
 //!TODO
-searchInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        performSearch();
-    }
-});
+// var categoryButtons = document.querySelectorAll('.category');
+
+// categoryButtons.forEach(button => button.addEventListener('click', function(e) {
+//     e.preventDefault();
+
+//     $.ajax({
+//         type: 'POST',
+//         url: 'category.php',
+//         data: {
+//             query: button.textContent
+//         },
+//         success: function(response) {
+//             var productsContainer = document.querySelector('main');
+//             productsContainer.innerHTML = response;
+//         }
+//     });
+// }));

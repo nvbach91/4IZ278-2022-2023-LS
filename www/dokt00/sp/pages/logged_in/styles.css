@@ -245,6 +245,12 @@ input[type=submit] {
     align-items: center;
 }
 
+#billing-form {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
 #register-form label {
     align-self: flex-start;
     margin-top: 10px;
@@ -323,4 +329,14 @@ input[type=submit] {
     font-size: 2em;  
     text-align: center;   
     margin: 50px 0; 
+}
+
+.product-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-name {
+    margin-left: 10px; 
 }

@@ -1,43 +1,33 @@
 <?php
-$db_host = 'localhost';
-$db_name = 'tea_shop';
-$db_user = 'root';
-$db_password = '';
 
-//connection to db
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+require_once 'db/Database.php';
+require_once 'db/ProductDB.php';
 
-// checking connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$productDB = new ProductDB();
 
-$sql = "SELECT * FROM product";
-$result = $conn->query($sql);
+$products = $productDB->getAll();
 
 $productCounter = 0;
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        if ($productCounter % 3 == 0) {
-            echo '<section class="products">';
+if (!empty($products)) {
+    echo '<section class="products">';
+
+    foreach ($products as $product) {
+        if ($productCounter % 3 == 0 && $productCounter > 0) {
+            echo '</section><section class="products">';
         }
 
         echo '<div class="product">';
-        echo '<img src="' . $row["image_url"] . '" alt="' . $row["name"] . '">';
-        echo '<h3>' . $row["name"] . '</h3>';
-        echo '<p>$' . $row["price"] . '</p>';
+        echo '<img src="' . $product["image_url"] . '" alt="' . $product["name"] . '">';
+        echo '<h3>' . $product["name"] . '</h3>';
+        echo '<p>$' . $product["price"] . '</p>';
         echo '<form method="POST">';
-        echo '<input type="hidden" name="product_id" value="' . $row["product_id"] . '">';
+        echo '<input type="hidden" name="product_id" value="' . $product["product_id"] . '">';
         echo '<button class="add-to-cart" type="submit">Add to Cart</button>';
         echo '</form>';
         echo '</div>';
 
         $productCounter++;
-
-        if ($productCounter % 3 == 0) {
-            echo '</section>';
-        }
     }
 
     if ($productCounter % 3 != 0) {
@@ -47,5 +37,3 @@ if ($result->num_rows > 0) {
 } else {
     echo "No products found";
 }
-
-$conn->close();

@@ -17,10 +17,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
+                <li><a class="category" href="#">Green Tea</a></li>
+                <li><a class="category" href="#">Black Tea</a></li>
+                <li><a class="category" href="#">Herbal Tea</a></li>
+                <li><a class="category" href="#">Fruit Tea</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -55,7 +55,6 @@
         </aside>
         <main>
             <?php include 'products.php'; ?>
-
         </main>
     </div>
     <footer>
@@ -96,6 +95,7 @@
     </div>
 
     <script src="main.js"></script>
+    <script src="search.js"></script>
 </body>
 
 </html>

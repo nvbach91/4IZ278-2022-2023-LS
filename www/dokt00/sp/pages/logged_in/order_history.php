@@ -1,34 +1,16 @@
 <?php
 session_start();
 
+require_once '../../db/Database.php';
+require_once '../../db/OrderDB.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
     exit;
 }
 
-$db_host = 'localhost';
-$db_name = 'tea_shop';
-$db_user = 'root';
-$db_password = '';
-
-//connection to db
-$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-
-// checking connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM Orders WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $_SESSION['user_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$orders = $result->fetch_all(MYSQLI_ASSOC);
-
-$stmt->close();
-$conn->close();
+$orderDB = new OrderDB();
+$orders = $orderDB->getOrdersByUserId($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +22,7 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Your Order History</h1>
+    <h1>Order History</h1>
 
     <table>
         <tr>
@@ -55,7 +37,7 @@ $conn->close();
             <tr>
                 <td><?= $order['order_id'] ?></td>
                 <td><?= $order['date'] ?></td>
-                <td><?= $order['product'] ?></td>
+                <td><?= $order['name'] ?></td>
                 <td><?= $order['quantity'] ?></td>
                 <td><?= $order['total_price'] ?></td>
             </tr>
