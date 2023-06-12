@@ -94,13 +94,26 @@ class OrderitemDB extends Teadatabase
     }
 
     public function getAllByOrderId($orderId)
-{
-    $sql = "SELECT * FROM orderitem WHERE order_id = ?";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(1, $orderId);
-    $stmt->execute();
+    {
+        $sql = "SELECT * FROM orderitem WHERE order_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $orderId);
+        $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    public function getTotalPriceByOrderId($orderId)
+    {
+        $sql = "SELECT SUM(p.price * oi.quantity) as total_price
+            FROM `orderitem` oi
+            INNER JOIN `product` p ON oi.product_id = p.product_id
+            WHERE oi.order_id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$orderId]);
+        $result = $stmt->fetch();
+
+        return $result ? $result['total_price'] : 0;
+    }
 }

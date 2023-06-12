@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // update quantity
   $(".quantity").on("change", function () {
     var product_id = $(this).data("product-id");
     var quantity = $(this).val();
@@ -17,7 +16,6 @@ $(document).ready(function () {
     });
   });
 
-  // delete item
   $(".delete-item").on("click", function () {
     let productId = $(this).data("product-id");
     $.ajax({

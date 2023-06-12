@@ -1,9 +1,12 @@
-var searchButton = document.querySelector('.search-button');
+var searchForm = document.querySelector('.search-form');
 var searchInput = document.querySelector('.input-search');
 
-searchButton.addEventListener('click', function(e) {
+searchForm.addEventListener('submit', function(e) {
     e.preventDefault();
-    console.log('searching...');
+    performSearch();
+});
+
+function performSearch() {
     var searchText = searchInput.value;
 
     $.ajax({
@@ -17,4 +20,4 @@ searchButton.addEventListener('click', function(e) {
             productsContainer.innerHTML = response;
         }
     });
-});
+}

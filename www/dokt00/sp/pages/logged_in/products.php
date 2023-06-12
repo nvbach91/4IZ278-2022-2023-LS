@@ -4,36 +4,34 @@ require_once '../../db/Database.php';
 require_once '../../db/ProductDB.php';
 
 $productDB = new ProductDB();
-
 $products = $productDB->getAll();
+?>
 
-$productCounter = 0;
+<?php if (!empty($products)): ?>
+    <section class="products">
+        <?php $productCounter = 0; ?>
+        <?php foreach ($products as $product): ?>
+            <?php if ($productCounter % 3 == 0 && $productCounter > 0): ?>
+                </section>
+                <section class="products">
+            <?php endif; ?>
 
-if (!empty($products)) {
-    echo '<section class="products">';
+            <div class="product">
+                <img src="../../<?= htmlspecialchars($product["image_url"]); ?>" alt="<?= htmlspecialchars($product["name"]); ?>">
+                <h3><?= htmlspecialchars($product["name"]); ?></h3>
+                <p><?= htmlspecialchars($product["price"]); ?> Kč</p>
+                <form method="POST">
+                    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product["product_id"]); ?>">
+                    <button class="add-to-cart" data-product-id="<?= htmlspecialchars($product["product_id"]); ?>" type="button">Add to Cart</button>
+                </form>
+            </div>
 
-    foreach ($products as $product) {
-        if ($productCounter % 3 == 0 && $productCounter > 0) {
-            echo '</section><section class="products">';
-        }
+            <?php $productCounter++; ?>
+        <?php endforeach; ?>
 
-        echo '<div class="product">';
-        echo '<img src="../../' . $product["image_url"] . '" alt="' . $product["name"] . '">';
-        echo '<h3>' . $product["name"] . '</h3>';
-        echo '<p>$' . $product["price"] . '</p>';
-        echo '<form method="POST" action="add_to_cart.php">';
-        echo '<input type="hidden" name="product_id" value="' . $product["product_id"] . '">';
-        echo '<button class="add-to-cart" type="submit">Add to Cart</button>';
-        echo '</form>';
-        echo '</div>';
-
-        $productCounter++;
-    }
-
-    if ($productCounter % 3 != 0) {
-        echo '</section>';
-    }
-
-} else {
-    echo "No products found";
-}
+        <?php if ($productCounter % 3 != 0): ?>
+            </section>
+        <?php endif; ?>
+<?php else: ?>
+    <p>No products found</p>
+<?php endif; ?>

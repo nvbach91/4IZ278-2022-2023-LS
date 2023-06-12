@@ -1,8 +1,8 @@
 <?php
-session_start();
 
 require_once '../../db/Database.php';
 require_once '../../db/OrderDB.php';
+require_once '../../db/OrderitemDB.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.html");
@@ -10,38 +10,43 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $orderDB = new OrderDB();
+$orderitemDB = new OrderitemDB();
 $orders = $orderDB->getOrdersByUserId($_SESSION['user_id']);
+
+$orderNumber = 1;
+
+foreach ($orders as $order) :
 ?>
+    <div class="order-box">
+        <h3>Order <?= $orderNumber; ?></h3>
+        <h4>Order Date: <?= (new DateTime($order['date']))->format('j.n.Y H:i'); ?></h4>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order History</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Order History</h1>
+        <?php
+        $orderProducts = $orderDB->getProductsByOrderId($order['order_id']);
 
-    <table>
-        <tr>
-            <th>Order ID</th>
-            <th>Date</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total Price</th>
-        </tr>
+        ?>
+        <div class="product-box">
+            <table>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <?php
+                foreach ($orderProducts as $product) :
+                ?>
+                    <tr>
+                        <td><img src="../../<?= htmlspecialchars($product['image_url']); ?>" alt="" width="100"><span class="product-name"><?= htmlspecialchars($product['name']); ?></span></td>
+                        <td><span class="product-quantity"><?= htmlspecialchars($product['quantity']); ?> ks</span></td>
+                        <td><span class="product-price"><?= htmlspecialchars($product['price']); ?> CZK</span></td>
+                    </tr>
 
-        <?php foreach ($orders as $order): ?>
-            <tr>
-                <td><?= $order['order_id'] ?></td>
-                <td><?= $order['date'] ?></td>
-                <td><?= $order['name'] ?></td>
-                <td><?= $order['quantity'] ?></td>
-                <td><?= $order['total_price'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-</body>
-</html>
+                <?php
+                endforeach;
+                ?>
+            </table>
+            <span class="total-price">Total price: <?= $orderitemDB->getTotalPriceByOrderId($order['order_id']); ?> CZK</span>
+        </div>
+    </div>
+<?php
+    $orderNumber++;
+endforeach;
+?>

@@ -61,4 +61,12 @@ class UsersDB extends Teadatabase {
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function getByEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->bindValue(1, $email);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    
 }

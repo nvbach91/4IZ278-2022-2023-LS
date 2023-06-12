@@ -38,7 +38,7 @@
             <div class="dropdown">
                 <p>Welcome, <?php echo $_SESSION['username']; ?></p>
                 <div class="dropdown-content">
-                    <a href="order_history_page.php">Order history</a>
+                    <a href="order_history.php">Order history</a>
                     <a href="logout.php">Log out</a>
                 </div>
             </div>
@@ -64,7 +64,7 @@
         </aside>
         <main>
 
-            <?php include 'products.php'; ?>
+            <?php include 'order_history.php'; ?>
 
         </main>
     </div>

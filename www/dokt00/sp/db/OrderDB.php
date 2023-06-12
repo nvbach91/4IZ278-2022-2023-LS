@@ -101,11 +101,9 @@ class OrderDB extends Teadatabase
 
     public function getOrdersByUserId($userId)
     {
-        $sql = "SELECT o.order_id, o.date, p.name, p.image_url, oi.quantity 
-            FROM `order` o 
-            INNER JOIN `orderitem` oi ON o.order_id = oi.order_id
-            INNER JOIN `product` p ON oi.product_id = p.product_id
-            WHERE o.user_id = ?";
+        $sql = "SELECT o.order_id, o.date
+        FROM `order` o 
+        WHERE o.user_id = ?";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $userId);
@@ -113,6 +111,7 @@ class OrderDB extends Teadatabase
 
         return $stmt->fetchAll();
     }
+
 
     public function markAsCompleted($orderId)
     {
@@ -134,5 +133,20 @@ class OrderDB extends Teadatabase
         $result = $stmt->fetch();
 
         return $result ? $result['total_price'] : 0;
+    }
+
+    public function getProductsByOrderId($orderId)
+    {
+        $sql = "SELECT p.product_id, p.name, p.image_url, p.price, oi.quantity, o.total_price
+            FROM `orderitem` oi 
+            INNER JOIN `product` p ON oi.product_id = p.product_id
+            INNER JOIN `order` o ON oi.order_id = o.order_id
+            WHERE oi.order_id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $orderId);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 }

@@ -1,4 +1,15 @@
-<?php session_start(); ?>
+<?php session_start();
+$token = bin2hex(random_bytes(32));
+$_SESSION['token'] = $token;
+
+if (!isset($_SESSION['invalidInputs'])) {
+    $_SESSION['invalidInputs'] = [];
+}
+if (!isset($_SESSION['alertMessages'])) {
+    $_SESSION['alertMessages'] = [];
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,35 +74,46 @@
         <main>
 
             <h1>Doručení</h1>
-            <form id="billing-form" action="checkout.php" method="POST" onsubmit="event.preventDefault();">
+            <?php
+            if (!empty($_SESSION['alertMessages'])) : ?>
+                <div class="alert <?php echo $_SESSION['alertType']; ?>">
+                    <?php foreach ($_SESSION['alertMessages'] as $message) : ?>
+                        <p><?php echo $message; ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php
+                $_SESSION['alertMessages'] = [];
+            endif;
+            ?>
+            <form id="billing-form" action="checkout.php" method="POST">
 
-                <label for="first_name">Jméno:</label>
-                <input type="text" name="first_name" id="first_name">
+                <label for="firstname">Jméno:</label>
+                <input type="text" name="first_name" id="firstname" value="<?php echo isset($_SESSION['inputValues']['first_name']) ? $_SESSION['inputValues']['first_name'] : ''; ?>">
 
-                <label for="last_name">Příjmení:</label>
-                <input type="text" name="last_name" id="last_name">
+                <label for="lastname">Příjmení:</label>
+                <input type="text" name="last_name" id="lastname" value="<?php echo isset($_SESSION['inputValues']['last_name']) ? $_SESSION['inputValues']['last_name'] : ''; ?>">
 
-                <label for="phone">Phone:</label>
-                <input type="tel" name="phone" id="phone">
+                <label for="orderphone">Phone:</label>
+                <input type="tel" name="phone" id="orderphone" value="<?php echo isset($_SESSION['inputValues']['phone']) ? $_SESSION['inputValues']['phone'] : ''; ?>">
 
                 <label for="city">Město:</label>
-                <input type="text" name="city" id="city" required>
+                <input type="text" name="city" id="city" required value="<?php echo isset($_SESSION['inputValues']['city']) ? $_SESSION['inputValues']['city'] : ''; ?>">
 
                 <label for="street">Ulice:</label>
-                <input type="text" name="street" id="street" required>
+                <input type="text" name="street" id="street" required value="<?php echo isset($_SESSION['inputValues']['street']) ? $_SESSION['inputValues']['street'] : ''; ?>">
 
                 <label for="password">PSČ:</label>
-                <input type="text" name="psc" id="psc" required>
+                <input type="text" name="psc" id="psc" required value="<?php echo isset($_SESSION['inputValues']['psc']) ? $_SESSION['inputValues']['psc'] : ''; ?>">
 
                 <label for="payment_method">Typ platby:</label><br>
                 <select id="pay_method" name="payment_method">
-                    <option value="dobirka">Platba dobírkou</option>
-                    <option value="prevod">Platba převodem</option>
+                    <option value="dobirka" <?php echo (isset($_SESSION['inputValues']['payment_method']) && $_SESSION['inputValues']['payment_method'] == 'dobirka') ? 'selected' : ''; ?>>Platba dobírkou</option>
+                    <option value="prevod" <?php echo (isset($_SESSION['inputValues']['payment_method']) && $_SESSION['inputValues']['payment_method'] == 'prevod') ? 'selected' : ''; ?>>Platba převodem</option>
                 </select><br>
 
-                <button type="submit">Checkout</button>
+                <input type="hidden" name="token" id="token" value="<?= $token; ?>">
+                <input type="submit" id="place-order-button" value="Odeslat objednávku">
             </form>
-
         </main>
     </div>
     <footer>

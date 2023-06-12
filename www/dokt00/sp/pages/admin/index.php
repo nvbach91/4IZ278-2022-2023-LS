@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if ($user['isAdmin']) {
+    $_SESSION['isAdmin'] = true;
+} else {
+    $_SESSION['isAdmin'] = false;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +21,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="logged_in.php">
+            <a href="index.php">
                 <img src="../../img/logo.png" alt="Tea E-Shop Logo" width="100">
             </a>
         </div>
@@ -43,11 +50,6 @@
                 </div>
             </div>
         </div>
-
-        <form class="cart " action="cart.php">
-            <input type="submit" value="Cart">
-        </form>
-
     </header>
 
     <img src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
@@ -80,7 +82,6 @@
 
     <script src="main.js"></script>
     <script src="../../search.js"></script>
-    <script src="add_to_cart.js"></script>
 </body>
 
 </html>

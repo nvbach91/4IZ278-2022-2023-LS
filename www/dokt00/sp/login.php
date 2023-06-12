@@ -15,11 +15,11 @@ if ($user) {
     if (password_verify($password, $hashed_password)) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $username;
-        header("Location: pages/logged_in/logged_in.php");
+        echo json_encode(['success' => true, 'isAdmin' => $user['isAdmin']]);  
     } else {
-        header("Location: index.html?error=incorrect_password");
+        echo json_encode(['success' => false]);
     }
 } else {
-    header("Location: index.html?error=user_not_found");
+    echo json_encode(['success' => false]);
 }
 ?>

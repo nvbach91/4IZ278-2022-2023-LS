@@ -47,18 +47,6 @@ nav ul li a {
     color: #fff;
 }
 
-.login {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.input-login {
-    padding: 5px;
-    margin-right: 10px;
-    margin-bottom: 5px;
-}
-
 button {
     padding: 5px 10px;
     background-color: #444;
@@ -271,3 +259,33 @@ footer nav ul li a:hover {
     padding: 10px;
     border-radius: 5px;
 }
+
+.login-error {
+    display: none;
+    color: red;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-direction: row;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-login {
+    margin-right: 10px;
+}
+
+
+
+

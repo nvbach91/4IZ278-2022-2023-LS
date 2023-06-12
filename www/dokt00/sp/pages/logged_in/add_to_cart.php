@@ -25,4 +25,7 @@ if ($order_id) {
     $orderitemDB->create($order_id, $product_id);
 }
 
-header("Location: logged_in.php");
+echo json_encode([
+    'success' => true,
+    'message' => 'Item added to cart'
+]);
