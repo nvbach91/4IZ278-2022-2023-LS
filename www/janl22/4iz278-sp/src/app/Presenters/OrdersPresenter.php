@@ -58,7 +58,7 @@ final class OrdersPresenter extends BaseEmployeesPresenter {
 	 */
 	public function renderDefault(): void {
 
-		if ($this->getHttpRequest()->getReferer()->getPath() === '/orders/detail') $this->orderService->unsetUserEditingOrder($this->getHttpRequest()->getReferer()->getQueryParameter('idOrder'));
+		if ($this->getHttpRequest()->getReferer() !== null && $this->getHttpRequest()->getReferer()->getPath() === '/orders/detail') $this->orderService->unsetUserEditingOrder($this->getHttpRequest()->getReferer()->getQueryParameter('idOrder'));
 		$this->template->orders = $this->orderService->getOrders();
 
 	}
