@@ -10,16 +10,28 @@
         </a>
 
         <ul id="sidenav-scroll-container" class="sidenav-menu px-3 px-lg-4 pt-3 pb-2 py-xl-0">
+
+            {if $user->getIdentity() !== null && $user->getIdentity()->getData()['employee']}
+
+                <li class="sidenav-item">
+                    <a n:href="Intra:Dashboard"
+                            class="sidenav-link">
+                        <i class="fas fa-user-tag me-2 fa-fw"></i>Sekce pro zaměstnance
+                    </a>
+                </li>
+
+            {/if}
+
             <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Restaurace</span>
             <li class="sidenav-item">
                 <a n:href="Homepage:"
                         class="sidenav-link {isLinkCurrent('Homepage:*') ? "custom-color-blue-text" : ""}">
-                    <i class="fas fa-home me-3 fa-fw"></i>Domů
+                    <i class="fas fa-home me-2 fa-fw"></i>Domů
                 </a>
             </li>
             <li class="sidenav-item">
                 <a n:href="Menu:" class="sidenav-link {isLinkCurrent('Menu:*') ? "custom-color-blue-text" : ""}">
-                    <i class="fa-solid fa-utensils me-3 fa-fw"></i>Menu
+                    <i class="fa-solid fa-utensils me-2 fa-fw"></i>Menu
                 </a>
             </li>
 

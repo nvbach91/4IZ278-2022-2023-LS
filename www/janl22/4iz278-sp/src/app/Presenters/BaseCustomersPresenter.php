@@ -18,6 +18,13 @@ abstract class BaseCustomersPresenter extends BaseAuthPresenter {
 
 		parent::startup();
 
+		if ($this->getUser()->getIdentity()->getData()['employee']) {
+
+			$this->flashMessage('Tato sekce/akce je přístupná pouze zákazníkům!', 'danger');
+			$this->redirect('Homepage:');
+
+		}
+
 	}
 
 }

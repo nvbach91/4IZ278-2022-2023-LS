@@ -5,6 +5,11 @@
 
         <div class="row animation fade-in">
 
+            <div class="alert alert-{$flash->type} mb-4"
+                 role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                {$flash->message}
+            </div>
+
             <div class="col-12 col-8 mb-4">
 
                 <div class="card w-100 h-100">
