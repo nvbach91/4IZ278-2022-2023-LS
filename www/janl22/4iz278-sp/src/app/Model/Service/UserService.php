@@ -162,15 +162,23 @@ final class UserService extends BaseService {
 	/**
 	 * Function which remove user from the system.
 	 *
-	 * @param string $idUser             id_user of the user which will be removed.
-	 * @param string $currentUserid_user id_user of the current signed user.
+	 * @param string $idUser id_user of the user which will be removed.
+	 * @param string $currentUserIdUser
 	 *
 	 * @return void                             Function has no return value.
-	 * @throws Exception                        If user try to remove himself, the exception will be thrown.
+	 * @throws Exception If user try to remove himself, the exception will be thrown.
 	 */
-	public function removeUser(string $idUser, string $currentUserid_user): void {
+	public function removeUser(string $idUser, string $currentUserIdUser): void {
 
-		if ($idUser === $currentUserid_user) {
+		$user = $this->getUserById($idUser);
+
+		if (!$user->deletable) {
+
+			throw new Exception('Tohoto uživatele nelze odstranit!');
+
+		}
+
+		if ($user->id_user === $currentUserIdUser) {
 
 			throw new Exception('Nemůžeš odstranit sám sebe!');
 
