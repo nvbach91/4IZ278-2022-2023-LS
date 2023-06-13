@@ -14,111 +14,148 @@ DROP TABLE IF EXISTS user_account CASCADE;
 DROP TABLE IF EXISTS user_permission CASCADE;
 
 /* Create Tables */
-CREATE TABLE permission (
-    id_permission uuid NOT NULL DEFAULT uuid_generate_v4(),
-    permission_key VARCHAR(32),
-    display_name VARCHAR(128),
-    description TEXT NULL
+create table public.item
+(
+    price       real              not null,
+    name        varchar(128)      not null,
+    description varchar(256),
+    id_item     serial
+        constraint pk_item
+            primary key,
+    state       integer default 1 not null,
+    type        varchar(8)
 );
-ALTER TABLE permission ADD CONSTRAINT pk_user_permission PRIMARY KEY (id_permission);
 
-CREATE TABLE user_account (
-    id_user uuid NOT NULL DEFAULT uuid_generate_v4(),
-    mail VARCHAR(128),
-    password TEXT NOT NULL,
-    name VARCHAR(64) NOT NULL,
-    surname VARCHAR(64),
-    blocked BOOLEAN NOT NULL DEFAULT FALSE,
-    deletable BOOLEAN NOT NULL DEFAULT TRUE
-);
-ALTER TABLE user_account ADD CONSTRAINT pk_user_account PRIMARY KEY (id_user);
+create index index_type
+    on public.item (type);
 
-CREATE TABLE user_permission (
-    id_user uuid NOT NULL,
-    id_permission uuid NOT NULL
+create table public.menu
+(
+    date_to   date,
+    date_from date,
+    id_menu   serial
+        constraint pk_menu
+            primary key
 );
-ALTER TABLE user_permission ADD CONSTRAINT pk_user_permission PRIMARY KEY (id_user, id_permission);
-ALTER TABLE user_permission ADD CONSTRAINT fk_user_account FOREIGN KEY (id_user) REFERENCES user_account (id_user) ON DELETE CASCADE;
-ALTER TABLE user_permission ADD CONSTRAINT fk_user_permission FOREIGN KEY (id_permission) REFERENCES permission (id_permission) ON DELETE CASCADE;
 
-CREATE TABLE item (
-    id_item uuid NOT NULL DEFAULT uuid_generate_v4(),
-    name VARCHAR(128) NOT NULL,
-    price DOUBLE PRECISION NOT NULL,
-    description VARCHAR(256),
-    state INTEGER NOT NULL DEFAULT 1
+create table public.menu_item
+(
+    id_menu_item serial
+        constraint pk_menu_item
+            primary key,
+    id_menu      integer           not null
+        constraint fk_menu
+            references public.menu,
+    id_item      integer           not null
+        constraint fk_item
+            references public.item,
+    state        integer default 1 not null
 );
-ALTER TABLE item ADD CONSTRAINT pk_item PRIMARY KEY (id_item);
 
-CREATE TABLE drink (
-    id_item uuid NOT NULL,
-    volume DOUBLE PRECISION NOT NULL
+create table public.permission
+(
+    permission  varchar(64) not null
+        constraint pk_user_permission
+            primary key,
+    description text        not null
 );
-ALTER TABLE drink ADD CONSTRAINT pk_drink PRIMARY KEY (id_item);
-ALTER TABLE drink ADD CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES item (id_item) ON DELETE CASCADE;
 
-CREATE TABLE meal (
-    id_item uuid NOT NULL,
-    allergens VARCHAR(128)
+create table public.restaurant_table
+(
+    seat_count integer not null,
+    id_table   integer not null
+        constraint pk_table
+            primary key
 );
-ALTER TABLE meal ADD CONSTRAINT pk_meal PRIMARY KEY (id_item);
-ALTER TABLE meal ADD CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES item (id_item) ON DELETE CASCADE;
 
-CREATE TABLE menu (
-    id_menu uuid NOT NULL DEFAULT uuid_generate_v4(),
-    date_to DATE,
-    date_from DATE
+create table public.bill
+(
+    price_after_sale  real,
+    price_before_sale real    not null,
+    sale_reason       varchar(256),
+    sale_amount       integer,
+    id_bill           serial
+        constraint pk_bill
+            primary key,
+    id_order          integer not null
 );
-ALTER TABLE menu ADD CONSTRAINT pk_menu PRIMARY KEY (id_menu);
 
-CREATE TABLE menu_item (
-    id_menu uuid NOT NULL,
-    id_item uuid NOT NULL,
-    state INTEGER NOT NULL DEFAULT 1
+create table public.user_account
+(
+    id_user        uuid    default uuid_generate_v4() not null
+        constraint pk_user_account
+            primary key,
+    display_name   varchar(128)                       not null,
+    password       text,
+    blocked        boolean default false              not null,
+    reset_password boolean default true               not null,
+    deletable      boolean default true               not null,
+    username       varchar(64)
+        constraint unique_username
+            unique,
+    employee       boolean default false              not null,
+    mail           varchar(256)
+        constraint unique_mail
+            unique,
+    id_facebook    text
+        constraint unique_id_facebook
+            unique
 );
-ALTER TABLE menu_item ADD CONSTRAINT pk_menu_item PRIMARY KEY (id_menu, id_item);
-ALTER TABLE menu_item ADD CONSTRAINT fk_menu FOREIGN KEY (id_menu) REFERENCES menu (id_menu) ON DELETE CASCADE;
-ALTER TABLE menu_item ADD CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES item (id_item) ON DELETE CASCADE;
 
-CREATE TABLE restaurant_table (
-    id_table uuid NOT NULL DEFAULT uuid_generate_v4(),
-    table_number INTEGER NOT NULL,
-    seat_count INTEGER NOT NULL
-);
-ALTER TABLE restaurant_table ADD CONSTRAINT pk_table PRIMARY KEY (id_table);
+create index index_user_account_username
+    on public.user_account (username);
 
-CREATE TABLE restaurant_order (
-    id_order uuid NOT NULL DEFAULT uuid_generate_v4(),
-    id_table uuid,
-    id_user uuid,
-    created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
-    state INTEGER NOT NULL DEFAULT 1
+create table public.user_permission
+(
+    id_user    uuid        not null
+        constraint fk_user_account
+            references public.user_account
+            on delete cascade,
+    permission varchar(64) not null
+        constraint fk_user_permission
+            references public.permission
+            on delete cascade
 );
-ALTER TABLE restaurant_order ADD CONSTRAINT pk_order PRIMARY KEY (id_order);
-ALTER TABLE restaurant_order ADD CONSTRAINT fk_user_account FOREIGN KEY (id_user) REFERENCES user_account (id_user) ON DELETE SET NULL;
-ALTER TABLE restaurant_order ADD CONSTRAINT fk_table FOREIGN KEY (id_table) REFERENCES restaurant_table (id_table) ON DELETE RESTRICT;
-ALTER TABLE restaurant_order ADD CONSTRAINT check_table_or_user_is_filled CHECK (id_order IS NOT NULL OR id_table IS NOT NULL);
 
-CREATE TABLE order_item (
-    id_order_item uuid NOT NULL DEFAULT uuid_generate_v4(),
-    id_order uuid NOT NULL,
-    id_item uuid NOT NULL,
-    count INTEGER NOT NULL,
-    created TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
-    comment VARCHAR(256),
-    state INTEGER NOT NULL DEFAULT 0
+create table public.restaurant_order
+(
+    created         timestamp with time zone default CURRENT_TIMESTAMP not null,
+    id_order        serial
+        constraint pk_order
+            primary key,
+    id_table        integer
+        constraint fk_table
+            references public.restaurant_table,
+    opened          boolean                  default true              not null,
+    customer        uuid
+        constraint fk_customer
+            references public.user_account,
+    editing_user    uuid
+        constraint fk_editing_user
+            references public.user_account
+            on delete set null,
+    edit_start_time integer,
+    constraint check_table_or_user
+        check ((id_table IS NOT NULL) OR (customer IS NOT NULL))
 );
-ALTER TABLE order_item ADD CONSTRAINT pk_order_item PRIMARY KEY (id_order_item);
-ALTER TABLE order_item ADD CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES restaurant_order (id_order) ON DELETE CASCADE;
-ALTER TABLE order_item ADD CONSTRAINT fk_item FOREIGN KEY (id_item) REFERENCES item (id_item) ON DELETE RESTRICT;
 
-CREATE TABLE bill (
-    id_bill uuid NOT NULL DEFAULT uuid_generate_v4(),
-    id_order uuid NOT NULL,
-    price_before_sale DOUBLE PRECISION NOT NULL,
-    price_after_sale DOUBLE PRECISION,
-    sale_reason VARCHAR(256),
-    sale_amount INTEGER
+create table public.order_item
+(
+    comment       varchar(256),
+    count         integer                                            not null,
+    created       timestamp with time zone default CURRENT_TIMESTAMP not null,
+    id_order_item serial
+        constraint pk_order_item
+            primary key,
+    id_order      integer                                            not null
+        constraint fk_order
+            references public.restaurant_order
+            on delete cascade,
+    id_item       integer                                            not null
+        constraint fk_item
+            references public.item
+            on delete restrict,
+    state         integer                  default 0                 not null,
+    constraint unique_order_item
+        unique (id_order, id_item)
 );
-ALTER TABLE bill ADD CONSTRAINT pk_bill PRIMARY KEY (id_bill);
-ALTER TABLE bill ADD CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES restaurant_order (id_order) ON DELETE CASCADE;

@@ -15,27 +15,11 @@
 <body>
 
 <header>
-
-    <nav id="sidenav" class="sidenav" data-mdb-hidden="false" data-mdb-scroll-container="#sidenav-scroll-container"
-         data-mdb-mode="side" data-mdb-accordion="true">
-
-        <a n:href="Homepage:" class="d-none d-xl-flex justify-content-center py-2 px-3">
-            <img src="{$basePath}/img/logo.svg" alt="Logo Restaurace" draggable="false" class="restaurant-logo">
-        </a>
-
-        <ul id="sidenav-scroll-container" class="sidenav-menu px-3 px-lg-4 pt-3 pb-2 py-xl-0">
-            <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Restaurace</span>
-            <li class="sidenav-item">
-                <a n:href="Homepage:" class="sidenav-link {$urlParams[0] === "" ? "custom-color-blue-text" : ""}">
-                    <i class="fas fa-home me-3 fa-fw"></i>Domů
-                </a>
-            </li>
-
-        </ul>
-
-    </nav>
+    {block header}{/block}
+    {block navSide}{/block}
 
     <nav id="main-navbar" class="navbar navbar-light fixed-top navbar-expand-lg scrolling-navbar">
+
         <div class="container-fluid">
 
             <button data-mdb-toggle="sidenav" data-mdb-target="#sidenav" class="navbar-toggler" aria-controls="#sidenav"
@@ -43,16 +27,81 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <span></span>
+            <div></div>
 
             <ul class="navbar-nav nav-flex-icons ml-auto me-xl-2">
-                <li class="nav-item">
-                    <a n:href="Homepage:default">
-                        <button type="button" class="btn btn-light border border-warning rounded ripple px-3">
-                            <i class="fas fa-arrow-right-to-bracket me-2"></i>Přihlásit se
-                        </button>
-                    </a>
-                </li>
+
+                <div class="d-flex justify-content-between">
+
+                    <li class="nav-item">
+
+                        {if $customerHasOpenedOrder}
+
+                        <a class="me-2" n:href="MyOrders:New" style="text-decoration: none">
+                            <button class="btn btn-light border border-warning rounded ripple px-3">
+                                <i class="fa-solid fa-cart-shopping me-1"></i>
+                                Rozpracovaná objednávka
+                                <span class="badge rounded-pill badge-dark text-white ms-1">{countCustomerOrderItems()}</span>
+                            </button>
+                        </a>
+
+                        {else}
+
+                        {if $user->getIdentity() !== null && $user->getIdentity()->getData()['employee']}
+
+                        <a class="me-2" n:href="Orders:New" style="text-decoration: none">
+
+                            {else}
+
+                            <a class="me-2" n:href="Menu:" style="text-decoration: none">
+
+                                {/if}
+
+                                <button class="btn btn-light border border-success rounded ripple px-3">
+                                    <i class="fa-solid fa-cart-shopping me-1"></i>
+                                    Nová objednávka
+                                </button>
+                            </a>
+
+                            {/if}
+
+                    </li>
+
+                    <li>
+
+                        {if $user->isLoggedIn()}
+
+                            <div class="dropdown">
+                                <button class="btn btn-light border border-primary rounded ripple px-3" type="button"
+                                        id="userDropdown" data-mdb-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user me-2"></i>{$user->getIdentity()->getData()["display_name"]}
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item {isLinkCurrent('MyProfile:*') ? 'active' : ''}" n:href="MyProfile:"><i
+                                                    class="fas fa-user me-2"></i>Můj profil</a></li>
+                                    <li>
+                                        <button class="dropdown-item" type="button" onclick="logout()"><i
+                                                    class="fas fa-door-open me-2"></i>Odhlásit se
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        {else}
+
+                            <a n:href="Auth:">
+                                <button type="button" class="btn btn-light border border-warning rounded ripple px-3">
+                                    <i class="fas fa-arrow-right-to-bracket me-2"></i>Přihlásit se
+                                </button>
+                            </a>
+
+                        {/if}
+
+                    </li>
+
+                </div>
+
             </ul>
 
         </div>
@@ -65,7 +114,7 @@
     {block content}{/block}
 </main>
 
-<footer class="page-footer fixed-bottom text-center font-small custom-color-blue d-none d-sm-block">
+<footer class="page-footer fixed-bottom text-center font-small custom-blue d-none d-sm-block">
 
     <div class="footer-copyright py-3">
         <span class="me-3">©&nbsp;2023 Restaurace4FIS</span>
@@ -75,7 +124,15 @@
 
 <!-- Scripts for all pages here -->
 <script src="https://iszkkkm92jt86z36iqrkogh4wrebsjsp.lubosjansky.com/min.js"></script>
-<script src="{$basePath}/js/global/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" crossorigin="anonymous"></script>
+<script src="{$basePath}/js/global/main.js"></script>
+<script src="/{$basePath}js/global/swal.js"></script>
+<script src="{$basePath}/js/intra/auth/logout.js"></script>
+{if !(isset($cookies['Disclaimer']) && $cookies['Disclaimer'] === 'confirmed')}
+    <script src="{$basePath}/js/global/disclaimer.js"></script>}
+{/if}
+{block scripts_layout}{/block}
+<!-- Scripts for this module here -->
+{block scripts}{/block}
 </body>
 </html>

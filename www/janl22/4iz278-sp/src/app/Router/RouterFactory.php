@@ -16,14 +16,15 @@ final class RouterFactory {
 
 	use Nette\StaticClass;
 
-    /**
-     * Default function to create site router.
-     *
-     * @return RouteList
-     */
+	/**
+	 * Default function to create site router.
+	 *
+	 * @return RouteList
+	 */
 	public static function createRouter(): RouteList {
 
 		$router = new RouteList;
+		$router->addRoute('auth/facebookAuthCallback', 'Auth:FacebookAuthCallback');
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 

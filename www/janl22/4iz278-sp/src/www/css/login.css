@@ -1,0 +1,31 @@
+.view, body, header, html {
+    height: 100%
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .view, body, header, html {
+        height: 650px
+    }
+}
+
+.mask {
+    background-color: rgba(0, 0, 0, 0.3)
+}
+
+.login-green {
+    background-color: #14A44D !important;
+}
+
+.login-blue {
+    background-color: #3B71CA !important;
+}
+
+.login-gray {
+    background-color: #9FA6B2;
+}
+
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.2);
+}

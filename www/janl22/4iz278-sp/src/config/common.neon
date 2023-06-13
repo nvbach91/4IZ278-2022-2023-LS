@@ -1,9 +1,22 @@
+parameters:
+
+
 application:
 	errorPresenter: Error
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
+
+session:
+	expiration: 12 hours
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+
 database:
 	dsn: 'pgsql:host=localhost;port=5432;dbname=restaurant'
-	user: 'postgres'
-	password: 'postgres'
+	user: ''
+	password: ''

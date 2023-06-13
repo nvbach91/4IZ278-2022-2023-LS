@@ -1,0 +1,69 @@
+{layout '../../../templates/@nav-employees.latte'}
+
+{block content}
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            <div class="alert alert-{$flash->type} mt-2 mb-4"
+                 role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                {$flash->message}
+            </div>
+
+            <div class="col-12 col-8 mb-4">
+
+                <div class="card w-100 h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <h3>Objednávky</h3>
+
+                            <a n:href="Orders:new">
+                                <button type="button" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-plus me-2"></i>Nová Objednávka
+                                </button>
+                            </a>
+
+                        </div>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="lead fw-normal">Číslo objednávky</th>
+                                <th scope="col" class="lead fw-normal">Vytvořena</th>
+                                <th scope="col" class="lead fw-normal">Stůl</th>
+                                <th scope="col" class="lead fw-normal">Stav</th>
+                                <th scope="col" class="lead fw-normal">Akce</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $orders as $order}
+                                <tr>
+                                    <td>{$order->id_order}</td>
+                                    <td>{$order->created->format('d.m.Y H:i:s')}</td>
+                                    <td>{$order->customer === null ? $order->id_table : 'Odnos'}</td>
+                                    <td>{if $order->opened} Otevřená {else} Uzavřená {/if}</td>
+                                    <td>
+                                        <a n:href="Orders:Detail $order->id_order, true">
+                                            <button class="call-btn btn btn-outline-primary btn-floating btn-sm">
+                                                <i class="fas {$order->customer === null ? 'fa-pen-to-square' : 'fa-magnifying-glass'}"></i>
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{/block}

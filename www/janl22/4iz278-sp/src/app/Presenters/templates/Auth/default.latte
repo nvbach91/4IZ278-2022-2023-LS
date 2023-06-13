@@ -1,0 +1,16 @@
+{layout '@layout-auth.latte'}
+
+{block authCard}
+
+    <p class="h3 text-center">Začněte zde:</p>
+
+    <a n:href="Auth:Customer" class="btn login-green text-white waves-effect d-block mb-3" role="button"><i
+                class="fas fa-solid fa-user me-3"></i>Přihlásit se jako zákazník</a>
+
+    <a n:href="Auth:Employee" class="btn login-blue text-white waves-effect d-block mb-3" role="button"><i
+                class="fas fa-solid fa-user-tag me-3"></i>Přihlásit se jako zaměstnanec</a>
+
+    <a n:href="Homepage:" class="btn login-gray text-white waves-effect d-block" role="button"><i
+                class="fas fa-solid fa-arrow-left me-3"></i>Zpět na hlavní stránku</a>
+
+{/block}

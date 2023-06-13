@@ -26,3 +26,16 @@ const setMode = () => {
 
 setMode();
 window.addEventListener("resize", setMode);
+
+/*
+ * ================
+ * Global functions
+ * ================
+ */
+function isStringEmpty(str) {
+    return (!str || str.length === 0);
+}
+
+function isStringBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}

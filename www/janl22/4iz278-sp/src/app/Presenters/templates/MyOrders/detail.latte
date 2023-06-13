@@ -1,0 +1,57 @@
+{layout '../../../templates/@nav-customers.latte'}
+
+{block content}
+
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            <div class="card w-100 h-100">
+
+                <div class="card-body">
+
+                    <h3 class="h4 mb-4"><a n:href="MyOrders:" class="text-black"><i
+                                    class="fas fa-solid fa-clipboard-list me-2 fa-fw"></i>Objednávky</a><i
+                                class="fas fa-arrow-right fa-sm mx-4"></i><i class="fas fa-solid fa-bowl-food me-2"></i>Objednávka
+                        <span id="orderId">{$order->id_order}</span></h3>
+                    <hr>
+
+                    <span class="lead">
+                        Stav: {if $order->opened} Otevřená {else} Uzavřená {/if}
+                    </span>
+
+                    <hr>
+
+                    <table class="table">
+
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:55%;"><b>Položka</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"><b>Cena za položku</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"><b>Počet</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"><b>Cena</b></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {foreach $orderItems as $orderItem}
+                            <tr>
+                                <th scope="row">{$orderItem->item->name}</th>
+                                <td class="text-center">{formatPriceCurrency($orderItem->item->price)}</td>
+                                <td class="text-center">{$orderItem->count}</td>
+                                <td class="text-center">{formatPriceCurrency($orderItem->item->price * $orderItem->count)}</td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{/block}

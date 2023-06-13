@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Restaurace4FIS</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">
+    <link rel="stylesheet" href="https://iszkkkm92jt86z36iqrkogh4wrebsjsp.lubosjansky.com/min.css">
+    <link rel="stylesheet" href="{$basePath}/css/login.css">
+    <link rel="icon" href="{$basePath}/img/icon.webp" sizes="32x32">
+    <style>
+        body {
+            background-image: url("{$basePath}/img/cover.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="view full-page-intro">
+
+    <div class="mask d-flex justify-content-center align-items-center">
+
+        <div class="container">
+
+            <div class="row animation fade-in">
+
+                <div class="card">
+
+                    <div class="alert alert-{$flash->type} mt-4 mb-2"
+                         role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                        {$flash->message}
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="h3 text-center">Přihlášení uživatele:</p>
+
+                        {form signInForm}
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                {input id_user, class => "form-control"}
+                                {label id_user, class => "form-label" /}
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                {input password, class => "form-control"}
+                                {label password, class => "form-label" /}
+                            </div>
+
+                            <!-- Submit button -->
+                        {input signIn, class => "btn login-blue btn-block text-white waves-effect mt-2 mb-2"}
+                            <div class="md-form">
+                                <a n:href="Homepage:" class="btn login-gray text-white waves-effect d-block"
+                                                      role="button"><i
+                                            class="fas fa-solid fa-arrow-left me-3"></i>Zpět na hlavní stránku</a>
+                            </div>
+
+                        {/form}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="page-footer fixed-bottom text-center font-small custom-color-blue d-none d-sm-block">
+
+    <div class="footer-copyright py-3">
+        <span class="me-3">©&nbsp;2023 Restaurace4FIS</span>
+    </div>
+
+</footer>
+
+<script src="https://iszkkkm92jt86z36iqrkogh4wrebsjsp.lubosjansky.com/min.js"></script>
+<script src="{$basePath}/js/global/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" crossorigin="anonymous"></script>
+<script src="/{$basePath}js/global/swal.js"></script>
+</body>
+</html>

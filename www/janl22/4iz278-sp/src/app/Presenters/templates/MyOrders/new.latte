@@ -1,0 +1,103 @@
+{layout '../../../templates/@nav-customers.latte'}
+
+{block content}
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            <div class="col-12 col-8 mb-4">
+
+                <div class="card w-100 h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <h3>Otevřená objednávka</h3>
+
+                            <a n:href="Menu:">
+                                <button type="button" class="btn btn-primary btn-sm"><i
+                                            class="fas fa-plus me-2"></i>Přidat položku do objednávky
+                                </button>
+                            </a>
+
+                        </div>
+
+                        <hr>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width:50%;"><b>Položka</b></th>
+                                <th scope="col" class="text-center" style="width:15%;"><b>Cena za položku</b></th>
+                                <th scope="col" class="text-center" style="width:15%;"><b>Počet</b></th>
+                                <th scope="col" class="text-center" style="width:15%;"><b>Cena</b></th>
+                                <th scope="col" class="text-center" style="width:5%;"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $orderItems as $orderItemId => $orderItem}
+                                <tr>
+                                    <th scope="row">{$orderItem->name}</th>
+                                    <td class="text-center">{formatPriceCurrency($orderItem->unitPrice)}</td>
+                                    <td class="text-center">
+                                        <a n:href="DecreaseItemOrderCount! $orderItemId"
+                                                class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </a>
+                                        {$orderItem->count}
+                                        <a n:href="IncreaseItemOrderCount! $orderItemId"
+                                                class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">{formatPriceCurrency($orderItem->unitPrice * $orderItem->count)}</td>
+                                    <td>
+                                        <a n:href="DecreaseItemOrderCount! $orderItemId, true"
+                                                class="text-black ms-2 me-2">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width:50%;"><b>Celkem</b></th>
+                                <th scope="col" class="text-center" style="width:15%;"></th>
+                                <th scope="col" class="text-center" style="width:15%;"></th>
+                                <th scope="col" class="text-center" style="width:15%;">
+                                    <b>{formatPriceCurrency(sumCustomerOrderItemsPrice())}</b></th>
+                                <th scope="col" class="text-center" style="width:5%;"></th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                        <div class="mt-4 d-flex justify-content-between">
+
+                            <a n:href="cancelOrder!" class="me-2">
+                                <button type="button" class="btn btn-danger btn-sm"><i
+                                            class="fas fa-cancel me-2"></i>Zrušit objednávku
+                                </button>
+                            </a>
+
+                            <a n:href="submitOrder!">
+                                <button type="button" class="btn btn-success btn-sm"><i
+                                            class="fas fa-check me-2"></i>Odeslat objednávku
+                                </button>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{/block}

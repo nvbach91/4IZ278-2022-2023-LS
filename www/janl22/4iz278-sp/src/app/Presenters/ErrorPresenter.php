@@ -23,10 +23,11 @@ final class ErrorPresenter implements Nette\Application\IPresenter {
 
 	}
 
-    /**
-     * @param Nette\Application\Request $request
-     * @return Nette\Application\Response
-     */
+	/**
+	 * @param Nette\Application\Request $request
+	 *
+	 * @return Nette\Application\Response
+	 */
 	public function run(Nette\Application\Request $request): Nette\Application\Response {
 
 		$exception = $request->getParameter('exception');
@@ -42,7 +43,7 @@ final class ErrorPresenter implements Nette\Application\IPresenter {
 
 		return new Responses\CallbackResponse(function (Http\IRequest $httpRequest, Http\IResponse $httpResponse): void {
 
-			if (preg_match('#^text/html(?:;|$)#', (string) $httpResponse->getHeader('Content-Type'))) {
+			if (preg_match('#^text/html(?:;|$)#', (string)$httpResponse->getHeader('Content-Type'))) {
 				require __DIR__ . '/templates/Error/500.phtml';
 			}
 

@@ -1,0 +1,70 @@
+{layout '../../../templates/@nav-employees.latte'}
+
+{block content}
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            <div class="mx-auto col-xl-6 col-sm-12 mb-4">
+
+                <div class="card w-100 h-100">
+
+                    <div class="card-body">
+
+                        <div class="alert alert-{$flash->type} mt-4 mb-2"
+                             role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                            {$flash->message}
+                        </div>
+
+                        <div class="card-body">
+
+                            <p class="h3 text-center">Nový uživatel:</p>
+
+                            {form newUserForm}
+                                <!-- id_user input -->
+                                <div class="form-outline mb-4">
+                                    {input username, class => "form-control"}
+                                    {label username, class => "form-label" /}
+                                </div>
+
+                                <!-- Display name input -->
+                                <div class="form-outline mb-4">
+                                    {input display_name class => "form-control"}
+                                    {label display_name, class => "form-label" /}
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    {input password, class => "form-control"}
+                                    {label password, class => "form-label" /}
+                                </div>
+
+                                <!-- Password again input -->
+                                <div class="form-outline mb-4">
+                                    {input password_again, class => "form-control"}
+                                    {label password_again, class => "form-label" /}
+                                </div>
+
+                                <!-- Submit button -->
+                            {input newUser, class => "btn custom-green btn-block text-white waves-effect mt-2 mb-2"}
+                                <div class="md-form">
+                                    <a n:href="Users:"
+                                            class="btn custom-gray text-white waves-effect d-block"><i
+                                                class="fas fa-solid fa-arrow-left me-3"></i>Zpět</a>
+                                </div>
+
+                            {/form}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{/block}

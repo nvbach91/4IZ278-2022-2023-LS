@@ -1,0 +1,97 @@
+{layout $user->isInRole('customer') ? '../../../templates/@nav-customers.latte' : '../../../templates/@nav-employees.latte'}
+
+{block content}
+
+<div class="container-fluid">
+
+    <div class="row animation fade-in mb-4">
+
+        <input type="hidden" id="blocked" value="{$selectedUser->blocked}">
+
+        <div class="alert alert-{$flash->type} mt-2 mb-4"
+             role="alert" n:if="$flashes" n:foreach="$flashes as $flash">{$flash->message}</div>
+
+        <div class="col-12 col-xl-6 mb-4 mb-xl-0">
+
+            <div class="card testimonial-card w-100 h-100">
+
+                <div class="avatar mx-auto mt-2 mb-4 white bg-white">
+                    <img src="{$basePath}/img/user.png" class="rounded-circle img-fluid" alt="Obrázek uživatele">
+                </div>
+
+                <div class="text-center">
+                    <h4 class="card-title mb-1">{$selectedUser->display_name}</h4>
+                    <p class="mb-2 dark-grey-text">{if $selectedUser->employee} Uživatelské jméno: {$selectedUser->username} {else} E-mail: {$selectedUser->mail} {/if}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-xl-6">
+
+            <div class="card w-100 h-100">
+
+                <div class="card-body">
+
+                    <h3>
+                        Stav účtu:
+                    </h3>
+
+                    <hr>
+
+                    <div class="md-form my-0">
+                        <table class="table table-borderless mb-0">
+
+                            {if $selectedUser->employee}
+
+                                <tr>
+                                    <td>Heslo:</td>
+                                    <td class="font-weight-bold">Nastaveno</td>
+                                    <td><a n:href="UpdatePassword!"><span id="resetPasswordButton"></span></a></td>
+                                </tr>
+
+                            {else}
+
+                                <tr>
+                                    <td>Heslo:</td>
+                                    <td class="font-weight-bold">Facebook</td>
+                                    <td>
+                                        <a href="https://accountscenter.facebook.com/password_and_security/password/change"
+                                           target="_blank" rel="noopener noreferrer nofollow">
+                                            <button type="button"
+                                                    class="call-btn btn btn-outline-primary btn-floating btn-sm float-end">
+                                                <i class="fa-brands fa-facebook"></i></button>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            {/if}
+
+                            <tr>
+                                <td>Přihlášení:</td>
+                                <td class="font-weight-bold">{if $selectedUser->blocked}Blokováno{else}Povoleno{/if}</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {block content_detail}
+
+</div>
+
+{/block}
+
+{block scripts}
+    <script src="{$basePath}/js/intra/myProfile/myProfile.js"></script>
+    <script src="{$basePath}/js/intra/myProfile/functions.js"></script>
+{/block}

@@ -13,17 +13,16 @@ use Nette\Bootstrap\Configurator;
  */
 class Bootstrap {
 
-    /**
-     * Function which initializes the environment, creates a dependency injection (DI) container, and starts the application.
-     *
-     * @return Configurator
-     */
+	/**
+	 * Function which initializes the environment, creates a dependency injection (DI) container, and starts the application.
+	 *
+	 * @return Configurator
+	 */
 	public static function boot(): Configurator {
 
 		$configurator = new Configurator;
 		$appDir = dirname(__DIR__);
 
-		//$configurator->setDebugMode('secret@23.75.345.200'); // enable for your remote IP
 		$configurator->enableTracy($appDir . '/log');
 
 		$configurator->setTimeZone('Europe/Prague');

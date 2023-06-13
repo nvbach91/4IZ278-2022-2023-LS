@@ -1,0 +1,50 @@
+{layout '@layout-detail.latte'}
+
+{block content_detail}
+
+    <div class="card animation fade-in">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between">
+
+                <h3>Přiřazená oprávnění</h3>
+                <a n:href='NewPermission!'><span id="newPermissionButton"></span></a>
+
+            </div>
+
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th scope="col" class="lead fw-normal">Oprávnění</th>
+                    <th scope="col" class="lead fw-normal">Kód oprávnění</th>
+                    <th scope="col" class="lead fw-normal">Akce</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $assignedPermissions as $assignedPermission}
+                    <tr>
+                        <td>{$assignedPermission->description}</td>
+                        <td>{$assignedPermission->permission}</td>
+                        <td><a n:href='RemovePermission!, $selectedUser->id_user, $assignedPermission->permission'>
+                                <button class="message-btn btn ms-2 btn-outline-danger btn-floating btn-sm" onclick="">
+                                    <i class="fas fa-trash-alt"></i></button>
+                            </a></td>
+                    </tr>
+                {/foreach}
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+{/block}
+
+{block scripts_detail}
+
+    <script src="{$basePath}/js/intra/users/userDetailNewPermission.js"></script>
+
+{/block}

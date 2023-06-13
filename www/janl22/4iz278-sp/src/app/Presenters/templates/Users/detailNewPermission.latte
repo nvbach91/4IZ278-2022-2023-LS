@@ -1,0 +1,30 @@
+{layout '@layout-detail.latte'}
+
+{block content_detail}
+
+    <div class="card animation fade-in mx-auto col-xl-6 col-sm-12 mb-4">
+
+        <div class="card-body">
+
+            <h3>Nové oprávnění:</h3>
+
+            {form newPermissionForm}
+                <div class="mt-4 mb-4">
+                    {input permission, class => "select"}
+                    {label permission, class => "form-label select-label" /}
+                </div>
+
+                <hr>
+                <a n:href="Users:detail $selectedUser->id_user">
+                    <button type="button" class="btn btn-danger btn-sm float-start"><i
+                                class="fas fa-solid fa-xmark me-2"></i>Zrušit
+                    </button>
+                </a>
+                {input newPermission, class => "btn btn-success btn-sm float-end"}
+            {/form}
+
+        </div>
+
+    </div>
+
+{/block}
