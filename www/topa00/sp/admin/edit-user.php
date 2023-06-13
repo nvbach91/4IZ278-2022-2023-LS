@@ -3,8 +3,9 @@
 if (isset($_GET['id'])){
   $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
   $query = "SELECT * FROM users WHERE id=$id";
-  $result = mysqli_query($db, $query);
-  $user = mysqli_fetch_assoc($result);
+  $users_result = $db->prepare($query);
+  $users_result->execute();
+  $users = $users_result->fetch(PDO::FETCH_ASSOC);
 } else {
   header('location: manage-users.php');
 }

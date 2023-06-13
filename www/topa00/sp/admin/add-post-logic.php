@@ -49,26 +49,28 @@ if (isset($_POST['submit'])) {
   } else {
     if($is_featured == 1) {
       $zero_in_featured_query = "UPDATE posts SET is_featured = 0";
-      $zero_in_featured_result = mysqli_query($db, $zero_in_featured_query);
+      $zero_in_featured_result = $db->prepare($query);
+      $zero_in_featured_result->execute();
     }
     // data input in the table
     $query = "INSERT INTO posts (title, body, thumbnail, author_id, is_featured) VALUES ('$title','$body','$thumbnail_name','$author_id',$is_featured)";
-    $idata = mysqli_query($db, $query);
+    $input_results = $db->prepare($query);
+    $input_results->execute();
 
     $query = "SELECT MAX(id) AS id FROM posts";
-    $id_result = mysqli_query($db, $query);
-    $id = mysqli_fetch_assoc($id_result);
+    $id_result = $db->prepare($query);
+    $id_result->execute();
+    $id = $id_result->fetch(PDO::FETCH_ASSOC);
     $post_id = $id['id'];
 
     //creating links for many:many
     $link_query = "INSERT INTO posts_categories (post_id, category_id) VALUES ('$post_id', '$category_id')";
-    $link_input = mysqli_query($db, $link_query);
-    
-    if(!mysqli_errno($db)) {
-      $_SESSION['add-post_success'] = "New post was successfuly added" . $post_id;
+    $link_results = $db->prepare($query);
+    $link_results->execute();
+
+      $_SESSION['add-post_success'] = "New post was successfuly added";
       header('location: manage-posts.php');
       die();
-    }
   }
 }
 

@@ -2,7 +2,10 @@
 include 'elements/header.php';
 
 $query = "SELECT * FROM categories";
-$categories =mysqli_query($db, $query);
+$category_result = $db->prepare($query);
+$category_result->execute();
+$categories = $category_result->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
   
   <section class="form-section">
@@ -19,9 +22,9 @@ $categories =mysqli_query($db, $query);
       <form action="add-post-logic.php" enctype="multipart/form-data" method="POST">
         <input type="text" name="title" placeholder="Title">
         <select name="category">
-          <?php while($category=mysqli_fetch_assoc($categories)) : ?>
+          <?php foreach($categories as $category) : ?>
           <option value="<?=$category['id'] ?>"><?=$category['title'] ?></option>
-          <?php endwhile ?>
+          <?php endforeach ?>
         </select>        
         <textarea rows="10" name="body" placeholder="Body"></textarea>
         <?php if(isset($_SESSION['user_is_admin'])): ?>

@@ -9,9 +9,11 @@ if (isset($_POST['submit'])) {
     $_SESSION['edit-user'] = "Invalid first or last name";
   } else {
     $query = "UPDATE users SET first_name='$first_name', last_name='$last_name', is_admin='$is_admin' WHERE id=$id LIMIT 1";
-    $result = mysqli_query($db, $query);
+    $users_result = $db->prepare($query);
+    $users_result->execute();
+    $users = $users_result->fetch(PDO::FETCH_ASSOC);
 
-    if(mysqli_errno($db)) {
+    if($users->errorCode() !== "00000") {
       $_SESSION['edit-user'] = "Failed to update user info";
     } else {
       $_SESSION['edit-user success'] = "User info updated successfuly";

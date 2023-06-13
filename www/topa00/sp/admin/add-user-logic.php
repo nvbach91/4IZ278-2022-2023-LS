@@ -29,8 +29,11 @@ if (isset($_POST['submit'])) {
       $hashed_password = password_hash($create_password, PASSWORD_DEFAULT);
     
       $user_check_query = "SELECT * FROM users WHERE email='$email'";
-      $user_check_query = mysqli_query($db, $user_check_query);
-      if(mysqli_num_rows($user_check_query) > 0){
+      $user_check_result = $db->prepare($query);
+      $user_check_result->execute();
+      $num_rows = $user_check_result -> rowCount();
+
+      if($num_rows > 0){
         $_SESSION['add-user'] = "User with this email already exists";
       } else {
         //renaming avatar with timestamp
@@ -64,9 +67,10 @@ if (isset($_POST['submit'])) {
   } else {
     // data input in the table
     $insert_user_query = "INSERT INTO users (first_name, last_name, email, password, avatar, is_admin) VALUES ('$first_name','$last_name','$email','$hashed_password','$avatar_name',$is_admin)";
-    $insert_user_data = mysqli_query($db, $insert_user_query);
+    $insert_user_result = $db->prepare($query);
+    $insert_user_result->execute();
     
-    if(!mysqli_errno($db)) {
+    if($insert_user_result->errorCode() !== "00000") {
       $_SESSION['add-user_success'] = "New user was successfuly added";
       header('location: manage-users.php');
       die();

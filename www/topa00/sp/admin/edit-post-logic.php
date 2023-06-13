@@ -10,13 +10,15 @@ if (isset($_POST['update'])) {
   } else {
     if($is_featured == 1) {
       $zero_in_featured_query = "UPDATE posts SET is_featured = 0";
-      $zero_in_featured_result = mysqli_query($db, $zero_in_featured_query);
+      $zero_in_featured_result = $db->prepare($query);
+      $zero_in_featured_result->execute();
     }
     
     $query = "UPDATE posts SET title='$title', body='$body', is_featured='$is_featured' WHERE id=$id LIMIT 1";
-    $result = mysqli_query($db, $query);
+    $posts_results = $db->prepare($query);
+    $posts_results->execute();
 
-    if(mysqli_errno($db)) {
+    if($posts_results->errorCode() !== "00000") {
       $_SESSION['edit-post'] = "Failed to update post info";
     } else {
       $_SESSION['edit-post success'] = "Post info updated successfuly";

@@ -3,11 +3,14 @@
 if (isset($_GET['id'])){
   $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
   $query = "SELECT * FROM posts WHERE id=$id";
-  $result = mysqli_query($db, $query);
-  $post = mysqli_fetch_assoc($result);
+  $posts_results = $db->prepare($query);
+  $posts_results->execute();
+  $post = $posts_results->fetch(PDO::FETCH_ASSOC);
 
-  $query_categories = "SELECT * FROM categories";
-  $categories =mysqli_query($db, $query_categories);
+  $query = "SELECT * FROM categories";
+  $categories_result = $db->prepare($category_query);
+  $categories_result->execute();
+  $categories = $categories_result->fetchAll(PDO::FETCH_ASSOC);
 } else {
   header('location: manage-posts.php');
 }

@@ -4,8 +4,9 @@ require 'config/database.php';
 if(isset($_SESSION['user_id'])) {
   $id = filter_var($_SESSION['user_id'], FILTER_SANITIZE_NUMBER_INT);
   $query = "SELECT avatar FROM users WHERE id=$id";
-  $result = mysqli_query($db, $query);
-  $avatar = mysqli_fetch_assoc($result);
+  $result = $db->prepare($query);
+  $result->execute();
+  $avatar = $result->fetch(PDO::FETCH_ASSOC);
 }
 ?>
 
@@ -24,7 +25,6 @@ if(isset($_SESSION['user_id'])) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-
 </head>
 <body>
   

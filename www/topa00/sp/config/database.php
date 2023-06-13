@@ -1,9 +1,7 @@
 <?php
 require 'constants.php';
 
-//connecting to db via mysqli
-$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+//connecting to db via pdo
+$db = new PDO("mysql:host=". DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
 
-if(mysqli_errno($db)) {
-  die(mysqli_error($db));
-}
+$db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

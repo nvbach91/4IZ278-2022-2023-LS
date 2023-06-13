@@ -5,7 +5,10 @@ include 'elements/dashboard.php';
 $current_id = $_SESSION['user_id'];
 
 $query = "SELECT * FROM users WHERE NOT id=$current_id";
-$users = mysqli_query($db, $query)
+$users_result = $db->prepare($query);
+$users_result->execute();
+$users = $users_result->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
       <main>
         <h2>Manage Users</h2>
@@ -62,7 +65,7 @@ $users = mysqli_query($db, $query)
             </tr>            
           </thead>
           <tbody>
-            <?php while($user = mysqli_fetch_assoc($users)): ?>
+            <?php foreach ($users as $user): ?>
             <tr>
               <td><?= "{$user['first_name']} {$user['last_name']}" ?></td>
               <td><?= "{$user['email']}"?></td>
@@ -70,7 +73,7 @@ $users = mysqli_query($db, $query)
               <td><a href="delete-user.php?id=<?= $user['id'] ?>" class="button delete">Delete</a></td>
               <td><?= $user['is_admin'] ? 'Yes' : 'No' ?></td>
             </tr>
-            <?php endwhile ?>
+            <?php endforeach ?>
           </tbody>
         </table>
       </main>

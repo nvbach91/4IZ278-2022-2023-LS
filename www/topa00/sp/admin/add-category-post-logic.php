@@ -8,22 +8,25 @@ if (isset($_POST['add'])) {
 
   //checking if that category was already chosen
   $query = "SELECT * FROM posts_categories WHERE post_id=$post_id AND category_id=$category_id";
-  $result = mysqli_query($db,$query);
-  $length = mysqli_num_rows($result);
+  $link_results = $db->prepare($query);
+  $link_results->execute();
+  $length = $link_results->rowCount();
 
   //getting categories
   $query = "SELECT id FROM categories WHERE id = $category_id";
-  $result = mysqli_query($db,$query);
-  $category_length = mysqli_num_rows($result);
+  $category_result = $db->prepare($query);
+  $category_result->execute();
+  $category_length = $category_result->rowCount();
   
   if ($length == 1) {
     $_SESSION['add-post-category'] = "Category was already chosen for this post";
   } //check if the chosen category is valid
   elseif( $category_length > 0) {
     $query = "INSERT INTO posts_categories (post_id, category_id) VALUES ('posts_id', 'category_id')";
-    $result = mysqli_query($db, $query);
+    $input_results = $db->prepare($query);
+    $input_results->execute();
 
-    if(mysqli_errno($db)) {
+    if($input_results->errorCode() !== "00000") {
       $_SESSION['add-post-category'] = "Failed to update post info";
     } else {
       $_SESSION['add-post-category success'] = "Category added successfuly";

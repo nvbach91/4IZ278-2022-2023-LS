@@ -20,9 +20,10 @@ if (isset($_POST['submit'])) {
   } else {
     // data input in the table
     $query = "INSERT INTO categories (title, description) VALUES ('$title','$description')";
-    $result = mysqli_query($db, $query);
+    $result = $db->prepare($query);
+    $result->execute();
     
-    if(mysqli_errno($db)) {
+    if($result->errorCode() !== "00000") {
       $_SESSION['add-category_error'] = "Error occured while adding category";
       header('location: add-category.php');
       die();

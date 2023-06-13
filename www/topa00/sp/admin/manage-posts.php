@@ -4,8 +4,9 @@ include 'elements/dashboard.php';
 
 $current_id = $_SESSION['user_id'];
 $user_query = "SELECT * FROM users WHERE id=$current_id";
-$user_result = mysqli_query($db, $user_query);
-$user = mysqli_fetch_assoc($user_result);
+$user_result = $db->prepare($user_query);
+$user_result->execute();
+$user = $user_result->fetch(PDO::FETCH_ASSOC);
 
 if ($user['is_admin'] == 1) : {
   $query = "SELECT id, title FROM posts ORDER BY id DESC";
@@ -15,7 +16,9 @@ else : {
 }
 endif;
 
-$posts = mysqli_query($db, $query);
+$posts_results = $db->prepare($query);
+$posts_results->execute();
+$posts = $posts_results->fetchAll(PDO::FETCH_ASSOC);
 $titles = "";
 
 ?>
@@ -89,18 +92,21 @@ $titles = "";
             </tr>            
           </thead>
           <tbody>
-            <?php while($post = mysqli_fetch_assoc($posts)): ?>
+            <?php foreach ($posts as $post): ?>
             <?php
             $post_id = $post['id'];
             $link_query = "SELECT * FROM posts_categories WHERE post_id = $post_id";
-            $links = mysqli_query($db, $link_query);
+            $link_result = $db->prepare($link_query);
+            $link_result->execute();
+            $links = $link_result->fetchAll(PDO::FETCH_ASSOC);
             
-            while($link = mysqli_fetch_assoc($links)):
+            foreach($links as $link):
 
             $category_id = $link['category_id'];
             $category_query = "SELECT title FROM categories WHERE id=$category_id";
-            $category_result = mysqli_query($db, $category_query);
-            $category = mysqli_fetch_assoc($category_result);
+            $category_result = $db->prepare($category_query);
+            $category_result->execute();
+            $category = $category_result->fetch(PDO::FETCH_ASSOC);
             $titles = $titles . " " . $category['title'];
             ?>
             <tr>
@@ -110,8 +116,8 @@ $titles = "";
               <td><a href="edit-post.php?id=<?= $post['id'] ?>" class="button">Edit</a></td>
               <td><a href="delete-post.php?id=<?= $post['id'] ?>" class="button delete">Delete</a></td>
             </tr>
-            <?php endwhile;
-            endwhile ?>
+            <?php endforeach;
+            endforeach ?>
           </tbody>
         </table>
       </main>

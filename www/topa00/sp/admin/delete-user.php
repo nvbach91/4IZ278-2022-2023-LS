@@ -5,8 +5,9 @@
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
     $query = "SELECT * FROM users WHERE id=$id";
-    $result = mysqli_query($db, $query);
-    $user = mysqli_fetch_assoc($result);
+    $users_result = $db->prepare($query);
+    $users_result->execute();
+    $users = $users_result->fetch(PDO::FETCH_ASSOC);
 
     if (mysqli_num_rows($result) == 1) {
       $avatar_name = $user['avatar'];
@@ -18,8 +19,10 @@
     }
 
     $delete_user_query = "DELETE FROM users WHERE id=$id";
-    $delete_user_result = mysqli_query($db, $delete_user_query);
-    if (mysqli_errno($db)){
+    $delete_users_result = $db->prepare($query);
+    $delete_users_result->execute();
+
+    if ($delete_users_result->errorCode() !== "00000"){
       $_SESSION['delete-user'] = "Error occured while removing the entry";
     } else {
       $_SESSION['delete-user_success'] = "Successfuly deleted user from the database";

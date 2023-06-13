@@ -28,8 +28,11 @@ if (isset($_POST['submit'])) {
       $hashed_password = password_hash($create_password, PASSWORD_DEFAULT);
     
       $user_check_query = "SELECT * FROM users WHERE email='$email'";
-      $user_check_query = mysqli_query($db, $user_check_query);
-      if(mysqli_num_rows($user_check_query) > 0){
+      $result = $db->prepare($user_check_query);
+      $result->execute();
+      $num_rows = $result->rowCount();
+
+      if($num_rows > 0){
         $_SESSION['signup'] = "User with this email already exists";
       } else {
         //renaming avatar with timestamp
@@ -63,9 +66,11 @@ if (isset($_POST['submit'])) {
   } else {
     // data input in the table
     $insert_user_query = "INSERT INTO users (first_name, last_name, email, password, avatar, is_admin) VALUES ('$first_name','$last_name','$email','$hashed_password','$avatar_name',0)";
-    $insert_user_data = mysqli_query($db, $insert_user_query);
+    $insert_user_data = $db->prepare($insert_user_query);
+    $insert_user_data->execute();
+    $num_rows = $insert_user_data->rowCount();
     
-    if(!mysqli_errno($db)) {
+    if($num_rows > 0) {
       $_SESSION['signup_success'] = "Registration successful. Please log in";
       header('location: signin.php');
       die();

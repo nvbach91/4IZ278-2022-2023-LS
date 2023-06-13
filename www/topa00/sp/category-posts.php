@@ -1,8 +1,9 @@
 <?php include 'elements/header.php';
 $id = $_GET['id'];
 $query = "SELECT * FROM categories WHERE id=$id";
-$category_result = mysqli_query($db, $query);
-$category = mysqli_fetch_assoc($category_result); ?>?>
+$category_result = $db->prepare($query);
+$category_result->execute();
+$category = $category_result->fetch(PDO::FETCH_ASSOC); ?>
   <!--category-title-->
   <header class="category-title">
     <h2><?=$category['title']?></h2>
@@ -11,9 +12,17 @@ $category = mysqli_fetch_assoc($category_result); ?>?>
   <!--posts-->
   <section class="posts">
     <div class="container posts_container">
-      <?php $query = "SELECT * FROM posts WHERE category_id=$id";
-            $posts = mysqli_query($db, $query);
-            while($post = mysqli_fetch_assoc($posts)): 
+      <?php $posts_id_query = "SELECT * FROM posts_categories WHERE category_id=$id";
+            $posts_id_result = $db->prepare($posts_id_query);
+            $posts_id_result->execute();
+            $posts_id = $posts_id_result->fetchAll(PDO::FETCH_ASSOC);
+            foreach($posts_id as $post_id): 
+              $id = $post_id['post_id'];
+              $posts_query = "SELECT * FROM posts WHERE id=$id";
+              $posts_result = $db->prepare($posts_query);
+              $posts_result->execute();
+              $posts = $posts_result->fetchAll(PDO::FETCH_ASSOC);
+              foreach($posts as $post): 
             ?>
       <article class="post">
         <div class="post_thumbnail">
@@ -30,8 +39,9 @@ $category = mysqli_fetch_assoc($category_result); ?>?>
             <?php 
             $author_id = $post['author_id'];
             $author_query = "SELECT * FROM users WHERE id=$author_id";
-            $author_result = mysqli_query($db, $author_query);
-            $author = mysqli_fetch_assoc($author_result);
+            $author_result = $db->prepare($author_query);
+            $author_result->execute();
+            $author = $author_result->fetch(PDO::FETCH_ASSOC);
             ?>
           <div class="post_author_avatar">
             <img src="./images/<?=$author['avatar']?>">
@@ -43,7 +53,8 @@ $category = mysqli_fetch_assoc($category_result); ?>?>
         </div>
         </div>
       </article>
-      <?php endwhile ?>
+      <?php endforeach;
+      endforeach;?>
     </div>
   </section>
 

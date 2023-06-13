@@ -10,10 +10,12 @@ if (isset($_POST['submit'])){
     $_SESSION['signin'] = 'Password Required';
   } else {
     $fetch_user_query = "SELECT * FROM users WHERE email='$email'";
-    $fetch_user_result = mysqli_query($db, $fetch_user_query);
+    $fetch_user_result = $db->prepare($fetch_user_query);
+    $fetch_user_result->execute();
+    $num_rows = $fetch_user_result->rowCount();
 
-    if(mysqli_num_rows($fetch_user_result) == 1) {
-      $user_record = mysqli_fetch_assoc($fetch_user_result);
+    if($num_rows == 1) {
+      $user_record = $fetch_user_result->fetch(PDO::FETCH_ASSOC);
       $db_password = $user_record['password'];
 
       if(password_verify($password,$db_password)) {

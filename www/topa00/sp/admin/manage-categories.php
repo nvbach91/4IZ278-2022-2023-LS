@@ -2,8 +2,10 @@
 include 'elements/header.php';
 include 'elements/dashboard.php';
 
-$query = "SELECT * FROM categories ORDER BY title";
-$categories = mysqli_query($db, $query);
+$category_query = "SELECT * FROM categories ORDER BY title";
+$category_result = $db->prepare($category_query);
+$category_result->execute();
+$categories = $category_result->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
       <main>
@@ -58,13 +60,13 @@ $categories = mysqli_query($db, $query);
             </tr>            
           </thead>
           <tbody>
-          <?php while($category = mysqli_fetch_assoc($categories)): ?>
+          <?php foreach ($categories as $category): ?>
             <tr>
               <td><?= "{$category['title']}" ?></td>
               <td><a href="edit-category.php?id=<?= $category['id'] ?>" class="button">Edit</a></td>
               <td><a href="delete-category.php?id=<?= $category['id'] ?>" class="button delete">Delete</a></td>
             </tr>
-            <?php endwhile ?>
+            <?php endforeach ?>
           </tbody>
         </table>
       </main>

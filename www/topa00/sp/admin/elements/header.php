@@ -1,10 +1,12 @@
-<?php require '../config/database.php';
+<?php
+require '../config/database.php';
 
 if(isset($_SESSION['user_id'])) {
   $id = filter_var($_SESSION['user_id'], FILTER_SANITIZE_NUMBER_INT);
   $query = "SELECT avatar FROM users WHERE id=$id";
-  $result = mysqli_query($db, $query);
-  $avatar = mysqli_fetch_assoc($result);
+  $result = $db->prepare($query);
+  $result->execute();
+  $avatar = $result->fetch(PDO::FETCH_ASSOC);
 } else {
   header('location: ../signin.php');
   die();
@@ -39,16 +41,16 @@ if(isset($_SESSION['user_id'])) {
         <li><a href="../contacts.php">Contacts</a></li>
         <?php if(isset($_SESSION['user_id'])): ?>
           <li class="navigation_profile">
-          <div class="avatar">
-            <img src="<?='../images/' . $avatar['avatar']?>">
-          </div>
-          <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="../logout.php">Log Out</a></li>
-          </ul>
-        </li>
+            <div class="avatar">
+              <img src="<?='../images/' . $avatar['avatar']?>">
+            </div>
+            <ul>
+              <li><a href="admin/dashboard.php">Dashboard</a></li>
+              <li><a href="../logout.php">Log Out</a></li>
+            </ul>
+          </li>
         <?php else: ?>
-        <li><a href="../signin.php">Sign In</a></li>
+          <li><a href="../signin.php">Sign In</a></li>
         <?php endif ?>
       </ul>
     </div>
