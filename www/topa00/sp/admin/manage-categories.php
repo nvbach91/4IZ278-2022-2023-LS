@@ -61,8 +61,8 @@ $categories = mysqli_query($db, $query);
           <?php while($category = mysqli_fetch_assoc($categories)): ?>
             <tr>
               <td><?= "{$category['title']}" ?></td>
-              <td><a href="edit-category.php?id=<?= $user['id'] ?>" class="button">Edit</a></td>
-              <td><a href="delete-category.php?id=<?= $user['id'] ?>" class="button delete">Delete</a></td>
+              <td><a href="edit-category.php?id=<?= $category['id'] ?>" class="button">Edit</a></td>
+              <td><a href="delete-category.php?id=<?= $category['id'] ?>" class="button delete">Delete</a></td>
             </tr>
             <?php endwhile ?>
           </tbody>

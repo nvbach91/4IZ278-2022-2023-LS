@@ -1,46 +1,43 @@
-<?php include 'elements/header.php'
-?>
-  <!--search-->
-  <section class="search-bar">
-    <form class="container search-bar_container" action="search.php" method="GET">
-      <div>
-        <img src="./images/search.png">
-        <input type="search" name="search" placeholder="Search">
-      </div>
-      <button type="submit" name="go" class="button">Go</button>
-    </form>
-  </section>
+<?php 
+require 'elements/header.php';
 
-  <section class="posts">
-    <div class="container posts_container">
-      <?php $query = "SELECT * FROM posts ORDER BY title";
-            $posts = mysqli_query($db, $query);
-            while($post = mysqli_fetch_assoc($posts)): 
-            ?>
-      <article class="post">
-        <div class="post_thumbnail">
-          <img src="./images/<?=$post['thumbnail']?>">
-        </div>
-        <div class="post_body">
-          <?php
+if(isset($_GET['search']) && isset($_GET['go'])) {
+  $search = filter_var($_GET['search'], FILTER_SANITIZE_SPECIAL_CHARS);
+  $query = "SELECT * FROM posts WHERE title LIKE '%$search%'";
+  $posts = mysqli_query($db, $query);
+} else {
+  header('location: blog.php');
+  die();
+}
+?>
+
+<section class="posts">
+<div class="container posts_container">
+  <?php while($post = mysqli_fetch_assoc($posts)):?>
+  <article class="post">
+    <div class="post_thumbnail">
+      <img src="./images/<?=$post['thumbnail']?>">
+    </div>
+    <div class="post_body">
+    <?php
           $categories_buttons = generateCategories($db, $post);
           ?>
-          <h3 class="post_title">
-          <a href="post.php?id=<?= $post['id'] ?>"><?=$post['title']?></a>
-          </h3>
-          <p class="post_text">
-           <?= substr ($post['body'],0,200) ?>
-          </p>
-          <div class="post_info">
-          <?php
+      <h3 class="post_title">
+      <a href="post.php?id=<?= $post['id'] ?>"><?=$post['title']?></a>
+      </h3>
+      <p class="post_text">
+       <?= substr ($post['body'],0,200) ?>
+      </p>
+      <div class="post_info">
+      <?php
             $post_info = generatePostInfo($db, $post);
             ?>
-          </div>
-        </div>
-      </article>
-      <?php endwhile ?>
     </div>
-  </section>
+    </div>
+  </article>
+  <?php endwhile ?>
+</div>
+</section>
 
 <?php 
 function generateCategories($db, $post) {
@@ -58,10 +55,11 @@ function generateCategories($db, $post) {
       $categoryTitle = $category['title'];
 
       $output .= '<a href="category-posts.php?id=' . $category['id'] . '" class="category_button">' . $category['title'] . '</a>';
+      echo $output;
   }
 
   echo $output;
-  }
+}
 
   function generatePostInfo($db, $post) {
     $output = '';

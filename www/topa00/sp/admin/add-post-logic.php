@@ -52,11 +52,20 @@ if (isset($_POST['submit'])) {
       $zero_in_featured_result = mysqli_query($db, $zero_in_featured_query);
     }
     // data input in the table
-    $query = "INSERT INTO posts (title, body, thumbnail, category_id, author_id, is_featured) VALUES ('$title','$body','$thumbnail','$category_id','$author_id',$is_featured)";
+    $query = "INSERT INTO posts (title, body, thumbnail, author_id, is_featured) VALUES ('$title','$body','$thumbnail_name','$author_id',$is_featured)";
     $idata = mysqli_query($db, $query);
+
+    $query = "SELECT MAX(id) AS id FROM posts";
+    $id_result = mysqli_query($db, $query);
+    $id = mysqli_fetch_assoc($id_result);
+    $post_id = $id['id'];
+
+    //creating links for many:many
+    $link_query = "INSERT INTO posts_categories (post_id, category_id) VALUES ('$post_id', '$category_id')";
+    $link_input = mysqli_query($db, $link_query);
     
     if(!mysqli_errno($db)) {
-      $_SESSION['add-post_success'] = "New post was successfuly added";
+      $_SESSION['add-post_success'] = "New post was successfuly added" . $post_id;
       header('location: manage-posts.php');
       die();
     }

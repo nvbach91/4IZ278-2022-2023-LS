@@ -1,75 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php include 'elements/header.php';
 
-  <link rel="icon" href="./images/blog-b.png" type="image/x-icon">
-  <title>Blogist</title>
+  $id = $_GET['id'];
+  $query = "SELECT * FROM posts WHERE id=$id";
+  $post_result = mysqli_query($db, $query);
+  $post = mysqli_fetch_assoc($post_result);
+  $post_id = $post['id'];
+  $user_id = $_SESSION['user_id'];
   
-  <link rel="stylesheet" href="./styles/main.css">
+  $likesCount = mysqli_fetch_assoc(mysqli_query($db,"SELECT COUNT(*) AS likes FROM ratings WHERE post_id = $post_id AND status = '1'"))['likes'];
+  
+  $dislikesCount = mysqli_fetch_assoc(mysqli_query($db,"SELECT COUNT(*) AS dislikes FROM ratings WHERE post_id = $post_id AND status = '-1'"))['dislikes'];
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&family=Roboto:wght@100;400&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!--navigation-->
-  <navigation>
-    <div class="container navigation_container">
-      <a href="index.php" class="navigation_logo">Blogist</a>
-      <ul class="navigation_items">
-        <li><a href="blog.php">Blog</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contacts.php">Contacts</a></li>
-        <li><a href="signin.php">Sign In</a></li>
-        <li class="navigation_profile">
-          <div class="avatar">
-            <img src="./images/avatar.jpg">
-          </div>
-          <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="logout.php">Log Out</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </navigation>
+  $status = mysqli_query($db,"SELECT status FROM ratings WHERE post_id = $post_id AND user_id = $user_id");
+  if (mysqli_num_rows($status) > 0) {
+    $status = mysqli_fetch_assoc($status)['status'];
+  } else {
+    $status = 0;
+  }
+  ?> 
 
-  <!--post-->
+  
   <section class="single-post">
     <div class="container single-post_container">      
-      <h2>How to run away from guars in less then 5 minutes?</h2>
+      <h2><?=$post['title']?></h2>
       <div class="post_info">
-        <div class="post_author_avatar">
-          <img src="./images/avatar6.jpg">
-        </div>
-        <div class="post_autor_details">
-          <h5>By: Ezio Auditore da Firenze</h5>
-          <small> April 25, 2023 - 04:04</small>
-        </div>
+      <?php 
+            $author_id = $post['author_id'];
+            $author_query = "SELECT * FROM users WHERE id=$author_id";
+            $author_result = mysqli_query($db, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            ?>
+          <div class="post_author_avatar">
+            <img src="./images/<?=$author['avatar']?>">
+          </div>
+          <div class="post_author_details">
+            <h5>By: <?= "{$author['first_name']} {$author['last_name']}" ?></h5>
+            <small> <?= date("M, d, Y", strtotime($post['date_time'])) ?> </small>
+          </div>          
       </div>
       <div class="single-post_thumbnail">
-        <img src="./images/thumbnail2.jpg">
+        <img src="./images/<?=$post['thumbnail']?>">
       </div>
       <p class="post_text">
-        Hiding in the hay, jumping from roof to roof and lots of other helpful advices from your one and only.
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum commodi quos beatae provident doloremque dolorem, amet esse sit perferendis quibusdam dolores saepe voluptate rem architecto consequatur temporibus, rerum quod nisi.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum commodi quos beatae provident doloremque dolorem, amet esse sit perferendis quibusdam dolores saepe voluptate rem architecto consequatur temporibus, rerum quod nisi.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum commodi quos beatae provident doloremque dolorem, amet esse sit perferendis quibusdam dolores saepe voluptate rem architecto consequatur temporibus, rerum quod nisi.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum commodi quos beatae provident doloremque dolorem, amet esse sit perferendis quibusdam dolores saepe voluptate rem architecto consequatur temporibus, rerum quod nisi.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum commodi quos beatae provident doloremque dolorem, amet esse sit perferendis quibusdam dolores saepe voluptate rem architecto consequatur temporibus, rerum quod nisi.</p>
-    </div>
-    </section>
+        <?=$post['body'] ?>
+      </p> 
+      <?php if(isset($_SESSION['user_id'])) : { ?>
+        <div class="post_action">
+          <td>            
+            <a class="button like <?php if ($status == '1') echo "selected";?>">
+            <img src="./images/like.png"> <?=$likesCount?>
+            </a>
+          </td>
 
-  <!--footer--> 
-  <footer>
-    <div class="footer-details">
-      <small>4IZ278 LS2023</small>
+          <td>
+            <a class="button dislike <?php if ($status == '-1') echo "selected";?>">
+            <img src="./images/dislike.png"><?=$dislikesCount?>
+            </a>
+          </td>
+          
+          <?php if ($_SESSION['user_id'] == $post['author_id'] || $_SESSION['user_is_admin']) : {?>
+            <td><a href="./admin/edit-post.php?id=<?= $post['id'] ?>" class="button edit">Edit</a></td>
+          <?php } endif; ?>          
+        </div>
+      <?php } endif; ?>     
     </div>
-  </footer>
+  </section>
 
-</body>
-</html>
+  <section class="comments">
+  </section>
+<?php include 'elements/footer.php' ?>

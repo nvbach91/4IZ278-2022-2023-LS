@@ -1,44 +1,51 @@
-<?php include 'elements/header.php' ?>
+<?php include 'elements/header.php';
+$id = $_GET['id'];
+$query = "SELECT * FROM categories WHERE id=$id";
+$category_result = mysqli_query($db, $query);
+$category = mysqli_fetch_assoc($category_result); ?>?>
   <!--category-title-->
   <header class="category-title">
-    <h2>Category Title</h2>
+    <h2><?=$category['title']?></h2>
   </header>
 
   <!--posts-->
   <section class="posts">
     <div class="container posts_container">
+      <?php $query = "SELECT * FROM posts WHERE category_id=$id";
+            $posts = mysqli_query($db, $query);
+            while($post = mysqli_fetch_assoc($posts)): 
+            ?>
       <article class="post">
         <div class="post_thumbnail">
-          <img src="./images/thumbnail2.jpg">
+          <img src="./images/<?=$post['thumbnail']?>">
         </div>
         <div class="post_body">
-          <a href="category-posts.php" class="category_button">Lifehacks</a>
           <h3 class="post_title">
-            <a href="post.php">How to run away from guars in less then 5 minutes?</a>
+          <a href="post.php?id=<?= $post['id'] ?>"><?=$post['title']?></a>
           </h3>
           <p class="post_text">
-            Hiding in the hay, jumping from roof to roof and lots of other helpful advices from your one and only.
+           <?= substr ($post['body'],0,200) ?>
           </p>
           <div class="post_info">
-            <div class="post_author_avatar">
-              <img src="./images/avatar6.jpg">
-            </div>
-            <div class="post_autor_details">
-              <h5>By: Ezio Auditore da Firenze</h5>
-              <small> April 25, 2023 - 04:04</small>
-            </div>
+            <?php 
+            $author_id = $post['author_id'];
+            $author_query = "SELECT * FROM users WHERE id=$author_id";
+            $author_result = mysqli_query($db, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            ?>
+          <div class="post_author_avatar">
+            <img src="./images/<?=$author['avatar']?>">
+          </div>
+          <div class="post_autor_details">
+            <h5>By: <?= "{$author['first_name']} {$author['last_name']}" ?></h5>
+            <small> <?= date("M, d, Y", strtotime($post['date_time'])) ?> </small>
           </div>
         </div>
+        </div>
       </article>
-  </section>
-
-  <!--categories-->
-  <section class="category-buttons">
-    <div class="container category-buttons_container">
-      <a href="" class="category_button">Category 1</a>
-      <a href="" class="category_button">Category 2</a>
-      <a href="" class="category_button">Category 3</a>
+      <?php endwhile ?>
     </div>
   </section>
 
-<?php include 'elements/footer.php' ?>
+  <?php include 'elements/categories.php';
+include 'elements/footer.php' ?>
