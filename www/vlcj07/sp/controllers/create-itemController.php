@@ -1,9 +1,13 @@
 <?php
 require '../models/ProductsDB.php';
+require '../models/CategoriesDB.php';
 require 'authorization.php';
 require 'admin-required.php';
 
 $productsDatabase = new ProductsDatabase();
+
+$categoriesDatabase = new CategoriesDatabase();
+$categories = $categoriesDatabase->fetchAll();
 
 if (!empty($_POST)) {
     $name = $_POST['name'];
@@ -14,8 +18,4 @@ if (!empty($_POST)) {
     $category_id = $_POST['category_id'];
 
     $productsDatabase->createProduct($name, $price, $description, $img, $available, $category_id);
-    // $query = "UPDATE `cv09_goods`  SET name = :name, price = :price, description = :description, img = :img WHERE good_id = :goodId";
-    // $statement = $pdo->prepare($query);
-    // $statement->execute(['goodId' => $goodId, 'name' => $name, 'price' => $price, 'description' => $description, 'img' => $img]);
 }
-?>

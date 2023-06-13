@@ -31,4 +31,3 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
         array_push($errors, $message);
     }   
 }
-?>

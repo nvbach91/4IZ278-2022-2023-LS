@@ -4,7 +4,6 @@
 
 <?php
 require '../controllers/authorization.php';
-
 require '../controllers/admin-required.php';
 ?>
 <?php
@@ -20,7 +19,7 @@ require '../controllers/productsController.php';
             <div class="flex flex-col justify-between items-center my-10 space-y-2 text-2xl text-slate-900 dark:text-white ">
                 <?php include './displays/CategoryDisplay.php' ?>
             </div>
-            
+
 
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 <?php include './displays/ModifyProductDisplay.php' ?>
@@ -33,4 +32,5 @@ require '../controllers/productsController.php';
         </div>
     </section>
 </main>
+<script src="../public/js/confirm-delete.js"></script>
 <?php include './incl/footer.php'; ?>

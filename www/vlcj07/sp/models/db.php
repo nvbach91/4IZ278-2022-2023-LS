@@ -1,7 +1,8 @@
 <?php require_once '../config/db-config.php'; ?>
 
 <?php
-abstract class DB {
+abstract class DB
+{
    protected $pdo;
    public function __construct()
    {

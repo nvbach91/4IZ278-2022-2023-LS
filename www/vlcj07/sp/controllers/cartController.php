@@ -12,4 +12,3 @@ if (is_array($ids) && count($ids)) {
 
     $sum = $productsDatabase->getSum($question_marks, $ids);
 }
-?>

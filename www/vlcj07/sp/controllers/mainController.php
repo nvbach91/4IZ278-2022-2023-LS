@@ -13,4 +13,3 @@ $products = $productsDatabase->fetchAllPagination($limit, $offset);
 $count = $productsDatabase->getCount();
 
 $paginationCount = ceil($count / $limit);
-?>

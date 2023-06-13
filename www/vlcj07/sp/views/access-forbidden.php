@@ -1,4 +1,9 @@
-<?php 
+<?php $pageTitle = 'Fruitopia - přístup zamítnut' ?>
+<?php $metaKW = 'Fruitopia, cart, eshop, košík, buy, fruits' ?>
+<?php $metaDescription = 'Našim zákazníkům přinášíme to nejčerstvější a nejlahodnější exotické ovoce dostupné na trhu za ty nejpříznivější ceny. Jsme Fruitopia, váš svět exotického ovoce.' ?>
+
+
+<?php
 require_once '../models/UsersDB.php';
 require '../controllers/authorization.php';
 ?>

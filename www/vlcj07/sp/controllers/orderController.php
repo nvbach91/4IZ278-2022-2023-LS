@@ -3,6 +3,7 @@ require 'authorization.php';
 require '../models/ProductsDB.php';
 require '../models/OrderItemsDB.php';
 require '../models/OrdersDB.php';
+require '../controllers/mail.php';
 
 $ordersDatabase = new OrdersDatabase();
 $productsDatabase = new ProductsDatabase();
@@ -33,13 +34,10 @@ if (isset($_SESSION['user_id'])){
         $orderItemsDatabase->createOrder($amount, $price, $product_id, $order_id);
         
     }
-
+    sendEmail($_SESSION['user_email'], 'orderConfirmation');
 }
-// přidat potvrzení na email
+
 
 require 'clear-cart.php';
 
-// var_dump($_SESSION['cart']);
-
 header('Location: ../views/order.php');
-?>

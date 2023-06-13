@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../models/UsersDB.php';
+require '../controllers/mail.php';
 
 $usersDatabase = new UsersDatabase();
 
@@ -9,15 +10,15 @@ $errors = [];
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     $role = 'user';
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = htmlspecialchars(trim($_POST['password']));
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $name = $_POST['name'];
-    $country = $_POST['country'];
-    $zipCode = $_POST['zip_code'];
-    $city = $_POST['city'];
-    $adress = $_POST['adress'];
-    $phone = $_POST['phone'];
+    $name = htmlspecialchars(trim($_POST['name']));
+    $country = htmlspecialchars(trim($_POST['country']));
+    $zipCode = htmlspecialchars(trim($_POST['zip_code']));
+    $city = htmlspecialchars(trim($_POST['city']));
+    $adress = htmlspecialchars(trim($_POST['adress']));
+    $phone = htmlspecialchars(trim($_POST['phone']));
 
 
     if ($email == '') { $message = 'Vyplňte email.'; array_push($errors, $message); }
@@ -42,8 +43,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     if (empty($errors)) {
         $usersDatabase->registerUser($role, $email, $hashedPassword, $name, $country, $zipCode, $city, $adress, $phone);
+        sendEmail($email, 'registrationConfirmation');
         header("Location: login.php");
         exit();
     }
 }
-?>

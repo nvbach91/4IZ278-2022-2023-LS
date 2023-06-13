@@ -1,14 +1,16 @@
+<?php $pageTitle = 'Fruitopia - Nový produkt' ?>
+<?php $metaKW = 'Fruitopia, fruits' ?>
+<?php $metaDescription = 'Našim zákazníkům přinášíme to nejčerstvější a nejlahodnější exotické ovoce dostupné na trhu za ty nejpříznivější ceny. Jsme Fruitopia, váš svět exotického ovoce.' ?>
+
+
 <?php require '../controllers/create-itemController.php' ?>
 <?php include './incl/header.php'; ?>
 
 <main class="max-w-4xl mx-auto">
     <section id="edit-item" class="flex justify-center p-6 mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height">
-        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <!-- přidat výpis kateogiríí (čísel a názvů) -->
-            <?php if (!empty($_POST)) : ?>
-                <p>Produkt vytvořen!</p>
-            <?php endif; ?>
-            <div class="mx-auto rounded-xl bg-white max-w-2xl  sm:p-6 lg:max-w-7xl lg:px-8 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
+        <div class="flex flex-row mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 gap-5">
+            <?php include './displays/ChangeDisplay.php'; ?>
+            <div class="w-full mx-auto rounded-xl bg-white max-w-2xl  sm:p-6 lg:max-w-7xl lg:px-8 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
                 <h2 class="text-4xl font-bold text-center sm:text-5xl m-7 text-slate-900 dark:text-white">Nový produkt</h2>
                 <form class="w-full space-y-4 md:space-y-6 max-w-sm m-auto" method="POST">
                     <div class="flex flex-col py-1">
@@ -33,15 +35,19 @@
                     </div>
                     <div class="flex flex-col py-1">
                         <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategorie produktu</label>
-                        <input id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Kategorie produktu (číslo)" aria-label="available">
+                        <input id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Kategorie produktu (id)" aria-label="available">
                     </div>
                     <div class="m-2 flex justify-center items-center py-2">
                         <button class="w-full text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-primary-800" type="submit">
-                            Aktualizovat produkt
+                            Vytvořit produkt
                         </button>
                     </div>
                 </form>
             </div>
+            <div class="gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                <?php include './displays/CategoryListDisplay.php' ?>
+            </div>
+        </div>
     </section>
 </main>
 

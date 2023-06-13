@@ -24,14 +24,13 @@
 
     <hr class="mx-auto bg-black dark:bg-white w-1/2">
 
-    <section id="products" class="flex justify-center  mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height">
+    <section id="products" class="flex justify-center mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height">
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
             <h2 class="text-4xl font-bold text-center sm:text-5xl mb-7 text-slate-900 dark:text-white">Naše produkty</h2>
             <?php if (!isset($_SESSION['user_id'])) : ?>
                 <p class="text-xl text-center sm:text-sm m-10 text-slate-900 dark:text-white">Pro nákup a detaily produktů musíte být přihlášeni. </p>
             <?php endif; ?>
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-                <!-- product -->
                 <?php include './displays/ProductDisplay.php' ?>
             </div>
             <div class="text-center mt-4 text-gray-700 dark:text-white text-xl p-5 m-5 gap-1">

@@ -12,6 +12,3 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $current_user = $usersDatabase->fetchById($user_id);
-
-
-

@@ -729,6 +729,11 @@ video {
   margin-bottom: auto;
 }
 
+.my-2 {
+  margin-top: 0.5rem/* 8px */;
+  margin-bottom: 0.5rem/* 8px */;
+}
+
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -769,6 +774,10 @@ video {
 
 .mb-2 {
   margin-bottom: 0.5rem/* 8px */;
+}
+
+.mb-4 {
+  margin-bottom: 1rem/* 16px */;
 }
 
 .mb-10 {
@@ -931,6 +940,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-max {
+  width: max-content;
 }
 
 .max-w-2xl {
@@ -1505,6 +1518,10 @@ video {
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.gap-6 {
+  gap: 1.5rem/* 24px */;
 }
 
 .gap-x-6 {
@@ -2800,11 +2817,31 @@ video {
     width: 100%;
   }
 
+  .sm\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
   @media (min-width: 640px) {
     .sm\:container {
       max-width: 640px;
     }
   }
+
+  @media (min-width: 640px) {
+    .sm\:px-6 {
+        padding-left: 1.5rem/* 24px */;
+        padding-right: 1.5rem/* 24px */;
+    }
+}
+
+@media (min-width: 640px) {
+  .sm\:py-24 {
+      padding-top: 6rem/* 96px */;
+      padding-bottom: 6rem/* 96px */;
+  }
+}
 
   @media (min-width: 768px) {
     .sm\:container {
@@ -2829,6 +2866,19 @@ video {
       max-width: 1536px;
     }
   }
+
+  @media (min-width: 1024px) {
+    .lg\:max-w-7xl {
+        max-width: 80rem/* 1280px */;
+    }
+}
+
+@media (min-width: 1024px) {
+  .lg\:px-8 {
+      padding-left: 2rem/* 32px */;
+      padding-right: 2rem/* 32px */;
+  }
+}
 
   
 }
@@ -3092,6 +3142,10 @@ video {
     flex-direction: row;
   }
 
+  .sm\:flex-col {
+    flex-direction: column;
+}
+
   .sm\:justify-between {
     justify-content: space-between;
   }
@@ -3142,6 +3196,9 @@ video {
     margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1024px) {
@@ -3152,6 +3209,10 @@ video {
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 
   .lg\:px-8 {
     padding-left: 2rem;
@@ -3171,6 +3232,10 @@ video {
   .xl\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
+
+  .xl\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
 
   .xl\:gap-x-8 {
     -moz-column-gap: 2rem;

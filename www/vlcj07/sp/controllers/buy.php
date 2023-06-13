@@ -1,5 +1,3 @@
-<!-- oprávnění pro 1+ -->
-
 <?php
 require '../models/ProductsDB.php';
 require 'authorization.php';
@@ -12,14 +10,15 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// $query = "SELECT * FROM `sp_products` WHERE `product_id` = :productId";
-// $statement = $pdo->prepare($query);
-// $statement->execute(['productId' => $productId]);
-// $products = $statement->fetch();
 $products = $productsDatabase->fetchById($productId);
 if (!$products) {
-    exit("Unable to find goods!");
+    exit("Produkt neexistuje");
 }
 
-$_SESSION['cart'][] = $products['product_id'];
-header('Location: ../views/cart.php');
+if ($products['available'] === 1) {
+    $_SESSION['cart'][] = $products['product_id'];
+    header('Location: ../views/cart.php');
+} else {
+    echo '<script>alert("Produkt není skladem.")</script>';
+    header("Refresh:0; url=" . $_SERVER['HTTP_REFERER'], true, 303);
+}

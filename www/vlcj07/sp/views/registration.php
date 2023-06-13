@@ -6,13 +6,7 @@
 <?php include './incl/header.php'; ?>
 
 <main class="max-w-4xl mx-auto">
-    <?php if (!empty($errors)) : ?>
-        <div class="flex flex-col text-center m-5 gap-2">
-            <?php foreach ($errors as $error) : ?>
-                <p><?php echo $error ?></p>
-            <?php endforeach ?>
-        </div>
-    <?php endif ?>
+    <?php include './displays/ErrorDisplay.php' ?>
     <section id="register" class="w-full flex justify-center p-6 mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height">
         <div class="mx-auto rounded-xl bg-white max-w-2xl  sm:p-6 lg:max-w-7xl lg:px-8 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
             <h2 class="text-4xl font-bold text-center sm:text-5xl m-7 text-slate-900 dark:text-white">Registrace</h2>

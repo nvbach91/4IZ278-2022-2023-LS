@@ -11,4 +11,3 @@ if (isset($_SESSION['cart'])) {
 }
 
 header('Location: ../views/cart.php');
-?>

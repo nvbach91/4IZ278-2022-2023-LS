@@ -1,12 +1,14 @@
+<?php $pageTitle = 'Fruitopia - Úprava produktů' ?>
+<?php $metaKW = 'Fruitopia, edit, fruits' ?>
+<?php $metaDescription = 'Našim zákazníkům přinášíme to nejčerstvější a nejlahodnější exotické ovoce dostupné na trhu za ty nejpříznivější ceny. Jsme Fruitopia, váš svět exotického ovoce.' ?>
+
 <?php require '../controllers/edit-itemController.php' ?>
 <?php include './incl/header.php'; ?>
 
 <main class="max-w-4xl mx-auto">
     <section id="edit-item" class="flex justify-center p-6 mb-12 scroll-mt-40 widescreen:section-min-height tallscreen:section-min-height">
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-            <?php if (!empty($_POST)) : ?>
-                <p>Produkt upraven!</p>
-            <?php endif; ?>
+            <?php include './displays/ChangeDisplay.php'; ?>
             <div class="mx-auto rounded-xl bg-white max-w-2xl  sm:p-6 lg:max-w-7xl lg:px-8 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
                 <h2 class="text-4xl font-bold text-center sm:text-5xl m-7 text-slate-900 dark:text-white">Úprava produktu</h2>
                 <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 border rounded-xl">

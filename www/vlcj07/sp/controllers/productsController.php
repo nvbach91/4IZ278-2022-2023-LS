@@ -2,7 +2,6 @@
 require '../models/ProductsDB.php';
 require '../models/CategoriesDB.php';
 
-
 $limit = 4;
 
 if (isset($_GET['offset'])) {
@@ -27,5 +26,3 @@ $categoriesDatabase = new CategoriesDatabase();
 $categories = $categoriesDatabase->fetchAll();
 
 $paginationCount = ceil($count / $limit);
-
-?>
