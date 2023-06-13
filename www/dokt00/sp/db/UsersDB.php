@@ -68,5 +68,25 @@ class UsersDB extends Teadatabase {
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function updateUser($userID, $column, $value) {
+        $allowed_columns = ['username', 'email', 'first_name', 'last_name', 'phone', 'isAdmin'];
+    
+        if (!in_array($column, $allowed_columns)) {
+            die('Invalid column');
+        }
+    
+        $stmt = $this->pdo->prepare("UPDATE users SET $column = ? WHERE user_id = ?");
+        $stmt->execute([$value, $userID]);
+    }
+
+    public function deleteUser($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :id");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    
+        $stmt->execute();
+    }
+    
+    
     
 }

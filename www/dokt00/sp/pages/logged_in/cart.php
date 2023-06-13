@@ -36,10 +36,8 @@ foreach ($cartItems as $item) {
         </div>
         <nav>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
+                <li><a>O nás</a></li>
+                <li><a>Kontakt</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -67,11 +65,11 @@ foreach ($cartItems as $item) {
         <aside>
             <h3>Categories</h3>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-                <li><a href="#">Oolong Tea</a></li>
+                <li><a href="logged_in.php" class="tea-category">Zelený čaj</a></li>
+                <li><a href="logged_in.php" class="tea-category">Černý čaj</a></li>
+                <li><a href="logged_in.php" class="tea-category">Bylinný čaj</a></li>
+                <li><a href="logged_in.php" class="tea-category">Ovocný čaj</a></li>
+                <li><a href="logged_in.php" class="tea-category">čaj Oolong</a></li>
             </ul>
         </aside>
         <main>
@@ -129,6 +127,8 @@ foreach ($cartItems as $item) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="update.js"></script>
     <script src="main.js"></script>
+    <script src="category_select.js"></script>
+
 
 </body>
 

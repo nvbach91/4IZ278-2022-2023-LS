@@ -15,6 +15,7 @@ if ($user) {
     if (password_verify($password, $hashed_password)) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $username;
+        $_SESSION['isAdmin'] = $user['isAdmin'];
         echo json_encode(['success' => true, 'isAdmin' => $user['isAdmin']]);  
     } else {
         echo json_encode(['success' => false]);

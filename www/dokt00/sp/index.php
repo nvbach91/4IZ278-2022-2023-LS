@@ -18,10 +18,8 @@
         </div>
         <nav>
             <ul>
-                <li><a class="category" href="#">Green Tea</a></li>
-                <li><a class="category" href="#">Black Tea</a></li>
-                <li><a class="category" href="#">Herbal Tea</a></li>
-                <li><a class="category" href="#">Fruit Tea</a></li>
+                <li><a class="category" href="#">About us</a></li>
+                <li><a class="category" href="#">Contact</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -52,11 +50,11 @@
         <aside>
             <h3>Categories</h3>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-                <li><a href="#">Oolong Tea</a></li>
+                <li><a class="tea-category">Zelený čaj</a></li>
+                <li><a class="tea-category">Černý čaj</a></li>
+                <li><a class="tea-category">Bylinný čaj</a></li>
+                <li><a class="tea-category">Ovocný čaj</a></li>
+                <li><a class="tea-category">čaj Oolong</a></li>
             </ul>
         </aside>
         <main>
@@ -116,6 +114,7 @@
     <script src="main.js"></script>
     <script src="search.js"></script>
     <script src="login.js"></script>
+    <script src="category_select.js"></script>
 </body>
 
 </html>

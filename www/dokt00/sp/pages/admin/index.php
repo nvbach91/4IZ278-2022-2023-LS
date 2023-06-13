@@ -1,9 +1,8 @@
 <?php
 session_start();
-if ($user['isAdmin']) {
-    $_SESSION['isAdmin'] = true;
-} else {
-    $_SESSION['isAdmin'] = false;
+if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
+    header('Location: ../../index.php');
+    exit;
 }
 ?>
 
@@ -28,10 +27,8 @@ if ($user['isAdmin']) {
 
         <nav>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
+                <li><a href="#" class="user-accounts">User accounts</a></li>
+                <li><a href="#">Orders</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -57,16 +54,16 @@ if ($user['isAdmin']) {
         <aside>
             <h3>Categories</h3>
             <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-                <li><a href="#">Oolong Tea</a></li>
+                <li><a class="tea-category">Zelený čaj</a></li>
+                <li><a class="tea-category">Černý čaj</a></li>
+                <li><a class="tea-category">Bylinný čaj</a></li>
+                <li><a class="tea-category">Ovocný čaj</a></li>
+                <li><a class="tea-category">čaj Oolong</a></li>
             </ul>
         </aside>
         <main>
 
-            <?php include 'products.php'; ?>
+            <?php include 'admin_products.php'; ?>
 
         </main>
     </div>
@@ -80,8 +77,16 @@ if ($user['isAdmin']) {
         <p>&copy; 2023 Tea E-Shop. All rights reserved.</p>
     </footer>
 
-    <script src="main.js"></script>
     <script src="../../search.js"></script>
+    <script src="edit_product.js"></script>
+    <script src="delete_product.js"></script>
+    <script src="add_product.js"></script>  
+    <script src="category_select.js"></script>
+    <script src="users.js"></script>
+    <script src="edit_user.js"></script>
+    <script src="delete_user.js"></script>
+
+
 </body>
 
 </html>

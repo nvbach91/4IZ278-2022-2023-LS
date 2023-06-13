@@ -378,3 +378,50 @@ input[type=submit] {
     text-align: right;
 }
 
+.add-product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-product span {
+    font-size: 50px; 
+    font-weight: bold;
+}
+
+.users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.user {
+    width: 30%;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.user p {
+    margin-top: 5px;
+}
+
+.user button.delete-user {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #d9534f; 
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user button.delete-user:hover {
+    background-color: #c9302c;
+}
+
+
+
