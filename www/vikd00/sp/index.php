@@ -1,34 +1,16 @@
-<?php
+<?php if (!isset($_SESSION)) session_start(); ?>
 
-?>
-<!DOCTYPE html>
-<html lang="en">
+<?php require './header.php' ?>
+<?php require './navbar.php'; ?>
+<?php require './spotlight.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ReDrive</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
+<div class="d-flex align-items-center justify-content-center mt-5">
+    <h2 class="mb-0">Vyhľadajte svoje vozidlo snov... </h2>
+    <img class="logo-small d-inline-block align-text-top ms-4" src="./redrive_logo_text.png" alt="ReDrive Logo">
+</div>
 
-<body class="container">
-    <div class="container-content">
-        <?php require __DIR__ . '/includes/navbar.php'; ?>
-        <?php require __DIR__ . '/includes/spotlight.php'; ?>
-        <div class="text-center mt-4">
-            <h2>Vyhľadajte svoje vozidlo snov... ReDrive!</h2>
-        </div>
-        <?php require __DIR__ . '/includes/search-container.php'; ?>
-        <footer class="footer fixed-bottom bg-dark d-flex align-items-center">
-            <div class="container text-center text-white">
-                <p class="m-0">Dávid Vikor 2023 - vikd00@vse.cz</p>
-            </div>
-        </footer>
-    </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<div class="mx-5">
+    <?php require './search-form.php'; ?>
+</div>
 
-
-</html>
+<?php require './footer.php' ?>
