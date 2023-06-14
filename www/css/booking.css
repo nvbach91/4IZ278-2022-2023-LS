@@ -1,0 +1,196 @@
+
+body{
+  overflow-x: hidden;
+
+}
+table{
+  font-size: 16px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.table_res{
+  display: flex;
+  flex-direction: row;
+  height:100%;
+  width: 200%;
+
+}
+.myTable  table th,  table td {
+  height:60px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  min-width: 40px;
+}
+th{
+  font-size: large;
+}
+td {
+  padding: 5px;
+  border: 1px solid #dfdee3;
+  background-color: #dfdee3;
+}
+.add_cut_trainer{
+  text-align: center;
+  min-width: 70px !important;
+  font-size: large;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  background-color: #ECEBEE;
+}
+.error{
+  background-color: #ff6b6b;
+}
+.open{
+  background-color: #adbf39;
+}
+.add_cut{
+  text-align: center;
+  min-width: 70px !important;
+  font-size: large;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  background-color: #ECEBEE;
+}
+
+.reserved{
+  background-color: #ff9d57;
+}
+.add_delete_participants{
+  margin:0px !important;
+  background: var(--gray) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px !important;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  margin:0px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.add_delete_participants_add{
+  margin:0px!important;
+  background: var(--gray) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px !important;
+  font-size: 15px!important;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  margin:0px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.add_delete_participants_participants{
+  min-width: 60px;
+  background: var(--gray) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px !important;
+  font-size: 15px!important;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  margin: 0px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.add_delete_participants_reserve{
+  min-width: 60px;
+  background: var(--gray) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0px!important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+  font-size: 15px!important;
+  cursor: pointer;
+  color: black;
+  margin: 0px !important;
+  text-align: right;
+}
+.addit{
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.addRow{
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.select1{
+  background: var(--gray);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 20px;
+  border-radius: 3px;
+  margin-top: 20px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.noname{
+  background-color: black;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  opacity: 50%;
+}
+.sqr{
+  position: fixed;
+
+  background-color: #CBCACF;
+  top: 200px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: 20px;
+  word-wrap: break-word;
+  min-height: 200px;
+  box-shadow: 0 5px 5px 2px black;
+  border-radius: 10px;
+}
+.sqr td {
+  background-color: #CBCACF;
+  border: none;
+}
+.sqr th {
+  text-align: center;
+}
+#back_edit{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+#edit_booking{
+  position: absolute;
+  top: 170px;
+  left: 400px;
+}
+.sqr .addRow{
+  min-width: 240px;
+  text-align: center;
+}
