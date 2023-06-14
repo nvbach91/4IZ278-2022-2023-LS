@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
+
+    <!-- Import jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Import DataTables-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="sidebars.css" rel="stylesheet">
+
+    <title>FTP klient</title>
+
+</head>
+<body>
+
+<main>
+    <h1 class="visually-hidden">FTP klient</h1>
+
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">FTP klient</span>
+        </a>
+        <hr>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#FTPModal">
+            Nové FTP připojení
+        </button>
+
+        <ul class="nav nav-pills flex-column mb-auto" id="accessList"></ul>
+        <hr>
+        <div id="userLoginStatus">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Přihlásit se / Registrovat se
+            </button>
+        </div>
+    </div>
+
+    <!-- FTP Modal -->
+    <div class="modal fade" id="FTPModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">FTP připojení</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            <form id="ftpForm" method="post">
+                                Server: <input type="text" id="server" name="server" required/><br>
+                                Username: <input type="text" id="username" name="username" required/><br>
+                                Password: <input type="password" id="password" name="password" required/><br>
+                                <input type="hidden" id="id_access" name="id_access" value=""/><br>
+                                <input class="btn btn-primary" type="submit" value="Connect"/>
+                                <input class="btn btn-danger" type="button" value="Smazat připojení" id="deleteAccess"
+                                       data-bs-dismiss="modal"/>
+                            </form>
+                            <br>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Auth Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col">
+                            registrace
+                            <form id="userRegisterForm" method="post">
+                                email: <input type="email" id="user_email" name="user_email" required/><br>
+                                heslo: <input type="password" id="user_password" name="user_password" required/><br>
+                                heslo znovu: <input type="password" id="user_passwordAgain" name="user_passwordAgain"
+                                                    required/><br>
+                                <input type="submit" value="userRegister"/>
+                            </form>
+                            <br>
+
+                        </div>
+                        <div class="col">
+                            login
+                            <form id="userLoginForm" method="post">
+                                email: <input type="email" id="login_user_email" name="user_email" required/><br>
+                                heslo: <input type="password" id="login_user_password" name="user_password"
+                                              required/><br>
+                                <input type="submit" value="userLogin" data-bs-dismiss="modal"/>
+                            </form>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container text-center" id="FTPTable" style="overflow-y: auto; height: 100vh; ">
+        <div class="row">
+            <div class="col">
+                <h2 id="currentDirectory"></h2>
+
+
+                <strong>Nahrát soubor:</strong>
+                <input type="file" id="fileUpload">
+                <button class="btn btn-danger" onclick="location.reload();">Odpojit se</button>
+
+                <!-- Added id to the table -->
+                <div id="fileList">
+                    <table id="filesTable" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Název složky/souboru</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+
+    </div>
+
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+<!-- Import client.js script -->
+<script src="js/client.js"></script>
+
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/sidebars.js"></script>
+</body>
+</html>

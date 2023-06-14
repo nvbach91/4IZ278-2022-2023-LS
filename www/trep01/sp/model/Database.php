@@ -1,23 +1,29 @@
 <?php
-
-namespace model;
 class Database //třída pro komunikaci s databází
 {
     //nastavení propojení s databází
-    const HOST = "";
-    const DNAME = "";
-    const USER = "";
-    const PASS = "";
+
+    private $host;
+    private $dname;
+    private $user;
+    private $pass;
 
     private $conn;
 
     public function __construct()
     {
-        $this->conn = new PDO("mysql:host=" . self::HOST . ";dbname=" . self::DNAME,
-            self::USER,
-            self::PASS,
+        $config = include('databaseConfig.php'); // nahraďte správnou cestou k souboru config.php
+
+        $this->host = $config['db_host'];
+        $this->dname = $config['db_name'];
+        $this->user = $config['db_user'];
+        $this->pass = $config['db_pass'];
+
+        $this->conn = new \PDO("mysql:host=" . $this->host . ";dbname=" . $this->dname,
+            $this->user,
+            $this->pass,
             [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
             ]);
         $this->conn->query("SET NAMES utf8");
     }

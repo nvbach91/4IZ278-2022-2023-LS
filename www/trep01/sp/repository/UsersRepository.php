@@ -19,7 +19,7 @@ class UsersRepository extends Repository
             ":user_email" => $user_email
         ];
 
-        return $this->db->select($sql,$params);
+        return $this->db->selectOne($sql,$params);
     }
 
     public function addUser($user_email,$user_password) //

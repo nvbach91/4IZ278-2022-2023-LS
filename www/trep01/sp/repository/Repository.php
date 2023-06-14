@@ -1,6 +1,5 @@
 <?php
 
-use model\Database;
 
 abstract class Repository
 {

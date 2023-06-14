@@ -23,7 +23,7 @@ class App
         if (file_exists($filePath)) {
             require_once $filePath;
         } else {
-            throw new RuntimeException("Class not found: {$className}");
+            throw new RuntimeException("Class not found: {$className} " . $filePath);
         }
     }
 
