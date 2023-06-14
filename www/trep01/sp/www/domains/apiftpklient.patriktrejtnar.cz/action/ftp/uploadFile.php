@@ -23,7 +23,7 @@ if ($ftp && isset($ftp["server"],  $ftp["username"], $ftp["password"]) && isset(
         $destination = $_FILES['file']['name'];
 
         $ftp->uploadFile($file, $destination);
-        $response['message'] = "File uploaded successfully.";
+        $response['output'] = "Soubor úspěšně nahrán";
     } else {
         $response['error'] = 'Nepodařilo se připojit k serveru';
     }

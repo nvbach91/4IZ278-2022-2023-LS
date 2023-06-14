@@ -20,10 +20,7 @@ if (isset($user_password,$user_email))
                 unset($user["user_password"]);
                 unset($user[2]);
                 $_SESSION["user"] = $user;
-
                 session_regenerate_id();
-
-
 
             }else {
             $response['error'] = 'Neplatné heslo';
@@ -32,6 +29,8 @@ if (isset($user_password,$user_email))
     else {
         $response['error'] = 'Uživatel neexistuje';
     }
+
+
 
 }
 $response['user'] = $_SESSION["user"];

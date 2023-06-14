@@ -14,7 +14,10 @@ if (isset($user_password,$user_email))
 
     if (!$existingUser ) {
         $UsersR->addUser($user_email,$user_password);
+    }else{
+        $response['error'] = 'Uživatel s tímto emailem již existuje';
     }
+
 }
 
 echo json_encode($response);

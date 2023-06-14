@@ -63,6 +63,7 @@ $(document).ready(function() {
             }),
             success: function(data) {
                 drawData(data)
+                showResponse(data)
             }
         });
     }
@@ -85,6 +86,7 @@ $(document).ready(function() {
                 link.download = file;
                 link.click();
                 ftpDeleteLocalFile(file)
+                showResponse(data)
             }
         });
     }
@@ -122,8 +124,7 @@ $(document).ready(function() {
                 file: file,
             }),
             success: function(data) {
-
-
+                showResponse(data)
             }
         });
     }
@@ -148,7 +149,9 @@ $(document).ready(function() {
                 drawData(data)
                 if(user != null){
                     accessSave(server,username,password)
+
                 }
+                showResponse(data)
             }
         });
     }
@@ -176,6 +179,7 @@ $(document).ready(function() {
             }),
             success: function(data) {
                 alert("Byl jste úspěšně zaregistrován, můžete se přihlásit");
+                showResponse(data)
             }
         });
     }
@@ -200,7 +204,7 @@ $(document).ready(function() {
                 user = data.user;
                 displayUserLoginStatus(user)
                 accessList()
-
+                showResponse(data)
             }
         });
     }
@@ -217,6 +221,7 @@ $(document).ready(function() {
             success: function(data) {
                 accesses = data.accessList;
                 displayAccessNames(accesses)
+
             }
         });
     }
@@ -371,6 +376,33 @@ $(document).ready(function() {
             document.getElementById('userLogout').addEventListener('click', userLogout);
         }
     }
+
+    function showResponse(data) {
+        var toastElement = document.getElementById('myToast');
+        var toastBodyElement = toastElement.querySelector('.toast-body');
+
+        var toast = new bootstrap.Toast(toastElement);
+
+        // Čistíme tělo toastu
+        toastBodyElement.innerHTML = '';
+
+        // Pokud je error pole
+        if (Array.isArray(data.error)) {
+            data.error.forEach(function(err) {
+                toastBodyElement.innerHTML += '<p>' + err + '</p>';
+            });
+        }
+
+        // Pokud je output pole
+        if (Array.isArray(data.output)) {
+            data.output.forEach(function(out) {
+                toastBodyElement.innerHTML += '<p>' + out + '</p>';
+            });
+        }
+
+        toast.show();
+    }
+
 
 
 

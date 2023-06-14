@@ -43,6 +43,7 @@ if ($server && $username && $password) {
     ];
 
     $response['session'] = $_SESSION["ftp"];
+    $response['output'] = $ftp->getOutput();
 
 } else {
     $response['error'] = 'Nedostatečné údaje pro připojení';
