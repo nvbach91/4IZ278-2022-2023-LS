@@ -48,6 +48,11 @@ function uploadImage($file)
 
 <form class="p-5 m-3" action="./ad-create.php" method="POST" enctype="multipart/form-data">
     <h4>Informácie o inzeráte</h4>
+    <div class="w-100 pt-2 pb-5">
+        <div class="bg-dark w-100 d-flex justify-content-center">
+            <img class="image-large" style="visibility: hidden;" alt="Vehicle Image">
+        </div>
+    </div>
     <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="manufacturer">Značka:</label>
@@ -110,7 +115,7 @@ function uploadImage($file)
     </div>
     <div class="row mb-3 px-2">
         <label class="form-label" for="image">Obrázok:</label>
-        <input class="form-control" type="file" id="image" name="image">
+        <input class="form-control" type="file" id="image" name="image" onchange="previewImage(this);" </div>
     </div>
     <div class="row mb-3 mt-5">
         <input class="btn btn-primary" type="submit" value="Pridať inzerát">
@@ -119,3 +124,23 @@ function uploadImage($file)
 
 
 <?php require './footer.php' ?>
+
+<script>
+    function previewImage(input) {
+        var preview = document.querySelector('.image-large');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            preview.src = reader.result;
+            preview.style.visibility = 'visible';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "placeholder-image.jpg";
+            preview.style.visibility = 'visible';
+        }
+    }
+</script>
