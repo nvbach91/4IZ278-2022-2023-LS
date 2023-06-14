@@ -13,16 +13,16 @@ if (!empty($_POST)) {
         $_POST['fuel'],
         $_POST['transmission'],
         $_POST['color'],
-        $_POST['mileage'],
-        $_POST['year'],
-        $_POST['power'],
+        is_numeric($_POST['mileage']) ? $_POST['mileage'] : 0,
+        is_numeric($_POST['year']) ? $_POST['year'] : 0,
+        is_numeric($_POST['power']) ? $_POST['power'] : 0,
         $_POST['description']
     );
 
     $listingId = $db->createListing(
         $_SESSION['user']['user_id'],
         $vehicleId,
-        $_POST['price'],
+        is_numeric($_POST['price']) ? $_POST['price'] : 0,
         0
     );
 
@@ -61,11 +61,21 @@ function uploadImage($file)
     <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="fuel">Palivo:</label>
-            <input class="form-control" type="text" id="fuel" name="fuel">
+            <select class="form-control" id="fuel" name="fuel">
+                <option value="">Vyberte druh paliva</option>
+                <option value="Benzín">Benzín</option>
+                <option value="Nafta">Nafta</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="Elektro">Elektro</option>
+            </select>
         </div>
         <div class="col">
             <label class="form-label" for="transmission">Prevodovka:</label>
-            <input class="form-control" type="text" id="transmission" name="transmission">
+            <select class="form-control" id="transmission" name="transmission">
+                <option value="">Vyberte typ prevodovky</option>
+                <option value="Manuálna">Manuálna</option>
+                <option value="Automatická">Automatická</option>
+            </select>
         </div>
     </div>
     <div class="row mb-3">

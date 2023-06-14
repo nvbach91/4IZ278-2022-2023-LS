@@ -11,7 +11,7 @@ if (!empty($_GET['listing_id'])) {
     $listing = $db->getListingById($listingId);
 }
 
-if(!$listing){
+if (!$listing) {
     header('Location: /index.php');
 }
 ?>
@@ -38,11 +38,19 @@ if(!$listing){
     <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="fuel">Palivo:</label>
-            <input disabled class="form-control" type="text" id="fuel" name="fuel" value="<?php echo htmlspecialchars($listing['fuel']); ?>" readonly>
+            <select class="form-control" id="fuel" name="fuel" disabled readonly>
+                <option value="Benzín" <?php if ($listing['fuel'] === 'Benzín') echo 'selected'; ?>>Benzín</option>
+                <option value="Nafta" <?php if ($listing['fuel'] === 'Nafta') echo 'selected'; ?>>Nafta</option>
+                <option value="Hybrid" <?php if ($listing['fuel'] === 'Hybrid') echo 'selected'; ?>>Hybrid</option>
+                <option value="Elektro" <?php if ($listing['fuel'] === 'Elektro') echo 'selected'; ?>>Elektro</option>
+            </select>
         </div>
         <div class="col">
             <label class="form-label" for="transmission">Prevodovka:</label>
-            <input disabled class="form-control" type="text" id="transmission" name="transmission" value="<?php echo htmlspecialchars($listing['transmission']); ?>" readonly>
+            <select class="form-control" id="transmission" name="transmission" disabled readonly>
+                <option value="Manuálna" <?php if ($listing['transmission'] === 'Manuálna') echo 'selected'; ?>>Manuálna</option>
+                <option value="Automatická" <?php if ($listing['transmission'] === 'Automatická') echo 'selected'; ?>>Automatická</option>
+            </select>
         </div>
     </div>
     <div class="row mb-3">

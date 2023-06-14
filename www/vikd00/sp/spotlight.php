@@ -14,12 +14,12 @@ $spotlightListings = $spotlightDB->fetchAll();
         <?php foreach ($spotlightListings as $index => $listing) : ?>
             <div class="carousel-item <?php echo $index === 0 ? 'active' : '' ?>">
                 <div class="image-container">
-                    <img src="<?php echo $listing["images"][0]["image_data"] ?>" alt="Image for <?php echo $listing['model']; ?>" class="d-block w-100 image">
+                    <img src="<?php echo htmlspecialchars($listing["images"][0]["image_data"]) ?>" alt="Image for <?php echo htmlspecialchars($listing['model']); ?>" class="d-block w-100 image">
                 </div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h4><?php echo $listing['price'] . ' ' . ' € '; ?></h4>
-                    <h5 class="fw-bold"><?php echo $listing['manufacturer'] . ' ' . $listing['model']; ?></h5>
-                    <p><?php echo $listing['color'] . ' ' . $listing['year'] . ' ' . $listing['mileage'] . ' km, ' . $listing['fuel'] . ', ' . $listing['transmission']; ?></p>
+                    <h4><?php echo htmlspecialchars($listing['price']) . ' ' . ' € '; ?></h4>
+                    <h5 class="fw-bold"><?php echo htmlspecialchars($listing['manufacturer']) . ' ' . htmlspecialchars($listing['model']); ?></h5>
+                    <p><?php echo htmlspecialchars($listing['color']) . ' ' . htmlspecialchars($listing['year']) . ' ' . htmlspecialchars($listing['mileage']) . ' km, ' . htmlspecialchars($listing['fuel']) . ', ' . htmlspecialchars($listing['transmission']); ?></p>
                 </div>
             </div>
         <?php endforeach; ?>

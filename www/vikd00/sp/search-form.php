@@ -11,8 +11,14 @@
   </div>
   <div class="row mb-3">
     <div class="col">
-      <label for="fuel" class="form-label">Palivo</label>
-      <input name="fuel" type="text" class="form-control" id="fuel">
+      <label class="form-label" for="fuel">Palivo:</label>
+      <select class="form-control" id="fuel" name="fuel">
+        <option value="">Vyberte druh paliva</option>
+        <option value="Benzín">Benzín</option>
+        <option value="Nafta">Nafta</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Elektro">Elektro</option>
+      </select>
     </div>
     <div class="col">
       <label for="color" class="form-label">Farba</label>

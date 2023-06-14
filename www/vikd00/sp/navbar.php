@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <a class=" navbar-brand" href="./."><img class="logo-xsmall d-inline-block align-text-top me-2" src="./redrive_logo_text.png" /></a>
         <div class="d-flex justify-content-center flex-grow-1">
-            <form class="d-flex w-100" method="POST" action="./ads.php">
+            <form class="d-flex w-100" method="GET" action="./ads.php">
                 <input name="searchQuery" class="form-control me-2" type="search" placeholder="Vyhľadať vozidlo..." aria-label="Search" oninput="toggleButton(this)">
                 <button id="searchButton" class="btn btn-outline-light" type="submit" disabled>Vyhľadať</button>
             </form>

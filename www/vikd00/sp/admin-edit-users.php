@@ -19,16 +19,16 @@ if (!$users) {
     <?php foreach ($users as $user) : ?>
         <div class="card mt-4">
             <div class="card-body">
-                <h3 class="card-title"><?php echo $user['xname'] ?></h3>
-                <h5 class="card-subtitle mb-2 text-muted"><?php echo $user['email'] ?></h5>
+                <h3 class="card-title"><?php echo htmlspecialchars($user['xname']) ?></h3>
+                <h5 class="card-subtitle mb-2 text-muted"><?php echo htmlspecialchars($user['email']) ?></h5>
                 <p class="card-text"><?php echo ($user['role'] == 2 ? 'Admin' : 'Užívateľ') ?></p>
                 <div class=" d-flex justify-content-end">
                     <form method="GET" action="./profile-edit.php">
-                        <input type="hidden" name="user_to_edit" value="<?php echo $user['user_id'] ?>">
+                        <input type="hidden" name="user_to_edit" value="<?php echo htmlspecialchars($user['user_id']) ?>">
                         <button type="submit" class="btn btn-outline-dark">Upraviť profil</button>
                     </form>
                     <form method="GET" action="./admin-delete-user.php">
-                        <input type="hidden" name="user_to_delete" value="<?php echo $user['user_id'] ?>">
+                        <input type="hidden" name="user_to_delete" value="<?php echo htmlspecialchars($user['user_id']) ?>">
                         <button type="submit" class="btn btn-danger ms-2" onclick="return confirmDelete()">Zmazať profil</button>
                     </form>
                 </div>

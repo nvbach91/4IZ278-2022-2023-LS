@@ -46,10 +46,10 @@ if (isset($_GET['reciever_id']) &&  isset($_GET['listing_id'])) {
                             <form method="GET" class="mb-0">
                                 <div class="row">
                                     <div class="col-8">
-                                        <input type="hidden" name="reciever_id" value="<?php echo $conversation['partner_id']; ?>">
-                                        <input type="hidden" name="listing_id" value="<?php echo $conversation['listing_id']; ?>">
-                                        <p><b><?php echo $conversation['partner_xname'] ?></b></p>
-                                        <p><i><?php echo $conversation['manufacturer'] . ' ' . $conversation['model'] . ' - ' . $conversation['price'] . '€'; ?></i></p>
+                                        <input type="hidden" name="reciever_id" value="<?php echo htmlspecialchars($conversation['partner_id']); ?>">
+                                        <input type="hidden" name="listing_id" value="<?php echo htmlspecialchars($conversation['listing_id']); ?>">
+                                        <p><b><?php echo htmlspecialchars($conversation['partner_xname']) ?></b></p>
+                                        <p><i><?php echo htmlspecialchars($conversation['manufacturer']) . ' ' . htmlspecialchars($conversation['model']) . ' - ' . htmlspecialchars($conversation['price']) . '€'; ?></i></p>
                                     </div>
                                     <div class="col-4 m-auto">
                                         <button class="btn btn-outline-dark" type="submit">Otvor</button>
@@ -118,7 +118,7 @@ if (isset($_GET['reciever_id']) &&  isset($_GET['listing_id'])) {
                         var shouldScroll = isScrolledToBottom();
                         $('#chat').empty();
                         response.forEach(function(message) {
-                            $('#chat').append("<div class='" + (message.sender_id == senderId ? "chat-bubble-me bg-primary" : "chat-bubble-other bg-dark") + "'>" + message.text + "</div>")
+                            $('#chat').append("<div class='" + (message.sender_id == senderId ? "chat-bubble-me bg-primary" : "chat-bubble-other bg-dark") + "'>" + escapeHtml(message.text) + "</div>")
                         });
                         if (messageLength != response.length) {
                             autoScrollDown();
@@ -128,6 +128,15 @@ if (isset($_GET['reciever_id']) &&  isset($_GET['listing_id'])) {
                     setTimeout(pollMessages, 2000); // Poll every 2.5 second
                 },
             });
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
 
         function isScrolledToBottom() {

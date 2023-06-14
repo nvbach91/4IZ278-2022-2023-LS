@@ -58,6 +58,11 @@ if (isset($_GET['listing_id'])) {
 <?php require './navbar.php'; ?>
 
 <form class="p-5 m-3" action="./ad-edit.php" method="POST" enctype="multipart/form-data">
+    <div class="w-100 pt-2 pb-5">
+        <div class="bg-dark w-100 d-flex justify-content-center">
+            <img src="<?= htmlspecialchars($listing["images"][0]["image_data"]) ?>" class="image-large" alt="Vehicle Image">
+        </div>
+    </div>
     <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="manufacturer">Značka:</label>
@@ -71,11 +76,21 @@ if (isset($_GET['listing_id'])) {
     <div class="row mb-3">
         <div class="col">
             <label class="form-label" for="fuel">Palivo:</label>
-            <input class="form-control" type="text" id="fuel" name="fuel" value="<?php echo htmlspecialchars($listing['fuel']); ?>">
+            <select class="form-control" id="fuel" name="fuel">
+                <option value="">Vyberte druh paliva</option>
+                <option value="Benzín" <?php if ($listing['fuel'] === 'Benzín') echo 'selected'; ?>>Benzín</option>
+                <option value="Nafta" <?php if ($listing['fuel'] === 'Nafta') echo 'selected'; ?>>Nafta</option>
+                <option value="Hybrid" <?php if ($listing['fuel'] === 'Hybrid') echo 'selected'; ?>>Hybrid</option>
+                <option value="Elektro" <?php if ($listing['fuel'] === 'Elektro') echo 'selected'; ?>>Elektro</option>
+            </select>
         </div>
         <div class="col">
             <label class="form-label" for="transmission">Prevodovka:</label>
-            <input class="form-control" type="text" id="transmission" name="transmission" value="<?php echo htmlspecialchars($listing['transmission']); ?>">
+            <select class="form-control" id="transmission" name="transmission">
+                <option value="">Vyberte typ prevodovky</option>
+                <option value="Manuálna" <?php if ($listing['transmission'] === 'Manuálna') echo 'selected'; ?>>Manuálna</option>
+                <option value="Automatická" <?php if ($listing['transmission'] === 'Automatická') echo 'selected'; ?>>Automatická</option>
+            </select>
         </div>
     </div>
     <div class="row mb-3">
@@ -116,10 +131,27 @@ if (isset($_GET['listing_id'])) {
     <?php endif; ?>
     <div class="row mb-3 px-2">
         <label class="form-label" for="image">Obrázok:</label>
-        <input class="form-control" type="file" id="image" name="image">
-    </div>
-    <button type="submit" class="btn btn-primary mt-2" name="update">Uložiť</button>
-    <input hidden class="btn btn-primary" name="listing_id" value="<?php echo $listingId ?>">
+        <input class="form-control" type="file" id="image" name="image" onchange="previewImage(this);" </div>
+        <button type="submit" class="btn btn-primary mt-2" name="update">Uložiť</button>
+        <input hidden class="btn btn-primary" name="listing_id" value="<?php echo $listingId ?>">
 </form>
 
 <?php require './footer.php' ?>
+
+<script>
+    function previewImage(input) {
+        var preview = document.querySelector('.image-large');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "placeholder-image.jpg";
+        }
+    }
+</script>

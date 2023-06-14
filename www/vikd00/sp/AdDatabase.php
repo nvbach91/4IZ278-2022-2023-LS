@@ -191,16 +191,17 @@ class AdDatabase extends Database
     public function fulltextSearch($query)
     {
         $query = trim($query);
-
         $statement = $this->pdo->prepare("
             SELECT sp_listings.*, sp_vehicles.*
             FROM sp_listings
             INNER JOIN sp_vehicles ON sp_listings.vehicle_id = sp_vehicles.vehicle_id
-            WHERE MATCH (sp_vehicles.manufacturer, sp_vehicles.model, sp_vehicles.fuel, sp_vehicles.color)
-            AGAINST (:query IN BOOLEAN MODE)
-            ");
+            WHERE sp_vehicles.manufacturer LIKE :query
+            OR sp_vehicles.model LIKE :query
+            OR sp_vehicles.fuel LIKE :query
+            OR sp_vehicles.color LIKE :query
+        ");
 
-        $statement->bindValue(':query', $query, PDO::PARAM_STR);
+        $statement->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
         $statement->execute();
         $listings = $statement->fetchAll();
 
@@ -210,6 +211,7 @@ class AdDatabase extends Database
 
         return $listings;
     }
+
 
     public function unlockAd($listingId)
     {

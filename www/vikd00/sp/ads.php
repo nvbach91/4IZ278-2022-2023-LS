@@ -41,30 +41,30 @@ if (isset($_GET['searchQuery']) && $_GET['searchQuery']) {
         <div class="card mt-4">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="<?= $row["images"][0]["image_data"] ?>" class="image-ad" alt="Vehicle Image">
+                    <img src="<?= htmlspecialchars($row["images"][0]["image_data"]) ?>" class="image-ad" alt="Vehicle Image">
                 </div>
                 <div class="col-md-3 p-2 d-flex align-items-center justify-content-center">
                     <div class="row">
-                        <h4><?= $row["manufacturer"] ?> <?= $row["model"] ?></h4>
+                        <h4><?= htmlspecialchars($row["manufacturer"]) ?> <?= htmlspecialchars($row["model"]) ?></h4>
                     </div>
                 </div>
                 <div class="col-md-5 p-4">
                     <div class="row">
                         <div class="col-md-6">
-                            <p>Cena: <?= number_format($row["price"]) ?>€</p>
-                            <p>Palivo: <?= $row["fuel"] ?></p>
-                            <p>Výkon: <?= $row["power"] ?> KW</p>
-                            <p>Rok: <?= $row["year"] ?></p>
+                            <p>Cena: <?= number_format(htmlspecialchars($row["price"])) ?>€</p>
+                            <p>Palivo: <?= htmlspecialchars($row["fuel"]) ?></p>
+                            <p>Výkon: <?= htmlspecialchars($row["power"]) ?> KW</p>
+                            <p>Rok: <?= htmlspecialchars($row["year"]) ?></p>
                         </div>
                         <div class="col-md-6">
-                            <p>Prevodovka: <?= $row["transmission"] ?></p>
-                            <p>Farba: <?= $row["color"] ?></p>
-                            <p>Nájazd: <?= $row["mileage"] ?> KM</p>
+                            <p>Prevodovka: <?= htmlspecialchars($row["transmission"]) ?></p>
+                            <p>Farba: <?= htmlspecialchars($row["color"]) ?></p>
+                            <p>Nájazd: <?= htmlspecialchars($row["mileage"]) ?> KM</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Popis: <?= $row["description"] ?></p>
+                            <p>Popis: <?= htmlspecialchars($row["description"]) ?></p>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">

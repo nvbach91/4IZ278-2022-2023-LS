@@ -49,11 +49,11 @@ if (!$user) {
     <form method="POST" action="./profile-edit.php">
         <div class="form-group">
             <label for="xname">Prezývka</label>
-            <input type="text" class="form-control" id="xname" name="xname" value="<?= $user['xname'] ?>">
+            <input type="text" class="form-control" id="xname" name="xname" value="<?= htmlspecialchars($user['xname']) ?>">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="<?= $user['email'] ?>">
+            <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
         </div>
         <div class="form-group">
             <label for="password">Nové heslo</label>
