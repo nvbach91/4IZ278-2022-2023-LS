@@ -7,9 +7,6 @@
     <div class="row">
       <div class="col-lg-3">
         <h3 class="mb-4">Categories</h3>
-        <?php if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] >= 2) : ?>
-        <a class="btn btn-outline-secondary" href="./edit-categories.php">Edit</a>
-        <?php endif; ?>
         <?php require_once "./categoryDisplay.php" ?>
       </div>
       <div class="col-lg-9">

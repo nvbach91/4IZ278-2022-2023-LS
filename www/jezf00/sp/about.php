@@ -6,16 +6,13 @@
 
         <h1>About</h1>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam consectetur malesuada ex, in consequat lorem
-            aliquet a. Vestibulum sed augue sit amet urna condimentum congue. Aliquam erat volutpat. Nullam dignissim
-            eleifend leo, a scelerisque nisl pulvinar ac. Curabitur sit amet aliquam neque. Etiam a luctus justo.
-            Curabitur iaculis sem nec justo aliquet, nec mattis urna dignissim. Nulla facilisi. Vivamus at ligula
-            dapibus, lobortis lorem non, aliquet risus.</p>
+        <p>Welcome to our company, where we specialize in providing high-quality protection glasses for mobile phones. 
+            We understand the importance of safeguarding your valuable devices from daily wear and tear, accidental drops, and scratches. 
+            Our mission is to offer top-notch protection solutions that ensure the longevity and pristine condition of your mobile phones.</p>
 
-        <p>Praesent maximus nisi non purus consectetur, eu vestibulum sapien pharetra. Suspendisse commodo auctor massa,
-            vel molestie est dignissim a. Suspendisse quis turpis nisl. Donec facilisis enim nisl, vitae suscipit metus
-            rhoncus in. Etiam ut nunc dignissim, pharetra urna a, venenatis nisl. Nulla varius, leo vel tincidunt
-            tincidunt, nisl arcu posuere turpis, id fringilla est nisl sed sem.</p>
+        <p>At our company, we take pride in offering a wide range of protective glasses specifically designed for various phone models. 
+            Our products are crafted with precision and engineered to provide reliable protection without compromising the sleek aesthetics of your device. 
+            We prioritize quality and durability to ensure that our glasses offer long-lasting defense against everyday hazards.</p>
         
       
 

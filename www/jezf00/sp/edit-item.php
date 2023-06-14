@@ -1,5 +1,9 @@
 <?php
 
+require_once 'categoriesDatabase.php';
+$categoriesDb = new CategoriesDatabase();
+$categories = $categoriesDb->fetchAll();
+
 session_start();
 require_once 'auth.php';
 requireLogin();
@@ -26,9 +30,10 @@ if (!empty($_POST) && !empty($_GET['good_id'])) {
     $price = $_POST['price'];
     $description = $_POST['description'];
     $good_id = $_GET['good_id'];
+    $category_id = $_POST['category_id'];
 
-    $statement = $pdo->prepare('UPDATE sp_products SET name = :name, price = :price, description = :description WHERE good_id = :good_id');
-    $statement->execute(['name' => $name, 'price' => $price, 'description' => $description, 'good_id' => $good_id]);
+    $statement = $pdo->prepare('UPDATE sp_products SET name = :name, price = :price, description = :description, category_id = :category_id WHERE good_id = :good_id');
+    $statement->execute(['name' => $name, 'price' => $price, 'description' => $description, 'good_id' => $good_id, 'category_id'=>$category_id]);
 
     header('Location: ./edit-item.php?good_id=' . $good_id . '&message=success');
     exit;
@@ -50,6 +55,18 @@ if (!empty($_GET['good_id'])) {
     <?php endif; ?>
     <?php if (isset($item)) : ?>
         <form action="./edit-item.php?good_id=<?php echo $item['good_id']; ?>" method="post">
+            <br>
+            <div class="input-group">
+            <label for="category_id">Category ID:</label>
+            <input type="text" name="category_id" id="category_id" value="<?php echo $item['category_id']; ?>" required>
+            <div class="input-group-append">
+                <button class="btn btn-info" type="button" id="infoBtn">i</button>
+            </div>
+        </div>
+        <small id="categoryHint" class="form-text text-muted" style="display: none;">Hint: Enter a category ID. Available IDs and categories:<br><?php foreach ($categories as $category) {
+            echo $category['category_id'] . ': ' . $category['name'] . '<br>';
+        } ?></small>
+            <br>
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" value="<?php echo $item['name']; ?>" required>
             <br>
@@ -64,6 +81,22 @@ if (!empty($_GET['good_id'])) {
     <?php else : ?>
         <p>Item not found.</p>
     <?php endif; ?>
+    <script>
+        
+        var categoryHint = document.getElementById('categoryHint');
+        var infoBtn = document.getElementById('infoBtn');
+        var categoryIdField = document.getElementById('category_id');
+
+        infoBtn.addEventListener('click', function() {
+            if (categoryHint.style.display === 'none') {
+                categoryHint.style.display = 'block';
+            } else {
+                categoryHint.style.display = 'none';
+            }
+        });
+
+    </script>
 </body>
+
 
 <?php require __DIR__ . '/footer.php'; ?>

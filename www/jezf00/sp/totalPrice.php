@@ -6,6 +6,9 @@ function calculateTotalPrice($cart, $records) {
 
     foreach ($records as $item) {
         $quantity = isset($cart[$item['good_id']]) ? $cart[$item['good_id']] + 1 : 1;
+        if ($quantity >= 10) {
+            $quantity = 10; 
+        }
         $totalPrice += $item['price'] * $quantity;
     }
 
@@ -14,4 +17,3 @@ function calculateTotalPrice($cart, $records) {
 
 $totalPrice = calculateTotalPrice($cart, $records);
 ?>
-

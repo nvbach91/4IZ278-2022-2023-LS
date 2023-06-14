@@ -8,8 +8,8 @@ requirePrivilege(2);
 require_once 'dbconfig.php';
 $pdo = new PDO(
     'mysql:host=' . DB_HOST .
-        ';dbname=' . DB_NAME .
-        ';charset=utf8mb4',
+    ';dbname=' . DB_NAME .
+    ';charset=utf8mb4',
     DB_USERNAME,
     DB_PASSWORD
 );
@@ -21,9 +21,10 @@ function getCategoryById($pdo, $id)
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-if (!empty($_POST) && !empty($_GET['category_id'])) {
-    $name = $_POST['name'];
+$category_id = $_GET['category_id'];
 
+if (!empty($_POST) && isset($category_id)) {
+    $name = $_POST['name'];
 
     $statement = $pdo->prepare('UPDATE sp_categories SET name = :name WHERE category_id = :category_id');
     $statement->execute(['name' => $name, 'category_id' => $category_id]);
@@ -32,8 +33,8 @@ if (!empty($_POST) && !empty($_GET['category_id'])) {
     exit;
 }
 
-if (!empty($_GET['category_id'])) {
-    $category = getCategoryById($pdo, $_GET['category_id']);
+if (isset($category_id)) {
+    $category = getCategoryById($pdo, $category_id);
 }
 ?>
 

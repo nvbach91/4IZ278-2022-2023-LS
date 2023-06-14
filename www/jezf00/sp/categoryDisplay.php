@@ -12,6 +12,9 @@ $categories = $categoriesDb->fetchAll();
       <div class="card">
 
           <div class="list-group">
+          <?php if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] >= 2) : ?>
+        <a class="btn btn-outline-secondary" href="./create-category.php">Add new category</a>
+        <?php endif; ?>
               <a class="list-group-item" href="./">
                   All
               </a>
@@ -21,7 +24,7 @@ $categories = $categoriesDb->fetchAll();
                   </a>
                   <?php if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] >= 2) : ?>
                     <a class="btn btn-outline-secondary" href="./rename-categories.php?category_id=<?php echo $category['category_id'] ?>">Rename</a>
-                            <a class="btn btn-outline-secondary" href="./delete-item.php?category_id=<?php echo $category['category_id'] ?>">Delete</a>
+                            <a class="btn btn-outline-secondary" href="./delete-categories.php?category_id=<?php echo $category['category_id'] ?>">Delete</a>
                     <?php endif; ?>
               <?php endforeach ?>
           

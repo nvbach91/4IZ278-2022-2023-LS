@@ -15,9 +15,9 @@ if (!empty($_GET['category_id'])) {
         DB_PASSWORD
     );
 
-    $category_id = $_GET['category_id'];
-    
-    $stmt = $pdo->prepare('DELETE FROM sp_categories WHERE category_id = :category_id');
+    $category_id = $_GET['category_id']; 
+    $stmt = $pdo->prepare('DELETE FROM sp_categories WHERE category_id = :category_id');   
+
     $stmt->execute(['category_id' => $category_id]);
 
     header('Location: ./index.php');

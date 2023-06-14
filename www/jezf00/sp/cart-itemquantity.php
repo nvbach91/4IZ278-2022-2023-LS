@@ -15,15 +15,20 @@ if (!empty($_GET['good_id']) && !empty($_GET['action'])) {
 
     if ($action === 'increment') {
         if (isset($cart[$goodId])) {
-            $cart[$goodId]++;
+            $quantity = $cart[$goodId]+1;
+            if ($quantity <= 10) {
+                $cart[$goodId] = $quantity; 
+            }
         } else {
-            $cart[$goodId] = 1;
+            $cart[$goodId] = 1; 
         }
     } elseif ($action === 'decrement') {
         if (isset($cart[$goodId])) {
-            $cart[$goodId]--;
-            if ($cart[$goodId] <= 0) {
-                unset($cart[$goodId]);
+            $quantity = $cart[$goodId] - 1;
+            if ($quantity > 0) {
+                $cart[$goodId] = $quantity; 
+            } else {
+                unset($cart[$goodId]); 
             }
         }
     }
