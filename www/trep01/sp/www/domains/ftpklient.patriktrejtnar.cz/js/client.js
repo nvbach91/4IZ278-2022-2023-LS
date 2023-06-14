@@ -145,11 +145,13 @@ $(document).ready(function() {
                 password: password
             }),
             success: function(data) {
-                $('#FTPTable').show();
-                drawData(data)
+
                 if(user != null){
                     accessSave(server,username,password)
-
+                }
+                if(!data.error){
+                    $('#FTPTable').show();
+                    drawData(data)
                 }
                 showResponse(data)
             }
@@ -178,7 +180,6 @@ $(document).ready(function() {
                 user_password: user_password,
             }),
             success: function(data) {
-                alert("Byl jste úspěšně zaregistrován, můžete se přihlásit");
                 showResponse(data)
             }
         });
@@ -287,10 +288,19 @@ $(document).ready(function() {
             table.clear();
 
             // Add the go-up row
-            table.row.add({ name: '..' }).draw().node().classList.add('go-up');
+            var goUpRow = table.row.add({ name: '..' }).draw().node();
+            goUpRow.classList.add('go-up');
 
             // Add the rest of the files
-            table.rows.add(data.files).draw();
+            data.files.forEach(function(file) {
+                var rowNode = table.row.add(file).draw().node();
+
+                if (file.isDirectory) {
+                    rowNode.classList.add('directory-row');
+                } else {
+                    rowNode.classList.add('file-row');
+                }
+            });
 
             if (data.currentDirectory) {
                 $('#currentDirectory').text(data.currentDirectory);
@@ -298,6 +308,7 @@ $(document).ready(function() {
             }
         }
     }
+
 
 
 
