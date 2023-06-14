@@ -131,6 +131,12 @@ nav.fill ul li a:hover:after {
 .white{
     color: white !important;
 }
+.cart-counter{
+    background-color: rgb(9, 65, 9);
+    padding: 2px;
+    color: white;
+    border-radius: 50px;
+}
 
 /*INDEX PAGE*/
 .main-image{
@@ -200,6 +206,126 @@ label {
 .login-form label{
     color: white;
 }
+
+/*ESHOP*/
+.filters{
+    background-color: var(--smoky-black);
+    padding: 20px;
+    color: var(--lavender-blush);
+}
+.filters form{
+    margin-left: 20px;
+}
+.filters button{
+    margin-left: 10px;
+}
+.card-img-top{
+    height: 400px !important;
+}
+.card-img{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.card{
+    width:100% !important;
+
+    box-sizing: border-box;
+    height: 100% !important;
+}
+.card-container{
+    padding: 30px 0 30px 0;
+}
+.product{
+    text-decoration: none;
+}
+.card-text{
+    margin: 8px;
+    color: grey;
+}
+.price{
+    color: var(--dark-pastel-green)
+}
+.card:hover{
+    border: solid white 1px;
+    background-color: rgb(234, 230, 230) ;
+    transition:0.3s ease;
+}
+
+/*ONE PRODUCT*/
+.one-product-container{
+    margin-top: 50px;
+}
+.product-info{
+    padding: 20px;
+}
+.product-info > *{
+    margin-bottom: 20px;
+}
+.one-product-container img{
+    max-height: 500px;
+    float: right;
+}
+
+/*PROFILE*/
+.profile-container{
+    margin-top: 50px;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: var(--aureolin);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.profile-info-text{
+    margin: 20px;
+    margin-left: 50px;
+}
+.profile-btn{
+    position: relative;
+    top: 40%;
+    margin-bottom: 20px;
+}
+.profile-buttons{
+    border-left: dotted var(--smoky-black) 1px;
+}
+
+/*CART*/
+.cart-container{
+    margin: 50px 0 20px 0;
+}
+
+.item{
+    margin: 15px 0 20px 0px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.cart-quantity,.cart-name,.cart-price{
+    padding-top: 35px ;
+}
+.cart-legend{
+    background-color: var(--smoky-black);
+    border-radius: 10px;
+    color: white;
+}
+.cart-img >img{
+    max-height: 100px;
+}
+.cart-delete{
+    padding-top: 35px;
+}
+.cart-summary{
+    background-color: var(--aureolin);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 500px;
+    padding-top: 30px;
+    padding-left: 30px!important;
+    padding-right: 40px !important;
+}
+.cart-button{
+    float: right;
+}
+
 
 /*FOOTER*/
 footer {

@@ -23,4 +23,11 @@ class AdressesDatabase extends Database
         $result = $statement->execute();
         return $result;
     }
+
+    public function fetchById($adress_id)
+    {
+        $query = $this->pdo->prepare("SELECT * FROM adresses WHERE adress_id = ?");
+        $query->execute([$adress_id]);
+        return $query->fetchAll();
+    }
 }

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['cart'])) {
+    $objectCount = count($_SESSION['cart']);
+} else {
+    $objectCount = 0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +13,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 
 
@@ -33,16 +40,10 @@
                         <a class="nav-link navbar-brand" href="./index.php">About us</a>
                     </li>
                     <li class="nav-item btn text-center">
-                        <a class="nav-link navbar-brand" href="./cart.php"><i class="fa-solid fa-cart-shopping" style="color: #0d090a;"></i> Cart</a>
+                        <a class="nav-link navbar-brand" href="./cart.php"><i class="fa-solid fa-cart-shopping" style="color: #0d090a;"></i> Cart <span class="cart-counter"><?php echo $objectCount; ?></span></a>
                     </li>
                     <li class="nav-item btn text-center">
                         <a class="nav-link navbar-brand" href="./profile.php"><i class="fa-solid fa-user" style="color: #0d090a;"></i> My account</a>
-                    </li>
-                    <li class="nav-item btn btn-dark text-center">
-                        <a class="nav-link navbar-brand white" href="./registration.php">Registration</a>
-                    </li>
-                    <li class="nav-item last btn btn-success text-center">
-                        <a class="nav-link navbar-brand white" href="./login.php">Login</a>
                     </li>
                 </ul>
             </div>
@@ -50,19 +51,19 @@
         <nav class="navbar navbar-expand-lg bg-light justify-content-center bottom nav-pills nav-fill shift">
             <ul class="navbar-nav nav-fill w-100">
                 <li class="nav-item text-center font-weight-bold">
-                    <a class="nav-link navbar-brand" href="#">Honey</a>
+                    <a class="nav-link navbar-brand" href="./eshop.php?category=1">Honey</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link navbar-brand" href="#">Candles</a>
+                    <a class="nav-link navbar-brand" href="./eshop.php?category=2">Candles</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link navbar-brand" href="#">Wax papers</a>
+                    <a class="nav-link navbar-brand" href="./eshop.php?category=3">Wax papers</a>
                 </li>
                 <li class="nav-item text-center">
-                    <a class="nav-link navbar-brand" href="#">For skin</a>
+                    <a class="nav-link navbar-brand" href="./eshop.php?category=4">For skin</a>
                 </li>
                 <li class="nav-item flex-sm-fill text-center">
-                    <a class="nav-link navbar-brand" href="#">Beekeeping</a>
+                    <a class="nav-link navbar-brand" href="./eshop.php?category=5">Beekeeping</a>
                 </li>
             </ul>
 

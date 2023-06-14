@@ -23,6 +23,8 @@
         </div>
     </div>
 </footer>
+
+
 <script src="../javascript/main.js"></script>
 </body>
 
