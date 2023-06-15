@@ -130,9 +130,39 @@
             </form>
         </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<div class="admin-buttonHolder">
+        <button id="previousOrder" type="button">Previous orders</button>
+        <?php if(isset($_GET['orders'])): ?>
+            <?php if(intval($_GET['orders'])<=3): ?>
+            <?php for($i = 1; $i < 5; $i++): ?>
+            <?php if(intval($_GET['orders'])==$i): ?>
+            <a class="admin-currentOrders" href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <?php else: ?>
+            <a href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <?php endif; ?>            
+            <?php endfor; ?>
+            <?php else: ?>
+            <a href="./?orders=1">1</a>
+            <p>..</p>
+            <a href="./?orders=<?php echo e(intval($_GET['orders'])-1); ?>"><?php echo e(intval($_GET['orders'])-1); ?></a>
+            <a class="admin-currentOrders" href="./?orders=<?php echo e(intval($_GET['orders'])); ?>"><?php echo e(intval($_GET['orders'])); ?></a>
+            <a href="./?orders=<?php echo e(intval($_GET['orders'])+1); ?>"><?php echo e(intval($_GET['orders'])+1); ?></a>
+            <?php endif; ?>
+        <?php else: ?>
+        <?php for($i = 1; $i < 5; $i++): ?>
+        <?php if($i==1): ?>
+        <a class="admin-currentOrders" href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <?php else: ?>
+        <a href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <?php endif; ?>            
+        <?php endfor; ?>
+        <?php endif; ?>
+        <button id="nextOrder" type="button">Next orders</button>
+</div>
 <?php else: ?>
    <p>No orders found.</p>
 <?php endif; ?>
 </div>
+<script src="<?php echo e(asset('js/adminPanel.js')); ?>"></script>
     <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\dev\4iz278\SP\eGarden\resources\views/adminPanel.blade.php ENDPATH**/ ?>

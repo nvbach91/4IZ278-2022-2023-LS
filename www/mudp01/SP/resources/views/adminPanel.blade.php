@@ -130,8 +130,38 @@
             </form>
         </div>
     @endforeach
+<div class="admin-buttonHolder">
+        <button id="previousOrder" type="button">Previous orders</button>
+        @if (isset($_GET['orders']))
+            @if(intval($_GET['orders'])<=3)
+            @for ($i = 1; $i < 5; $i++)
+            @if (intval($_GET['orders'])==$i)
+            <a class="admin-currentOrders" href="./?orders={{$i}}">{{$i}}</a>
+            @else
+            <a href="./?orders={{$i}}">{{$i}}</a>
+            @endif            
+            @endfor
+            @else
+            <a href="./?orders=1">1</a>
+            <p>..</p>
+            <a href="./?orders={{intval($_GET['orders'])-1}}">{{intval($_GET['orders'])-1}}</a>
+            <a class="admin-currentOrders" href="./?orders={{intval($_GET['orders'])}}">{{intval($_GET['orders'])}}</a>
+            <a href="./?orders={{intval($_GET['orders'])+1}}">{{intval($_GET['orders'])+1}}</a>
+            @endif
+        @else
+        @for ($i = 1; $i < 5; $i++)
+        @if ($i==1)
+        <a class="admin-currentOrders" href="./?orders={{$i}}">{{$i}}</a>
+        @else
+        <a href="./?orders={{$i}}">{{$i}}</a>
+        @endif            
+        @endfor
+        @endif
+        <button id="nextOrder" type="button">Next orders</button>
+</div>
 @else
    <p>No orders found.</p>
 @endif
 </div>
+<script src="{{ asset('js/adminPanel.js') }}"></script>
     @endsection

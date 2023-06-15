@@ -6,9 +6,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AdminController;
 
 class OfferController extends Controller
 {
+    private function testPositiveNumber($number, $float){
+        if($float){
+            if(preg_match ("/^[0-9]*([\.][0-9]*)?$/", $number)){
+                return true;
+            }else{
+                return false;
+            }
+                
+        }
+        elseif(preg_match ("/^[0-9]*$/", $number)){ 
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     private function getGoods(){
         $goods = DB::select(
             'select item.name as name, item.quantity as available,item.id as id ,item.price as price,item.description as description ,item.img_URL as img, item.img_alt as alt,category.name as category,
@@ -31,13 +49,24 @@ class OfferController extends Controller
         }
         $sorted_goods = [];
         foreach ($product_type_arrays as $array) {
-            $sorted_goods = array_merge($sorted_goods, $array);
+            if(isset($_GET[$array[0]->product_type]))
+            {if($this->testPositiveNumber(intval($_GET[$array[0]->product_type]),false)){
+                if(intval($_GET[$array[0]->product_type])>0){
+                    $sliced_goods = array_slice($array,(intval($_GET[$array[0]->product_type])*4)-4,4);
+                    $sorted_goods[$array[0]->product_type] = $sliced_goods;
+                }
+            }}
+            else{
+                $sliced_goods = array_slice($array,0,4);
+                $sorted_goods[$array[0]->product_type] = $sliced_goods; #used to be array_merge
+            }
         }
         return $sorted_goods;
     }
 
     public function getActiveOffer()
     {
+        //dd($_GET);
         $sorted_goods = $this->getGoods();
         return view('goods', ['goods' => $sorted_goods]);
     }

@@ -230,6 +230,46 @@ form {
     width: 100%;
 }
 
+.goods-product-item .goods-product-item-priceHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   margin-top: auto;
+}
+
+.goods-product-item .goods-product-item-priceHolder .goods-product-item-price{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.goods-product-item .goods-product-item-priceHolder form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+}
+
+.goods-product-item .goods-product-item-priceHolder form > button{
+    width: 30%;
+    padding: 5px;
+}
+
+.goods-product-item .goods-product-item-priceHolder form > input{
+    width: calc(100%/3);
+}
+
+.goods-product-item .goods-product-item-priceHolder label{
+    width: 100%;
+    text-align: end;
+    padding: 8px;    
+}
+
 .goods-product-item-img {
     height: 200px;
     border: 1px solid black;
@@ -477,4 +517,29 @@ form .cart-item .cart-item-name {
 .cart-item-confirm button{
     padding: 7px 15px;
     margin-right: 61px;
+}
+
+.admin-buttonHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 20px 0px 20px;
+    align-items: center;
+    justify-content: space-around;
+    margin: 40px 35% 10px;
+}
+
+.admin-buttonHolder button{
+    padding: 5px 10px;
+}
+
+.admin-buttonHolder a{
+    text-decoration: none;
+    color: black;
+}
+
+.admin-buttonHolder .admin-currentOrders{
+    font-weight: bold;
+    text-decoration: underline;
 }

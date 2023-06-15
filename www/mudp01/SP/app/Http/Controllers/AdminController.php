@@ -43,7 +43,17 @@ class AdminController extends Controller
     private function pullOrders()
     {
         $response = DB::select('SELECT `order`.*, `user`.email FROM `order` JOIN `user` ON (`order`.customer = `user`.id)');
-        return $response;
+        if(isset($_GET['orders']))
+        {if($this->testPositiveNumber(intval($_GET['orders']),false)){
+            if(intval($_GET['orders'])>0){
+                $sliced_responce = array_slice($response,(intval($_GET['orders'])*3)-3,3);
+            return $sliced_responce;
+            }
+        }}
+        else{
+            $sliced_responce = array_slice($response,0,3);
+            return $sliced_responce;
+        }
     }
 
     public function handleGet()
