@@ -30,8 +30,8 @@ if (isset($_GET['category_id'])) {
                 <div class="card-footer">
                     <a class="btn card-link btn-outline-primary" href="./buy.php?good_id=<?php echo $item['good_id'] ?>">Buy</a>
                     <?php if (isset($_SESSION['user']) && $_SESSION['user']['privilege'] >= 2) : ?>
-                        <a class="btn btn-outline-secondary" href="./edit-item.php?good_id=<?php echo $item['good_id'] ?>">Edit</a>
-                        <a class="btn btn-outline-secondary" href="./delete-item.php?good_id=<?php echo $item['good_id'] ?>">Delete</a>
+                        <a class="btn btn-outline-secondary" href="admin/edit-item.php?good_id=<?php echo $item['good_id'] ?>">Edit</a>
+                        <a class="btn btn-outline-secondary" href="admin/delete-item.php?good_id=<?php echo $item['good_id'] ?>">Delete</a>
                     <?php endif; ?>
                 </div>
             </div>

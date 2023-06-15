@@ -1,5 +1,5 @@
-<?php require_once './dbconfig.php' ?>
-<?php require_once './database.php' ?>
+<?php require_once __DIR__.'/dbconfig.php' ?>
+<?php require_once __DIR__.'/database.php' ?>
 <?php
 
 

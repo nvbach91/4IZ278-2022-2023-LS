@@ -19,7 +19,7 @@ if (!empty($_GET)) {
         }
     }
 
-    header('Location: ./cart.php');
+    header('Location: ./user/cart.php');
     exit;
 }
 ?>

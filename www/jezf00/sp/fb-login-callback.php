@@ -66,7 +66,7 @@ try {
     }
 
 
-    header('Location: profile.php');
+    header('Location: ./user/profile.php');
     exit;
 } catch (\JanuSoftware\Facebook\Exception\ResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();

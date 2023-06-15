@@ -55,6 +55,6 @@ $headers = [
 
 mail($email, $subject, $message, $headers);
 
-header("Location: ./cart.php");
+header("Location: ./user/cart.php");
 exit();
 ?>

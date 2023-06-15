@@ -36,6 +36,6 @@ if (!empty($_GET['good_id']) && !empty($_GET['action'])) {
     $_SESSION['cart'] = $cart;
 }
 
-header('Location: ./cart.php');
+header('Location: ./user/cart.php');
 exit();
 ?>

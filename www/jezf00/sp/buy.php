@@ -12,6 +12,6 @@ if (!empty($_GET['good_id'])) {
     }
 }
 
-header('Location: ./cart.php');
+header('Location: ./user/cart.php');
 exit;
 ?>
