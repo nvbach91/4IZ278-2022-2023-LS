@@ -39,24 +39,24 @@
             @if(intval($_GET[$productType])<=3)
             @for ($i = 1; $i < 5; $i++)
             @if (intval($_GET[$productType])==$i)
-            <a class="admin-currentOrders" href="./?{{$productType}}={{$i}}">{{$i}}</a>
+            <a class="admin-currentOrders" href="./goods/?{{$productType}}={{$i}}">{{$i}}</a>
             @else
-            <a href="./?{{$productType}}={{$i}}">{{$i}}</a>
+            <a href="./goods/?{{$productType}}={{$i}}">{{$i}}</a>
             @endif            
             @endfor
             @else
-            <a href="./?{{$productType}}=1">1</a>
+            <a href="./goods/?{{$productType}}=1">1</a>
             <p>..</p>
-            <a href="./?{{$productType}}={{intval($_GET[$productType])-1}}">{{intval($_GET[$productType])-1}}</a>
-            <a class="admin-currentOrders" href="./?{{$productType}}={{intval($_GET[$productType])}}">{{intval($_GET[$productType])}}</a>
-            <a href="./?{{$productType}}={{intval($_GET[$productType])+1}}">{{intval($_GET[$productType])+1}}</a>
+            <a href="./goods/?{{$productType}}={{intval($_GET[$productType])-1}}">{{intval($_GET[$productType])-1}}</a>
+            <a class="admin-currentOrders" href="./goods/?{{$productType}}={{intval($_GET[$productType])}}">{{intval($_GET[$productType])}}</a>
+            <a href="./goods/?{{$productType}}={{intval($_GET[$productType])+1}}">{{intval($_GET[$productType])+1}}</a>
             @endif
         @else
         @for ($i = 1; $i < 5; $i++)
         @if ($i==1)
-        <a class="admin-currentOrders" href="./?{{$productType}}={{$i}}">{{$i}}</a>
+        <a class="admin-currentOrders" href="./goods/?{{$productType}}={{$i}}">{{$i}}</a>
         @else
-        <a href="./?{{$productType}}={{$i}}">{{$i}}</a>
+        <a href="./goods/?{{$productType}}={{$i}}">{{$i}}</a>
         @endif            
         @endfor
         @endif

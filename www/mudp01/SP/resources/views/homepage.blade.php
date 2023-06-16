@@ -8,10 +8,10 @@
        we are here to provide guidance, expert advice, and a platform for sharing your passion for nature.
         Let's cultivate beauty together!.</p>
         <div class="homepage-buttons">
-            <a href="/goods/">Browse goods</a>
+            <a href="./goods/">Browse goods</a>
             @if(!session()->exists('id'))
-            <a href="/login/">Login</a>
-            <a href="/register/">Register</a>
+            <a href="./login/">Login</a>
+            <a href="./register/">Register</a>
             @endif
         </div>
 </div>

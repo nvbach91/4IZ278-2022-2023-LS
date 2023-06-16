@@ -63,8 +63,9 @@ class CartController extends Controller
                 $insert_item = key($value);
                 $insert_quantity = current($value);
                 $insert_order = $order_id[0]->id;
+                $insert_price = DB::select("select price from item where id=$insert_item")[0]->price;
                 
-                DB::insert("INSERT INTO `contains` (item_id, order_id, quantity) VALUES ({$insert_item},{$insert_order},{$insert_quantity})");
+                DB::insert("INSERT INTO `contains` (item_id, order_id, quantity,price) VALUES ({$insert_item},{$insert_order},{$insert_quantity},{$insert_price})");
             }
             
             $id = session('id');

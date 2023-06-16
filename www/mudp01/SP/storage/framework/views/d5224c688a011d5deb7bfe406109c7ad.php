@@ -40,24 +40,24 @@
             <?php if(intval($_GET[$productType])<=3): ?>
             <?php for($i = 1; $i < 5; $i++): ?>
             <?php if(intval($_GET[$productType])==$i): ?>
-            <a class="admin-currentOrders" href="./?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <a class="admin-currentOrders" href="./goods/?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
             <?php else: ?>
-            <a href="./?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <a href="./goods/?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
             <?php endif; ?>            
             <?php endfor; ?>
             <?php else: ?>
-            <a href="./?<?php echo e($productType); ?>=1">1</a>
+            <a href="./goods/?<?php echo e($productType); ?>=1">1</a>
             <p>..</p>
-            <a href="./?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])-1); ?>"><?php echo e(intval($_GET[$productType])-1); ?></a>
-            <a class="admin-currentOrders" href="./?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])); ?>"><?php echo e(intval($_GET[$productType])); ?></a>
-            <a href="./?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])+1); ?>"><?php echo e(intval($_GET[$productType])+1); ?></a>
+            <a href="./goods/?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])-1); ?>"><?php echo e(intval($_GET[$productType])-1); ?></a>
+            <a class="admin-currentOrders" href="./goods/?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])); ?>"><?php echo e(intval($_GET[$productType])); ?></a>
+            <a href="./goods/?<?php echo e($productType); ?>=<?php echo e(intval($_GET[$productType])+1); ?>"><?php echo e(intval($_GET[$productType])+1); ?></a>
             <?php endif; ?>
         <?php else: ?>
         <?php for($i = 1; $i < 5; $i++): ?>
         <?php if($i==1): ?>
-        <a class="admin-currentOrders" href="./?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <a class="admin-currentOrders" href="./goods/?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
         <?php else: ?>
-        <a href="./?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <a href="./goods/?<?php echo e($productType); ?>=<?php echo e($i); ?>"><?php echo e($i); ?></a>
         <?php endif; ?>            
         <?php endfor; ?>
         <?php endif; ?>

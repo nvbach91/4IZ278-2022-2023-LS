@@ -21,6 +21,6 @@
         @endisset
         <button class="register-formbutton" type="submit">Register</button>
     </form>
-    <a class="register-formredirect" href="/login/">Login instead</a>
+    <a class="register-formredirect" href="./login/">Login instead</a>
     <script src="{{ asset('js/register.js') }}"></script>
 @endsection

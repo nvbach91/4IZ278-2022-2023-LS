@@ -12,6 +12,31 @@
     <h2>Add item</h2>
     <form class="adminForm" method="POST">
        <?php echo csrf_field(); ?>
+       <?php if(isset($_POST['addItem'])): ?>
+       <input hidden name="addItem" value="true">
+       <label>Name:</label>
+       <input name="name" placeholder="name" value="<?php echo e($_POST['name']); ?>">
+       <label>Description:</label>
+       <input name="description" placeholder="description" value="<?php echo e($_POST['description']); ?>">
+       <label>Image URL:</label>
+       <input name="imgUrl" placeholder="image url" value="<?php echo e($_POST['imgUrl']); ?>">
+       <label>Image Alt:</label>
+       <input name="imgAlt" placeholder="image alt" value="<?php echo e($_POST['imgAlt']); ?>">
+       <label>Price:</label>
+       <input name="price" placeholder="price" value="<?php echo e($_POST['price']); ?>">
+       <label>Stock:</label>
+       <input name="quantity" placeholder="stock" value="<?php echo e($_POST['quantity']); ?>">
+       <label>Category:</label>
+       <select name="category">
+        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if(($_POST['category']==$category->id)): ?>
+        <option value="<?php echo e($category->id); ?>" selected><?php echo e($category->name); ?></option>
+        <?php else: ?>
+        <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+        <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </select>
+       <?php else: ?>
        <input hidden name="addItem" value="true">
        <label>Name:</label>
        <input name="name" placeholder="name">
@@ -26,7 +51,18 @@
        <label>Stock:</label>
        <input name="quantity" placeholder="stock">
        <label>Category:</label>
-       <input name="category" placeholder="category">
+       <select name="category">
+        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php if(isset($_POST['category'])): ?>
+        <?php if(($_POST['category']==$category->id)): ?>
+        <option value="<?php echo e($category->id); ?>" selected><?php echo e($category->name); ?></option>
+        <?php endif; ?>
+        <?php else: ?>
+        <option value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
+        <?php endif; ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </select>
+       <?php endif; ?>
        <button type="submit">Add item</button>
     </form>
 </div>
@@ -49,7 +85,7 @@
         <p>Category: <?php echo e($removeItem[0]->category); ?></p>
         <div class="adminForm-buttons">
         <button type="submit">Pemanently delete item</button>
-        <a href=".">Cancel deleting</a>
+        <a href="./">Cancel deleting</a>
         </div>
     </form>
     </div>
@@ -93,7 +129,7 @@
             <input name="category" placeholder="category" value="<?php echo e($editItem[0]->category); ?>">
             <div class="adminForm-buttons-edit">
             <button class="admiForm-cancelEdit" type="submit">Edit item</button>
-            <a class="admiForm-cancelEdit" href=".">Cancel editing</a>
+            <a class="admiForm-cancelEdit" href="./">Cancel editing</a>
             </div>
         </form>
     </div>
@@ -114,6 +150,25 @@
     <?php endif; ?>
 </div>
 <h2 class="admin-item-heading">Orders</h2>
+<form method="POST">
+    <?php echo csrf_field(); ?>
+    <input hidden name="filterOrders" value="true">
+    <label>Filter by state:</label>
+    <select name="filter">        
+        <?php if(isset($_POST['filterOrders'])): ?>
+        <option value="paid" <?php echo e($_POST['filter']=='paid'? 'selected':''); ?>>Paid</option>
+        <?php else: ?>
+        <option value="paid">Paid</option>
+        <?php endif; ?>
+        <?php if(isset($_POST['filterOrders'])): ?>
+        
+        <option value="Waiting for payment" <?php echo e($_POST['filter']=='Waiting for payment'? 'selected' :''); ?>>Waiting for payment</option>
+        <?php else: ?>
+        <option value="Waiting for payment">Waiting for payment</option>
+        <?php endif; ?>
+    </select>
+    <button type="submit">Filter</button>
+</form>
 <div class="admin-orders">
 <?php if(isset($orders)): ?>
     <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -136,24 +191,24 @@
             <?php if(intval($_GET['orders'])<=3): ?>
             <?php for($i = 1; $i < 5; $i++): ?>
             <?php if(intval($_GET['orders'])==$i): ?>
-            <a class="admin-currentOrders" href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <a class="admin-currentOrders" href="./adminPanel/?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
             <?php else: ?>
-            <a href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+            <a href="./adminPanel/?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
             <?php endif; ?>            
             <?php endfor; ?>
             <?php else: ?>
-            <a href="./?orders=1">1</a>
+            <a href="./adminPanel/?orders=1">1</a>
             <p>..</p>
-            <a href="./?orders=<?php echo e(intval($_GET['orders'])-1); ?>"><?php echo e(intval($_GET['orders'])-1); ?></a>
-            <a class="admin-currentOrders" href="./?orders=<?php echo e(intval($_GET['orders'])); ?>"><?php echo e(intval($_GET['orders'])); ?></a>
-            <a href="./?orders=<?php echo e(intval($_GET['orders'])+1); ?>"><?php echo e(intval($_GET['orders'])+1); ?></a>
+            <a href="./adminPanel/?orders=<?php echo e(intval($_GET['orders'])-1); ?>"><?php echo e(intval($_GET['orders'])-1); ?></a>
+            <a class="admin-currentOrders" href="./adminPanel/?orders=<?php echo e(intval($_GET['orders'])); ?>"><?php echo e(intval($_GET['orders'])); ?></a>
+            <a href="./adminPanel/?orders=<?php echo e(intval($_GET['orders'])+1); ?>"><?php echo e(intval($_GET['orders'])+1); ?></a>
             <?php endif; ?>
         <?php else: ?>
         <?php for($i = 1; $i < 5; $i++): ?>
         <?php if($i==1): ?>
-        <a class="admin-currentOrders" href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <a class="admin-currentOrders" href="./adminPanel/?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
         <?php else: ?>
-        <a href="./?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
+        <a href="./adminPanel/?orders=<?php echo e($i); ?>"><?php echo e($i); ?></a>
         <?php endif; ?>            
         <?php endfor; ?>
         <?php endif; ?>

@@ -12,6 +12,31 @@
     <h2>Add item</h2>
     <form class="adminForm" method="POST">
        @csrf
+       @if(isset($_POST['addItem']))
+       <input hidden name="addItem" value="true">
+       <label>Name:</label>
+       <input name="name" placeholder="name" value="{{$_POST['name']}}">
+       <label>Description:</label>
+       <input name="description" placeholder="description" value="{{$_POST['description']}}">
+       <label>Image URL:</label>
+       <input name="imgUrl" placeholder="image url" value="{{$_POST['imgUrl']}}">
+       <label>Image Alt:</label>
+       <input name="imgAlt" placeholder="image alt" value="{{$_POST['imgAlt']}}">
+       <label>Price:</label>
+       <input name="price" placeholder="price" value="{{$_POST['price']}}">
+       <label>Stock:</label>
+       <input name="quantity" placeholder="stock" value="{{$_POST['quantity']}}">
+       <label>Category:</label>
+       <select name="category">
+        @foreach($categories as $category)
+        @if (($_POST['category']==$category->id))
+        <option value="{{$category->id}}" selected>{{$category->name}}</option>
+        @else
+        <option value="{{$category->id}}">{{$category->name}}</option>
+        @endif
+        @endforeach
+        </select>
+       @else
        <input hidden name="addItem" value="true">
        <label>Name:</label>
        <input name="name" placeholder="name">
@@ -26,7 +51,18 @@
        <label>Stock:</label>
        <input name="quantity" placeholder="stock">
        <label>Category:</label>
-       <input name="category" placeholder="category">
+       <select name="category">
+        @foreach($categories as $category)
+        @if (isset($_POST['category']))
+        @if (($_POST['category']==$category->id))
+        <option value="{{$category->id}}" selected>{{$category->name}}</option>
+        @endif
+        @else
+        <option value="{{$category->id}}">{{$category->name}}</option>
+        @endif
+        @endforeach
+        </select>
+       @endif
        <button type="submit">Add item</button>
     </form>
 </div>
@@ -49,7 +85,7 @@
         <p>Category: {{$removeItem[0]->category}}</p>
         <div class="adminForm-buttons">
         <button type="submit">Pemanently delete item</button>
-        <a href=".">Cancel deleting</a>
+        <a href="./">Cancel deleting</a>
         </div>
     </form>
     </div>
@@ -93,7 +129,7 @@
             <input name="category" placeholder="category" value="{{$editItem[0]->category}}">
             <div class="adminForm-buttons-edit">
             <button class="admiForm-cancelEdit" type="submit">Edit item</button>
-            <a class="admiForm-cancelEdit" href=".">Cancel editing</a>
+            <a class="admiForm-cancelEdit" href="./">Cancel editing</a>
             </div>
         </form>
     </div>
@@ -114,6 +150,25 @@
     @endif
 </div>
 <h2 class="admin-item-heading">Orders</h2>
+<form method="POST">
+    @csrf
+    <input hidden name="filterOrders" value="true">
+    <label>Filter by state:</label>
+    <select name="filter">        
+        @if (isset($_POST['filterOrders']))
+        <option value="paid" {{$_POST['filter']=='paid'? 'selected':'';}}>Paid</option>
+        @else
+        <option value="paid">Paid</option>
+        @endif
+        @if (isset($_POST['filterOrders']))
+        
+        <option value="Waiting for payment" {{$_POST['filter']=='Waiting for payment'? 'selected' :'';}}>Waiting for payment</option>
+        @else
+        <option value="Waiting for payment">Waiting for payment</option>
+        @endif
+    </select>
+    <button type="submit">Filter</button>
+</form>
 <div class="admin-orders">
 @if (isset($orders))
     @foreach ($orders as $order)
@@ -136,24 +191,24 @@
             @if(intval($_GET['orders'])<=3)
             @for ($i = 1; $i < 5; $i++)
             @if (intval($_GET['orders'])==$i)
-            <a class="admin-currentOrders" href="./?orders={{$i}}">{{$i}}</a>
+            <a class="admin-currentOrders" href="./adminPanel/?orders={{$i}}">{{$i}}</a>
             @else
-            <a href="./?orders={{$i}}">{{$i}}</a>
+            <a href="./adminPanel/?orders={{$i}}">{{$i}}</a>
             @endif            
             @endfor
             @else
-            <a href="./?orders=1">1</a>
+            <a href="./adminPanel/?orders=1">1</a>
             <p>..</p>
-            <a href="./?orders={{intval($_GET['orders'])-1}}">{{intval($_GET['orders'])-1}}</a>
-            <a class="admin-currentOrders" href="./?orders={{intval($_GET['orders'])}}">{{intval($_GET['orders'])}}</a>
-            <a href="./?orders={{intval($_GET['orders'])+1}}">{{intval($_GET['orders'])+1}}</a>
+            <a href="./adminPanel/?orders={{intval($_GET['orders'])-1}}">{{intval($_GET['orders'])-1}}</a>
+            <a class="admin-currentOrders" href="./adminPanel/?orders={{intval($_GET['orders'])}}">{{intval($_GET['orders'])}}</a>
+            <a href="./adminPanel/?orders={{intval($_GET['orders'])+1}}">{{intval($_GET['orders'])+1}}</a>
             @endif
         @else
         @for ($i = 1; $i < 5; $i++)
         @if ($i==1)
-        <a class="admin-currentOrders" href="./?orders={{$i}}">{{$i}}</a>
+        <a class="admin-currentOrders" href="./adminPanel/?orders={{$i}}">{{$i}}</a>
         @else
-        <a href="./?orders={{$i}}">{{$i}}</a>
+        <a href="./adminPanel/?orders={{$i}}">{{$i}}</a>
         @endif            
         @endfor
         @endif

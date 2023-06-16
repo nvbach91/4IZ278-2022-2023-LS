@@ -16,24 +16,24 @@
     <header>
         <nav>
             <div class="header-home">
-                <a href="/"><img src="<?php echo e(asset('img/homepage_logo.png')); ?>" alt="Logo redirecting to homepage"></a>
+                <a href="./"><img src="<?php echo e(asset('img/homepage_logo.png')); ?>" alt="Logo redirecting to homepage"></a>
             </div>
             <div class="header-goods">
-                <a href="/goods/">Browse goods</a>
+                <a href="./goods/">Browse goods</a>
             </div>
             <?php if(session()->exists('id')): ?>
             <div class="header-other">
-                <a href="/cart/">Cart</a>
+                <a href="./cart/">Cart</a>
             </div>
             <div id="account" class="header-other">
-                <a href=".">Account</a>
+                <a href="./">Account</a>
             </div>
             <?php else: ?>
             <div class="header-other">
-                <a href="/register/">Register</a>
+                <a href="./register/">Register</a>
             </div>
             <div class="header-other">
-                <a id="account" href="/login/">Login</a>
+                <a id="account" href="./login/">Login</a>
             </div>
             <?php endif; ?>
         </nav>

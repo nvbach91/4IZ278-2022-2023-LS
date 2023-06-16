@@ -19,15 +19,15 @@ $.each(productTypes, (i, productType) => {
             } else {
                 urlParamseters += `&${type}=1`
             }
-            window.location.replace(`./?${urlParamseters}`);
+            window.location.replace(`./goods/?${urlParamseters}`);
         } else {
             currentPage = getParameter(type);
             if (parseInt(currentPage) > 1) {
                 urlParamseters = urlParamseters.replace(`${type}=${currentPage}`, `${type}=${parseInt(currentPage) - 1}`);
-                window.location.replace(`./?${urlParamseters}`);
+                window.location.replace(`./goods/?${urlParamseters}`);
             } else {
                 urlParamseters = urlParamseters.replace(`${type}=${currentPage}`, `${type}=1`);
-                window.location.replace(`./?${urlParamseters}`);
+                window.location.replace(`./goods/?${urlParamseters}`);
             }
         }
     });
@@ -35,40 +35,16 @@ $.each(productTypes, (i, productType) => {
         var url_params = new URLSearchParams(window.location.search);
         if (url_params.get(type) == null) {
             if (urlParamseters == '') {
-                urlParamseters += `${type}=1`
+                urlParamseters += `${type}=2`
             } else {
-                urlParamseters += `&${type}=1`
+                urlParamseters += `&${type}=2`
             }
-            window.location.replace(`./?${urlParamseters}`);
+            window.location.replace(`./goods/?${urlParamseters}`);
         } else {
             currentPage = getParameter(type);
             urlParamseters = urlParamseters.replace(`${type}=${currentPage}`, `${type}=${parseInt(currentPage) + 1}`);
-            window.location.replace(`./?${urlParamseters}`);
+            window.location.replace(`./goods/?${urlParamseters}`);
 
         }
     });
-});
-
-nextOrder.on('click', () => {
-    var url_params = new URLSearchParams(window.location.search);
-    if (url_params.get('orders') == null) {
-        window.location.replace('./?orders=2');
-    } else {
-        currentOrderPage = getOrdersParameter();
-        window.location.replace(`./?orders=${parseInt(currentOrderPage) + 1}`);
-    }
-});
-
-previousOrder.on('click', () => {
-    var url_params = new URLSearchParams(window.location.search);
-    if (url_params.get('orders') == null) {
-        window.location.replace('./?orders=1');
-    } else {
-        currentOrderPage = getOrdersParameter();
-        if (parseInt(currentOrderPage) <= 1) {
-            window.location.replace('./?orders=1');
-        } else {
-            window.location.replace(`./?orders=${parseInt(currentOrderPage) - 1}`);
-        }
-    }
 });

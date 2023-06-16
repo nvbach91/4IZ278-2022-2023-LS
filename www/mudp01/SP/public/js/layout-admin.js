@@ -1,12 +1,12 @@
 const account = $('#account');
 const orders = $('<a>');
-orders.attr('href', '/myOrders/');
+orders.attr('href', './myOrders/');
 orders.text('My orders');
 const logout = $('<a>');
 logout.text('Logout');
-logout.attr('href', '/logout/');
+logout.attr('href', './logout/');
 const adminPanel = $('<a>');
-adminPanel.attr('href', '/adminPanel/');
+adminPanel.attr('href', './adminPanel/');
 adminPanel.text('Admin panel');
 
 
