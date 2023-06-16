@@ -16,6 +16,8 @@ if ($user) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $username;
         $_SESSION['isAdmin'] = $user['isAdmin'];
+        $_SESSION['email'] = $user['email'];
+
         echo json_encode(['success' => true, 'isAdmin' => $user['isAdmin']]);  
     } else {
         echo json_encode(['success' => false]);

@@ -34,23 +34,14 @@ foreach ($cartItems as $item) {
                 <img src="../../img/logo.png" alt="Tea E-Shop Logo" width="100">
             </a>
         </div>
-        <nav>
-            <ul>
-                <li><a>O nás</a></li>
-                <li><a>Kontakt</a></li>
-            </ul>
-        </nav>
-        <div class="search">
-            <input type="text" placeholder="Search" class="input-search">
-            <button action="cart.php">Search</button>
-        </div>
 
         <div class="login">
             <div class="dropdown">
                 <p>Welcome, <?php echo $_SESSION['username']; ?></p>
                 <div class="dropdown-content">
-                    <a href="order_history.php">Order history</a>
+                    <a href="order_history_page.php">Order history</a>
                     <a href="logout.php">Log out</a>
+                    <a href="profile.php">My profile</a>
                 </div>
             </div>
         </div>
@@ -61,16 +52,9 @@ foreach ($cartItems as $item) {
 
     </header>
 
+    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
-            <h3>Categories</h3>
-            <ul>
-                <li><a href="logged_in.php" class="tea-category">Zelený čaj</a></li>
-                <li><a href="logged_in.php" class="tea-category">Černý čaj</a></li>
-                <li><a href="logged_in.php" class="tea-category">Bylinný čaj</a></li>
-                <li><a href="logged_in.php" class="tea-category">Ovocný čaj</a></li>
-                <li><a href="logged_in.php" class="tea-category">čaj Oolong</a></li>
-            </ul>
         </aside>
         <main>
             <div class="cart">

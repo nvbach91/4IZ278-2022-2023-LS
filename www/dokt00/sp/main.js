@@ -95,38 +95,3 @@ viewCartButton.addEventListener("click", showErrorMessage);
 var searchButton = document.querySelector(".search-button");
 var searchInput = document.querySelector(".input-search");
 
-searchButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  var searchText = searchInput.value;
-
-  $.ajax({
-    type: "POST",
-    url: "search.php",
-    data: {
-      query: searchText,
-    },
-    success: function (response) {
-      var productsContainer = document.querySelector("main");
-      productsContainer.innerHTML = response;
-    },
-  });
-});
-
-//!TODO
-// var categoryButtons = document.querySelectorAll('.category');
-
-// categoryButtons.forEach(button => button.addEventListener('click', function(e) {
-//     e.preventDefault();
-
-//     $.ajax({
-//         type: 'POST',
-//         url: 'category.php',
-//         data: {
-//             query: button.textContent
-//         },
-//         success: function(response) {
-//             var productsContainer = document.querySelector('main');
-//             productsContainer.innerHTML = response;
-//         }
-//     });
-// }));

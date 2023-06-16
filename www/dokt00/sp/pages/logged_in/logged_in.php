@@ -18,15 +18,6 @@
                 <img src="../../img/logo.png" alt="Tea E-Shop Logo" width="100">
             </a>
         </div>
-
-        <nav>
-            <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-            </ul>
-        </nav>
         <div class="search">
             <form class="search-form">
                 <input type="text" placeholder="Search" class="input-search" pattern="^[a-zA-Z0-9\s]*$" required>
@@ -36,10 +27,13 @@
 
         <div class="login">
             <div class="dropdown">
-                <p>Welcome, <?php echo $_SESSION['username']; ?></p>
+                <p>Welcome,
+                    <?php echo $_SESSION['username']; ?>
+                </p>
                 <div class="dropdown-content">
                     <a href="order_history_page.php">Order history</a>
                     <a href="logout.php">Log out</a>
+                    <a href="profile.php">My profile</a>
                 </div>
             </div>
         </div>
@@ -50,7 +44,7 @@
 
     </header>
 
-    <img src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
+    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
             <h3>Categories</h3>
@@ -62,7 +56,17 @@
                 <li><a class="tea-category">čaj Oolong</a></li>
             </ul>
         </aside>
+
+
+
         <main>
+
+            <?php if (isset($_SESSION['order_success'])) {
+                echo '<div class="alert alert-success">' . $_SESSION['order_success'] . '</div>';
+                unset($_SESSION['order_success']);
+            }
+            ?>
+
 
             <?php include 'products.php'; ?>
 
@@ -79,7 +83,7 @@
     </footer>
 
     <script src="main.js"></script>
-    <script src="../../search.js"></script>
+    <script src="search.js"></script>
     <script src="add_to_cart.js"></script>
     <script src="category_select.js"></script>
 

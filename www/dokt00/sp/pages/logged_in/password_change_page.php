@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once '../../db/Database.php';
+require_once '../../db/UsersDB.php';
+
+
+$usersDB = new UsersDB();
+$info = $usersDB->getById($_SESSION['user_id']);
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,18 +28,11 @@
             </a>
         </div>
 
-        <div class="search">
-            <form class="search-form">
-                <input type="text" placeholder="Search" class="input-search" pattern="^[a-zA-Z0-9\s]*$" required>
-                <button class="search-button" type="submit">Search</button>
-            </form>
-        </div>
-
-
-
         <div class="login">
             <div class="dropdown">
-                <p>Welcome, <?php echo $_SESSION['username']; ?></p>
+                <p>Welcome,
+                    <?php echo $_SESSION['username']; ?>
+                </p>
                 <div class="dropdown-content">
                     <a href="order_history_page.php">Order history</a>
                     <a href="logout.php">Log out</a>
@@ -45,14 +47,22 @@
 
     </header>
 
-    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
-                
+
         </aside>
         <main>
 
-            <?php include 'order_history.php'; ?>
+            <form id="change-password-form" action="change_password.php" method="POST" novalidate>
+
+                <label for="password">Old password:</label>
+                <input type="password" name="old_password" id="old_password" required>
+
+                <label for="password">New password:</label>
+                <input type="password" name="new_password" id="new_password" required>
+
+                <button type="submit">Change password</button>
+            </form>
 
         </main>
     </div>
@@ -67,8 +77,9 @@
     </footer>
 
     <script src="main.js"></script>
-    <script src="search.js"></script>
-    <script src="add_to_cart.js"></script>
+    <script src="change_password.js"></script>
+
+
 </body>
 
 </html>

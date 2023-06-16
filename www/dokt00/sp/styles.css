@@ -45,7 +45,10 @@ nav ul li a {
     border: 1px solid #fff;
     background-color: #333;
     color: #fff;
+    width: 300px;
+    font-size: 1.2em; 
 }
+
 
 button {
     padding: 5px 10px;
@@ -285,6 +288,13 @@ footer nav ul li a:hover {
 .input-login {
     margin-right: 10px;
 }
+
+.main-image {
+    width: 100%;
+}
+
+
+
 
 
 

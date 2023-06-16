@@ -28,7 +28,7 @@ if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
         <nav>
             <ul>
                 <li><a href="#" class="user-accounts">User accounts</a></li>
-                <li><a href="#">Orders</a></li>
+                <li><a href="#" class="orders-button">Orders</a></li>
             </ul>
         </nav>
         <div class="search">
@@ -49,7 +49,7 @@ if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
         </div>
     </header>
 
-    <img src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
+    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
             <h3>Categories</h3>
@@ -81,10 +81,12 @@ if (!isset($_SESSION['isAdmin']) || !$_SESSION['isAdmin']) {
     <script src="edit_product.js"></script>
     <script src="delete_product.js"></script>
     <script src="add_product.js"></script>  
-    <script src="category_select.js"></script>
+    <script src="../../category_select.js"></script>
     <script src="users.js"></script>
     <script src="edit_user.js"></script>
     <script src="delete_user.js"></script>
+    <script src="orders.js"></script>
+
 
 
 </body>

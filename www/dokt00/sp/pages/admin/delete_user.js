@@ -14,7 +14,10 @@ $(document).on('click', '.delete-user', function () {
         },
         success: function (data) {
             console.log(data);
-            location.reload();
+            var userBox = document.querySelector(`.user-box[data-user-id='${userID}']`);
+            if (userBox) {
+                userBox.remove();
+            }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);

@@ -9,6 +9,16 @@ if (!isset($_SESSION['alertMessages'])) {
     $_SESSION['alertMessages'] = [];
 }
 
+require_once '../../db/UsersDB.php';
+
+$usersDB = new UsersDB();
+
+$user = $usersDB->getById($_SESSION['user_id']);
+
+if ($user) {
+    $_SESSION['user'] = $user;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,25 +40,20 @@ if (!isset($_SESSION['alertMessages'])) {
             </a>
         </div>
 
-        <nav>
-            <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-            </ul>
-        </nav>
         <div class="search">
-            <input type="text" placeholder="Search" class="input-search">
-            <button class="search-button">Search</button>
+            <form class="search-form">
+                <input type="text" placeholder="Search" class="input-search" pattern="^[a-zA-Z0-9\s]*$" required>
+                <button class="search-button" type="submit">Search</button>
+            </form>
         </div>
 
         <div class="login">
             <div class="dropdown">
                 <p>Welcome, <?php echo $_SESSION['username']; ?></p>
                 <div class="dropdown-content">
-                    <a href="order_history.php">Order history</a>
+                    <a href="order_history_page.php">Order history</a>
                     <a href="logout.php">Log out</a>
+                    <a href="profile.php">My profile</a>
                 </div>
             </div>
         </div>
@@ -59,17 +64,9 @@ if (!isset($_SESSION['alertMessages'])) {
 
     </header>
 
-    <img src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
+    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
-            <h3>Categories</h3>
-            <ul>
-                <li><a href="#">Green Tea</a></li>
-                <li><a href="#">Black Tea</a></li>
-                <li><a href="#">Herbal Tea</a></li>
-                <li><a href="#">Fruit Tea</a></li>
-                <li><a href="#">Oolong Tea</a></li>
-            </ul>
         </aside>
         <main>
 
@@ -88,13 +85,13 @@ if (!isset($_SESSION['alertMessages'])) {
             <form id="billing-form" action="checkout.php" method="POST">
 
                 <label for="firstname">Jméno:</label>
-                <input type="text" name="first_name" id="firstname" value="<?php echo isset($_SESSION['inputValues']['first_name']) ? $_SESSION['inputValues']['first_name'] : ''; ?>">
+                <input type="text" name="first_name" id="firstname" value="<?php echo isset($_SESSION['user']['first_name']) ? $_SESSION['user']['first_name'] : ''; ?>">
 
                 <label for="lastname">Příjmení:</label>
-                <input type="text" name="last_name" id="lastname" value="<?php echo isset($_SESSION['inputValues']['last_name']) ? $_SESSION['inputValues']['last_name'] : ''; ?>">
+                <input type="text" name="last_name" id="lastname" value="<?php echo isset($_SESSION['user']['last_name']) ? $_SESSION['user']['last_name'] : ''; ?>">
 
                 <label for="orderphone">Phone:</label>
-                <input type="tel" name="phone" id="orderphone" value="<?php echo isset($_SESSION['inputValues']['phone']) ? $_SESSION['inputValues']['phone'] : ''; ?>">
+                <input type="tel" name="phone" id="orderphone" value="<?php echo isset($_SESSION['user']['phone']) ? $_SESSION['user']['phone'] : ''; ?>">
 
                 <label for="city">Město:</label>
                 <input type="text" name="city" id="city" required value="<?php echo isset($_SESSION['inputValues']['city']) ? $_SESSION['inputValues']['city'] : ''; ?>">
@@ -126,35 +123,10 @@ if (!isset($_SESSION['alertMessages'])) {
         <p>&copy; 2023 Tea E-Shop. All rights reserved.</p>
     </footer>
 
-    <div id="register-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form id="register-form" action="register.php" method="POST" onsubmit="event.preventDefault(); registerUser();">
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" required>
-
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" required>
-
-                <label for="password">Password:</label>
-                <input type="password" name="password" id="password" required>
-
-                <label for="first_name">First Name:</label>
-                <input type="text" name="first_name" id="first_name">
-
-                <label for="last_name">Last Name:</label>
-                <input type="text" name="last_name" id="last_name">
-
-                <label for="phone">Phone:</label>
-                <input type="tel" name="phone" id="phone">
-
-                <button type="submit">Register</button>
-            </form>
-        </div>
-    </div>
-
     <script src="main.js"></script>
     <script src="../../search.js"></script>
+    <script src="category_select.js"></script>
+
 </body>
 
 </html>

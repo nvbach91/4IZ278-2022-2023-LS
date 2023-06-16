@@ -16,12 +16,7 @@
                 <img src="img/logo.png" alt="Tea E-Shop Logo" width="100">
             </a>
         </div>
-        <nav>
-            <ul>
-                <li><a class="category" href="#">About us</a></li>
-                <li><a class="category" href="#">Contact</a></li>
-            </ul>
-        </nav>
+
         <div class="search">
             <form class="search-form">
                 <input type="text" placeholder="Search" class="input-search" pattern="^[a-zA-Z0-9\s]*$" required>
@@ -45,7 +40,7 @@
         </div>
     </header>
 
-    <img src="img/IMG_4580-1702829-1920px-16x7 (1).jpg" alt="">
+    <img class="main-image" src="img/IMG_4580-1702829-1920px-16x7 (1).jpg" alt="">
     <div class="content-wrapper">
         <aside>
             <h3>Categories</h3>

@@ -4,13 +4,6 @@ require_once 'Database.php';
 class OrderDB extends Teadatabase
 {
 
-    public function getAll()
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM `order`");
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     public function getByID($orderId)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM `order` WHERE order_id = ?");
@@ -90,20 +83,25 @@ class OrderDB extends Teadatabase
         return $this->pdo->lastInsertId();
     }
 
-
-    public function getPendingOrderByUser($userId)
-    {
-        $stmt = $this->pdo->prepare("SELECT order_id FROM `order` WHERE user_id = ? AND status = 'pending'");
-        $stmt->bindValue(1, $userId);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
     public function getOrdersByUserId($userId)
     {
         $sql = "SELECT o.order_id, o.date
         FROM `order` o 
         WHERE o.user_id = ?";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, $userId);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    public function getOrdersByUserIdOrderByDate($userId)
+    {
+        $sql = "SELECT o.order_id, o.date
+        FROM `order` o 
+        WHERE o.user_id = ?
+        ORDER BY o.date DESC";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(1, $userId);

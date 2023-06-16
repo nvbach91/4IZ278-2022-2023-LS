@@ -91,16 +91,44 @@ if ($submittedForm) {
                 $productDB->decrementStock($item['product_id'], $item['quantity']);
             }
 
-            $orderDB->markAsCompleted($order_id, $firstName, $lastName, $phone, $city, $street, $psc, $paymentMethod);
+            $orderDB->markAsCompleted($order_id);
+
+            $_SESSION['order_success'] = 'Your order has been successfully placed';
 
             $alertType = 'alert-success';
             $alertMessages = ['Checkout successful'];
+
+            $to = $_SESSION['email'];
+
+            $subject = "Teashop order confirmation";
+
+            $message =
+                '<div>
+                <h1> Your order has been successfully placed</h1>
+                <br>
+                <p>Thank you!</p>
+                </div>';
+
+            $headers = "From: info@teashop.com\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+            mail($to, $subject, $message, $headers);
+
             unset($_SESSION['token']);
             unset($_SESSION['inputValues']);
-        }
+
+            header('Location: logged_in.php');
+            exit;
+        } 
     }
-    $_SESSION['invalidInputs'] = $invalidInputs;
-    $_SESSION['alertMessages'] = $alertMessages;
-    $_SESSION['alertType'] = $alertType;
+
+    if (count($alertMessages)) {
+        $_SESSION['invalidInputs'] = $invalidInputs;
+        $_SESSION['alertMessages'] = $alertMessages;
+        $_SESSION['alertType'] = $alertType;
+
+        header('Location: checkout_page.php');
+        exit;
+    }
 }
-header('Location: checkout_page.php');

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $orderDB = new OrderDB();
 $orderitemDB = new OrderitemDB();
-$orders = $orderDB->getOrdersByUserId($_SESSION['user_id']);
+$orders = $orderDB->getOrdersByUserIdOrderByDate($_SESSION['user_id']);
 
 $orderNumber = 1;
 

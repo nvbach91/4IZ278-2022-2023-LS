@@ -14,6 +14,7 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $phone = $_POST['phone'];
 
+
 $username_pattern = "/^[a-zA-Z0-9]*$/";
 $email_pattern = "/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/";
 $password_pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";  

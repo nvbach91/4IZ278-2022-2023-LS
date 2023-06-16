@@ -1,20 +1,24 @@
 <?php require_once 'Database.php';
 
-class UsersDB extends Teadatabase {
-    public function getAll() {
+class UsersDB extends Teadatabase
+{
+    public function getAll()
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM users");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getById($userId) {
+    public function getById($userId)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE user_id = ?");
         $stmt->bindValue(1, $userId);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    public function insert($userData) {
+    public function insert($userData)
+    {
         $sql = "INSERT INTO users (username, email, password, first_name, last_name, phone) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -27,9 +31,10 @@ class UsersDB extends Teadatabase {
         ]);
         return $this->pdo->lastInsertId();
     }
-    
 
-    public function update($userId, $userData) {
+
+    public function update($userId, $userData)
+    {
         $sql = "UPDATE users SET email = ?, password = ?, first_name = ?, last_name = ?, username = ?, isAdmin = ?, phone = ? WHERE user_id = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -44,49 +49,66 @@ class UsersDB extends Teadatabase {
         ]);
     }
 
-    public function delete($userId) {
+    public function updatePasswordHash($userId, $hashed_password)
+    {
+        $sql = "UPDATE users SET password = :password WHERE user_id = :user_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':user_id', $userId);
+
+        return $stmt->execute();
+    }
+
+
+    public function delete($userId)
+    {
         $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = ?");
         $stmt->bindValue(1, $userId);
         $stmt->execute();
     }
 
-    public function deleteAll() {
+    public function deleteAll()
+    {
         $stmt = $this->pdo->prepare("DELETE FROM users");
         $stmt->execute();
     }
 
-    public function getByUsername($username) {
+    public function getByUsername($username)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bindValue(1, $username);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    public function getByEmail($email) {
+    public function getByEmail($email)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->bindValue(1, $email);
         $stmt->execute();
         return $stmt->fetch();
     }
 
-    public function updateUser($userID, $column, $value) {
+    public function updateUser($userID, $column, $value)
+    {
         $allowed_columns = ['username', 'email', 'first_name', 'last_name', 'phone', 'isAdmin'];
-    
+
         if (!in_array($column, $allowed_columns)) {
             die('Invalid column');
         }
-    
+
         $stmt = $this->pdo->prepare("UPDATE users SET $column = ? WHERE user_id = ?");
         $stmt->execute([$value, $userID]);
     }
 
-    public function deleteUser($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM users WHERE user_id = :id");
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    
+    public function getNonAdminUsers()
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE isAdmin = 0');
         $stmt->execute();
+        return $stmt->fetchAll();
     }
-    
-    
-    
+
+
+
+
 }

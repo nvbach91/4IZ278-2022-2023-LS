@@ -8,7 +8,7 @@ if(isset($_POST['user_id'])) {
     $usersDB = new UsersDB();
     
     try {
-        $usersDB->deleteUser($userID);
+        $usersDB->delete($userID);
         echo "User deleted successfully.";
     } catch (Exception $e) {
         error_log($e->getMessage());

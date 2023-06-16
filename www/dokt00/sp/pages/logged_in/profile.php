@@ -18,15 +18,12 @@
                 <img src="../../img/logo.png" alt="Tea E-Shop Logo" width="100">
             </a>
         </div>
-
         <div class="search">
             <form class="search-form">
                 <input type="text" placeholder="Search" class="input-search" pattern="^[a-zA-Z0-9\s]*$" required>
                 <button class="search-button" type="submit">Search</button>
             </form>
         </div>
-
-
 
         <div class="login">
             <div class="dropdown">
@@ -45,14 +42,13 @@
 
     </header>
 
-    <img class="main-image" src="../../img/IMG_4580-1702829-1920px-16x7 (1) copy.jpg" alt="">
     <div class="content-wrapper">
         <aside>
-                
+            
         </aside>
         <main>
 
-            <?php include 'order_history.php'; ?>
+            <?php include 'user_info.php'; ?>
 
         </main>
     </div>
@@ -69,6 +65,7 @@
     <script src="main.js"></script>
     <script src="search.js"></script>
     <script src="add_to_cart.js"></script>
+
 </body>
 
 </html>

@@ -5,13 +5,6 @@ require_once 'ProductDB.php';
 class OrderitemDB extends Teadatabase
 {
 
-    public function getAll()
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM orderitem");
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
     public function getByID($orderitemId)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM orderitem WHERE orderitem_id = ?");
