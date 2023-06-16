@@ -1,0 +1,20 @@
+.register-icon {
+    max-width: 20px;
+}
+.navlogo{
+    max-width: 40px;
+}
+.navbar {
+    border: none;
+    width: 100%;
+  }
+  .navbar-brand{
+    margin-right: auto;
+  }
+  .categoryDisplayContainer{
+    float: left!important;
+    margin-right: 20px;
+  }
+ .imga{
+  max-width: 50px;
+ }
