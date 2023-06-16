@@ -1,0 +1,31 @@
+CREATE TABLE categories(
+    category_id int,
+    name varchar(255)
+);
+
+CREATE TABLE products(
+    product_id int,
+    name varchar(255),
+    price float,
+    description text,
+    picture varchar(255),
+    q_in_stock int,
+    category_id int
+);
+
+CREATE TABLE users(
+    user_id int,
+    first_name varchar(255),
+    second_name varchar(255),
+    email varchar(255),
+    phone varchar(255),
+    adress_id int
+);
+
+CREATE TABLE adresses(
+    adress_id int,
+    city varchar(255),
+    postal_code varchar(255),
+    street_plus_number varchar(255),
+    country varchar(255)
+);

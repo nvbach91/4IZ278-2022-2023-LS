@@ -1,0 +1,354 @@
+:root{
+    --lavender-blush: #f3e8eeff;
+    --dark-pastel-green: #1bc54eff;
+    --aureolin: #f9f110ff;
+    --smoky-black: #0d090aff;
+}
+body{
+    margin: 0;
+    box-sizing: border-box;
+    background-color: var(--lavender-blush);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*HEADER*/
+
+.upper{
+    background-color: var(--aureolin);
+}
+.bottom{
+    background-color: var(--lavender-blush);
+}
+.logo{
+    width: 45px;
+    margin-left: 50px;
+}
+.last{
+    margin-right: 50px;
+}
+nav.shift ul li a {
+    position: relative;
+    z-index: 1;
+}
+
+nav.shift ul li a:hover {
+    color: var(--lavender-blush);
+}
+
+nav.shift ul li a:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    content: '.';
+    color: transparent;
+    background: var(--dark-pastel-green);
+    visibility: none;
+    opacity: 0;
+    z-index: -1;
+}
+
+nav.shift ul li a:hover:after {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+}
+.shift ul{
+    margin-left: 200px;
+    margin-right: 200px;
+}
+.shift{
+    border: solid 1px var(--smoky-black);
+}
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+    transition: all .5s;
+}
+.shift li{
+    margin-right: 5px;
+}
+.upper .last{
+    margin-right: 1Opx;
+}
+nav.stroke ul li a,
+nav.fill ul li a {
+    position: relative;
+}
+
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: var(--smoky-black);
+    height: 1px;
+}
+
+nav.stroke ul li a:hover:after {
+    width: 100%;
+}
+
+nav.fill ul li a {
+    transition: all 2s;
+}
+
+nav.fill ul li a:after {
+    text-align: left;
+    content: '.';
+    margin: 0;
+    opacity: 0;
+}
+
+nav.fill ul li a:hover {
+    color: var(--smoky-black);
+    z-index: 1;
+}
+
+nav.fill ul li a:hover:after {
+    z-index: -10;
+    animation: fill 1s forwards;
+    -webkit-animation: fill 1s forwards;
+    -moz-animation: fill 1s forwards;
+    opacity: 1;
+}
+.stroke li{
+    margin: 0 5px 0 5px;
+}
+.white{
+    color: white !important;
+}
+.cart-counter{
+    background-color: rgb(9, 65, 9);
+    padding: 2px;
+    color: white;
+    border-radius: 50px;
+}
+
+/*INDEX PAGE*/
+.main-image{
+    background-image: url(../pictures/bee_on_flower.jpg);
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding-top: 300px;
+    
+}
+.main-image h1{
+    font-size: 5em;
+}
+.article{
+    padding: 30px 200px 20px 200px !important;
+}
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+.article p{
+    font-size: 1.2em;
+}
+.article div{
+    margin-top: 20px;
+}
+.last-article div{
+    margin-bottom: 30px;
+}
+
+
+/* REGISTRATION PAGE*/
+.registration-form{
+    padding: 50px 31% 50px 31%;
+}
+label{
+    text-align: left !important;
+}
+.registration-form div {
+    margin-top: 5px;
+}
+/*LOGIN PAGE*/
+.login-form {
+    padding: 50px 21% 50px 21%;
+    margin-top: 100px;
+}
+
+label {
+    text-align: left !important;
+}
+.inner{
+    padding: 50px 10% 50px 10%;
+    background-color: var(--smoky-black);
+}
+
+.login-form div {
+    margin-top: 5px;
+}
+.login-form label{
+    color: white;
+}
+
+/*ESHOP*/
+.filters{
+    background-color: var(--smoky-black);
+    padding: 20px;
+    color: var(--lavender-blush);
+}
+.filters form{
+    margin-left: 20px;
+}
+.filters button{
+    margin-left: 10px;
+}
+.card-img-top{
+    height: 400px !important;
+}
+.card-img{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.card{
+    width:100% !important;
+
+    box-sizing: border-box;
+    height: 100% !important;
+}
+.card-container{
+    padding: 30px 0 30px 0;
+}
+.product{
+    text-decoration: none;
+}
+.card-text{
+    margin: 8px;
+    color: grey;
+}
+.price{
+    color: var(--dark-pastel-green)
+}
+.card:hover{
+    border: solid white 1px;
+    background-color: rgb(234, 230, 230) ;
+    transition:0.3s ease;
+}
+
+/*ONE PRODUCT*/
+.one-product-container{
+    margin-top: 50px;
+}
+.product-info{
+    padding: 20px;
+}
+.product-info > *{
+    margin-bottom: 20px;
+}
+.one-product-container img{
+    max-height: 500px;
+    float: right;
+}
+
+/*PROFILE*/
+.profile-container{
+    margin-top: 50px;
+    border-radius: 10px;
+    padding: 40px;
+    background-color: var(--aureolin);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.profile-info-text{
+    margin: 20px;
+    margin-left: 50px;
+}
+.profile-btn{
+    position: relative;
+    top: 40%;
+    margin-bottom: 20px;
+}
+.profile-buttons{
+    border-left: dotted var(--smoky-black) 1px;
+}
+
+/*CART*/
+.cart-container{
+    margin: 50px 0 20px 0;
+}
+
+.item{
+    margin: 15px 0 20px 0px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.cart-quantity,.cart-name,.cart-price{
+    padding-top: 35px ;
+}
+.cart-legend{
+    background-color: var(--smoky-black);
+    border-radius: 10px;
+    color: white;
+}
+.cart-img >img{
+    max-height: 100px;
+}
+.cart-delete{
+    padding-top: 35px;
+}
+.cart-summary{
+    background-color: var(--aureolin);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 500px;
+    padding-top: 30px;
+    padding-left: 30px!important;
+    padding-right: 40px !important;
+}
+.cart-button{
+    float: right;
+}
+
+
+/*FOOTER*/
+footer {
+    background-color: var(--smoky-black);
+    height: 220px;
+    margin-top: auto;
+    color: var(--lavender-blush);
+    padding-top: 20px;
+    padding-left: 100px;
+}
+footer .contact{
+    text-align: right;
+}
+footer .logo a{
+    position: relative;
+    left: 110px;
+    top: 50px;
+}
+footer .links i{
+    width: 50px;
+    font-size: 30px;
+}
+footer .links{
+    line-height: 80px;
+}
+
