@@ -1,0 +1,545 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+header {
+    height: 8%;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    border-bottom: 2px solid black;
+}
+
+header nav div a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.header-home {
+    width: 20%;
+}
+
+.header-goods {
+    width: 60%;
+}
+
+.header-other {
+    width: 10%;
+}
+
+.account-hover,
+.account-admin-hover {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 3px;
+    border: 2px solid black;
+    border-top: 0px;
+    z-index: 0;
+    background-color: white;
+    width: 150px;
+    height: 140px;
+    font-size: 18px;
+    align-items: center;
+}
+
+.account-admin-hover {
+    height: 165px;
+}
+
+.account-hover a,
+.account-admin-hover a {
+    border-bottom: 1px solid black;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.account-hover a:hover,
+.account-admin-hover a:hover {
+    font-weight: bold;
+}
+
+.account-hover label,
+.account-admin-hover label {
+    margin: 20px 0px 20px;
+}
+
+.register-form-Heading {
+    text-align: center;
+    margin: 3%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+}
+
+.register-formfield {
+    width: 30%;
+    margin-bottom: 12px;
+    height: 40px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: medium;
+}
+
+.register-formbutton {
+    margin: 1.5%;
+    width: 6%;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.register-formredirect {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-style: italic;
+    text-align: center;
+}
+
+.register-formredirect:hover {
+    text-decoration: underline solid blue;
+    color: blue;
+    font-style: italic;
+}
+
+.login-formredirect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    color: black;
+    font-style: italic;
+    text-align: center;
+    align-items: center;
+}
+
+.login-formredirect label {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.register-errorMessageDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+
+}
+
+.register-errorMessage {
+    color: #2f2d2d;
+    border: 3px #ff3333 solid;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    /* Initial opacity */
+    100% {
+        opacity: 0;
+    }
+
+    /* Final opacity */
+}
+
+.message {
+    position: absolute;
+    top: 0;
+    left: 41%;
+    background-color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    border: 3px solid red;
+    border-radius: 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+    animation: fadeOut 2s linear 2s forwards;
+    width: 325px;
+    text-align: center;
+}
+
+.goods-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 3%;
+}
+
+.goods-category-holder {
+    width: 100%;
+    text-align: left;
+    padding: 30px;
+    padding-left: 100px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+
+.goods-category-label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.goods-product-holder {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 23%;
+    margin: 0 1%;
+}
+
+.goods-product-item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.goods-product-item .goods-product-item-priceHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   margin-top: auto;
+}
+
+.goods-product-item .goods-product-item-priceHolder .goods-product-item-price{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.goods-product-item .goods-product-item-priceHolder form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+}
+
+.goods-product-item .goods-product-item-priceHolder form > button{
+    width: 30%;
+    padding: 5px;
+}
+
+.goods-product-item .goods-product-item-priceHolder form > input{
+    width: calc(100%/3);
+}
+
+.goods-product-item .goods-product-item-priceHolder label{
+    width: 100%;
+    text-align: end;
+    padding: 8px;    
+}
+
+.goods-product-item-img {
+    height: 200px;
+    border: 1px solid black;
+}
+
+.homepage-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homepage-div p {
+    width: 700px;
+    font-size: 20px;
+}
+
+.homepage-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-items: center;
+}
+
+.homepage-buttons a {
+    text-decoration: none;
+    color: black;
+    margin: 30px 50px;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 150px;
+    text-align: center;
+    font-weight: bold
+}
+
+.adminForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 460px;
+    margin: auto;
+}
+
+.adminForm input,
+.adminForm select {
+    margin: 3px 10px;
+    width: 150px;
+    text-align: center;
+}
+
+.adminForm label {
+    margin: 3px 10px;
+    width: 130px;
+    font-size: 18px;
+}
+
+.admin-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: 2px solid black;
+    padding: 25px 15px;
+}
+
+.adminForm button {
+    padding: 7px 20px;
+    margin: 10px 100px;
+}
+
+.admin-heading {
+    text-align: center;
+}
+
+.admin-item-heading {
+    margin-left: 3%;
+}
+
+.adminForm-delete {
+    display: flex;
+    flex-direction: column;
+    width: 460px;
+    justify-content: start;
+    align-items: start;
+}
+
+.adminForm-delete p {
+    width: 460px;
+    height: auto;
+    overflow-wrap: anywhere;
+    margin: 7px;
+    margin-left: 0;
+    font-size: 18px;
+}
+
+.adminForm-delete input {
+    border: 0;
+    font-size: 16px;
+}
+
+.adminForm-delete .adminForm-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminForm-delete .adminForm-buttons>*,
+form .admiForm-cancelEdit {
+    width: 180px;
+
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    padding: 6px 12px;
+    margin: 10px 12px;
+    border: 1px solid #747474;
+    border-radius: 2px;
+    box-shadow: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+form .adminForm-buttons-edit {
+    display: flex;
+    padding-top: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+form .admiForm-cancelEdit {
+    width: 120px;
+}
+
+.adminForm-delete .adminForm-buttons>*:hover {
+    background-color: #e0e0e0;
+}
+
+.adminForm-delete .adminForm-buttons>*:active {
+    background-color: #d3d3d3;
+}
+
+.admin-orders {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: 2px solid black;
+    padding: 25px 15px;
+}
+
+.admin-orders div {
+    display: flex;
+    width: 100%;
+}
+
+.admin-orders div form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.admin-orders div form>* {
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    margin: 20px 20px;
+}
+
+.admin-orders div form .admin-orders-state {
+    width: 250px;
+}
+
+.admin-orders div form button {
+    display: flex;
+    width: 150px;
+    margin: auto 50px;
+}
+
+.admin-orders div form input {
+    border: 0;
+    font-size: 16px;
+}
+
+.cart-heading {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+form .cart-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 5px;
+}
+
+form .cart-item label {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+form .cart-item input {
+    font-size: 18px;
+    border: 0;
+    width: 90px;
+}
+
+form .cart-item .cart-item-name {
+    width: 300px;
+}
+
+.cart-item-total{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.cart-item-total > *{
+    text-align: center;
+    font-size: 18px;
+    border: 0;
+    margin: 15px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.cart-item-confirm{
+    margin: 5px;
+}
+
+.cart-item-confirm button{
+    padding: 7px 15px;
+    margin-right: 61px;
+}
+
+.admin-buttonHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 20px 0px 20px;
+    align-items: center;
+    justify-content: space-around;
+    margin: 40px 35% 10px;
+}
+
+.admin-buttonHolder button{
+    padding: 5px 10px;
+}
+
+.admin-buttonHolder a{
+    text-decoration: none;
+    color: black;
+}
+
+.admin-buttonHolder .admin-currentOrders{
+    font-weight: bold;
+    text-decoration: underline;
+}
