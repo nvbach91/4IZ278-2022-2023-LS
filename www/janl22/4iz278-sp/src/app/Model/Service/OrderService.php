@@ -137,7 +137,9 @@ final class OrderService extends OrderItemService {
 	 * @return int|null                ID of the new created order if order was created by employee.
 	 * @throws Exception
 	 */
-	public function newOrder(ArrayHash|SessionSection $data, bool $customerOrder = false, string $customer = null): ?int {
+	public function newOrder(ArrayHash|SessionSection $data, bool $customerOrder = false, string $customer = null, $tip = 0): ?int {
+
+		if ($tip >= 1 && $tip <= 2) $tip -= 1;
 
 		if (!$customerOrder) {
 
@@ -157,7 +159,7 @@ final class OrderService extends OrderItemService {
 
 			try {
 
-				$orderId = $this->databaseC->query("INSERT INTO restaurant_order(customer) VALUES (?) RETURNING id_order;", $customer)->fetch()->id_order;
+				$orderId = $this->databaseC->query("INSERT INTO restaurant_order(customer, order_tip) VALUES (?, ?) RETURNING id_order;", $customer, $tip)->fetch()->id_order;
 
 				foreach ($data as $idOrderItem => $orderItem) {
 
@@ -223,6 +225,18 @@ final class OrderService extends OrderItemService {
 	public function deleteOrder(string $idOrder): void {
 
 		$this->databaseE->table('restaurant_order')->where('id_order', $idOrder)->delete();
+
+	}
+
+	public function calculateOrderItemsSumPrice(array $orderItems): float {
+
+		$sum = 0;
+
+		foreach ($orderItems as $orderItem) {
+			$sum += ($orderItem->count * $orderItem->item->price);
+		}
+
+		return $sum;
 
 	}
 

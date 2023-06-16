@@ -83,11 +83,10 @@
                                 </button>
                             </a>
 
-                            <a n:href="submitOrder!">
-                                <button type="button" class="btn btn-success btn-sm"><i
-                                            class="fas fa-check me-2"></i>Odeslat objednávku
-                                </button>
-                            </a>
+                            <button type="button" class="btn btn-success btn-sm"
+                                    onclick="addTipToOrder({link "submitOrder!"}, {sumCustomerOrderItemsPrice()})"><i
+                                        class="fas fa-check me-2"></i>Odeslat objednávku
+                            </button>
 
                         </div>
 
@@ -100,4 +99,8 @@
         </div>
 
     </div>
+{/block}
+
+{block scripts_layout}
+    <script src="{$basePath}/js/intra/orders/orderTips.js"></script>
 {/block}

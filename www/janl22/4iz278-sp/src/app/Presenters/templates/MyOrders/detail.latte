@@ -46,6 +46,41 @@
 
                     </table>
 
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:55%;"><b>Celkem za položky</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;">
+                                <b>{formatPriceCurrency($orderSum)}</b></th>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="width:55%;"><b>Dýško</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;">
+                                <b>{formatPriceCurrency($orderSum * $order->order_tip)} ({$order->order_tip * 100}
+                                    %)</b></th>
+                        </tr>
+
+                        </thead>
+                    </table>
+
+                    <hr>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:55%;"><b>Cena objednávky</b></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;"></th>
+                            <th scope="col" class="text-center" style="width:15%;">
+                                <b>{formatPriceCurrency($orderSum + ($orderSum * $order->order_tip))}</b></th>
+                        </tr>
+                        </thead>
+                    </table>
+
                 </div>
 
             </div>

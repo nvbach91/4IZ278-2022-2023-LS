@@ -58,8 +58,11 @@ final class MyOrdersPresenter extends BaseCustomersPresenter {
 	 */
 	public function renderDetail(string $idOrder): void {
 
+		$orderItems = $this->orderService->getOrderItems($idOrder);
+
 		$this->template->order = $this->orderService->getCustomerOrder($idOrder, $this->getUser()->getId());
-		$this->template->orderItems = $this->orderService->getOrderItems($idOrder);
+		$this->template->orderItems = $orderItems;
+		$this->template->orderSum = $this->orderService->calculateOrderItemsSumPrice($orderItems);
 
 	}
 
@@ -170,9 +173,9 @@ final class MyOrdersPresenter extends BaseCustomersPresenter {
 	/**
 	 * @throws AbortException
 	 */
-	#[NoReturn] public function handleSubmitOrder(): void {
+	#[NoReturn] public function handleSubmitOrder($tip): void {
 
-		$this->orderService->newOrder($this->getSession()->getSection('customerOrder'), true, $this->getUser()->getId());
+		$this->orderService->newOrder($this->getSession()->getSection('customerOrder'), true, $this->getUser()->getId(), $tip);
 		$this->getSession()->getSection('customerOrder')->remove();
 		$this->redirect('Homepage:');
 

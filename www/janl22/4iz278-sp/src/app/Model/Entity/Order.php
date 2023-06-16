@@ -31,7 +31,8 @@ class Order {
 		public ?bool     $opened = null,
 		public ?string   $customer = null,
 		public ?string   $editing_user = null,
-		public ?int      $edit_start_time = null
+		public ?int      $edit_start_time = null,
+		public ?float    $order_tip = null
 
 	) {}
 
