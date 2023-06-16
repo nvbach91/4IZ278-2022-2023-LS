@@ -7,6 +7,7 @@ $category = $category_result->fetch(PDO::FETCH_ASSOC); ?>
   <!--category-title-->
   <header class="category-title">
     <h2><?=$category['title']?></h2>
+    <h5><?=$category['description']?></h5>
   </header>
 
   <!--posts-->

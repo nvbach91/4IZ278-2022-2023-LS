@@ -20,7 +20,6 @@ $posts_results = $db->prepare($query);
 $posts_results->execute();
 $posts = $posts_results->fetchAll(PDO::FETCH_ASSOC);
 $titles = "";
-
 ?>
       <main>
         <h2>Manage Posts</h2>
@@ -32,11 +31,11 @@ $titles = "";
               ?>
             </p>
           </div>
-        <?php elseif (isset($_SESSION['edit-post_success'])): ?>
+        <?php elseif (isset($_SESSION['edit-post success'])): ?>
           <div class="alert-message success">
             <p>
-              <?= $_SESSION['edit-post_success'];
-              unset($_SESSION['edit-post_success'])
+              <?= $_SESSION['edit-post success'];
+              unset($_SESSION['edit-post success'])
               ?>
             </p>
           </div>
@@ -117,6 +116,7 @@ $titles = "";
               <td><a href="delete-post.php?id=<?= $post['id'] ?>" class="button delete">Delete</a></td>
             </tr>
             <?php endforeach;
+            $titles = null;
             endforeach ?>
           </tbody>
         </table>

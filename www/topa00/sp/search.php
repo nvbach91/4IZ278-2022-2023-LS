@@ -13,7 +13,7 @@ if(isset($_GET['search']) && isset($_GET['go'])) {
 }
 ?>
 
-<section class="posts">
+<section class="search">
 <div class="container posts_container">
   <?php foreach($posts as $post):?>
   <article class="post">

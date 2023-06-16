@@ -8,7 +8,7 @@ if (isset($_GET['id'])){
   $post = $posts_results->fetch(PDO::FETCH_ASSOC);
 
   $query = "SELECT * FROM categories";
-  $categories_result = $db->prepare($category_query);
+  $categories_result = $db->prepare($query);
   $categories_result->execute();
   $categories = $categories_result->fetchAll(PDO::FETCH_ASSOC);
 } else {
@@ -22,7 +22,7 @@ if (isset($_GET['id'])){
       <form action="edit-post-logic.php" method="POST">
         <input type="hidden" value="<?=$post['id']?>" name="id">
         <input type="text" value="<?= $post['title']?>" name="title" placeholder="Title">
-        <input type="text" value="<?= $post['body']?>" name="body" placeholder="Body">
+        <textarea name="body" rows="10" placeholder="Body"><?= $post['body']?></textarea>
         <?php if(isset($_SESSION['user_is_admin'])): ?>
         <div class="form-control inline">
           <input type="checkbox" name="is_featured" value="<?=$post['is_featured']?>" id="is_featured">

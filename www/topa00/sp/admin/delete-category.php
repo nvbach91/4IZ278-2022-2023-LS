@@ -16,7 +16,7 @@
     if($delete_category_results->errorCode() !== "00000"){
       $_SESSION['delete-category'] = "Error occured while removing the entry";
     } else {
-      $_SESSION['delete-category_success'] =  "Successfuly deleted category from the database";
+      $_SESSION['delete-category success'] =  "Successfuly deleted category from the database";
     }
   }
 

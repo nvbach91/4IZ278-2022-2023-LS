@@ -18,11 +18,11 @@ $categories = $category_result->fetchAll(PDO::FETCH_ASSOC);
               ?>
             </p>
           </div>
-        <?php elseif (isset($_SESSION['edit-category_success'])): ?>
+        <?php elseif (isset($_SESSION['edit-category success'])): ?>
           <div class="alert-message success">
             <p>
-              <?= $_SESSION['edit-category_success'];
-              unset($_SESSION['edit-category_success'])
+              <?= $_SESSION['edit-category success'];
+              unset($_SESSION['edit-category success'])
               ?>
             </p>
           </div>
@@ -34,11 +34,11 @@ $categories = $category_result->fetchAll(PDO::FETCH_ASSOC);
               ?>
             </p>
           </div>
-        <?php elseif (isset($_SESSION['delete-category_success'])): ?>
+        <?php elseif (isset($_SESSION['delete-category success'])): ?>
           <div class="alert-message success">
             <p>
-              <?= $_SESSION['delete-category_success'];
-              unset($_SESSION['delete-category_success'])
+              <?= $_SESSION['delete-category success'];
+              unset($_SESSION['delete-category success'])
               ?>
             </p>
           </div>

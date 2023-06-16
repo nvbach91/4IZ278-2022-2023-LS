@@ -7,9 +7,10 @@
     $query = "SELECT * FROM posts WHERE id=$id";
     $posts_results = $db->prepare($query);
     $posts_results->execute();
+    $num_rows = $posts_results->rowCount();
     $posts = $posts_results->fetch(PDO::FETCH_ASSOC);
 
-    if (mysqli_num_rows($result) == 1) {
+    if ($num_rows == 1) {
       $thumbnail_name = $post['thumbnail'];
       $thumbnail_path = '../images/' . $thumbnail_name;
 
@@ -19,7 +20,7 @@
     }
 
     $delete_post_query = "DELETE FROM posts WHERE id=$id";
-    $delete_posts_results = $db->prepare($query);
+    $delete_posts_results = $db->prepare($delete_post_query);
     $delete_posts_results->execute();
 
     if($delete_posts_results->errorCode() !== "00000"){

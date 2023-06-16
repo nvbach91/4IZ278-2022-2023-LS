@@ -71,7 +71,8 @@ if (isset($_POST['submit'])) {
     $num_rows = $insert_user_data->rowCount();
     
     if($num_rows > 0) {
-      $_SESSION['signup_success'] = "Registration successful. Please log in";
+      $alert = sendConformation($email, $first_name, $last_name);
+      $_SESSION['signup_success'] = "Registration successful. " . $alert;
       header('location: signin.php');
       die();
     }
@@ -81,4 +82,32 @@ if (isset($_POST['submit'])) {
   die();
 }
 
+
+function sendConformation($email, $first_name, $last_name){
+  $subject = 'Registration Conformation - Welcome to Blogist';
+  $text = nl2br('Dear ' . $first_name . ' ' . $last_name . ',\n\n');
+  $text .= nl2br('Congratulations! We are thrilled to inform you that your registration with Blogist has been successfully completed. Welcome to our community!\n\n');
+  $text .= nl2br('Best regards,\n');
+  $text .= 'Blogist';
+
+  $text .= wordwrap($text, 70);
+
+  $headers = [
+    'MIME-Version: 1.0',
+    'Content-type: text/plain; charset=utf-8',
+    'From: contacts@blogist.com',
+    'Reply-To: contacts@blogist.com',
+    'X-Mailer: PHP/'.phpversion()
+];
+
+  $headers = implode("\r\n", $headers);
+
+  if (mail($email, $subject, $text, $headers)){
+    $alert = 'Conformation email was sent to your adress';
+  }else{
+    $alert = 'Error occured while sending conformation email to your adress';
+  }
+
+  return $alert;
+}
 ?>

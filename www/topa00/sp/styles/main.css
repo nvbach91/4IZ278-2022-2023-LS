@@ -1,7 +1,8 @@
 :root {
   /* MAIN PALLETTE */
-  --color-bg: #F1F0EB;
-  --color-bg-dark: #D6D4CF;
+  --color-bg: rgb(241, 240, 235);
+  --color-bg-dark: rgb(214, 212, 207);
+  --color-bg-shade: rgba(214, 212, 207, 0.3);
   --color-ac: #3f54a5;
   --color-ac-dark: #2C3A73; 
 
@@ -165,10 +166,17 @@ navigation button {
 }
 
 /* ======================= CATEGORY ======================= */
+.category-button-container {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+}
+
 .category_button {
   background: var(--color-bg-dark);
   color: var(--color-tx);
-  display: inline-block;
+  display: inline-flex;
   padding: 0.4rem 0.8rem;
   border-radius: 0.5rem;
   font-weight: 700;
@@ -264,6 +272,10 @@ footer {
 }
 
 /* ======================= SEARCH ======================= */
+.search{
+  margin: 4rem;
+}
+
 .search-bar {
   margin-top: 7rem;
 }
@@ -337,6 +349,14 @@ footer {
 .dislike img {
   width: 1.5rem;
   margin-right: 0.6rem;
+}
+
+.like.selected {
+  border: 0.1rem solid black;
+}
+
+.dislike.selected {
+  border: 0.1rem solid black;
 }
 
 /* ======================= SINGLE POST ======================= */
@@ -462,3 +482,36 @@ input, textarea, select {
   color: var(--color-bg);
 }
 
+/* ======================= COMMENTS ======================= */
+
+.comments_container {
+  padding: 1rem 2rem 2rem;  
+}
+
+.comment {
+  background: var(--color-bg-shade);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  margin: 1rem;
+}
+
+.comment .comment-text {
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+}
+
+.comment-reply {
+  margin-left: auto;
+  margin-right: 0rem;
+}
+
+.comment-reply{
+  font-size: smaller;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.comment-reply-inline {
+  margin-left: 3rem;
+}

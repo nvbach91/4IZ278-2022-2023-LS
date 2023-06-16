@@ -71,7 +71,7 @@ $num_rows = $featured_result->rowCount();
 
 <?php 
   function generateCategories($db, $post) {
-      $output = '';
+      $output = '<div class="category-buttons-container">';
   
       $post_id = $post['id'];
       $link_query = "SELECT * FROM posts_categories WHERE post_id = $post_id";
@@ -88,7 +88,7 @@ $num_rows = $featured_result->rowCount();
   
           $output .= '<a href="category-posts.php?id=' . $category['id'] . '" class="category_button">' . $category['title'] . '</a>';
       }
-  
+      $output .= '</div>';
       echo $output;
   }
 
@@ -113,4 +113,6 @@ $num_rows = $featured_result->rowCount();
   }
 
 include 'elements/categories.php';
+?>
+<?php
 include 'elements/footer.php' ?>

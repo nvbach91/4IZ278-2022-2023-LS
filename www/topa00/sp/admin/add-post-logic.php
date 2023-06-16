@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         $extention = end($extention);
         if(in_array($extention, $allowed_types)) {
           //checking image size
-          if($avatar['size'] < 2000000) {
+          if($thumbnail['size'] < 2000000) {
             move_uploaded_file($thumbnail_temp_name, $thumbnail_path);
           } else {
             $_SESSION['add-user'] = "Thumbnail should be less then 1Mb";
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
   } else {
     if($is_featured == 1) {
       $zero_in_featured_query = "UPDATE posts SET is_featured = 0";
-      $zero_in_featured_result = $db->prepare($query);
+      $zero_in_featured_result = $db->prepare($zero_in_featured_query);
       $zero_in_featured_result->execute();
     }
     // data input in the table
@@ -65,12 +65,12 @@ if (isset($_POST['submit'])) {
 
     //creating links for many:many
     $link_query = "INSERT INTO posts_categories (post_id, category_id) VALUES ('$post_id', '$category_id')";
-    $link_results = $db->prepare($query);
+    $link_results = $db->prepare($link_query);
     $link_results->execute();
 
-      $_SESSION['add-post_success'] = "New post was successfuly added";
-      header('location: manage-posts.php');
-      die();
+    $_SESSION['add-post_success'] = "New post was successfuly added";
+    header('location: manage-posts.php');
+    die();
   }
 }
 
