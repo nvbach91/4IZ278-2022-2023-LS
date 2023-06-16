@@ -131,8 +131,6 @@ class AccessConnection
             } else {
                 $this->output[] = "Nepodařilo se smazat soubor $file.";
             }
-        } else {
-            $this->output[] = "Soubor $file neexistuje.";
         }
     }
 

@@ -43,6 +43,8 @@ $(document).ready(function() {
         }
     });
 
+
+
     function change(directory) {
         $.ajax({
             url: apiDomain + '/action/change.php',
@@ -74,12 +76,21 @@ $(document).ready(function() {
             }),
             success: function(data) {
 
-                var link = document.createElement('a');
-                link.href = apiDomain + "/file/" + file;
-                link.download = file;
-                link.click();
-                ftpDeleteLocalFile(file)
-                showResponse(data)
+                var filePath = apiDomain + "/file/" + file;
+
+                var fileExtension = filePath.split('.').pop().toLowerCase();
+
+                if (['txt', 'js', 'css', 'html', 'json', 'xml', 'csv', 'md', 'php', 'py', 'c', 'cpp', 'java', 'cs'].includes(fileExtension)) {
+                    displayFileContent(filePath)
+                }else{
+                    var link = document.createElement('a');
+
+                    link.href = apiDomain + "/file/" + file;
+                    link.download = file;
+                    link.click();
+                    showResponse(data)
+                    ftpDeleteLocalFile(file)
+                }
             }
         });
     }
@@ -128,7 +139,7 @@ $(document).ready(function() {
         var id_access = $('#id_access').val();
 
         if(id_access.trim() === "") {
-            $('#id_access').val(null);
+            id_access = null;
         }
 
         $.ajax({
@@ -143,7 +154,7 @@ $(document).ready(function() {
             success: function(data) {
 
                 if(user != null){
-                    if(id_access === null)
+                    if(id_access == null)
                     accessSave(server,username,password,id_access)
                 }
                 if(!data.error){
@@ -275,10 +286,8 @@ $(document).ready(function() {
     function drawData(data) {
         if (data.files && data.files.length > 0) {
 
-            // Clear the table first
             table.clear();
 
-            // Add the go-up row
             var goUpRow = table.row.add({ name: '..' }).draw().node();
             goUpRow.classList.add('go-up');
 
@@ -299,6 +308,26 @@ $(document).ready(function() {
             }
         }
     }
+
+    function displayFileContent(filePath) {
+        // Use AJAX to get the file content
+        $.get(filePath, function(fileData) {
+            // Split the file path to get the file name
+            var fileName = filePath.split('/').pop();
+
+            // Update the file content and download link
+            $('#fileContent').text(fileData);
+            $('#fileDownload').attr('href', filePath);
+            $('#fileDownload').attr('download', fileName);
+
+            // Update the modal title
+            $('#fileModal .modal-title').text('File Content: ' + fileName);
+
+            // Show the modal
+            $('#fileModal').modal('show');
+        });
+    }
+
 
 
     function displayAccessNames(accessList) {

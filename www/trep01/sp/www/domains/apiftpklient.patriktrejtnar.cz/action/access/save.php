@@ -12,7 +12,6 @@ if (isset ($_SESSION["user"])){
     if(!isset($access_name))
         $access_name = $access_server;
 
-    if($id_access === null){
         $access_id = $AccessesR->addAccess($access_name,$access_server,$access_username,$access_password);
 
         $UserAccessesR = new UserAccessesRepository($db);
@@ -25,9 +24,7 @@ if (isset ($_SESSION["user"])){
         $response['output'] = 'Access přidán';
 
         $response['access_id'] = $access_id;
-    }else{
-        $response['access_id'] = $id_access;
-    }
+
 }else{
     $response['error'] = 'Uživatel nepříhlašen';
 }
