@@ -6,7 +6,7 @@
 
 $userDatabase = new UserDatabase();
 
-if (isset($_GET['user_to_edit'])) {
+if (isset($_GET['user_to_edit']) && isAdmin()) {
     $user = $userDatabase->getUserById($_GET['user_to_edit']);
 } else {
     $user = $userDatabase->getUserById($_SESSION['user']['user_id']);

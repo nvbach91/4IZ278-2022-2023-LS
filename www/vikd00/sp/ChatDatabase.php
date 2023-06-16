@@ -5,17 +5,29 @@ class ChatDatabase extends Database
     public function getMessages($userId, $listingId)
     {
         $query = 'SELECT * FROM sp_messages WHERE 
-             (receiver_id = :user_id OR sender_id = :user_id) 
-             AND listing_id = :listing_id 
-             ORDER BY sent_at ASC';
+         (receiver_id = :user_id OR sender_id = :user_id) 
+         AND listing_id = :listing_id 
+         ORDER BY sent_at ASC';
         $statement = $this->pdo->prepare($query);
         $params = [
             'user_id' => $userId,
             'listing_id' => $listingId,
         ];
         $statement->execute($params);
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $messages = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $messages;
     }
+
+    public function markAsRead($userId, $listingId)
+    {
+        $updateQuery = 'UPDATE sp_messages SET is_read = 1 WHERE receiver_id = :user_id AND listing_id = :listing_id';
+        $updateStatement = $this->pdo->prepare($updateQuery);
+        $updateStatement->execute([
+            'user_id' => $userId,
+            'listing_id' => $listingId,
+        ]);
+    }
+
 
     public function getListingDetailsById($listingId)
     {
@@ -114,6 +126,18 @@ class ChatDatabase extends Database
         ];
         $statement->execute($params);
         return $statement->fetchColumn();
+    }
+
+    public function hasUnreadMessages($userId)
+    {
+        $query = 'SELECT COUNT(*) FROM sp_messages WHERE receiver_id = :user_id AND is_read = 0';
+        $statement = $this->pdo->prepare($query);
+        $params = [
+            'user_id' => $userId,
+        ];
+        $statement->execute($params);
+        $count = $statement->fetchColumn();
+        return $count;
     }
 
     public function sendMessage($senderId, $receiverId, $listingId, $text)

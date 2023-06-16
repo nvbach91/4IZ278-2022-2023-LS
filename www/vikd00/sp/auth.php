@@ -1,7 +1,12 @@
+<?php require_once './UserDatabase.php'; ?>
 <?php
 
 function isLoggedIn()
 {
+    $userDatabase = new UserDatabase();
+    if(isset($_SESSION['user']) && !$userDatabase->getUserById($_SESSION['user']['user_id'])){
+        header('Location: ./logout.php');
+    }
     return isset($_SESSION['user']);
 }
 

@@ -51,6 +51,11 @@ if (isset($_GET['listing_id'])) {
     }
 
     $listing = $db->getListingById($listingId);
+
+    if (!isAdmin() && $listing['user_id'] != $_SESSION['user']['user_id']) {
+        echo "Nemáte oprávnenie na editovanie inzerátu";
+        exit();
+    }
 }
 ?>
 

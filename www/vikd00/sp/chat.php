@@ -17,6 +17,7 @@ if (isset($_GET['reciever_id']) &&  isset($_GET['listing_id'])) {
     $sender_id = $_SESSION['user']['user_id'];
 
     $chatDetails = $db->getChatDetails($listing_id, $_SESSION['user']['user_id']);
+    $db->markAsRead($_SESSION['user']['user_id'], $listing_id);
 
     if ($chatDetails) {
         $recipient_name = $chatDetails['partner_xname'];
@@ -116,9 +117,16 @@ if (isset($_GET['reciever_id']) &&  isset($_GET['listing_id'])) {
                 success: function(response) {
                     if (response && response.length > 0) {
                         var shouldScroll = isScrolledToBottom();
+                        console.log(response)
                         $('#chat').empty();
                         response.forEach(function(message) {
-                            $('#chat').append("<div class='" + (message.sender_id == senderId ? "chat-bubble-me bg-primary" : "chat-bubble-other bg-dark") + "'>" + escapeHtml(message.text) + "</div>")
+                            $('#chat').append("<div class='" +
+                                (message.sender_id == senderId ?
+                                    "chat-bubble-me bg-primary" :
+                                    "chat-bubble-other bg-dark") + "'>" +
+                                "<div>" + escapeHtml(message.text) + "</div>" +
+                                "<i>" + escapeHtml(message.sent_at) + "</i>" +
+                                "</div>")
                         });
                         if (messageLength != response.length) {
                             autoScrollDown();

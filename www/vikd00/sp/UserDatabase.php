@@ -94,6 +94,10 @@ class UserDatabase extends Database
             $statement = $this->pdo->prepare($query);
             $statement->execute(['listing_id' => $listing['listing_id']]);
 
+            $query = 'DELETE FROM sp_listings WHERE listing_id = :listing_id';
+            $statement = $this->pdo->prepare($query);
+            $statement->execute(['listing_id' => $listing['listing_id']]);
+
             $query = 'SELECT vehicle_id FROM sp_listings WHERE listing_id = :listing_id';
             $statement = $this->pdo->prepare($query);
             $statement->execute(['listing_id' => $listing['listing_id']]);
@@ -102,10 +106,6 @@ class UserDatabase extends Database
             $query = 'DELETE FROM sp_vehicles WHERE vehicle_id = :vehicle_id';
             $statement = $this->pdo->prepare($query);
             $statement->execute(['vehicle_id' => $vehicle['vehicle_id']]);
-
-            $query = 'DELETE FROM sp_listings WHERE listing_id = :listing_id';
-            $statement = $this->pdo->prepare($query);
-            $statement->execute(['listing_id' => $listing['listing_id']]);
         }
 
         $query = 'DELETE FROM sp_users WHERE user_id = :user_id';

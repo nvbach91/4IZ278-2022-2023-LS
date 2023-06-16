@@ -1,5 +1,14 @@
 <?php if (!isset($_SESSION)) session_start(); ?>
 <?php require_once './auth.php'; ?>
+<?php require_once './ChatDatabase.php'; ?>
+<?php
+if (isLoggedIn()) {
+    $db = new ChatDatabase();
+    $unread_msgs = $db->hasUnreadMessages($_SESSION['user']['user_id']);
+}
+
+
+?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
@@ -29,8 +38,12 @@
                     <?php endif; ?>
                     <?php if (isLoggedIn()) : ?>
                         <li class="nav-item d-flex align-items-center">
-                            <a class="nav-link text-light text-center" href="./chat.php">Chat</a>
+                            <a class="nav-link text-light text-center d-flex" href="./chat.php">
+                                Chat
+                                <span class="badge bg-warning text-dark ms-1"><?php echo ($unread_msgs > 0) ? $unread_msgs : ""; ?></span>
+                            </a>
                         </li>
+
                         <li class="nav-item d-flex align-items-center">
                             <a class="nav-link text-light text-center" href="./ad-create.php">Nový inzerát</a>
                         </li>
