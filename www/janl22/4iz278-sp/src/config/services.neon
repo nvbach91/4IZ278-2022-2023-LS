@@ -1,0 +1,10 @@
+services:
+	router: App\Router\RouterFactory::createRouter
+	authenticator: App\Model\MyAuthenticator
+	facebookAuthenticator: App\Model\FacebookAuthenticator
+	ItemService: App\Model\Service\ItemService
+	orderService: App\Model\Service\OrderService
+	menuService: App\Model\Service\MenuService
+	userService: App\Model\Service\UserService
+	permissionService: App\Model\Service\PermissionService
+	baseService: App\Model\Service\BaseService

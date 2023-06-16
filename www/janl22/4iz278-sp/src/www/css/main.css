@@ -1,0 +1,64 @@
+.sidenav {
+    width: 270px !important;
+}
+
+@media (min-width: 1200px) {
+    main,
+    header,
+    footer,
+    #main-navbar {
+        padding-left: 270px;
+    }
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+}
+
+.restaurant-logo {
+    width: 200px;
+    height: 155px;
+}
+
+.custom-green {
+    background-color: #14A44D !important;
+}
+
+.custom-blue {
+    background-color: #3B71CA !important;
+}
+
+.custom-gray {
+    background-color: #9FA6B2;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .navbar-expand-lg .navbar-toggler {
+        display: block !important;
+    }
+}
+
+body {
+    background-color: #eee !important;
+    color: black;
+}
+
+nav {
+    background-color: white !important;
+}
+
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.font-small {
+    font-size: .9rem;
+}
+
+.badge-grey {
+    background-color: #dddddd;
+    color: #404040;
+}

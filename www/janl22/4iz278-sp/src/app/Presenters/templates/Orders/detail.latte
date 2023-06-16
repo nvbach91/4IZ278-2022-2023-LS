@@ -1,0 +1,260 @@
+{layout '../../../templates/@nav-employees.latte'}
+
+{block content}
+
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            {if !$orderEditable->editable && $orderEditable->canUse === 'noneBecauseOtherEditing'}
+
+                <span class="alert alert-danger mb-4 d-flex justify-content-between">Objednávka byla otevřena pouze pro čtení, protože jí nyní edituje jiný uživatel!</span>
+
+            {/if}
+
+            <div class="card w-100 h-100">
+
+                <div class="card-body">
+
+                    <h3 class="h4 mb-4"><a n:href="Orders:" class="text-black"><i
+                                    class="fas fa-solid fa-clipboard-list me-2 fa-fw"></i>Objednávky</a><i
+                                class="fas fa-arrow-right fa-sm mx-4"></i><i class="fas fa-solid fa-bowl-food me-2"></i>Objednávka
+                        <span id="orderId">{$order->id_order}</span></h3></h3>
+                    <hr>
+
+                    <h6>Vytvořena: {$order->created->format('d.m.Y H:i:s')}</h6>
+                    <h6>Stůl: {$order->id_table}</h6>
+                    <h6>Stav: {if $order->opened} Otevřená {else} Uzavřená {/if}</h6>
+
+                    <hr>
+
+                    <div class="alert alert-{$flash->type} mt-2 mb-4"
+                         role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                        {$flash->message}
+                    </div>
+
+                    <div id="drinks">
+
+                        <div class="mb-1 d-flex justify-content-between">
+                            <h5>Nápoje</h5>
+
+                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-primary" type="button" id="dropdownMenuButton"
+                                            data-mdb-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-plus me-3"></i>Přidat nápoj
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                        {foreach $drinks as $drink}
+                                            <li>
+                                                <a n:href="IncreaseItemOrderCount! $drink->id_item, 'orderDetailDrinks'">
+                                                    <button class="dropdown-item" type="button">{$drink->name}</button>
+                                                </a>
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+
+                            {/if}
+
+                        </div>
+
+                        {if $hasOrderDrinks}
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width:50%;"><b>Položka</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Cena za položku</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Počet</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Cena</b></th>
+                                    <th scope="col" class="text-center" style="width:5%;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $orderDrinks as $idOrderDrink => $orderDrink}
+                                    <tr>
+                                        <th scope="row">{$orderDrink->name}</th>
+                                        <td class="text-center">{formatPriceCurrency($orderDrink->unitPrice)}</td>
+                                        <td class="text-center">
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="DecreaseOrderItemCount! $idOrderDrink, 'orderDetailDrinks'"
+                                                        class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </a>
+                                            {/if}
+                                            {$orderDrink->count}
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="IncreaseItemOrderCount! $idOrderDrink, 'orderDetailDrinks'"
+                                                        class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            {/if}
+                                        </td>
+                                        <td class="text-center">{formatPriceCurrency($orderDrink->unitPrice * $orderDrink->count)}</td>
+                                        <td>
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="DecreaseOrderItemCount! $idOrderDrink, 'orderDetailDrinks', true"
+                                                        class="text-black ms-2 me-2">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            {/if}
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+
+                        {/if}
+
+                    </div>
+
+                    <hr>
+
+                    <div id="meals">
+
+                        <div class="mt-1 mb-1 d-flex justify-content-between">
+                            <h5>Jídla</h5>
+
+                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-primary" type="button" id="dropdownMenuButton"
+                                            data-mdb-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-plus me-3"></i>Přidat jídlo
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                        {foreach $meals as $meal}
+                                            <li>
+                                                <a n:href="IncreaseItemOrderCount! $meal->id_item, 'orderDetailMeals'">
+                                                    <button class="dropdown-item" type="button">{$meal->name}</button>
+                                                </a>
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+
+                            {/if}
+
+                        </div>
+
+                        {if $hasOrderMeals}
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" style="width:50%;"><b>Položka</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Cena za položku</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Počet</b></th>
+                                    <th scope="col" class="text-center" style="width:15%;"><b>Cena</b></th>
+                                    <th scope="col" class="text-center" style="width:5%;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $orderMeals as $idOrderMeal => $orderMeal}
+                                    <tr>
+                                        <th scope="row">{$orderMeal->name}</th>
+                                        <td class="text-center">{formatPriceCurrency($orderMeal->unitPrice)}</td>
+                                        <td class="text-center">
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="DecreaseOrderItemCount! $idOrderMeal, 'orderDetailMeals'"
+                                                        class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </a>
+                                            {/if}
+                                            {$orderMeal->count}
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="IncreaseItemOrderCount! $idOrderMeal, 'orderDetailMeals'"
+                                                        class="badge rounded-pill badge-dark text-white ms-2 me-2">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </a>
+                                            {/if}
+                                        </td>
+                                        <td class="text-center">{formatPriceCurrency($orderMeal->unitPrice * $orderMeal->count)}</td>
+                                        <td>
+                                            {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+                                                <a n:href="DecreaseOrderItemCount! $idOrderMeal, 'orderDetailMeals', true"
+                                                        class="text-black ms-2 me-2">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            {/if}
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+
+                        {/if}
+
+                    </div>
+
+                    <hr>
+
+                    <div class="mt-4 d-flex justify-content-between">
+
+                        {if $orderEditable->editable && $orderEditable->canUse === 'all'}
+
+                            <div>
+
+                                <a n:href="Orders:" class="me-4">
+                                    <button type="button" class="btn btn-warning text-dark btn-sm"><i
+                                                class="fas fa-arrow-left me-2"></i>Zpět
+                                    </button>
+                                </a>
+
+                                <a n:href="CancelOrder! $order->id_order">
+                                    <button type="button" class="btn btn-danger btn-sm"><i
+                                                class="fas fa-cancel me-2"></i>Zrušit objednávku
+                                    </button>
+                                </a>
+
+                            </div>
+
+                            <div>
+
+                                <a class="me-4">
+                                    <button type="button" class="btn btn-success btn-sm"><i
+                                                class="fas fa-check me-2"></i>Uzavřít objednávku
+                                    </button>
+                                </a>
+
+                                <a n:href="SaveOrder! $order->id_order">
+                                    <button type="button" class="btn btn-primary btn-sm float-end"><i
+                                                class="fas fa-floppy-disk me-2"></i>Uložit objednávku
+                                    </button>
+                                </a>
+
+                            </div>
+
+                        {else}
+
+                            <a n:href="Orders:">
+                                <button type="button" class="btn btn-warning text-dark btn-sm"><i
+                                            class="fas fa-arrow-left me-2"></i>Zpět
+                                </button>
+                            </a>
+
+                            {if $orderEditable->editable && $orderEditable->canUse === 'close'}
+
+                                <a class="me-4">
+                                    <button type="button" class="btn btn-success btn-sm"><i
+                                                class="fas fa-check me-2"></i>Uzavřít objednávku
+                                    </button>
+                                </a>
+
+                            {/if}
+
+                        {/if}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{/block}

@@ -1,0 +1,52 @@
+{layout '@layout.latte'}
+
+{block navSide}
+
+    <nav id="sidenav" class="sidenav" data-mdb-hidden="false" data-mdb-scroll-container="#sidenav-scroll-container"
+         data-mdb-mode="side" data-mdb-accordion="true">
+
+        <a n:href="Homepage:" class="d-none d-xl-flex justify-content-center py-2 px-3">
+            <img src="{$basePath}/img/logo.svg" class="restaurant-logo" alt="Logo Restaurace" draggable="false">
+        </a>
+
+        <ul id="sidenav-scroll-container" class="sidenav-menu px-3 px-lg-4 pt-3 pb-2 py-xl-0">
+            <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Restaurace</span>
+            <li class="sidenav-item">
+                <a n:href="Homepage:"
+                        class="sidenav-link {isLinkCurrent('Homepage:*') ? "custom-color-blue-text" : ""}">
+                    <i class="fas fa-home me-3 fa-fw"></i>Domů
+                </a>
+            </li>
+            <li class="sidenav-item">
+                <a n:href="Menu:" class="sidenav-link {isLinkCurrent('Menu:*') ? "custom-color-blue-text" : ""}">
+                    <i class="fa-solid fa-utensils me-3 fa-fw"></i>Menu
+                </a>
+            </li>
+
+        </ul>
+
+        <ul id="sidenav-scroll-container" class="sidenav-menu px-3 px-lg-4 pt-3 pb-2 py-xl-0">
+
+            <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Zákazník</span>
+            <li class="sidenav-item">
+                <a n:href="MyProfile:"
+                        class="sidenav-link {isLinkCurrent('MyProfile:*') ? "custom-color-blue-text" : ""}">
+                    <i class="fas fa-user me-3 fa-fw"></i>Můj profil
+                </a>
+            </li>
+            <li class="sidenav-item">
+                <a n:href="MyOrders:"
+                        class="sidenav-link {isLinkCurrent('MyOrders:*') ? "custom-color-blue-text" : ""}">
+                    <i class="fas fa-solid fa-clipboard-list me-3 fa-fw"></i>Moje objednávky
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+{/block}
+
+{block scripts_layout}
+
+{/block}

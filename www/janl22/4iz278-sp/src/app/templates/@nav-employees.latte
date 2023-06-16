@@ -1,0 +1,61 @@
+{layout '@layout.latte'}
+
+{block navSide}
+
+    <nav id="sidenav" class="sidenav" data-mdb-hidden="false" data-mdb-scroll-container="#sidenav-scroll-container"
+         data-mdb-mode="side" data-mdb-accordion="true">
+
+        <a n:href="Intra:Dashboard" class="d-none d-xl-flex justify-content-center py-2 px-3">
+            <img src="{$basePath}/img/logo.svg" class="restaurant-logo" alt="Logo Restaurace" draggable="false">
+        </a>
+
+        <ul id="sidenav-scroll-container" class="sidenav-menu px-3 px-lg-4 pt-3 pb-2 py-xl-0">
+
+            <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Restaurace - Intranet</span>
+
+            <li class="sidenav-item">
+                <a n:href="Intra:Dashboard"
+                        class="sidenav-link {isLinkCurrent('Intra:Dashboard') ? "custom-color-blue-text" : ""}">
+                    <i class="fas fa-home me-3 fa-fw"></i>Domů
+                </a>
+            </li>
+            <li class="sidenav-item">
+                <a n:href="MyProfile:"
+                        class="sidenav-link {isLinkCurrent('MyProfile:*') ? "custom-color-blue-text" : ""}">
+                    <i class="fas fa-user me-3 fa-fw"></i>Můj profil
+                </a>
+            </li>
+            {if $user->isInRole('waiter') || $user->isInRole('cook')}
+                <li class="sidenav-item">
+                    <a n:href="Orders:"
+                            class="sidenav-link {isLinkCurrent('Orders:*') ? "custom-color-blue-text" : ""}">
+                        <i class="fas fa-solid fa-clipboard-list me-3 fa-fw"></i>Objednávky
+                    </a>
+                </li>
+            {/if}
+
+            {if $user->isInRole('admin.users')}
+                <span class="d-flex justify-content-center badge badge-grey badge-pill text-uppercase mb-2">Správa uživatelů</span>
+                <li class="sidenav-item">
+                    <a n:href="Users:Employees"
+                            class="sidenav-link {isLinkCurrent('Users:Employees') ? "custom-color-blue-text" : ""}">
+                        <i class="fas fa-solid fa-users me-3 fa-fw"></i>Zaměstnanci
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a n:href="Users:Customers"
+                            class="sidenav-link {isLinkCurrent('Users:Customers') ? "custom-color-blue-text" : ""}">
+                        <i class="fas fa-solid fa-users me-3 fa-fw"></i>Zákazníci
+                    </a>
+                </li>
+            {/if}
+
+        </ul>
+
+    </nav>
+
+{/block}
+
+{block scripts_layout}
+
+{/block}

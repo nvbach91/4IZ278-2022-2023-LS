@@ -1,0 +1,15 @@
+{layout '@layout-auth.latte'}
+
+{block authCard}
+
+    <p class="h3 text-center">Přihlášení zákazníka:</p>
+
+    <a n:href="Auth:FacebookLogin" class="btn text-white waves-effect d-block mb-3" style="background-color: #3b5998;"
+                                   role="button">
+        <i class="fa-brands fa-facebook me-3"></i>Přihlásit se přes Facebook
+    </a>
+
+    <a n:href="Auth:" class="btn login-gray text-white waves-effect d-block" role="button"><i
+                class="fas fa-arrow-left me-3"></i>Zpět</a>
+
+{/block}

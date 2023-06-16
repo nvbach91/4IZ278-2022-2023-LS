@@ -1,0 +1,36 @@
+{layout '@layout-myProfile.latte'}
+
+{block content_detail}
+
+    <div class="card animation fade-in">
+
+        <div class="card-body">
+
+            <h3 style="display:inline-block">
+                Přiřazená oprávnění:
+            </h3>
+
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th scope="col" class="lead fw-normal">Oprávnění</th>
+                    <th scope="col" class="lead fw-normal">Kód oprávnění</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $assignedPermissions as $assignedPermission}
+                    <tr>
+                        <td>{$assignedPermission->description}</td>
+                        <td>{$assignedPermission->permission}</td>
+                    </tr>
+                {/foreach}
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+{/block}

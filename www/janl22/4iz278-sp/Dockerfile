@@ -1,0 +1,45 @@
+FROM nginx:mainline
+
+MAINTAINER "Luboš Jánský <lubos.jansky@outlook.com>"
+
+# Add all package repositories and update the system
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends wget gnupg2 apt-transport-https lsb-release curl nano vim \
+  && curl --output /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
+  && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list \
+  && apt-get update && apt-get -y upgrade
+
+# Azure SSH access
+ENV SSH_PASSWD "root:Docker!"
+RUN apt-get install -y --no-install-recommends dialog openssh-server \
+  && mkdir -p /run/sshd \
+  && echo "$SSH_PASSWD" | chpasswd
+
+# Install PHP
+RUN apt-get -y install php8.2-common php8.2-fpm php8.2-curl php8.2-gd php8.2-intl php8.2-mbstring php8.2-pgsql \
+  && mkdir -p /run/php/ \
+  && usermod -a -G nginx www-data && usermod -a -G www-data nginx \
+  && echo "clear_env = no" >> /etc/php/8.2/fpm/pool.d/www.conf \
+  && ln -sf /dev/stdout /var/log/php8.2-fpm.log \
+  && chown www-data:www-data /var/log/php8.2-fpm.log
+
+# Install Supervisor
+RUN apt-get install -y --no-install-recommends supervisor
+
+# Configuration
+RUN rm -f /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+COPY infra/supervisor.conf /etc/supervisor/supervisord.conf
+COPY infra/sshd_config /etc/ssh/sshd_config
+COPY infra/server.conf /etc/nginx/templates/default.conf.template
+COPY infra/php.ini /etc/php/8.2/fpm/conf.d/99-user.ini
+COPY infra/motd /etc/motd
+
+# Project files are copied directly onto the image
+COPY /src /var/www
+RUN chown -R www-data:www-data /var/www && chmod -R 2770 /var/www
+
+# Cleanup
+RUN apt-get -y clean
+
+EXPOSE 80 2222
+CMD ["supervisord","-c","/etc/supervisor/supervisord.conf"]

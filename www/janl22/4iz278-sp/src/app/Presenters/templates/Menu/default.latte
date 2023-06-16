@@ -1,0 +1,57 @@
+{layout $user->isLoggedIn() && !$user->getIdentity()->getData()['employee'] ? '../../../templates/@nav-customers.latte' : '../../../templates/@nav-notLoggedIn.latte'}
+
+{block content}
+    <div class="container-fluid">
+
+        <div class="row animation fade-in">
+
+            <div class="alert alert-{$flash->type} mb-4"
+                 role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+                {$flash->message}
+            </div>
+
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center mb-4">
+
+                {foreach $items as $item}
+
+                    <div class="col mb-3">
+
+                        <div class="card h-100">
+
+                            {if isset($item->link)} <img class="card-img-top" src="{$item->link}"
+                                                         alt="Product image"> {/if}
+
+
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h6 class="fw-bolder">{$item->name}</h6>
+                                    {formatPriceCurrency($item->price)}
+                                </div>
+                            </div>
+
+                            {if $user->getIdentity() === null || ($user->getIdentity() !== null && !$user->getIdentity()->getData()['employee'])}
+
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a n:href="MyOrders:addItemToOrder $item->id_item"
+                                                class="btn btn-primary waves-effect d-block mt-auto ms-2 me-2">Přidat
+                                            do objednávky</a>
+                                    </div>
+                                </div>
+
+                            {/if}
+
+                        </div>
+
+                    </div>
+
+                {/foreach}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{/block}

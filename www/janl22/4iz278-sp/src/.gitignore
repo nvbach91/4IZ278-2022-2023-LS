@@ -1,0 +1,4 @@
+config/local.neon
+/temp/
+/vendor/
+composer.lock
