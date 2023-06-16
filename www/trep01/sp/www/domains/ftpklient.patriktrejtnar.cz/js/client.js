@@ -10,9 +10,15 @@ $(document).ready(function() {
 
     var table = $('#filesTable').DataTable({
         columns: [
-            { data: 'name' }
+            { data: 'name' },
+            { data: "action" }
         ]
     });
+
+    document.getElementById("fileUpload").addEventListener("change", function(event){
+        ftpUploadFile(this.files[0]);
+    });
+
 
     $('#ftpForm').on('submit', function(e) {
         e.preventDefault();
@@ -33,7 +39,7 @@ $(document).ready(function() {
     });
 
 
-    $('#filesTable tbody').on('click', 'tr', function() {
+    $('#filesTable tbody').on('click', 'td:first-child', function() {
         var data = table.row(this).data();
         if (data.isDirectory) {
             change(currentDirectory + "/" + data.name);
@@ -41,7 +47,20 @@ $(document).ready(function() {
             download(data.name);
         }
     });
-    
+
+    $('#filesTable tbody').on('click', 'tr.directory-row', function() {
+        var data = table.row(this).data();
+        change(currentDirectory + "/" + data.name);
+    });
+
+    $('#filesTable tbody').on('click', '.file-row button.file-preview', function(e) {
+        e.stopPropagation();
+        displayFileContent($(this).data('filename'));
+    });
+
+
+
+
 
     function change(directory) {
         $.ajax({
@@ -79,13 +98,10 @@ $(document).ready(function() {
         });
     }
 
-    function download(file) {
+    function download(file, show = true) {
         $.ajax({
             url: apiDomain + '/action/download.php',
             method: 'POST',
-            headers: {
-                'X-API-Key': 'f5c9d143-7622-4122-9725-65ef38f48559'
-            },
             contentType: "application/json",
             data: JSON.stringify({
                 file: file,
@@ -96,7 +112,7 @@ $(document).ready(function() {
 
                 var fileExtension = filePath.split('.').pop().toLowerCase();
 
-                if (['txt', 'js', 'css', 'html', 'json', 'xml', 'csv', 'md', 'php', 'py', 'c', 'cpp', 'java', 'cs'].includes(fileExtension)) {
+                if (['txt', 'js', 'css', 'html', 'json', 'xml', 'csv', 'md', 'php', 'py', 'c', 'cpp', 'java', 'cs'].includes(fileExtension) && show) {
                     displayFileContent(filePath)
                 }else{
                     var link = document.createElement('a');
@@ -111,9 +127,6 @@ $(document).ready(function() {
         });
     }
 
-    document.getElementById("fileUpload").addEventListener("change", function(event){
-        ftpUploadFile(this.files[0]);
-    });
 
     function ftpUploadFile(file) {
         var formData = new FormData();
@@ -301,20 +314,25 @@ $(document).ready(function() {
 
     function drawData(data) {
         if (data.files && data.files.length > 0) {
-
             table.clear();
 
-            var goUpRow = table.row.add({ name: '..' }).draw().node();
+            var goUpRow = table.row.add({ name: '..', action: ''}).draw().node();
             goUpRow.classList.add('go-up');
 
-            // Add the rest of the files
             data.files.forEach(function(file) {
-                var rowNode = table.row.add(file).draw().node();
+                var actions = file.isDirectory ? '' :
+                    '<button class="btn btn-info file-preview" data-filename="' + apiDomain + '/file/' + file.name + '">Náhled</button> ' +
+                    '<a class="btn btn-warning" onclick="download(\'' + apiDomain + '/file/' + file.name + '\')" id="fDownload" href="' + apiDomain + '/file/' + file.name + '" download="' + file.name + '">Download</a>';
+
+                var row = table.row.add({
+                    name: file.name,
+                    action: actions
+                }).draw().node();
 
                 if (file.isDirectory) {
-                    rowNode.classList.add('directory-row');
+                    row.classList.add('directory-row');
                 } else {
-                    rowNode.classList.add('file-row');
+                    row.classList.add('file-row');
                 }
             });
 
@@ -322,8 +340,19 @@ $(document).ready(function() {
                 $('#currentDirectory').text(data.currentDirectory);
                 currentDirectory = data.currentDirectory;
             }
+
+            // add click event listener to file preview buttons
+            $('.file-preview').click(function(e) {
+                e.stopPropagation(); // stop the click event from bubbling
+                displayFileContent($(this).data('filename'));
+            });
         }
     }
+
+
+
+
+
 
     function displayFileContent(filePath) {
         // Use AJAX to get the file content
@@ -393,11 +422,6 @@ $(document).ready(function() {
         });
     }
 
-
-
-
-
-
     function displayUserLoginStatus(user) {
         var userLoginStatus = document.getElementById('userLoginStatus');
 
@@ -452,12 +476,6 @@ $(document).ready(function() {
     }
 
 
-
-
-
-
-
-
     $(document).on('click', '.go-up', function(e){
         e.preventDefault();
 
@@ -465,10 +483,3 @@ $(document).ready(function() {
     });
 
 });
-
-
-
-
-
-
-

@@ -3,17 +3,9 @@ define('__ROOT__', dirname(__FILE__, 6));
 require_once __ROOT__ . "/App.php";
 App::init();
 
-session_start();
-
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
+include_once "../header.php";
 $ftp = $_SESSION["ftp"] ?? null;
 
-$response = [];
 
 if ($ftp && isset($ftp["server"],  $ftp["username"], $ftp["password"]) && isset($_FILES['file'])) {
     $ftp = new AccessConnection($ftp["server"], $ftp["username"], $ftp["password"]);

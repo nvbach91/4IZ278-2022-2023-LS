@@ -12,11 +12,16 @@ if (isset ($_SESSION["user"]) AND $id_access !=null AND $email !=null){
 
     $User = $UserR->getUserByEmail($email); //TODO: kontrola
 
-    $UserAccessesR = new UserAccessesRepository($db);
+    if ($User != null){
+        $UserAccessesR = new UserAccessesRepository($db);
 
-    $UserAccessesR->addUserAccess( $id_access,$User["id_user"],"note");
+        $UserAccessesR->addUserAccess( $id_access,$User["id_user"],"note");
 
-    $response['output'] = 'Access nasdílen';
+        $response['output'] = 'Access nasdílen';
+        include_once "../../email/send.php";
+    }
+
+
 }else{
     $response['error'] = 'Uživatel nepříhlašen';
 }

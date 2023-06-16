@@ -34,4 +34,15 @@ class UserAccessesRepository extends Repository
         $this->db->delete($sql,$params);
     }
 
+    public function addUserAccessLog($userAccess_id)
+    {
+        $sql = "INSERT INTO userAccessLogs SET userAccess_id = :userAccess_id";
+        $params = [
+            ":userAccess_id" => $userAccess_id,
+        ];
+
+        return $this->db->insert($sql,$params);
+
+    }
+
 }
