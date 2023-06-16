@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once '../auth.php';
 requireLogin();
@@ -24,7 +23,7 @@ function getCategoryById($pdo, $id)
 $category_id = $_GET['category_id'];
 
 if (!empty($_POST) && isset($category_id)) {
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
 
     $statement = $pdo->prepare('UPDATE sp_categories SET name = :name WHERE category_id = :category_id');
     $statement->execute(['name' => $name, 'category_id' => $category_id]);
@@ -32,6 +31,7 @@ if (!empty($_POST) && isset($category_id)) {
     header('Location: ./rename-categories.php?category_id=' . $category_id . '&message=success');
     exit;
 }
+
 $category = getCategoryById($pdo, $category_id);
 if (!$category) {
     header('Location: ../index.php');
@@ -39,8 +39,7 @@ if (!$category) {
 }
 ?>
 
-
-<?php require  '../header.php'; ?>
+<?php require '../header.php'; ?>
 
 <body class="container">
     <?php require '../navbar.php'; ?>
@@ -51,8 +50,8 @@ if (!$category) {
     <?php if (isset($category)) : ?>
         <form action="./rename-categories.php?category_id=<?php echo $category['category_id']; ?>" method="post">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="<?php echo $category['name']; ?>" required>
-             <button class="btn btn-outline-primary" type="submit">Update category</button>
+            <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($category['name']); ?>" required>
+            <button class="btn btn-outline-primary" type="submit">Update category</button>
         </form>
     <?php else : ?>
         <p>Category not found.</p>

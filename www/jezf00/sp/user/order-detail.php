@@ -49,7 +49,7 @@
         <tbody>
             <?php foreach ($items as $item) : ?>
                 <tr>
-                    <td><?php echo $item['name']; ?></td>
+                    <td><a href="../product-detail.php?good_id=<?php echo $item['good_id'] ?>"><?php echo $item['name']; ?></td>
                     <td><?php echo $item['amount']; ?></td>
                     <td><?php echo $item['price']; ?></td>
                 </tr>

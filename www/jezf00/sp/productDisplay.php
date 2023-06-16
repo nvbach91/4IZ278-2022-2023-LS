@@ -2,10 +2,18 @@
 
 <?php
 $productsDb = new ProductsDatabase();
+$products = [];
 
-if (isset($_GET['category_id'])) {
+if (isset($_GET['category_id']) && isset($_GET['sort']) && ($_GET['sort'] == 'asc' || $_GET['sort'] == 'desc')) {
+    $category_id = $_GET['category_id'];
+    $maxmin = ($_GET['sort'] == 'asc') ? 'min' : 'max';
+    $products = $productsDb->fetchByCategoryAndPrice($category_id, $maxmin);
+} elseif (isset($_GET['category_id'])) {
     $category_id = $_GET['category_id'];
     $products = $productsDb->fetchByCategory($category_id);
+} elseif (isset($_GET['sort']) && ($_GET['sort'] == 'asc' || $_GET['sort'] == 'desc')) {
+    $maxmin = ($_GET['sort'] == 'asc') ? 'min' : 'max';
+    $products = $productsDb->fetchByPrice($maxmin);
 } else {
     $products = $productsDb->fetchAll();
 }

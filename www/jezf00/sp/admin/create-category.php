@@ -20,24 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             DB_PASSWORD
         );
 
-        
-        $stmt = $pdo->prepare('SELECT * FROM sp_categories WHERE category_id = :category_id OR name = :name');
-        $stmt->execute(['category_id' => $category_id, 'name' => $name]);
-        $existingCategory = $stmt->fetch();
+        // Sanitize the input
+        $category_id = htmlspecialchars($_POST['category_id'], ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
 
-        if ($existingCategory) {
-           
-            $message = 'Category ID or name already exists. Please choose a different category ID or name.';
+        // Validate the input
+        if (!preg_match('/^[0-9]+$/', $category_id)) {
+            $message = 'Invalid category ID. Please enter a valid number.';
         } else {
-            
-            $stmt = $pdo->prepare('INSERT INTO sp_categories (category_id, name) VALUES (:category_id, :name)');
+            $stmt = $pdo->prepare('SELECT * FROM sp_categories WHERE category_id = :category_id OR name = :name');
             $stmt->execute(['category_id' => $category_id, 'name' => $name]);
+            $existingCategory = $stmt->fetch();
 
-            header('Location: ../index.php');
-            exit;
+            if ($existingCategory) {
+                $message = 'Category ID or name already exists. Please choose a different category ID or name.';
+            } else {
+                $stmt = $pdo->prepare('INSERT INTO sp_categories (category_id, name) VALUES (:category_id, :name)');
+                $stmt->execute(['category_id' => $category_id, 'name' => $name]);
+
+                header('Location: ../index.php');
+                exit;
+            }
         }
     } else {
-        
         $message = 'Category ID and name are required.';
     }
 }
@@ -50,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Create Category</h1>
 
     <?php if (!empty($message)) : ?>
-        <p><?php echo $message; ?></p>
+        <p><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
 
     <form method="POST" action="">

@@ -9,6 +9,7 @@ $categories = $categoriesDb->fetchAll();
 <div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-lg-10">
+      
       <div class="card">
 
           <div class="list-group">

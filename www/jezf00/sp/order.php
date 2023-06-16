@@ -14,13 +14,22 @@ $paymentMethod = $_POST['paymentMethod'];
 $deliveryMethod = $_POST['deliveryMethod'];
 $email = $_SESSION['user']['email'];
 $cart = $_SESSION['cart'];
+if(isset($_SESSION['user']['user_id'])){
+    $user_id = $_SESSION['user']['user_id'];
+}else{
+    $stmt = $pdo->prepare("SELECT user_id FROM sp_users WHERE email = ?");
+$stmt->execute([$email]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$user_id = $user['user_id'];
+}
+
 
 $date = date('Y-m-d H:i:s'); 
-$stmt = $pdo->prepare("INSERT INTO sp_order (price, date, payment_method, delivery_method, email) VALUES (?, ?, ?, ?, ?)");
-$stmt->execute([$totalPrice, $date, $paymentMethod, $deliveryMethod, $email]);
+$stmt = $pdo->prepare("INSERT INTO sp_order (price, date, payment_method, delivery_method, email, user_id) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->execute([$totalPrice, $date, $paymentMethod, $deliveryMethod, $email, $user_id]);
 $orderID = $pdo->lastInsertId();
 
-$stmt = $pdo->prepare("INSERT INTO sp_order_table (order_id, good_id, amount) VALUES (?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO sp_order_table (order_id, good_id, amount, price) VALUES (?, ?, ?, ?)");
 
 function fetchCartItems($pdo, $cart)
 {
@@ -39,7 +48,7 @@ if (!empty($_SESSION['cart'])) {
 
 foreach ($records as $item) {
     $quantity = isset($cart[$item['good_id']]) ? $cart[$item['good_id']] + 1 : 1;
-    $stmt->execute([$orderID, $item['good_id'], $quantity]);
+    $stmt->execute([$orderID, $item['good_id'], $quantity, $item['price']]);
 }
 
 $_SESSION['cart'] = [];
