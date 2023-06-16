@@ -10,12 +10,14 @@ $productsDatabase = new ProductsDatabase();
 $orderItemsDatabase = new OrderItemsDatabase();
 $ids = @$_SESSION['cart'];
 
+$deliveryPrice = floatval($_SESSION['delivery_method']);
+
 if (isset($_SESSION['user_id'])){
 
     $question_marks = str_repeat('?,', count($ids) - 1) . '?';
 
     $status = 'new';
-    $total_price = $productsDatabase->getSum($question_marks, $ids);
+    $total_price = $productsDatabase->getSum($question_marks, $ids) + $deliveryPrice;
     $date = date('Y-m-d H:i:s', time());
     $user_id = $_SESSION['user_id'];
 
@@ -39,5 +41,7 @@ if (isset($_SESSION['user_id'])){
 
 
 require 'clear-cart.php';
+
+unset($_SESSION['delivery_method']);
 
 header('Location: ../views/order.php');

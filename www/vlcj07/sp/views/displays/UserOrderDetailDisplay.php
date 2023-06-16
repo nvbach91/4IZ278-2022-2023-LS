@@ -8,9 +8,6 @@
             </h3>
             <!-- celkem kusů -->
             <p class="mt-1 text-lg font-medium text-gray-900 dark:text-white"><?php echo number_format($product['price'], 2), 'Kč'; ?></p>
-            <div>
-                <a href="../controllers/remove-item.php?product_id=<?php echo $product['product_id'] ?>">Odebrat</a>
-            </div>
         </div>
     </div>
 <?php endforeach; ?>

@@ -17,6 +17,14 @@
                 <?php else : ?>
                     <h5>Nic tady není. 😔</h5>
                 <?php endif; ?>
+            <?php elseif ($current_user['role'] === 'admin') : ?>
+                <?php if (@$order) : ?>
+                    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                        <?php include './displays/OrderDetailDisplay.php' ?>
+                    </div>
+                <?php else : ?>
+                    <h5>Nic tady není. 😔</h5>
+                <?php endif; ?>
             <?php else : ?>
                 <?php header('Location: access-forbidden.php'); ?>
             <?php endif; ?>

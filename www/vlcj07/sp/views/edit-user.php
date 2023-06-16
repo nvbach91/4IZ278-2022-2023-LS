@@ -16,36 +16,36 @@
                 </div>
                 <form class="w-full space-y-4 md:space-y-6 max-w-sm m-auto" method="POST">
                     <div class="flex flex-col py-1">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['name'] ?></label>
-                        <input id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nové jméno" aria-label="name">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jméno</label>
+                        <input id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['name'] ?>" aria-label="name">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['role'] ?></label>
-                        <input id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nová role (user nebo admin)" aria-label="role">
+                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                        <input id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['role'] ?>" aria-label="role">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['email'] ?></label>
-                        <input id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="email" placeholder="Nový email" aria-label="email">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                        <input id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="email" placeholder="<?php echo $user['email'] ?>" aria-label="email">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['phone'] ?></label>
-                        <input id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="phone" placeholder="Nové telefonní číslo" aria-label="phone">
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefon</label>
+                        <input id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="phone" placeholder="<?php echo $user['phone'] ?>" aria-label="phone">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['adress'] ?></label>
-                        <input id="adress" name="adress" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nová adresa (ulice a č.p.)" aria-label="adress">
+                        <label for="adress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ulice a č.p.</label>
+                        <input id="adress" name="adress" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['adress'] ?>" aria-label="adress">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['city'] ?></label>
-                        <input id="city" name="city" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nové město" aria-label="city">
+                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Město</label>
+                        <input id="city" name="city" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['city'] ?>" aria-label="city">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="zip_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['zip_code'] ?></label>
-                        <input id="zip_code" name="zip_code" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nové poštovní směrovací číslo" aria-label="zip_code">
+                        <label for="zip_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PSČ</label>
+                        <input id="zip_code" name="zip_code" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['zip_code'] ?>" aria-label="zip_code">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $user['country'] ?></label>
-                        <input id="country" name="country" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nový stát" aria-label="country">
+                        <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stát</label>
+                        <input id="country" name="country" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $user['country'] ?>" aria-label="country">
                     </div>
                     <div class="m-2 flex justify-center items-center py-2">
                         <button class="w-full text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-primary-800" type="submit">

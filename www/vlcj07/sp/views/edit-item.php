@@ -16,24 +16,32 @@
                 </div>
                 <form class="w-full space-y-4 md:space-y-6 max-w-sm m-auto" method="POST">
                     <div class="flex flex-col py-1">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $product['name'] ?></label>
-                        <input id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nový název" aria-label="name">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Název produktu</label>
+                        <input id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $product['name'] ?>" aria-label="name">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $product['price'] ?> (v Kč)</label>
-                        <input id="price" name="price" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nová cena (v Kč)" aria-label="price">
+                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $product['price'] ?> Cena (v Kč)</label>
+                        <input id="price" name="price" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $product['price'] ?>" aria-label="price">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $product['description'] ?></label>
-                        <input id="description" name="description" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Nový popis" aria-label="description">
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Popis produktu</label>
+                        <input id="description" name="description" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $product['description'] ?>" aria-label="description">
                     </div>
                     <div class="flex flex-col py-1">
-                        <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><?php echo $product['img'] ?></label>
-                        <input id="img" name="img" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="URL nového obrázku" aria-label="img">
+                        <label for="img" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">URL obrázku</label>
+                        <input id="img" name="img" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="<?php echo $product['img'] ?>" aria-label="img">
                     </div>
-                    <div class="flex flex-col py-1">
+                    <!-- <div class="flex flex-col py-1">
                         <label for="available" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dostupnost: <?php echo $product['available'] ?></label>
                         <input id="available" name="available" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Dostupnost produktu - 1 = dostupný, 0 = nedostupný" aria-label="available">
+                    </div> -->
+                    <div class="flex flex-col py-1">
+                        <label for="available" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dostupnost produktu</label>
+                        <select id="available" name="available" class="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-1 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200">
+                            <option value="<?php echo $product['available'] ?>"><?php echo $product["available"] ? 'Dostupný' : 'Nedostupný' ?></option>
+                            <option value="1">Dostupný</option>
+                            <option value="0">Nedostupný</option>
+                        </select>
                     </div>
                     <div class="m-2 flex justify-center items-center py-2">
                         <button class="w-full text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-primary-800" type="submit">

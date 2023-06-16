@@ -30,7 +30,7 @@ $templates = [
             <p>Děkujeme za registraci!</p>
             <h4>Přihlašovací email:</h4>
             <p><a href="mailto:' . $recipient . '">' . $recipient . '</a></p>
-            <p>Nyní se můžete přihlásit <a href="https://eso.vse.cz/~vlcj07/sp/">zde</a>.</p>
+            <p>Nyní se můžete přihlásit <a href="https://esotemp.vse.cz/~vlcj07/sp/">zde</a>.</p>
             <hr>
             <p>Pokud máte nějaký problém nebo dotaz, neváhejte se na nás obrátit na adrese <a href="mailto:' . $sender . '">' . $sender . '</a></p>' .
             $htmlSecondPart
@@ -43,7 +43,7 @@ $templates = [
         return ($htmlFirstPart .
             '<h2>Potvrzení objednávky</h2>
             <p>Děkujeme za objednávku!</p>
-            <p>Nyní se můžete podívat na detaily objednávky na svém profilu na našich stránkách <a href="https://eso.vse.cz/~vlcj07/sp/">zde</a>.</p>
+            <p>Nyní se můžete podívat na detaily objednávky na svém profilu na našich stránkách <a href="https://esotemp.vse.cz/~vlcj07/sp/">zde</a>.</p>
             <hr>
             <p>Pokud máte nějaký problém nebo dotaz, neváhejte se na nás obrátit na adrese <a href="mailto:' . $sender . '">' . $sender . '</a></p>' .
             $htmlSecondPart
@@ -54,7 +54,7 @@ $templates = [
 function sendEmail($recipient, $subject)
 {
     global $templates;
-    $headers = implode('\r\n', $templates['headers']);
+    $headers = implode("\r\n", $templates['headers']);
     $message = $templates[$subject]($recipient);
     return mail(
         $recipient,

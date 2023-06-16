@@ -31,11 +31,22 @@
                     </div>
                     <div class="flex flex-col py-1">
                         <label for="available" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dostupnost produktu</label>
-                        <input id="available" name="available" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Dostupnost produktu -> 1 = dostupný, 0 = nedostupný" aria-label="available">
+                        <select id="available" name="available" class="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-1 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200">
+                            <option value="1">Dostupný</option>
+                            <option value="0">Nedostupný</option>
+                        </select>
                     </div>
-                    <div class="flex flex-col py-1">
+                    <!-- <div class="flex flex-col py-1">
                         <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategorie produktu</label>
                         <input id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" type="text" placeholder="Kategorie produktu (id)" aria-label="available">
+                    </div> -->
+                    <div class="flex flex-col py-1">
+                        <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kategorie produktu</label>
+                        <select id="category_id" name="category_id" class="block py-2.5 px-2 w-full text-sm text-gray-500 bg-transparent border-1 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200">
+                            <?php foreach ($categories as $category) : ?>
+                                <option value="<?php echo $category["category_id"] ?>"><?php echo $category["name"] ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="m-2 flex justify-center items-center py-2">
                         <button class="w-full text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-primary-800" type="submit">

@@ -17,6 +17,7 @@ require '../controllers/authorization.php';
                 <div class="flex flex-col sm:flex-row sm:space-x-4">
                     <a class="m-4 w-full whitespace-nowrap sm:w-auto text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" href="modify-products.php">Spravovat produkty</a>
                     <a class="m-4 w-full whitespace-nowrap sm:w-auto text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" href="users.php">Spravovat uživatele</a>
+                    <a class="m-4 w-full whitespace-nowrap sm:w-auto text-black dark:text-white bg-orange-100 hover:bg-orange-200 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" href="orders-all.php">Spravovat objednávky</a>
                 </div>
             <?php endif; ?>
             <div class="flex flex-col sm:flex-row sm:space-x-4">

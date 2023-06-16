@@ -1,4 +1,4 @@
-<a href="user-order-details" class="group">
+<a href="#" class="group">
     <div class="flex flex-col px-5 py-2">
         <div>
             <h1 class="mt-4 text-2xl font-bold text-gray-700 dark:text-white">Doručovací údaje:</h1>

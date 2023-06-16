@@ -12,3 +12,8 @@ if (is_array($ids) && count($ids)) {
 
     $sum = $productsDatabase->getSum($question_marks, $ids);
 }
+
+if ('POST' == $_SERVER['REQUEST_METHOD']){
+    $_SESSION['delivery_method'] = $_POST['delivery_method'];
+    header('Location: user-order-details.php');
+}

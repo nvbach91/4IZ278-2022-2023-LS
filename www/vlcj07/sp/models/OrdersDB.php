@@ -41,5 +41,12 @@ class OrdersDatabase extends DB
         $statement->execute(['order_id' => $order_id]);
         return $statement->fetchAll()[0];
     }
+
+    public function updateOrder($order_id, $status, $date, $user_id, $total_price)
+    {
+        $query = "UPDATE `sp_orders`  SET status = :status, user_id = :user_id, date = :date, total_price = :total_price WHERE order_id = :order_id";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute(['order_id' => $order_id, 'status' => $status, 'user_id' => $user_id, 'total_price' => $total_price, 'date' => $date]);
+    }
 }
 ?>
