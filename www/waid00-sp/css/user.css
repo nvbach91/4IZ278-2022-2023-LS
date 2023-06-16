@@ -1,0 +1,141 @@
+:root {
+  --primary: #adbf39;
+  --secondary: #ff9d57;
+  --gray: #dfdee3;
+}
+main{
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+  font-size: 200%;
+}
+* {
+  font-family: 'Muli', sans-serif, Helvetica, sans-serif;
+}
+
+input {
+  border: none;
+}
+.newPassSubmit{
+  width: 450px;
+  height: 30px;
+  font-size: large;
+  padding: 5px;
+}
+
+.done{
+  height: 10%;
+  width: 50%;
+  text-align: center;
+  font-size: x-large;
+}
+.newPass
+{
+  font-size: x-large;
+}
+
+.barva_text{
+  font-size: x-large;
+}
+.primary{
+  background:var(--gray);
+  width: 200px;
+  height: 50px;
+
+}
+.submit_barva{
+  background-color: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.submit_barva:hover, .reset_color:hover{
+  color: #dfdee3;
+}
+
+.reset_color{
+  background-color: var(--primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: black;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.news{
+  position: absolute;
+  width: 40%;
+  background-color: var(--gray);
+  top:200px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: 60px;
+  word-wrap: break-word;
+  min-height:400px;
+  box-shadow: 0 5px 5px black;
+  border-radius: 10px;
+   z-index: -1;
+}
+table {
+  width: 100%;
+}
+td{
+  padding: 10px;
+}
+table .td{
+  clear:left;
+  text-align: center;
+}
+.gender{
+  padding-top: 10px;
+}
+.info{
+  font-size: x-large;
+}
+#header{
+  text-align: center;
+  font-size: xx-large;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+}
+#info{
+  text-align: center;
+  font-size: x-large;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+}
+#given_info{
+  text-align: center;
+  font-size: large;
+  color: black;
+  border-bottom: 1px solid grey;
+  font-weight: bold;
+}
+.borderline{
+  border-bottom: 1px solid grey;
+text-align: center;
+}
+.participantss{
+  position: absolute;
+  background-color: var(--gray);
+  top:200px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: 60px;
+  padding-top: 30px;
+  word-wrap: break-word;
+  min-height:400px;
+  box-shadow: 0 5px 5px black;
+  border-radius: 10px;
+     z-index: -1;
+}

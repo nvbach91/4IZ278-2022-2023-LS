@@ -1,0 +1,237 @@
+:root {
+  --primary: #adbf39;
+  --secondary: #ff9d57;
+  --gray:#dfdee3;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: #222222;
+  background-color: var(--primary);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  overflow-x: hidden;
+  font-family: 'Muli', sans-serif, Helvetica, sans-serif;
+  outline: none;
+}
+
+.rightside{
+  position: absolute;
+  height: 300vh;
+  width: 200%;
+  transform: rotate(10deg);
+  top: -20vh;
+  background: var(--gray);
+  transition: 0.4s;
+  left: 0%;
+  -webkit-box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+  box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+}
+
+.rrightside{
+  position: absolute;
+  height: 300vh;
+  width: 200%;
+  transform: rotate(10deg);
+  top: -20vh;
+  background: #dfdee3;
+  transition: 0.4s;
+  left: 0%;
+  -webkit-box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+  box-shadow: -12px 0px 48px 0px rgba(0,0,0,0.75);
+}
+.rightside:hover{
+  left: -15%;
+}
+.otherside{
+  margin-top: 10%;
+}
+
+.buttons_essential{
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+}
+
+.login{
+  transform: rotate(-10deg);
+  position: absolute;
+  top: 18.5%;
+  left: 12%;
+}
+
+.registration{
+  transform: rotate(-10deg);
+  position: absolute;
+  top: 12%;
+  left: 12%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+
+a {
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}
+
+.form-container {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form-body {
+  position: absolute;
+  top: -40px;
+  right: -400px;
+  width: 50vh;
+  background-color:#859ca2;
+  padding: 50px;
+
+  color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.login .form-body{
+    padding-bottom: 10px;
+}
+.registration .form-body{
+    padding-bottom: 10px;
+}
+
+
+
+.form-body .title {
+  margin: 0;
+  text-align: center;
+  font-weight: normal;
+}
+
+._or {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d9d9d9;
+}
+
+.the-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.the-form label {
+  margin-bottom: 5px;
+  color: #e6e6e6;
+  font-weight: bold;
+}
+
+.the-form [type="text"],
+.the-form [type="email"],
+.the-form [type="password"] {
+  padding: 15px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 15px;
+  transition:.3s;
+  color: #e6e6e6;
+}
+
+.container{
+  display: flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+
+.the-form [type="text"]::placeholder,
+.the-form [type="email"]::placeholder,
+.the-form [type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.the-form [type="text"]:hover,
+.the-form [type="email"]:hover,
+.the-form [type="password"]:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[type="submit"], [type="button"] {
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.otherside button {
+  margin:6.5%;
+  width: 65%;
+  background: #f2f1f6;
+}
+
+.form-footer div {
+  text-align: center;
+  padding: 25px 20px;
+  font-size: 18px;
+}
+
+.form-footer div a {
+  color: #f57b22;
+}
+#birth_date{
+  padding: 11px;
+  padding-right: 18px;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-bottom: 15px;
+  transition:.3s;
+  color: #e6e6e6;
+}
+
+.google {
+  display: block;
+    margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: black;
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.google:hover {
+  background-color: #3367D6;
+  color: #fff;
+  border: 1px solid black;
+}
+
+/* Additional styles to match the existing CSS */
+.google {
+  font-weight: bold;
+}
+

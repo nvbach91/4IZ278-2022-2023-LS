@@ -1,0 +1,173 @@
+:root {
+  --primary: #adbf39;
+  --secondary: #ff9d57;
+  --gray:#dfdee3;
+}
+
+* {
+  font-family: 'Muli', sans-serif, Helvetica, sans-serif;
+
+}
+.header {
+  background-color: var(--primary);
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  height: 85px;
+  width: 100%;
+  overflow:hidden;
+}
+
+.header .square {
+  background-color: var(--gray);
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  top: 10%;
+  right: 31%;
+
+  transform: rotate(20deg);
+  -webkit-box-shadow: -29px 0px 50px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: -29px 0px 50px -7px rgba(0,0,0,0.75);
+  box-shadow: -29px 0px 50px -7px rgba(0,0,0,0.75);
+}
+
+.header .rightside {
+  background-color: var(--gray);
+  position: absolute;
+  top: 0%;
+  right: -10%;
+  height: 85px;
+  width: 900px;
+}
+.header .forms [type="submit"], [type="button"] {
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.header .rightside .forms .logout:hover, .header .rightside .forms .account:hover {
+  color: #dfdee3;
+}
+
+.header .forms_noReg [type="submit"], [type="button"] {
+  background: var(--secondary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 70px;
+  padding-right: 70px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  color: black;
+  margin-right: 40px;
+  margin-left: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+
+
+.header .noForms [type="submit"], [type="button"]{
+  background-color: #f2f1f6;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  padding-left: 60px;
+  padding-right: 60px;
+  font-size: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  color: black;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+}
+
+.noForms{
+  position: absolute;
+  top: -3%;
+  left: 15%;
+
+}
+.forms{
+  position: absolute;
+  top: 27%;
+  left: 20%;
+}
+.forms_noReg{
+  position: absolute;
+  top: -5%;
+  left: 05%;
+}
+
+.or{
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 102.5%;
+
+}
+.logo{
+  position: absolute;
+  top: 10%;
+  left: 3%;
+  font-size: 60px;
+  font-family: Courier, monospace;
+  font-weight: bold;
+  color: #f2f1f6;
+}
+.user p{
+  font-size: 40px;
+  font-family: Courier, monospace;
+  font-weight: bold;
+  color: black;
+}
+.user{
+  position: absolute;
+  top: -40px;
+  right: -450px;
+}
+.userLogo{
+  position: absolute;
+  top: 0px;
+  right: -500px;
+  font-size: 40px;
+  color: black;
+}
+.account{
+  position: absolute;
+  right: -350px;
+  top: -25px;
+
+}
+
+.logout{
+  position: absolute;
+  right: -100px;
+  top: -25px;
+}
+
+.line {
+  border-bottom: 6px solid transparent;
+  width: 100%;
+  position: fixed;
+  left: 0%;
+  top: 79px;
+  box-shadow: 0 5px 5px black;
+}
+.sign{
+  position: absolute;
+  top: 0%;
+  left: 110%;
+}
