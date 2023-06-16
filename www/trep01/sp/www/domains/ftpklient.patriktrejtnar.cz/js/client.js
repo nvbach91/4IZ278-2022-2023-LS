@@ -8,7 +8,6 @@ $(document).ready(function() {
     $('#FTPTable').hide();
 
 
-
     var table = $('#filesTable').DataTable({
         columns: [
             { data: 'name' }
@@ -16,12 +15,6 @@ $(document).ready(function() {
     });
 
     $('#ftpForm').on('submit', function(e) {
-        e.preventDefault();
-
-        ftpConnect();
-    });
-
-    $('#ftpForm save').on('submit', function(e) {
         e.preventDefault();
 
         ftpConnect();
@@ -113,8 +106,6 @@ $(document).ready(function() {
     }
 
 
-
-
     function ftpDeleteLocalFile(file) {
         $.ajax({
             url: apiDomain + '/action/ftp/deleteLocalFile.php',
@@ -134,6 +125,11 @@ $(document).ready(function() {
         var server = $('#server').val();
         var username = $('#username').val();
         var password = $('#password').val();
+        var id_access = $('#id_access').val();
+
+        if(id_access.trim() === "") {
+            $('#id_access').val(null);
+        }
 
         $.ajax({
             url: apiDomain + '/action/ftp/connect.php',
@@ -147,7 +143,8 @@ $(document).ready(function() {
             success: function(data) {
 
                 if(user != null){
-                    accessSave(server,username,password)
+                    if(id_access === null)
+                    accessSave(server,username,password,id_access)
                 }
                 if(!data.error){
                     $('#FTPTable').show();
@@ -171,9 +168,6 @@ $(document).ready(function() {
         $.ajax({
             url: apiDomain + '/action/user/register.php',
             method: 'POST',
-            headers: {
-                'X-API-Key': 'f5c9d143-7622-4122-9725-65ef38f48559'
-            },
             contentType: "application/json", //přidání contentType
             data: JSON.stringify({ //data konvertována na JSON
                 user_email: user_email,
@@ -188,10 +182,6 @@ $(document).ready(function() {
     function userLogin() {
         var user_email = $('#login_user_email').val();
         var user_password = $('#login_user_password').val();
-        var user_passwordAgain = $('#user_passwordAgain').val();
-
-        // Kontrola shodnosti hesel
-
 
         $.ajax({
             url: apiDomain + '/action/user/login.php',
@@ -245,7 +235,7 @@ $(document).ready(function() {
         });
     }
 
-    function accessSave(access_server,access_username,access_password) {
+    function accessSave(access_server,access_username,access_password,id_access) {
 
         $.ajax({
             url: apiDomain + '/action/access/save.php',
@@ -254,6 +244,7 @@ $(document).ready(function() {
                 access_server: access_server,
                 access_username: access_username,
                 access_password: access_password,
+                id_access: id_access,
 
             }),
             contentType: "application/json", //přidání contentType
@@ -308,8 +299,6 @@ $(document).ready(function() {
             }
         }
     }
-
-
 
 
     function displayAccessNames(accessList) {
@@ -376,10 +365,6 @@ $(document).ready(function() {
                     <strong id="user">${user.user_email}</strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" id="userLogout">Sign out</a></li>
                 </ul>
             </div>
