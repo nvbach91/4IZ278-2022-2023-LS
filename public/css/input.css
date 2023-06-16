@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .section-min-height {
+        min-height: calc(100vh - 68px)
+    }
+
+    .toggle-btn {
+        @apply [&>div: :before]:translate-y-0 [&>div::before]:rotate-45 [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 [&>div]:bg-transparent
+    }
+}
+
+.slide-container {
+    width: 100%;
+    height: 400px;
+    display: inline-block;
+}
+
+.slide {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.slide.active {
+    opacity: 1;
+}
