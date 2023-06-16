@@ -3,6 +3,16 @@ require_once "Database.php";
 
 // TODO test
 class BooksDatabase extends Database {
+    private static ?BooksDatabase $sInstance = null;
+
+    private function __construct() {
+        parent::__construct();
+    }
+
+    public static function getInstance(): BooksDatabase {
+        if (self::$sInstance === null) self::$sInstance = new BooksDatabase();
+        return self::$sInstance;
+    }
 
     public function addBook(string $isbn, string $name, string $author, string $desc, int $category,
                             int    $amount = 1): bool {
@@ -21,12 +31,16 @@ class BooksDatabase extends Database {
         return $statement->fetch();
     }
 
-    public function getBooks(int $category, int $amount, int $offset = 0): array {
-        $query = "SELECT * FROM books WHERE category_id = :catId LIMIT :offset, :amount";
+//    public function getBooks(int $category, int $amount = 0, int $offset = 0): array {
+    public function getBooks(int $category): array {
+        if ($category === 0) return $this->getAllBooks(); // TODO
+
+//        $query = "SELECT * FROM books WHERE category_id = :catId LIMIT :offset, :amount";
+        $query = "SELECT * FROM books WHERE category_id = :catId";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue("catId", $category, PDO::PARAM_INT);
-        $statement->bindValue("offset", $offset, PDO::PARAM_INT);
-        $statement->bindValue("amount", $amount, PDO::PARAM_INT);
+//        $statement->bindValue("offset", $offset, PDO::PARAM_INT);
+//        $statement->bindValue("amount", $amount, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
     }

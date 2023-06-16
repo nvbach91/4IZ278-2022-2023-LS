@@ -10,14 +10,72 @@ body {
     min-height: 100vh;
 }
 
+img.icon {
+    max-height: 24px;
+    max-width: 24px;
+    aspect-ratio: 1;
+}
+
 header {
     grid-area: header;
 }
 
+.header-row {
+    flex-flow: row;
+}
+
 main {
     grid-area: main;
+    /*max-width: 1280px;*/
 }
 
 footer {
     grid-area: footer;
+}
+
+.card-body {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.card-body:hover {
+    color: inherit;
+}
+
+.card-text:last-child {
+    margin-top: auto;
+}
+
+.login-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto auto;
+}
+
+.register-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto auto auto;
+}
+
+.branch-control-grid {
+    display: grid;
+    grid-template-columns: auto 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    justify-content: center;
+}
+
+.edit-book-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: repeat(7, auto);
+    gap: 8px;
+}
+
+.edit-book-grid > label {
+    justify-self: end;
 }

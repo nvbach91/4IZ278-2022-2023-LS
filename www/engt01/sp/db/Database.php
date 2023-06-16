@@ -4,7 +4,7 @@ require_once "config.php";
 abstract class Database {
     protected PDO $pdo;
 
-    public function __construct() {
+    protected function __construct() {
         $this->pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USERNAME,
             DB_PASSWORD);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
