@@ -33,7 +33,6 @@ $(document).ready(function() {
     });
 
 
-
     $('#filesTable tbody').on('click', 'tr', function() {
         var data = table.row(this).data();
         if (data.isDirectory) {
@@ -42,22 +41,39 @@ $(document).ready(function() {
             download(data.name);
         }
     });
-
-
+    
 
     function change(directory) {
         $.ajax({
             url: apiDomain + '/action/change.php',
             method: 'POST',
-            headers: {
-                'X-API-Key': 'f5c9d143-7622-4122-9725-65ef38f48559'
-            },
             contentType: "application/json",
             data: JSON.stringify({
                 directory: directory,
             }),
             success: function(data) {
                 drawData(data)
+                showResponse(data)
+            }
+        });
+    }
+
+    function accessShare(id_access,email){
+        var id_access = $('#id_access').val();
+
+        if(id_access.trim() === "") {
+            id_access = null;
+        }
+
+        $.ajax({
+            url: apiDomain + '/action/userAccess/add.php',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify({
+                id_access: id_access,
+                email: email,
+            }),
+            success: function(data) {
                 showResponse(data)
             }
         });
@@ -335,13 +351,10 @@ $(document).ready(function() {
 
         ul.innerHTML = '';
 
-        // Projdeme seznam přístupů
         accessList.forEach(function(access) {
-            // Pro každý přístup vytvoříme nový list item
             var li = document.createElement('li');
             li.className = "nav-item";
 
-            // Vytvoříme nový odkaz
             var a = document.createElement('a');
             a.href = "#";
             a.className = "nav-link";
@@ -360,11 +373,21 @@ $(document).ready(function() {
                 $('#password').val(access.access_password);
                 $('#id_access').val(access.id_access);
 
-                // Zde přiřazujeme událost click tlačítku deleteAccess
+                // Zde přiřazujeme události
                 $('#deleteAccess').off('click').on('click', function() {
                     accessDelete(access.id_access);
                 });
             });
+
+            $(document).ready(function() {
+                $('#globalShareAccess').on('click', function() {
+                    var shareEmail = $('#globalShareEmail').val();
+                    var id_access = $('#globalIdAccess').val();
+
+                    accessShare(id_access, shareEmail);
+                });
+            });
+
 
             ul.appendChild(li);
         });

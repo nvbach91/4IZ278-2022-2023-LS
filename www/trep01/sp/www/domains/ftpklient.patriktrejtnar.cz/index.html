@@ -146,6 +146,9 @@
                 <h2 id="currentDirectory"></h2>
                 <strong>Nahrát soubor:</strong>
                 <input type="file" id="fileUpload">
+                <input type="text" id="globalShareEmail" placeholder="Zadejte e-mail" />
+                <input type="hidden" id="globalIdAccess" value="" />
+                <input class="btn btn-secondary" type="button" value="Sdílet připojení" id="globalShareAccess" />
                 <button class="btn btn-danger" onclick="location.reload();">Odpojit se</button>
                 <div id="fileList">
                     <table id="filesTable" class="display" style="width:100%">
