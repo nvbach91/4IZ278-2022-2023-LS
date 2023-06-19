@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 64);
-            $table->unsignedBigInteger('parent_category_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('parent_category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

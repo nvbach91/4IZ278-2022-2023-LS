@@ -9,20 +9,13 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if(Auth::check())
+        if(Auth::user()->role == 'admin')
         {
-            if(Auth::user()->role == 'admin')
-            {
-                return $next($request);
-            }
-            else
-            {
-                return redirect('/home')->with('status','Access Denied! as you are not as admin');
-            }
+            return $next($request)->with(['status'=>'Access Denied! as you are not as admin']);
         }
         else
         {
-            return redirect('/home')->with('status','Please Login First');
+            return redirect('/home')->with('status','Access Denied! as you are not as admin');
         }
     }
 

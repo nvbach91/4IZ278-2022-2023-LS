@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\UserController::class, 'index']);
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', function () {
-        return "This is admin dashboard";
+        return view("admin");
     });
+});
+
+Route::get('/product/{id}', [App\Http\Controllers\PublicController::class, 'product']);
+Route::redirect('/product', '/');
+
+View::composer(['layouts.app'], function ($view) {
+    $view->with('rootCategories', App\Models\Category::all()->where('category_id', null));
 });

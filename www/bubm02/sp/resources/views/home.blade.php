@@ -15,6 +15,11 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    @foreach ($categories as $category)
+                        <ul>
+                            <li>Category id: {{$category->id}}, Category name: {{$category->name}}</li>
+                        </ul>
+                    @endforeach
                 </div>
             </div>
         </div>
