@@ -1,16 +1,13 @@
 <?php
 
 $servername = 'localhost';
-$username = 'avdn00';
-$password = 'Chie9roozaweado9in';
-$databaseName= 'avdn00';
+$username = 'root';
+$password = '';
+$databaseName = 'bookstore';
 
 $connection = mysqli_connect(
     $servername,
     $username,
     $password,
     $databaseName
-) or die('connection failed');
-
-
-?>
+) or die('Connection failed');

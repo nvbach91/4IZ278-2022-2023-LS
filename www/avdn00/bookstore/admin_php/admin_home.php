@@ -1,14 +1,89 @@
 <?php
 
-include '../config.php';
+include_once '../config.php';
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+class AdminDashboard
+{
+    private $connection;
+
+    public function __construct($connection)
+    {
+        $this->connection = $connection;
+    }
+
+    private function fetchData($query)
+    {
+        $statement = mysqli_prepare($this->connection, $query);
+        if ($statement) {
+            mysqli_stmt_execute($statement);
+            $result = mysqli_stmt_get_result($statement);
+            $data = mysqli_fetch_assoc($result);
+            mysqli_stmt_close($statement);
+            return $data;
+        }
+        return false;
+    }
+
+    public function sanitize($value)
+    {
+        return isset($value) ? htmlspecialchars($value) : '0';
+    }
+
+    public function getTotalPendings()
+    {
+        $query = "SELECT SUM(total_price) AS total_pendings FROM `orders` WHERE payment_status = 'pending'";
+        $data = $this->fetchData($query);
+        return $data ? $data['total_pendings'] : 0;
+    }
+
+    public function getTotalCompleted()
+    {
+        $query = "SELECT SUM(total_price) AS total_completed FROM `orders` WHERE payment_status = 'completed'";
+        $data = $this->fetchData($query);
+        return $data ? $data['total_completed'] : 0;
+    }
+
+    public function getNumberOfOrders()
+    {
+        $query = "SELECT COUNT(*) AS number_of_orders FROM `orders`";
+        $data = $this->fetchData($query);
+        return $data ? $data['number_of_orders'] : 0;
+    }
+
+    public function getNumberOfProducts()
+    {
+        $query = "SELECT COUNT(*) AS number_of_products FROM `products`";
+        $data = $this->fetchData($query);
+        return $data ? $data['number_of_products'] : 0;
+    }
+
+    public function getNumberOfUsers()
+    {
+        $query = "SELECT COUNT(*) AS number_of_users FROM `users`";
+        $data = $this->fetchData($query);
+        return $data ? $data['number_of_users'] : 0;
+    }
+
+    public function getNumberOfMessages()
+    {
+        $query = "SELECT COUNT(*) AS number_of_messages FROM `message`";
+        $data = $this->fetchData($query);
+        return $data ? $data['number_of_messages'] : 0;
+    }
+}
+
 
 $admin_id = $_SESSION['admin_id'];
 
 if (!isset($admin_id)) {
-    header('location:./login.php');
+    header('Location: ./login.php');
+    exit;
 }
 
+$dashboard = new AdminDashboard($connection);
 
 ?>
 
@@ -35,87 +110,40 @@ if (!isset($admin_id)) {
             </div>
         </div>
         <section class='dashboard'>
-
             <h1 class='title'>Dashboard</h1>
-
             <div class='box-container'>
-
                 <div class="box">
-                    <?php
-                    $total_pendings = 0;
-                    $query = "SELECT total_price FROM `orders` WHERE payment_status = 'pending'";
-                    $select_pending = mysqli_query($connection, $query) or die('query failed');
-                    if (mysqli_num_rows($select_pending) > 0) {
-                        while ($fetch_pendings = mysqli_fetch_assoc($select_pending)) {
-                            $total_price = $fetch_pendings['total_price'];
-                            $total_pendings += $total_price;
-                        };
-                    };
-                    ?>
-                    <h3><?php echo $total_pendings ?></h3>
+                    <h3>$<?php echo $dashboard->sanitize($dashboard->getTotalPendings()); ?>/-</h3>
                     <p>Total pendings</p>
                 </div>
 
                 <div class='box'>
-                    <?php
-                    $total_completed = 0;
-                    $query = "SELECT total_price FROM `orders` WHERE payment_status = 'completed'";
-                    $select_completed = mysqli_query($connection, $query) or die('query failed');
-                    if (mysqli_num_rows($select_completed) > 0) {
-                        while ($fetch_completed = mysqli_fetch_assoc($select_completed)) {
-                            $total_price = $fetch_completed['total_price'];
-                            $total_completed += $total_price;
-                        };
-                    };
-                    ?>
-                    <h3><?php echo $total_completed ?></h3>
+                    <h3>$<?php echo $dashboard->sanitize($dashboard->getTotalCompleted()); ?>/-</h3>
                     <p>Completed payments</p>
                 </div>
 
                 <div class='box'>
-                    <?php
-                    $query = "SELECT * FROM `orders`";
-                    $select_orders = mysqli_query($connection, $query) or die('query failed');
-                    $number_of_orders = mysqli_num_rows($select_orders);
-                    ?>
-                    <h3><?php echo $number_of_orders ?></h3>
+                    <h3><?php echo $dashboard->sanitize($dashboard->getNumberOfOrders()); ?></h3>
                     <p>Orders placed</p>
                 </div>
 
                 <div class='box'>
-                    <?php
-                    $query = "SELECT * FROM `products`";
-                    $select_products = mysqli_query($connection, $query) or die('query failed');
-                    $number_of_products = mysqli_num_rows($select_products);
-                    ?>
-                    <h3><?php echo $number_of_products ?></h3>
+                    <h3><?php echo $dashboard->sanitize($dashboard->getNumberOfProducts()); ?></h3>
                     <p>Products added</p>
                 </div>
 
                 <div class='box'>
-                    <?php
-                    $query = "SELECT * FROM `users` WHERE user_type = 'user'";
-                    $select_users = mysqli_query($connection, $query) or die('query failed');
-                    $number_of_users = mysqli_num_rows($select_users);
-                    ?>
-                    <h3><?php echo $number_of_users ?></h3>
+                    <h3><?php echo $dashboard->sanitize($dashboard->getNumberOfUsers()); ?></h3>
                     <p>Users</p>
                 </div>
 
                 <div class='box'>
-                    <?php
-                    $query = "SELECT * FROM `message`";
-                    $select_messages = mysqli_query($connection, $query) or die('query failed');
-                    $number_of_messages = mysqli_num_rows($select_messages);
-                    ?>
-                    <h3><?php echo $number_of_messages ?></h3>
+                    <h3><?php echo $dashboard->sanitize($dashboard->getNumberOfMessages()); ?></h3>
                     <p>New messages</p>
                 </div>
             </div>
-
         </section>
     </div>
-
 
     <script src="../js/admin_script.js"></script>
 </body>
