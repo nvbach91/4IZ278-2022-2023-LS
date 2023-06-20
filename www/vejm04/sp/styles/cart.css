@@ -14,7 +14,7 @@
 
 .product-image img {
     max-height: 125px;
-    width: auto;
+    max-width: 187.5px;
     margin-right: 20px;
 }
 

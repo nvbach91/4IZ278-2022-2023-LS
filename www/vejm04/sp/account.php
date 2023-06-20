@@ -24,6 +24,8 @@ try {
 } catch (PDOException $e) {
     die("Error executing the query: " . $e->getMessage());
 }
+
+$isUserAdmin = ($user['admin'] == 1);
 ?>
 
 <!DOCTYPE html>
@@ -74,5 +76,16 @@ try {
             <p>No orders found.</p>
         <?php } ?>
     </section>
+
+    <?php if ($isUserAdmin) { ?>
+        <section>
+            <h2>Admin Actions</h2>
+            <a href="manageProducts.php" class="btn btnAdmin">Manage Products</a>
+            <a href="manageCategories.php" class="btn btnAdmin">Manage Categories</a>
+            <a href="manageUsers.php" class="btn btnAdmin">Manage Users</a>
+            <a href="manageOrders.php" class="btn btnAdmin">Manage Orders</a>
+        </section>
+    <?php } ?>
+
 </body>
 </html>

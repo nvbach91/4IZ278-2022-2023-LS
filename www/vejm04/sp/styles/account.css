@@ -58,3 +58,8 @@ table th {
     transition: background-color 0.3s;
     text-align: center;
 }
+
+.btnAdmin {
+    width: 150px;
+    margin-top: 5px;
+}
