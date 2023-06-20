@@ -24,12 +24,27 @@
 
                             <div class="form-group">
                                 <label for="description">{{ __('Description') }}</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4" required>{{ old('description', $project->description) }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description', $project->description) }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <div class="square-radio px-3">
+                                    <div class="row">
+                                        @foreach ($colors as $color)
+                                            <div class="col-1">
+                                                <input class="form-check-input" type="radio" name="color"
+                                                    value="{{ $color->HEX }}" {{ $project->color == $color->HEX ? 'checked' : '' }}
+                                                    style="background-color: #{{ $color->HEX }}" required>
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                </div>
                             </div>
 
                             <input type="hidden" id="user_id" name="user_id" value="{{ $project->user_id }}">

@@ -1,9 +1,8 @@
 @extends('layout')
 
 @section('content')
-    <h1>Projekty</h1>
-
+    <h1>Tagy</h1>
     
 
-    @livewire('project-manager')
+    @livewire('tag-manager')
 @endsection
