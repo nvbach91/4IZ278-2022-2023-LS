@@ -4,22 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Color;
+use App\Models\Tag;
 use App\Models\Project;
-
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('tasks')->get();
+        $projects = Project::with('tasks')->where('user_id', Auth::id())->get();
 
         return view('projects.index', compact('projects'));
     }
 
     public function create()
     {
-        return view('projects.create');
+        $colors = Color::all();
+        return view('projects.create', compact('colors'));
     }
 
     public function store(Request $request)
@@ -28,22 +30,24 @@ class ProjectController extends Controller
             'name' => 'required|max:255',
             'description' => 'nullable',
             'user_id' => 'required|integer',
+            'color' => 'nullable'
         ]);
 
         $project = Project::create($validatedData);
 
-        return redirect()->route('projects.show', $project->id);
+        return redirect()->route('projects.show', $project->id)->with('success', 'Projekt byl úspěšně vytvořen!');
     }
 
     public function show(Project $project)
     {
-
-        return view('projects.show', compact('project'));
+        $tags = Tag::where('user_id', Auth::id())->get();
+        return view('projects.show', compact('project', 'tags'));
     }
 
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $colors = Color::all();
+        return view('projects.edit', compact('project', 'colors'));
     }
 
     public function update(Request $request, Project $project)
@@ -52,6 +56,7 @@ class ProjectController extends Controller
             'name' => 'required|max:255',
             'description' => 'nullable',
             'user_id' => 'required|integer',
+            'color' => 'nullable'
         ]);
 
         $project->update($validatedData);
@@ -64,5 +69,16 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects');
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $projects = Project::where('user_id', Auth::id())->where('name', 'LIKE', "%$keyword%")->get();
+        if($projects == null){
+            $projects = Project::where('user_id', Auth::id());
+        }
+
+        return response()->json($projects);
     }
 }
