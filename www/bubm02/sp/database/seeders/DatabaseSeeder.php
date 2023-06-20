@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -42,12 +41,11 @@ class DatabaseSeeder extends Seeder
         $this->createItems();
     }
 
-    public function createGuitarCategory() {
-
+    public function createGuitarCategory() : void {
         DB::table('categories')->insert([
             'name' => 'Guitars',
         ]);
-        $guitarsId = DB::table('categories')->select('id')->where('name', 'Guitars')->get(0)->get(0)->id;
+        $guitarsId = $this->getCategoryId('Guitars');
         DB::table('categories')->insert([
             'name' => 'Acoustic guitars',
             'category_id' => $guitarsId,
@@ -78,13 +76,13 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 
-    public function createBassCategory() {
+    public function createBassCategory() : void {
 
 
         DB::table('categories')->insert([
             'name' => 'Bass guitars',
         ]);
-        $bassGuitarsId = DB::table('categories')->select('id')->where('name', 'Bass guitars')->get(0)->get(0)->id;
+        $bassGuitarsId = $this->getCategoryId('Bass guitars');
         DB::table('categories')->insert([
             'name' => 'Electric bases',
             'category_id' => $bassGuitarsId,
@@ -102,11 +100,11 @@ class DatabaseSeeder extends Seeder
             'category_id' => $bassGuitarsId,
         ]);
     }
-    public function createKeysCategory() {
+    public function createKeysCategory() : void {
         DB::table('categories')->insert([
             'name' => 'Keys',
         ]);
-        $keysId = DB::table('categories')->select('id')->where('name', 'Keys')->get(0)->get(0)->id;
+        $keysId = $this->getCategoryId('Keys');
         DB::table('categories')->insert([
             'name' => 'Keyboards',
             'category_id' => $keysId,
@@ -132,164 +130,123 @@ class DatabaseSeeder extends Seeder
             'category_id' => $keysId,
         ]);
     }
-    public function createItems() {
+    public function createItems() : void {
+        $guitarsId = $this->getCategoryId('Acoustic guitars');
         DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
+            'name' => 'Harley Benton CLA-15M SolidWood',
+            'image' => 'https://images.static-thomann.de/pics/bdb/505980/16405376_800.jpg',
+            'description' => 'Custom Line Solid Wood Series
+                Style: Auditorium
+                Top: solid okoume
+                Back and sides: solid okoume
+                Neck: Okoume
+                Fingerboard: Pau Ferro
+                SnowFlake fingerboard inlays
+                Neck profile: Oval C
+                Scale: 643 mm (25.3")
+                Nut width: 43 mm (1.69")
+                Bone nut
+                20 frets
+                Pau Ferro bridge with bone saddle
+                Deluxe Antique Copper open tuners
+                Factory strings: D\'Addarío XTAPB1253 .012 - .053 (Art. 471307)
+                Colour: Natural matte',
+            'price' => 7099,
+            'stock' => 5,
             'rating' => 5,
-            'category_id' => 1,
+            'category_id' => $guitarsId,
         ]);
         DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
+            'name' => 'Harley Benton Custom Line CLA-15MCE NS',
+            'image' => 'https://images.static-thomann.de/pics/bdb/333967/13547336_800.jpg',
+            'description' => 'Steel-String Guitar with Pickup
+                Design: Auditorium 000-14 with cutaway
+                Dovetail construction
+                Top: Gabon mahogany top (Aucoumea klaineana)
+                Scalloped X-bracing
+                Body: Gabon mahogany (Aucoumea klaineana)
+                Neck: Gabon mahogany (Aucoumea klaineana)
+                Fretboard: Ovangkol
+                Snowflake inlays
+                Dovetail construction
+                Neck profile: Modified oval C
+                Body binding: Wooden
+                Scale: 643 mm
+                Nut width: 43 mm
+                20 Frets
+                Nut: Bone
+                Compensated saddle
+                Pau Ferro bridge
+                Chrome-plated DLX DieCast machine heads
+                Strings: Daddario XTAPB Light .012 - .053 (Art.471307)
+                Pickup: Fishman Presys-II Preamp System with integrated tuner
+                Dimensions: 103 x 38 x 10 cm
+                Colour: Natural matt
+                Suitable case: Art.208576 (not included)',
+            'price' => 5699,
+            'discount_price' => 4999,
+            'stock' => 5,
             'rating' => 5,
-            'category_id' => 1,
+            'category_id' => $guitarsId,
         ]);
         DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
+            'name' => 'Martin Guitars 000JR-10E Shawn Mendes',
+            'image' => 'https://images.static-thomann.de/pics/bdb/556095/18200871_800.jpg',
+            'description' => 'Martin Guitars 000JR-10E, Spruce, Sapele Shawn Mendes; Shape: 000 Junior 14 Fret; Acoustic guitar; Top: Spruce; Back & sides: Sapele; Bracing: X-Brace 1/4" Spruce; Neck: Sipo; Fingerboard: Ebony; Inlays: Custom Shawn Mendes, MOP Pattern, white; 20 frets; Nut: White Corian; Nut width: 44.5 mm (1.75"); fretboard radius: 16"; bridge inlay: Compensated White Tusq; scale length: 610 mm (24"); rosette: Mother-of-Pearl Pattern with Multi-Stripe; bridge string spacing: 54.8 mm (2.16"); bridge material: ebony; binding: black; Pickup: Fishman; tuners: Small Chrome Enclosed Gear; includes. Gig Bag; Color: Natural',
+            'price' => 23390,
+            'discount_price' => 22990,
+            'stock' => 5,
             'rating' => 5,
-            'category_id' => 1,
+            'category_id' => $guitarsId,
         ]);
         DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
+            'name' => 'Martin Guitars 000-18',
+            'image' => 'https://images.static-thomann.de/pics/bdb/556071/18317048_800.jpg',
+            'description' => 'Martin Guitars 000-18; Shape: 000 - Auditorium Acoustic Guitar; Top: Solid Spruce; Back & Sides: Solid Mahogany; Neck: Mahogany; Fingerboard: Ebony (Diospyros Crassiflora); Inlays: White Abalone Dots; 20 Frets; Nut: Bone; Nut Width: 44,5 mm (1,75"); Scale: 632 mm (24,9"); Bridge Material: Ebenholz (Diospyros Crassiflora); Saddle: Bone; Pickguard: Tortoise; Binding: Tortoise; Tuners: Nickel Open Gear; Incl. Case; Colour: Natural; Stock Strings: Martin Guitars MA540T Authentic Treated Light (469771); Made In USA',
+            'price' => 81900,
+            'stock' => 5,
             'rating' => 5,
-            'category_id' => 1,
+            'category_id' => $guitarsId,
         ]);
         DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
+            'name' => 'Harley Benton Custom Line CLA-15M',
+            'image' => 'https://images.static-thomann.de/pics/bdb/318348/14965075_800.jpg',
             'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
+                Steel-String Guitar
+
+                    Auditorium 000-14 design
+                    Dovetail construction
+                    Solid gaboon mahagony top (Aucoumea klaineana)
+                    Scalloped X-bracing
+                    Gaboon mahagony body (Aucoumea klaineana)
+                    Gaboon mahagony neck (Aucoumea klaineana)
+                    Pau Ferro fretboard
+                    Modified oval C neck profile
+                    Snowflake fretboard inlays
+                    Wooden body binding
+                    Scale: 643 mm
+                    Nut width: 43 mm
+                    20 Frets
+                    Bone nut
+                    Compensated bone saddle
+                    Pau Ferro bridge
+                    Chrome-plated diecast DLX machine heads
+                    D\'Addario XTAPB1253 Light strings, .012 - .053 (Article Nr 471307)
+                    Colour: Natural matte
+
+            ',
+            'price' => 4290,
+            'stock' => 5,
             'rating' => 5,
-            'category_id' => 1,
+            'category_id' => $guitarsId,
         ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
-        DB::table('items')->insert([
-            'name' => 'Cort Little CJ Walnut Open Pore',
-            'image' => 'https://thumbs.static-thomann.de/thumb/thumb220x220/pics/prod/219218.jpg',
-            'description' => '
-Řada Discovery značky Tanglewood představuje cenově dostupné modely akustických kytar s výraznou kresbou exotických dřev.
-Tanglewood Discovery DBT PE HR je elektroakustická kytara s kompaktním tělem typu Parlor. Přední deska kytary je zhotovena z laminovaného himalájského smrku, luby z překližovaného ořechu a zadní deska z laminovaného materiálu označeného výrobcem jako Hawaiian Rainwood/Rain Tree, jehož kresba poskytuje kytaře luxusní vzhled. Krk je k tělu připevněn na dvanáctém pražci, plochu hmatníku z kompozitního materiálu v dekoru ebenu rozděluje dvacet pražců a orientační poziční tečky.
-Možnost ozvučení nabízí firemní preamp TW EX-4 s čtyřpásmovým ekvalizérem a integrovanou ladičkou. Struny jsou uchyceny v chromovaných Die-Cast mechanikách a kobylce z kompozitu.
-Parametry',
-            'price' => 6000,
-            'discount_price' => 9000,
-            'stock' => 6000,
-            'rating' => 5,
-            'category_id' => 1,
-        ]);
+    }
+
+
+
+    public function getCategoryId($name) : int
+    {
+        return DB::table('categories')->select('id')->where('name', $name)->get(0)->get(0)->id;
     }
 
 

@@ -40,7 +40,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
@@ -55,6 +55,11 @@
                             </li>
                         @endif
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cart">
+                                <i class="fa fa-shopping-cart fa-2x"></i>
+                            </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -66,6 +71,9 @@
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    {{ __('Profile') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -94,7 +102,7 @@
                             <div class="collapse" id="{{$categoryCollapseId}}">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     @foreach($category->childCategories as $childCategory)
-                                        <li><a href="#" class="link-dark rounded">{{$childCategory->name}}</a></li>
+                                        <li><a href="/category/{{$childCategory->id}}" class="link-dark rounded">{{$childCategory->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

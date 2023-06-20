@@ -15,11 +15,7 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
-
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\UserController::class, 'index']);
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', function () {
@@ -27,8 +23,18 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     });
 });
 
-Route::get('/product/{id}', [App\Http\Controllers\PublicController::class, 'product']);
+Route::get('/', [App\Http\Controllers\PublicController::class, 'index'])->name('index');
+Route::get('/home', [App\Http\Controllers\UserController::class, 'index'])->name('home');
+Route::get('/category/{id}', [App\Http\Controllers\PublicController::class, 'category'])->name('index.category');
+Route::get('/product/{id}', [App\Http\Controllers\PublicController::class, 'product'])->name('product');
 Route::redirect('/product', '/');
+
+Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart');
+Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/subtract', [App\Http\Controllers\CartController::class, 'subtract'])->name('cart.subtract');
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 
 View::composer(['layouts.app'], function ($view) {
     $view->with('rootCategories', App\Models\Category::all()->where('category_id', null));

@@ -18,10 +18,9 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
      *
      */
-    public function index() : Renderable
+    public function profile() : Renderable
     {
         return view('home', ['categories' => Category::all()]);
     }

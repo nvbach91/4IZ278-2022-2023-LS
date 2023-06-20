@@ -5,7 +5,9 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{$item->image}}" alt="..." /></div>
+                <div class="col-md-6 product-image-wrap d-flex justify-content-center">
+                    <img class="card-img-top mb-5 mb-md-0 product-image" src="{{$item->image}}" alt="..." />
+                </div>
                 <div class="col-md-6">
                     @php
                         $codeLength = 8;
@@ -21,15 +23,20 @@
                     <div class="fs-5 mb-5">
                         @if($item->discount_price > 0)
                             <span class="text-decoration-line-through">${{$item->price}}</span>
-                            <span>${{$item->discount_price}}</span>
+                            <span>{{$item->discountPriceKc()}}</span>
                         @else
-                            <span>${{$item->price}}</span>
+                            <span>{{$item->priceKc()}}</span>
                         @endif
                     </div>
                     <p class="lead">{{$item->description}}</p>
                     <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <form id="form{{$item->id}}" method="post" action="{{route('cart.add')}}">
+                            @csrf
+                            <input class="form-control text-center me-3" name="quantity" type="number" value="1" style="max-width: 3rem" />
+                            <input type="hidden" value="index" name="redirect">
+                            <input type="hidden" name="id" value="{{$item->id}}">
+                        </form>
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" href="javascript:{}" onclick="document.getElementById('form{{$item->id}}').submit();">
                             <i class="bi-cart-fill me-1"></i>
                             Add to cart
                         </button>

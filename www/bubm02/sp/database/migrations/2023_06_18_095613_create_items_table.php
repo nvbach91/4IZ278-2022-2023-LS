@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('name', 256);
-            $table->string('description', 1024)->nullable();
+            $table->string('description', 2048)->nullable();
             $table->string('properties', 1024)->nullable();
             $table->integer('price');
             $table->integer('discount_price')->nullable();

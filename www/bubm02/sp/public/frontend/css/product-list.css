@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 a,
+input,
+input:hover,
 a:hover {
     text-decoration: none;
     color: inherit;
@@ -49,8 +51,14 @@ a:hover {
     transition: all 0.3s;
 }
 
-.section-products .single-product:hover .part-1::before {
+.single-product:hover .part-1{
     transform: scale(1.2,1.2) rotate(5deg);
+    margin-bottom: 50px;
+}
+
+.single-product:hover .part-1 ul{
+    transform: rotate(-5deg);
+    transition: all 0.3s;
 }
 
 .section-products .single-product .part-1 .discount,
