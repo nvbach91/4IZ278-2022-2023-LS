@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once 'config.php';
-require_once 'header.php';
 
 if (isset($_SESSION['user_id'])) {
     try {
@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" type="text/css" href="./styles/editUser.css">
 </head>
 <body>
+    <?php require_once 'header.php'; ?>
     <div class="container-editUser">
         <h1>Edit User</h1>
         <form action="editUser.php" method="post">

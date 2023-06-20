@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once 'config.php';
-require_once 'header.php';
 
 $email = '';
 $password = '';
@@ -26,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="./styles/login.css">
     <title>User Login</title>
+    <link rel="stylesheet" type="text/css" href="./styles/login.css">
 </head>
 <body>
+    <?php require_once 'header.php'; ?>
     <h2>User Login</h2>
     <?php if (isset($error)) : ?>
         <p class="error"><?php echo $error; ?></p>

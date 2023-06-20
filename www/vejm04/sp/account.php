@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once 'config.php';
-require_once 'header.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -33,6 +33,7 @@ try {
     <link rel="stylesheet" type="text/css" href="./styles/account.css">
 </head>
 <body>
+    <?php require_once 'header.php'; ?>
     <h1>Account</h1>
 
     <section>

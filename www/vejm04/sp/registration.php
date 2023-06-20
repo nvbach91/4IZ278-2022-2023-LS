@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once 'config.php';
-require_once 'header.php';
 
 $firstName = '';
 $lastName = '';
@@ -88,10 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="./styles/registration.css">
     <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="./styles/registration.css">
 </head>
 <body>
+    <?php require_once 'header.php'; ?>
     <h2>User Registration</h2>
     <div class="container registration-container">
         <form method="POST" action="registration.php">
