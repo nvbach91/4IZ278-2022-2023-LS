@@ -1,0 +1,17 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  width: 444px;
+  margin: 5px;
+}
+
+
+body {
+  background: #89da6b;
+}
+
+.card_product {
+    width: 600px;
+    margin: 5px;
+    background-color: white;
+}
