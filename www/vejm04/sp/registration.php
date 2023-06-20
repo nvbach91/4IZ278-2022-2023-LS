@@ -1,7 +1,6 @@
 <?php
 require_once 'config.php';
 require_once 'header.php';
-session_start();
 
 $firstName = '';
 $lastName = '';
@@ -87,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="./styles/registration.css">
     <title>User Registration</title>
@@ -118,6 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="password" required><br>
 
             <input type="submit" value="Register">
+
+            <a href="privacyPolicy.php" class="privacyPolicyAndFB">Zásady ochrany osobních údajů</a>
         </form>
     </div>
 </body>

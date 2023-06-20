@@ -12,12 +12,12 @@ function displayProducts($products)
     foreach ($products as $product) {
         echo '<div class="product">';
         echo '<h3>' . $product['name'] . '</h3>';
-        echo '<a href="product_detail.php?id=' . $product['id'] . '">';
+        echo '<a href="productDetail.php?id=' . $product['id'] . '">';
         echo '<img src="' . $product['image'] . '" alt="' . $product['name'] . '">';
         echo '</a>';
         echo '<p>' . $product['description'] . '</p>';
         echo '<p>Price: $' . $product['price'] . '</p>';
-        echo '<a href="product_detail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
+        echo '<a href="productDetail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
         echo '</div>';
     }
 }
@@ -35,10 +35,10 @@ function displayCategories($categories)
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>E-Shop</title>
-    <link rel="stylesheet" type="text/css" href="./styles/index.css">
+    <link rel="stylesheet" type="text/css" href="./styles/common.css">
 </head>
 <body>
     <?php include 'header.php'; ?>

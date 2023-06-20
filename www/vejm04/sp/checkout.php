@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-session_start();
 $cartItems = [];
 
 if (isset($_POST['product']) && isset($_POST['quantity'])) {
@@ -33,12 +32,10 @@ foreach ($cartItems as $cartItem) {
         $totalPrice += $itemPrice;
     }
 }
-
-$_SESSION['cart'] = [];
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Checkout</title>
     <link rel="stylesheet" type="text/css" href="./styles/checkout.css">
@@ -94,7 +91,7 @@ $_SESSION['cart'] = [];
                     $city = $_POST['city'];
                     $zipCode = $_POST['zip_code'];
                     $email = $_POST['email'];
-                
+
                     echo "<p><strong>First Name:</strong> $firstName</p>";
                     echo "<p><strong>Last Name:</strong> $lastName</p>";
                     echo "<p><strong>Address:</strong> $address</p>";
@@ -103,11 +100,26 @@ $_SESSION['cart'] = [];
                     echo "<p><strong>Email:</strong> $email</p>";
                 }
                 ?>
-                </div>
-                <div class="thank-you">
-                    <p>Thank you for your order!</p>
-                </div>
+            </div>
+            <div class="send-order">
+                <form action="sendOrder.php" method="post">
+                    <?php foreach ($cartItems as $cartItem): ?>
+                        <input type="hidden" name="product[]" value="<?php echo $cartItem['product_id']; ?>">
+                        <input type="hidden" name="quantity[]" value="<?php echo $cartItem['quantity']; ?>">
+                    <?php endforeach; ?>
+                    <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+
+                    <input type="hidden" name="first_name" value="<?php echo $firstName; ?>">
+                    <input type="hidden" name="last_name" value="<?php echo $lastName; ?>">
+                    <input type="hidden" name="address" value="<?php echo $address; ?>">
+                    <input type="hidden" name="city" value="<?php echo $city; ?>">
+                    <input type="hidden" name="zip_code" value="<?php echo $zipCode; ?>">
+                    <input type="hidden" name="email" value="<?php echo $email; ?>">
+
+                    <div class="send-order"><button type="submit">Send Order</button></div>
+                </form>
             </div>
         </div>
+    </div>
     </body>
-</html>
+</html>    

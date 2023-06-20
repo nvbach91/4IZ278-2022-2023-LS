@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>E-Shop - Category</title>
     <link rel="stylesheet" type="text/css" href="./styles/category.css">
@@ -36,12 +36,12 @@ if (isset($_GET['id'])) {
             foreach ($products as $product) {
                 echo '<div class="product">';
                 echo '<h3>' . $product['name'] . '</h3>';
-                echo '<a href="product_detail.php?id=' . $product['id'] . '">';
+                echo '<a href="productDetail.php?id=' . $product['id'] . '">';
                 echo '<img src="' . $product['image'] . '" alt="' . $product['name'] . '">';
                 echo '</a>';
                 echo '<p>' . $product['description'] . '</p>';
                 echo '<p>Price: $' . $product['price'] . '</p>';
-                echo '<a href="product_detail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
+                echo '<a href="productDetail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
                 echo '</div>';
             }
         } else {
