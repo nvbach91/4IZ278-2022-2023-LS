@@ -11,7 +11,10 @@
         "laravel/framework": "^10.8",
         "laravel/jetstream": "^3.2",
         "laravel/sanctum": "^3.2",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.8",
+        "livewire/livewire": "^2.12",
+        "nesbot/carbon": "^2.67",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
