@@ -1,4 +1,11 @@
-<?php require_once "./UsersDatabase.php" ?>
+<?php require_once "./database/UsersDatabase.php" ?>
+<?php
+if(isset($_COOKIE["username"])){
+    header("Location: ./index.php");
+    exit;
+}
+?>
+<?php require "./checks/signupCheck.php"?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +18,7 @@
 </head>
 <body>
     <header>
-        <h1>Store Trek</h1>
+        <?php include "./includes/logo.php" ?>
         <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
@@ -39,13 +46,11 @@
             <label>Building number:</label>
             <input type="number" name="buildingNo">
             <label>Zip code:</label>
-            <input type="number" name="zipCode">
-            <button>Signup</button>
+            <input type="text" name="zipCode">
+            <p><a href="./login.php">Already have an account? Click here</a></p>
+            <button type="submit">Signup</button>
         </form>
-        <p><a href="./login.php">Already have an account? Click here</a></p>
     </main>
-    <footer>
-
-    </footer>
+    <?php include "./includes/footer.php" ?>
 </body>
 </html>

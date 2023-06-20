@@ -1,7 +1,23 @@
-<?php require_once "./ItemsDatabase.php" ?>
+<?php require_once "./database/ItemsDatabase.php" ?>
+<?php require_once "./database/UsersDatabase.php" ?>
 <?php
-    $itemsDatabase = new ItemsDatabase();
-    $items = $itemsDatabase->fetchAll();
+
+session_start();
+$itemsDatabase = new ItemsDatabase();
+$usersDatabase = new UsersDatabase();
+
+$totalItemAmounts = $itemsDatabase->getItemsAmount();
+$itemsPerPage = 6;
+$paginationCount = ceil($totalItemAmounts/$itemsPerPage);
+
+if(!empty($_GET)){
+    $offset = $_GET ["offset"];
+}
+else {
+    $offset=0;
+}
+$items = $itemsDatabase->fetchPage($itemsPerPage, $offset);
+
 ?>
 
 <!DOCTYPE html>
@@ -15,29 +31,63 @@
 </head>
 <body>
     <header>
-        <h1>Store Trek</h1>
+        <?php include "./includes/logo.php" ?>
         <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
-                <li><a href="./signup.php">Sign up</a></li>
-                <li><a href="./login.php">Login</a></li>
+                <?php
+                if(!isset($_COOKIE["username"])){
+                    echo '<li><a href="./signup.php">Sign up</a></li><li><a href="./login.php">Login</a></li>';
+                }
+                else{
+                    if($usersDatabase->isAdmin($_COOKIE["username"])){
+                        echo '<li><a href="./admin.php">Admin</a></li>';
+                    }
+                    else{
+                        if(isset($_SESSION["cart"])){
+                            $itemsNumber = count($_SESSION["cart"]);
+                        }
+                        else{
+                            $itemsNumber = 0;
+                        }
+                        echo '<li><a href="./orderhistory.php">Order history</a></li>';
+                        echo '<li><a href="./checkout.php">Checkout ('.$itemsNumber.')</a></li>';
+                    }
+                    echo '<li><a href="./logout.php">Logout</a></li>';
+                }
+                ?>
             </ul>
         </nav>
     </header>
     <main>
-        <div id="items">
-            <?php foreach($items as $item):?>
-                <div class="item">
-                    <h2><?php echo $item["name"];?></h2>
-                    <p><strong><?php echo $item["price"];?></strong></p>
-                    <p><?php echo $item["description"];?></p>
-                    <img width="200" src="<?php echo $item["image"];?>">
-                </div>
-            <?php endforeach;?>
+        <div id="intro-image">
+            <h1>Store Trek</h1>
+            <h3>The best place for your Star Trek needs
+            </h3>
         </div>
+        <div id="homepage">
+            <div id="items">
+                <?php foreach($items as $item):?>
+                    <div class="item">
+                        <img height="200" src="<?php echo $item["image"];?>">
+                        <h2><?php echo $item["name"];?></h2>
+                        <p class="price-item">$<?php echo $item["price"];?></p>
+                        <p class="description-item"><?php echo $item["description"];?></p>
+                        <p><a href="./buy.php?item_id=<?php echo $item["itemid"]; ?>">Buy</a></p>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        </div>
+        <ul id="homepage-pagination">
+            <?php for($i = 0; $i<$paginationCount; $i++){ ?>
+                <li>
+                    <a href="<?php echo './index.php?offset=' . $i * $itemsPerPage.'#items';?>">
+                        <?php echo $i+1; ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
     </main>
-    <footer>
-
-    </footer>
+    <?php include "./includes/footer.php" ?>
 </body>
 </html>
