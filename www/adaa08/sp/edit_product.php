@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Ensure the user is an admin
 if ($_SESSION['role'] != 'admin') {
     header('Location: login.php');
     exit();
 }
 
-// Check if product_id is set
 if (!isset($_GET['product_id'])) {
     die('Missing product_id parameter');
 }
@@ -43,14 +41,12 @@ $product = $productObj->getProductById($product_id);
     <input type="text" name="description" placeholder="Popis" value="<?= htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8') ?>">
     <input type="number" name="q_in_stock" placeholder="Nový počet kusov" value="<?= htmlspecialchars($product['q_in_stock'], ENT_QUOTES, 'UTF-8') ?>">
 
-<!-- Category dropdown -->
     <select name="category_id">
         <?php foreach ($categories as $category): ?>
         <option value="<?= htmlspecialchars($category['category_id'], ENT_QUOTES, 'UTF-8') ?>" <?= $category['category_id'] == $product['categories_category_id'] ? 'selected' : '' ?>><?= htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') ?></option>
         <?php endforeach; ?>
     </select>
 
-    <!-- File input for the product photo -->
     <input type="file" name="photo">
 
     <button type="submit">Upraviť produkt</button>

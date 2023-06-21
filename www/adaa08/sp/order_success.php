@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
 
-// You may want to retrieve the order details from the database here
 
 ?>
 

@@ -33,7 +33,6 @@ foreach ($orderItems as $item) {
     $product->updateProductStock($item['product_id'], $item['quantity']);
 }
 
-// Calculate the total price
 $total = 0;
 foreach ($cartItems as $item) {
     $productDetails = $product->getProductById($item['product_id']);
@@ -56,17 +55,12 @@ if(isset($_SESSION['user_id'])) {
     $_SESSION['cart_id'] = $newCartId;
 } else {
     echo "User is not logged in.";
-    // handle this situation appropriately
 }
 
-
-
-// Email section
 $userDetails = $user->getUser($_SESSION['user_id']);
 $adminEmail = 'adaa08@vse.cz';
 
-// Send email to the user after order is placed
-$to = $userDetails['email']; // User's email
+$to = $userDetails['email']; 
 $subject = "Potvrdenie objednávky";
 $message = "Ďakujeme za objednávku. Pracujeme na jej vybavení.";
 $headers = "From: noreply@example.com" . "\r\n" .
@@ -75,7 +69,6 @@ $headers = "From: noreply@example.com" . "\r\n" .
 
 mail($to, $subject, $message, $headers);
 
-// Send email to the admin
 $toAdmin = $adminEmail;
 $subjectAdmin = "Nová objednávka";
 $messageAdmin = "Nová objednávka bola vytvorená.";
@@ -86,6 +79,5 @@ $headersAdmin = "From: noreply@example.com" . "\r\n" .
 mail($toAdmin, $subjectAdmin, $messageAdmin, $headersAdmin);
 
 
-// Redirect to the order success page
 header('Location: order_success.php');
 ?>

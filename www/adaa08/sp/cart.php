@@ -15,11 +15,10 @@ $cart_id = $_SESSION['cart_id'];
 $db = new Database();
 $cart = new Cart($db);
 
-// Retrieve the cart items
+
 $cartItems = $cart->getCartItems($cart_id);
 $totalCartPrice = 0;
 
-// Your HTML goes here...
 ?>
 <!DOCTYPE html>
 <html lang="sk">
@@ -35,7 +34,7 @@ $totalCartPrice = 0;
     <h1>Nákupný košík</h1>
 </header>
 
-<?php if (count($cartItems) > 0): // Only show if there are items in the cart
+<?php if (count($cartItems) > 0): 
     foreach ($cartItems as $item): 
         $totalPriceForThisItem = $item['price'] * $item['quantity'];
         $totalCartPrice += $totalPriceForThisItem;
@@ -49,7 +48,7 @@ $totalCartPrice = 0;
     <p>Celková cena pre typ produktu: <?= htmlspecialchars($totalPriceForThisItem, ENT_QUOTES, 'UTF-8') ?></p>
 </div>
 
-<?php endforeach; // End of the items loop ?>
+<?php endforeach; ?>
 
 <p>Celková cena: <?= $totalCartPrice ?></p>
 
@@ -57,11 +56,11 @@ $totalCartPrice = 0;
     <button type="submit">Objednať</button>
 </form>
 
-<?php else: // If there are no items in the cart ?>
+<?php else:  ?>
 
 <p>Váš košík je prázdny.</p>
 
-<?php endif; // End of the items conditional ?>
+<?php endif;  ?>
 
 <?php include 'footer.php';?>
 

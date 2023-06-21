@@ -63,13 +63,11 @@ $categories = $categoryObj->getCategories();
             echo "<form action='add_to_cart.php' method='post'>\n";
             echo "<input type='hidden' name='product_id' value='" . $product['product_id'] . "'>\n";
             
-            // Start quantity select
             echo "<select name='quantity'>\n";
             for($i=1; $i<=10; $i++) {
                 echo "<option value='".$i."'>".$i."</option>\n";
             }
             echo "</select>\n";
-            // End quantity select
 
             echo "<button type='submit' class='add-to-cart'>Pridať do košíka</button>\n";
             echo "</form>\n";

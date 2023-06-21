@@ -10,19 +10,18 @@ class Admin {
     }
 
     public function cancelOrder($orderId) {
-        // Retrieve all order items
+
         $order_items = $this->orderObj->getOrderItems($orderId);
 
-        // Process each order item
         foreach ($order_items as $item) {
-            // Increase product quantity back in stock
+
             $this->productObj->updateQuantity($item['products_product_id'], $item['quantity']);
             
-            // Delete the order item
+
             $this->orderObj->deleteOrderItem($item['order_items_id']);
         }
 
-        // Delete the order
+
         $this->orderObj->deleteOrder($orderId);
     }
 
@@ -40,7 +39,6 @@ class Admin {
 
     public function updateProduct($productId, $name, $price, $description, $quantity, $categoryId, $photo)
 {
-    // Handle the file upload
     $target_dir = "pictures/";
     $target_file = $target_dir . basename($photo["name"]);
     $full_url = 'https://esotemp.vse.cz/~adaa08/sp/' . $target_file;

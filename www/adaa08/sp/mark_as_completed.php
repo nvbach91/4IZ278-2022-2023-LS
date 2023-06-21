@@ -20,13 +20,12 @@ $db = new Database();
 $orderObj = new Order($db);
 $userObj = new User($db);
 
-// Mark the order as completed
 if ($orderObj->updateOrderStatus($order_id, "Vybavená")) {
-    // Get user email
+
     $email = $userObj->getUserEmailByOrderId($order_id);
 
     if ($email) {
-        // Compose the email
+
         $to = $email;
         $subject = "Order Update";
         $message = "Your order (Order ID: " . $order_id . ") has been processed and is on its way.";
@@ -34,7 +33,6 @@ if ($orderObj->updateOrderStatus($order_id, "Vybavená")) {
             "Reply-To: noreply@example.com" . "\r\n" .
             "X-Mailer: PHP/" . phpversion();
         
-        // Send the email
         if (mail($to, $subject, $message, $headers)) {
             header('Location: admin.php');
             exit();
@@ -47,7 +45,6 @@ if ($orderObj->updateOrderStatus($order_id, "Vybavená")) {
 } else {
     echo "Could not update order status.";
 }
-    // Redirect back to admin page
 header('Location: admin.php');
 
 ?>

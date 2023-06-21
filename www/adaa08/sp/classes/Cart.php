@@ -32,7 +32,6 @@ class Cart
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // fetch and sanitize the data
         $data = [];
         while($row = $result->fetch_assoc()) {
             $data[] = array_map(function($value) {
@@ -45,12 +44,10 @@ class Cart
 
     public function deleteCart($cartId) 
 {
-    // First, delete all items associated with the cart
     $stmt = $this->db->prepare('DELETE FROM shopping_cart_item WHERE shopping_cart_cart_id = ?');
     $stmt->bind_param('i', $cartId);
     $stmt->execute();
 
-    // Then, delete the cart itself
     $stmt = $this->db->prepare('DELETE FROM shopping_cart WHERE cart_id = ?');
     $stmt->bind_param('i', $cartId);
     $stmt->execute();
