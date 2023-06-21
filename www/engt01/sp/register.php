@@ -32,6 +32,8 @@ if (!empty($_POST)) {
             $_SESSION["userId"] = $userDb->getUserId($email);
             $_SESSION["userType"] = $userDb->getUserType($userDb->getUserId($email));
 
+            mail($email, "Registrace do Knihovny 4IZ278", "Dobrý den,\nVaše registrace na https://esotemp.vse.cz/~engt01/sp/ proběhla úspěšně!");
+
             header("Location: index.php?registered=1");
             exit();
         } else $errors[] = "No login found";
@@ -59,7 +61,8 @@ include "components/header.php" ?>
                 <input id="password" name="password" type="password">
                 <label for="passwordR">Potvrdit heslo</label>
                 <input id="passwordR" name="passwordR" type="password">
-                <button type="submit" class="btn btn-primary mt-auto" style="grid-column: 1 / span 2">Registrovat</button>
+                <button type="submit" class="btn btn-primary mt-auto" style="grid-column: 1 / span 2">Registrovat
+                </button>
             </form>
         </div>
     </div>
