@@ -31,10 +31,28 @@ class TaskManager extends Component
 
         return view('livewire.task-manager', compact('tasks', 'projects'));
 
-        return view('livewire.task-manager');
     }
 
-    public function updateTask($taskId){
+
+    public function createTask(){
+        $this->name = null;
+        $this->description = null;
+        $this->due = null;
+        $this->taskId = null;
+        $this->project_id = null;
+    }
+
+    public function storeTask(){
+        $task = new Task;
+        $task->name = $this->name;
+        $task->description = $this->description;
+        $task->due = $this->due;
+        $task->project_id = $this->project_id;
+        $task->user_id = Auth::id();
+        $task->save();
+    }
+
+    public function editTask($taskId){
         $task = Task::where('id', $taskId)->first();
         $this->name = $task->name;
         $this->description = $task->description;
@@ -42,6 +60,16 @@ class TaskManager extends Component
         $this->taskId = $taskId;
         $this->project_id = $task->project_id;
     }
+
+    public function updateTask(){
+        $task = Task::where('id', $this->taskId)->first();
+        $task->name = $this->name;
+        $task->description = $this->description;
+        $task->due = $this->due;
+        $task->project_id = $this->project_id;
+        $task->save();
+    }
+
 
     public function completeTask($taskId){
         $task = Task::where('id', $taskId)->first();
@@ -53,6 +81,16 @@ class TaskManager extends Component
             $task->completed = 1;
         }
         $task->save();
+    }
+
+    public function deleteTask($taskId){
+        $task = Task::where('id', $taskId)->first();
+        $this->taskId = $task->id;
+    }
+
+    public function destroyTask(){
+        $task = Task::where('id', $this->taskId)->first();
+        $task->delete();
     }
 
 }

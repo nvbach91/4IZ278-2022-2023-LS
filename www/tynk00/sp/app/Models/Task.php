@@ -16,8 +16,6 @@ class Task extends Model
 
     protected $primaryKey = 'id';
 
-    protected $with = ['tags'];
-
     protected $atributes = [
         'completed' => false
     ];
@@ -31,10 +29,5 @@ class Task extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class);
     }
 }

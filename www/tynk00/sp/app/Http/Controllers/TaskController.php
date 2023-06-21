@@ -42,8 +42,6 @@ class TaskController extends Controller
         else{
             return redirect()->route('tasks')->with('success', 'Projekt byl úspěšně přidán!');
         }
-
-
     }
 
     public function show(Task $task)

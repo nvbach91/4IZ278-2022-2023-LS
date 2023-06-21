@@ -19,7 +19,7 @@ class NoteController extends Controller
     public function create()
     {
         $colors = Color::all();
-        $projects = Project::where('user_id', Auth::id());
+        $projects = Project::where('user_id', Auth::id())->get();
         return view('notes.create', compact('colors', 'projects'));
     }
 
