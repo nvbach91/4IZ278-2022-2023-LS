@@ -1,60 +1,31 @@
 <?php
-    $host = 'localhost';
-    $db   = 'adaa08';
-    $user = 'adaa08';
-    $pass = 'dahp7Eidien4iokoop';
-    $charset = 'utf8mb4';
+    session_start();
 
-    $conn = new mysqli($host, $user, $pass, $db);
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+
 ?>
+
 
 <!DOCTYPE html>
-<html>
+<html lang="sk">
 <head>
     <title>E-shop</title>
+    <?php include 'meta.php'; ?>
 </head>
 <body>
-    <header>
-        <h1>Vitaje v mojom E-shope!</h1>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.php">Domov</a></li>
-            <li><a href="eshop.php">Eshop</a></li>
-            <li><a href="login.php">Login</a></li>
-        </ul>
-    </nav>
+<?php include 'header.php';
+?>
 
-    <main>
-        <h2>O nás</h2>
-        <p>Príklad.</p>
+    <div class="header">
+        <h1>KitchenStore</h1>
+    </div>
 
-        <h2>Produkty</h2>
+        <div style="text-align: center; margin-bottom:50px">
+            Vitajte v našom obchode KitchenStore ponúkame vám rôzne kuchynské potreby a spotrebiče.
+        </div>
 
-        <?php
-            $query = 'SELECT product_id, name, price FROM products LIMIT 3';
-            $result = $conn->query($query);
 
-            while ($row = $result->fetch_assoc()) {
-                echo "<div>\n";
-                echo "<h3>" . $row['name'] . "</h3>\n";
-                echo "<p>Price: " . $row['price'] . "</p>\n";
-                echo "</div>\n";
-            }
-        ?>
-    </main>
-
-    <footer>
-        <p>adaa08 Eshop</p>
-    </footer>
+    <?php include 'footer.php';?>
 </body>
 </html>
-
-<?php
-    $conn->close();
-?>
