@@ -52,7 +52,7 @@ class NoteController extends Controller
             'title' => 'required|max:255',
             'body' => 'nullable',
             'user_id' => 'required|integer',
-            'project_id' => 'required|integer',
+            'project_id' => 'nullable',
             'color' => 'nullable'
         ]);
 
