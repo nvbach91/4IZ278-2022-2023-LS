@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header bg-dark text-light">
-                        <h2>{{ __('Nastavení uživatele') }}</h2>
+                        <h2 class="mb-0">{{ __('Nastavení uživatele') }}</h2>
                     </div>
 
                     <div class="card-body">

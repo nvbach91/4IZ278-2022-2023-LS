@@ -94,9 +94,9 @@
         aria-hidden="true" wire:ignore>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-primary text-light">
                     <h5 class="modal-title" id="addTagModalLabel">Přidat nový tag</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -111,7 +111,7 @@
                             <div class="square-radio px-3">
                                 <div class="row">
                                     @foreach ($colors as $color)
-                                        <div class="col-lg-2 col-md-4 col-6 mb-2">
+                                        <div class="col-lg-2 col-md-4 col-6 mb-2 mx-auto">
                                             <input class="form-check-input" type="radio" name="color"
                                                 value="{{ $color->HEX }}" wire:model="color"
                                                 {{ $color->HEX == 'FFFFFF' ? 'checked' : '' }}

@@ -1,9 +1,9 @@
-<div class="col-md-3 mb-3">
+<div class="col-lg-3 col-md-6 col-sm-12 mb-3">
     <div class="card shadow" style="background-color: #{{ $project->color }}">
-        <div class="card-header">
-            <h5 class="card-title m-0">{{ $project->name }}</h5>
+        <div class="card-header bg-dark text-light">
+            <h4 class="card-title m-0">{{ Illuminate\Support\Str::limit($project->name, 26, '...') }}</h4>
         </div>
-        <div class="card-body">
+        <div class="card-body fw-medium">
             @isset($project->description)
                 <p class="card-text">{{ $project->description }}</p>
             @else
@@ -25,7 +25,8 @@
             @endif
         </div>
         <div class="card-footer">
-            <a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary">Zobrazit</a>
+            <a href="{{ route('projects.show', $project->id) }}" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            <a href="{{ route('projects.edit', $project->id) }}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></a>
         </div>
     
     

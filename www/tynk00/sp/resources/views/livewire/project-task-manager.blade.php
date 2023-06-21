@@ -1,6 +1,6 @@
 <div>
 
-    <div class="p-2 shadow-lg rounded bg-dark mb-3">
+    <div class="p-2 rounded bg-dark mb-3">
         <a href="#" class="btn btn-light" data-toggle="modal" data-target="#addTaskModal"
             wire:click="createTask()">Nový úkol</a>
         <div class="float-right">
@@ -40,7 +40,8 @@
                     <td>{{ $task->name }}</td>
                     <td>
                         @if ($task->project != null)
-                            {{ $task->project->name }}
+                        <a href="{{ route('project.show', $task->project->id) }}"><span class="badge" style="background-color: #{{$task->project->color}}">{{ $task->project->name }}</span></a>
+                            
                         @endif
                     </td>
                     <td>{{ $task->due }}</td>

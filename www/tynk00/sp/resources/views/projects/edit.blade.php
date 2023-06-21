@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
-                    <div class="card-header">{{ __('Edit Project') }}</div>
+                    <div class="card-header bg-dark text-light">
+                        <h2 class="mb-0">{{ __('Upravit projekt') }}</h2>
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('projects.update', $project->id) }}">
@@ -13,7 +15,7 @@
                             @method('PUT')
 
                             <div class="form-group">
-                                <label for="name">{{ __('Name') }}</label>
+                                <label for="name">{{ __('Název') }}</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $project->name) }}" required>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -23,7 +25,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">{{ __('Description') }}</label>
+                                <label for="description">{{ __('Popis') }}</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description', $project->description) }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -48,8 +50,12 @@
                             </div>
 
                             <input type="hidden" id="user_id" name="user_id" value="{{ $project->user_id }}">
-                            <button type="submit" class="btn btn-primary">{{ __('Update Project') }}</button>
-                            <a href="{{ route('projects.show', $project->id) }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+
+                        </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">{{ __('Upravit projekt') }}</button>
+                                <a href="{{ route('projects.show', $project->id) }}" class="btn btn-secondary">{{ __('Zrušit') }}</a>
+                            </div>
                         </form>
                     </div>
                 </div>

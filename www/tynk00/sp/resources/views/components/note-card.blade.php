@@ -11,7 +11,7 @@
             <div class="card-footer">
                 {{ Illuminate\Support\Str::limit($note->lastUpdate(), 10, '...') }} |
                 @if($note->project != null)
-                {{ $note->project->name }}
+                {{ Illuminate\Support\Str::limit($note->project->name, 10, '...') }}
                 @else
                 Bez projektu
                 @endif

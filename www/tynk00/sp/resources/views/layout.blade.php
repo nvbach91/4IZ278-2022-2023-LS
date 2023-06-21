@@ -26,7 +26,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-light bg-gradient ">
 
     <x-app.navbar />
 

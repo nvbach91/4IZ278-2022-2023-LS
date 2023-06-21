@@ -1,5 +1,5 @@
 <div>
-    <div class="p-2 shadow-sm rounded bg-dark my-3">
+    <div class="p-2 shadow-sm rounded bg-dark mb-3">
         <a href="{{ route('projects.create') }}" class="btn btn-light">Nový projekt</a>
         <div class="float-right">
             <div class="input-group">

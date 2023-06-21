@@ -1,6 +1,6 @@
 <div>
 
-    <div class="p-2 shadow-lg rounded bg-dark mb-3">
+    <div class="p-2 rounded bg-dark mb-3">
         <a href="#" class="btn btn-light" data-toggle="modal" data-target="#addTaskModal"
             wire:click="createTask()">Nový úkol</a>
         <div class="float-right">
@@ -40,7 +40,8 @@
                     <td>{{ $task->name }}</td>
                     <td>
                         @if ($task->project != null)
-                            {{ $task->project->name }}
+                        <a href="{{ route('projects.show', $task->project->id) }}"><span class="badge text-dark p-2" style="background-color: #{{$task->project->color}}">{{ Illuminate\Support\Str::limit($task->project->name, 22, '...') }}</span></a>
+
                         @endif
                     </td>
                     <td>{{ $task->due }}</td>
@@ -48,7 +49,7 @@
                     <td class="text-end" style="width: 50px;">
                         <div class="dropdown" wire:ignore>
                             <button class="btn btn-sm btn-link dropdown-toggle" type="button"
-                                id="task{{ $task->id }}Actions" data-bs-toggle="dropdown" aria-expanded="false">
+                                id="task{{ $task->id }}Actions" data-bs-toggle="dropdown" aria-expanded="false"  wire:ignore>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="task{{ $task->id }}Actions" wire:ignore>
                                 <li><a class="dropdown-item" data-toggle="modal" data-target="#editTaskModal"

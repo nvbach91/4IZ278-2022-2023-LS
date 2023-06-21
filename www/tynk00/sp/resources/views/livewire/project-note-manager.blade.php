@@ -4,8 +4,7 @@
         <div class="float-right">
             <form action="/search-projects" method="get">
                 <input type="text" id="searchInput" class="form-control" wire:model="searchTerm" placeholder="Vyhledat...">
-            </form>
-            
+            </form>       
         </div>
     </div>
     <div class="row">
