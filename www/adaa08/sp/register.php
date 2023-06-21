@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $lastname = htmlspecialchars($_POST['second_name']);
     $email = htmlspecialchars($_POST['email']);
     $phone = htmlspecialchars($_POST['phone']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password']; // No hashing here
     $role = 'user';
 
     if ($userObj->createUser($firstname, $lastname, $email, $phone, $role, $password)) {
@@ -66,7 +66,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <input type="submit" value="Register">
 </form>
 
-
-    <?php include 'footer.php';?>
+<?php include 'footer.php';?>
 </body>
 </html>
