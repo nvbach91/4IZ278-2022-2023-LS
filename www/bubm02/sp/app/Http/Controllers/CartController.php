@@ -34,7 +34,7 @@ class CartController extends Controller
         }
         $cart[$itemId] = $quantity;
         $request->session()->put('cart', $cart);
-        return redirect()->route($request->input('redirect'));
+        return back();
     }
 
     public function subtract(Request $request)
@@ -53,7 +53,7 @@ class CartController extends Controller
             }
             $request->session()->put('cart', $cart);
         }
-        return redirect()->route($request->input('redirect'));
+        return back();
     }
 
     public function remove(Request $request)
@@ -64,7 +64,7 @@ class CartController extends Controller
             unset($cart[$itemId]);
             $request->session()->put('cart', $cart);
         }
-        return redirect()->route($request->input('redirect'));
+        return back();
     }
 
     /**

@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
+            $table->string('email', 256)->unique();
             $table->string('first_name', 64);
             $table->string('last_name', 64);
             $table->string('password', 256)->nullable();
-            $table->string('phone', 32)->nullable();
+            $table->string('provider_id', 256)->nullable();
+            $table->string('phone', 16)->nullable();
             $table->string('isic_number', 32)->nullable();
             $table->timestamp('discount_expiration')->nullable();
             $table->timestamp('email_verified_at')->nullable();

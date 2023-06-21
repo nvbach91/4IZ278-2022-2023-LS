@@ -56,11 +56,11 @@
                                                 @else
                                                     <p class="fw-bold mb-0 me-5 pe-4">{{$item->priceKc()}}</p>
                                                 @endif
-                                                <div class="def-number-input number-input safari_only">
+                                                <div class="def-number-input number-input">
                                                     <button onclick="document.getElementById('form-minus-{{$item->id}}').submit();"
                                                             class="minus"></button>
                                                     <input class="quantity fw-bold text-black" min="0" name="quantity" value="{{$cart[$item->id]}}"
-                                                           type="number" oninput="">
+                                                           type="number" oninput="" readonly>
                                                     <button onclick="document.getElementById('form-add-{{$item->id}}').submit();"
                                                             class="plus"></button>
                                                 </div>

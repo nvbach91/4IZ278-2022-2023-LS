@@ -51,6 +51,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-3">
+                                <a href="{{route('login.google')}}" class="btn btn-danger btn-block">Login with Google</a>
+                                <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">Login with Facebook</a>
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
