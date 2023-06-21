@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('status', 10);
             $table->float('total_price');
             $table->string('payment_method',100);
-            $table->date('date');
 
             $table->foreign('user_id')->references('id')->on('users');
         });

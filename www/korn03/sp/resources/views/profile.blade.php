@@ -44,14 +44,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">{{ $user->phone ? $user->phone : '-' }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary"> Bay Area, San Francisco, CA</div>
+                                <div class="col-sm-9 text-secondary">{{ $user->phone ? $user->phone : 'Not specified' }}</div>
                             </div>
                             <hr>
                             <div class="row">
@@ -97,7 +90,7 @@
                             <p>You have no orders... Wanna make one?</p>
                             @else
                             @foreach ($orders as $order)
-                            <p>order</p>
+                            <p>{{$order->created_at}}</p>
                             @endforeach
                             @endif
                         </div>

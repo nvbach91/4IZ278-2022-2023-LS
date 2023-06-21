@@ -27,8 +27,7 @@ class UserController extends Controller
 
     public function get() : Renderable
     {
-        return view('profile', ['user' => Auth::user()], ['addresses' => Address::where('user_id', Auth::user()->id)->get()],
-        ['orders' => Order::where('user_id', Auth::user()->id)->get()]);
+        return view('profile', ['user' => Auth::user(),'addresses' => Address::where('user_id', Auth::user()->id)->get(), 'orders' => Order::where('user_id', Auth::user()->id)->get()]);
 
     }
 

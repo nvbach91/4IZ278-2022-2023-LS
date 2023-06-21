@@ -38,6 +38,8 @@ Route::post('/cart/remove/', [App\Http\Controllers\CartController::class, 'remov
 
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'get'])->name('cart');
 
+Route::post('/cart/order', [App\Http\Controllers\OrderController::class, 'createOrder'])->name('make_an_order');
+
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'get'])->name('profile');
 
 

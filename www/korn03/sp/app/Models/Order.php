@@ -14,10 +14,11 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'created_at',
+        'updated_at',
         'status',
         'total_price',
         'payment_method',
-        'date',
     ];
 
     /**
