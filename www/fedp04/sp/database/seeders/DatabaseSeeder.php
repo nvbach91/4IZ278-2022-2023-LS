@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        
+
 
 
         DB::table('categories')->insert([
@@ -71,6 +71,22 @@ class DatabaseSeeder extends Seeder
             'price' => 6000,
             'category_id' => $this->getCategoryId("Frogs"),
             'img' => 'https://cdn.britannica.com/17/163817-004-D7A1C3EF.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Frog holder/bed',
+            'description' =>  'A holder or a bed for a frog in a shape of a frog',
+            'price' => 2000,
+            'category_id' => $this->getCategoryId("Accessories"),
+            'img' => 'https://m.media-amazon.com/images/I/615y-CxUDiL._AC_SL1500_.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => 'Frog hat for humans',
+            'description' =>  'A knitted hat in a shape of a frog(for humans)',
+            'price' => 200,
+            'category_id' => $this->getCategoryId("Other"),
+            'img' => 'https://i.etsystatic.com/28848691/r/il/d16559/3996660608/il_fullxfull.3996660608_1toj.jpg'
         ]);
 
         DB::table('products')->insert([

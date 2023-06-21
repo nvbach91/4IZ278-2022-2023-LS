@@ -33,5 +33,9 @@ class Product extends Model
         }
 
         return Product::toKc($sum);
+
     }
+
+    
+
 }

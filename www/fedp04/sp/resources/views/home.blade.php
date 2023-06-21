@@ -9,7 +9,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
             @foreach ($products as $product)
                 <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
-                    <a href="/product/{{ $product->id }}">
+                    <a href="{{route('product', $product->id)}}">
                         <div class="about-product text-center mt-2"><img src="{{ $product->img }}" height="200">
                             <div>
                                 <h4>{{ $product->name }}</h4>

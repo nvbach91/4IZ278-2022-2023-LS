@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -34,6 +36,17 @@ class ProfileController extends Controller
         //         'phone'=>'string|max:255',
         //     ]);
         $user = Auth::user();
+        if ($user->provider_id != null && $request->input('email') != $user->email) {
+            throw ValidationException::withMessages(['field_name' => 'You cant change email if you are logged in with social media']);
+        }
+        $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => [
+                'required', 'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');

@@ -77,6 +77,8 @@
                             <h3>Summary</h3>
                             <div class="summary-item"><span class="text"></span>{{\App\Models\Product::sumKc($cart)}}<span class="price"></span>
                             </div>
+                            <h5>+ shipping</h5>
+                            <div class="shipping"><span class= "text"></span>{{100}} {{"Kč"}}<span class="price"></span></div>
 
                             <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
                         </div>

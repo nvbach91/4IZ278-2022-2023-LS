@@ -66,9 +66,14 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item m-1">
                                 <a href ="{{route('cart')}}">Cart</a>
                             </li>
+
+                            <li class="nav-item m-1">
+                                <a href ="{{route('profile')}}">Profile</a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -101,7 +106,7 @@
 
 
                         @foreach (Category::all() as $category)
-                            <a href="/category/{{ $category->id }}">
+                            <a href="{{ url('category', ['id' => $category->id]) }}">
                                 <h4>{{ $category->category }}</h4>
                             </a>
                         @endforeach

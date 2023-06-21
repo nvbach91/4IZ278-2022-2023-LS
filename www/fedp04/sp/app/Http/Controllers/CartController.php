@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
-use function PHPUnit\Framework\isNull;
 
 class CartController extends Controller
 {
@@ -62,5 +59,8 @@ class CartController extends Controller
             'products' => $products
         ]);
     }
+
+    
+
 
 }

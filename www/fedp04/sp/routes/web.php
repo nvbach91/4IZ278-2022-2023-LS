@@ -14,26 +14,27 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::redirect('/','/home');
+Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
+Route::get('/product/{id}', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
+Route::get('/order/{id}', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'get'])->name('cart');
+Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/minus', [App\Http\Controllers\CartController::class, 'minus'])->name('cart.minus');
 
- Auth::routes();
- Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
- Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
- Route::get('/product/{id}', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
- Route::get('/order/{id}', [App\Http\Controllers\HomeController::class, 'order'])->name('order');
- Route::get('/cart/', [App\Http\Controllers\CartController::class, 'get'])->name('cart');
- Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
- Route::post('/cart/minus', [App\Http\Controllers\CartController::class, 'minus'])->name('cart.minus');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
- Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
- Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('/login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleFacebookCallback']);
 
 
 
- Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return "Admin dashboard";
-    });
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+Route::get('/dashboard', function () {
+    return "Admin dashboard";
+});
 });
 
 

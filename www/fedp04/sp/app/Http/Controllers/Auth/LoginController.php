@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -49,5 +51,34 @@ class LoginController extends Controller
         {
             return redirect('/')->with('status','Logged in successfully');
         }
+    }
+
+    //Facebook Login
+    public function redirectToFacebook(){
+        return Socialite::driver('facebook')
+            ->redirect();
+    }
+
+//facebook callback
+    public function handleFacebookCallback(){
+
+        $user = Socialite::driver('facebook')->stateless()->user();
+
+        $this->_registerorLoginUser($user);
+        return redirect()->route('home');
+    }
+
+protected function _registerOrLoginUser($data){
+        $user = User::where('email',$data->email)->first();
+        $namesurname = explode(' ', $data->name);
+        if(!$user){
+            $user = new User();
+            $user->name = $namesurname[0];
+            $user->surname = $namesurname[1];
+            $user->email = $data->email;
+            $user->provider_id = $data->id;
+            $user->save();
+        }
+        Auth::login($user);
     }
 }
