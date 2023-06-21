@@ -47,6 +47,5 @@ Route::get('/login/facebook/callback', [App\Http\Controllers\Auth\LoginControlle
 
 Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
-
 //////
 

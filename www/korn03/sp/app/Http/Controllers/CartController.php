@@ -26,21 +26,26 @@ class CartController extends Controller
 
         $request->session()->put('cart', $oldCart);
 
-        return redirect()->route('main');
+        return redirect()->route('cart');
 
     }
 
     public function remove(Request $request)
     {
         $oldCart = $request->session()->get('cart');
-        $product = $request->id;
-        if ($oldCart == null){return;}
 
-        array_splice($oldCart, array_search($oldCart, $product));
+        $product = $request->id;
+        /*
+        if ($oldCart == null){
+            return;
+        }
+        */
+        unset($oldCart[array_search($product, $oldCart)]);
+        //$newCart = unset($oldCart[array_search($product, $oldCart)]);
 
         $request->session()->put('cart', $oldCart);
 
-        return redirect()->route('main');
+        return redirect()->route('cart');
 
     }
 

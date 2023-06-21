@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phone',20)->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('is_admin')->default('0');
-            $table->string('provider_id', 255);
+            $table->string('provider_id', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

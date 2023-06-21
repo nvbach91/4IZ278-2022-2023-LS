@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'test',
-            'surname' => 'testovich',
+            'surname' => 'test',
             'email' => 'user@vse.cz',
             'password' => Hash::make('password'),
         ]);
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
     public function createProducts() {
         DB::table('products')->insert([
-            'name' => 'Boss Distortion Pedal',
+            'name' => 'Distortion Pedal',
             'brand' => 'Boss',
             'description' => '
 The best Boss pedal ever. Not only Boss, distortion overall.',
@@ -59,8 +59,7 @@ The best Boss pedal ever. Not only Boss, distortion overall.',
         DB::table('products')->insert([
             'name' => 'Wah-wah Pedal',
             'brand' => 'Dunlop',
-            'description' => '
-The best Wah-wah pedal ever.',
+            'description' => 'The best Wah-wah pedal ever.',
             'price' => 110,
             'code' => '1002',
             'stock' => 2,
