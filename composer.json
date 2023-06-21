@@ -1,0 +1,6 @@
+{
+    "require": {
+        "vlucas/valitron": "^1.4",
+        "google/apiclient": "^2.15"
+    }
+}
