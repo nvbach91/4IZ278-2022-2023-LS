@@ -16,6 +16,3 @@ const CONFIG_FACEBOOK = [
 const CONFIG_PROTOCOL = 'http://';
 const CONFIG_DOMAIN = 'localhost';
 const CONFIG_PATH = '../sp';
-
-
-?>

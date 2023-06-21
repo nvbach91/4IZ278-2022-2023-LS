@@ -27,7 +27,7 @@
         $totalprice = $totalprice + $item["price"];
     }
 
-    $ordersDB->createOrder(date("Y-m-d"), $totalprice, $user["userid"], $_POST["shipping"], $_POST["payment"]);
+    $ordersDB->createOrder(date("Y-m-d"), $totalprice, $user["userid"], htmlspecialchars($_POST["shipping"]), htmlspecialchars($_POST["payment"]));
     $orderID = $ordersDB->getLastID();
 
     $quantities = array_count_values($itemsIDs);
@@ -41,4 +41,3 @@
     $_SESSION["cart"]=[];
     header("Location: ./orderhistory.php");
     exit;
-?>

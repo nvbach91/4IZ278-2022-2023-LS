@@ -10,8 +10,8 @@
         header("Location: ./checkout.php");
         exit;
     }
-    $type=$_GET["type"];
-    $id=$_GET["id"];
+    $type=htmlspecialchars($_GET["type"]);
+    $id=htmlspecialchars($_GET["id"]);
     $idList=$_SESSION["cart"];
 
     if($type=="add"){
@@ -34,4 +34,3 @@
     }
     header("Location: ./checkout.php");
     exit;
-?>

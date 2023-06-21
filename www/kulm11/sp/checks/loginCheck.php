@@ -4,8 +4,8 @@ $isLoginSuccesful = false;
 $userDB = new UsersDatabase();
 
 if(!empty($_POST)){
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    $email = htmlspecialchars($_POST["email"]);
+    $password = htmlspecialchars($_POST["password"]);
     $errors = [];
     $isLoginSuccesful = true;
 
@@ -37,5 +37,3 @@ if(!empty($_POST)){
     }
 
 }
-
-?>

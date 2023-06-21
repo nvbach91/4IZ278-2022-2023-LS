@@ -10,23 +10,23 @@ if(!empty($_POST)){
     $errors=[];
     $mode="";
     if(isset($_POST["userid"])){
-        $email = $_POST["email"];
-        $firstName = $_POST["firstname"];
-        $lastName = $_POST["lastname"];
-        $city = $_POST["city"];
-        $street = $_POST["street"];
-        $buildingNo = $_POST["buildingno"];
-        $zipCode = $_POST["zipcode"];
-        $role = $_POST["role"];
-        $id = $_POST["userid"];
+        $email = htmlspecialchars($_POST["email"]);
+        $firstName = htmlspecialchars($_POST["firstname"]);
+        $lastName = htmlspecialchars($_POST["lastname"]);
+        $city = htmlspecialchars($_POST["city"]);
+        $street = htmlspecialchars($_POST["street"]);
+        $buildingNo = htmlspecialchars($_POST["buildingno"]);
+        $zipCode = htmlspecialchars($_POST["zipcode"]);
+        $role = htmlspecialchars($_POST["role"]);
+        $id = htmlspecialchars($_POST["userid"]);
         $mode = "user";
     }elseif(isset($_POST["itemid"])){
-        $id = $_POST["itemid"];
-        $name = $_POST["name"];
-        $price = $_POST["price"];
-        $description = $_POST["description"];
-        $image = $_POST["image"];
-        $category = $_POST["category"];
+        $id = htmlspecialchars($_POST["itemid"]);
+        $name = htmlspecialchars($_POST["name"]);
+        $price = htmlspecialchars($_POST["price"]);
+        $description = htmlspecialchars($_POST["description"]);
+        $image = htmlspecialchars($_POST["image"]);
+        $category = htmlspecialchars($_POST["category"]);
         $mode = "item";
     }
     $isRegistrationSuccesful = true;
@@ -154,4 +154,3 @@ if(!empty($_POST)){
         exit;
     }
 }
-?>

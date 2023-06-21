@@ -1,14 +1,15 @@
 <?php require_once "./database/UsersDatabase.php" ?>
 <?php
-if(isset($_COOKIE["username"])){
+if (isset($_COOKIE["username"])) {
     header("Location: ./index.php");
     exit;
 }
 ?>
-<?php require "./checks/signupCheck.php"?>
+<?php require "./checks/signupCheck.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +17,7 @@ if(isset($_COOKIE["username"])){
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Signup</title>
 </head>
+
 <body>
     <header>
         <?php include "./includes/logo.php" ?>
@@ -53,4 +55,5 @@ if(isset($_COOKIE["username"])){
     </main>
     <?php include "./includes/footer.php" ?>
 </body>
+
 </html>

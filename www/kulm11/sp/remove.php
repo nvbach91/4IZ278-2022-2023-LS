@@ -10,15 +10,14 @@ if(!isset($_COOKIE["username"]) || !$usersDatabase->isAdmin($_COOKIE["username"]
 if(isset($_GET["item_id"])){
     require_once "./database/ItemsDatabase.php";
     $itemsDatabase = new ItemsDatabase();
-    if($itemsDatabase->containsItem($_GET["item_id"])){
-        $itemsDatabase->removeItem($_GET["item_id"]);
+    if($itemsDatabase->containsItem(htmlspecialchars($_GET["item_id"]))){
+        $itemsDatabase->removeItem(htmlspecialchars($_GET["item_id"]));
     }
 }
 elseif(isset($_GET["user_id"])){
-    if($usersDatabase->containsUser($_GET["user_id"])){
-        $usersDatabase->removeUser($_GET["user_id"]);
+    if($usersDatabase->containsUser(htmlspecialchars($_GET["user_id"]))){
+        $usersDatabase->removeUser(htmlspecialchars($_GET["user_id"]));
     }
 }
 header("Location: ./admin.php");
 exit;
-?>

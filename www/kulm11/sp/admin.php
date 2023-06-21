@@ -7,7 +7,7 @@ $users = $userDatabase->fetchAll();
 $itemsDatabase = new ItemsDatabase();
 $items = $itemsDatabase->fetchAll();
 
-if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])){
+if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])) {
     header("Location: ./login.php");
     exit;
 }
@@ -15,6 +15,7 @@ if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,6 +23,7 @@ if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Admin</title>
 </head>
+
 <body>
     <header>
         <?php include "./includes/logo.php" ?>
@@ -47,18 +49,18 @@ if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])
                 <th>Role</th>
                 <th\>
             </tr>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($users as $user) : ?>
                 <tr>
-                    <td><?php echo $user["username"];?></td>
-                    <td><?php echo $user["firstname"];?></td>
-                    <td><?php echo $user["lastname"];?></td>
-                    <td><?php echo $user["city"];?></td>
-                    <td><?php echo $user["street"];?></td>
-                    <td><?php echo $user["buildingno"];?></td>
-                    <td><?php echo $user["zipcode"];?></td>
-                    <td><?php echo $user["role"];?></td>
-                    <td><a href="./edit.php?user_id=<?php echo $user["userid"]?>">Edit</a></td>
-                    <td><a href="./remove.php?user_id=<?php echo $user["userid"]?>">Remove</a></td>
+                    <td><?php echo $user["username"]; ?></td>
+                    <td><?php echo $user["firstname"]; ?></td>
+                    <td><?php echo $user["lastname"]; ?></td>
+                    <td><?php echo $user["city"]; ?></td>
+                    <td><?php echo $user["street"]; ?></td>
+                    <td><?php echo $user["buildingno"]; ?></td>
+                    <td><?php echo $user["zipcode"]; ?></td>
+                    <td><?php echo $user["role"]; ?></td>
+                    <td><a href="./edit.php?user_id=<?php echo $user["userid"] ?>">Edit</a></td>
+                    <td><a href="./remove.php?user_id=<?php echo $user["userid"] ?>">Remove</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -73,15 +75,15 @@ if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])
                 <th>Category</th>
                 <th\>
             </tr>
-            <?php foreach ($items as $item): ?>
+            <?php foreach ($items as $item) : ?>
                 <tr>
-                    <td><?php echo $item["name"];?></td>
-                    <td><?php echo $item["price"];?></td>
-                    <td><?php echo $item["description"];?></td>
-                    <td><?php echo $item["image"];?></td>
-                    <td><?php echo $item["category_categoryid"];?></td>
-                    <td><a href="./edit.php?item_id=<?php echo $item["itemid"]?>">Edit</a></td>
-                    <td><a href="./remove.php?item_id=<?php echo $item["itemid"]?>">Remove</a></td>
+                    <td><?php echo $item["name"]; ?></td>
+                    <td><?php echo $item["price"]; ?></td>
+                    <td><?php echo $item["description"]; ?></td>
+                    <td><?php echo $item["image"]; ?></td>
+                    <td><?php echo $item["category_categoryid"]; ?></td>
+                    <td><a href="./edit.php?item_id=<?php echo $item["itemid"] ?>">Edit</a></td>
+                    <td><a href="./remove.php?item_id=<?php echo $item["itemid"] ?>">Remove</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -89,4 +91,5 @@ if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])
     </main>
     <?php include "./includes/footer.php" ?>
 </body>
+
 </html>

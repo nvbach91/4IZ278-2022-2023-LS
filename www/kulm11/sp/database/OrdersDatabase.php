@@ -3,26 +3,29 @@ require_once "Database.php";
 
 class OrdersDatabase extends Database
 {
-    public function fetchAll() {
+    public function fetchAll()
+    {
         $query = "SELECT * FROM `Order`";
         $statement = $this->pdo->prepare($query);
         $statement->execute();
         return $statement->fetchAll();
     }
 
-    public function createOrder($date, $price, $userid, $shipping, $paymenttype){
+    public function createOrder($date, $price, $userid, $shipping, $paymenttype)
+    {
         $query = "INSERT `Order` (date, price, user_userid, shipping, paymenttype) 
         VALUES(?,?,?,?,?);";
         $statement = $this->pdo->prepare($query);
-        $statement->bindParam(1,$date);
-        $statement->bindParam(2,$price);
-        $statement->bindParam(3,$userid);
-        $statement->bindParam(4,$shipping);
-        $statement->bindParam(5,$paymenttype);
+        $statement->bindParam(1, $date);
+        $statement->bindParam(2, $price);
+        $statement->bindParam(3, $userid);
+        $statement->bindParam(4, $shipping);
+        $statement->bindParam(5, $paymenttype);
         $statement->execute();
     }
 
-    public function getLastID(){
+    public function getLastID()
+    {
         $query = "SELECT orderid FROM `Order` ORDER BY orderid DESC LIMIT 1;";
         $statement = $this->pdo->prepare($query);
         $statement->execute();
@@ -30,29 +33,32 @@ class OrdersDatabase extends Database
         return $result["orderid"];
     }
 
-    public function createOrderItem($quantity,$price,$orderid,$itemid){
+    public function createOrderItem($quantity, $price, $orderid, $itemid)
+    {
         $query = "INSERT ordereditem (quantity, price, order_orderid, item_itemid) 
         VALUES(?,?,?,?);";
         $statement = $this->pdo->prepare($query);
-        $statement->bindParam(1,$quantity);
-        $statement->bindParam(2,$price);
-        $statement->bindParam(3,$orderid);
-        $statement->bindParam(4,$itemid);
+        $statement->bindParam(1, $quantity);
+        $statement->bindParam(2, $price);
+        $statement->bindParam(3, $orderid);
+        $statement->bindParam(4, $itemid);
         $statement->execute();
     }
 
-    public function getUsersOrders($id){
+    public function getUsersOrders($id)
+    {
         $query = "SELECT * FROM `Order` where user_userid=?;";
         $statement = $this->pdo->prepare($query);
-        $statement->bindParam(1,$id);
+        $statement->bindParam(1, $id);
         $statement->execute();
         return $statement->fetchAll();
     }
 
-    public function getOrderedItems($orderID){
+    public function getOrderedItems($orderID)
+    {
         $query = "SELECT * FROM ordereditem where order_orderid=?;";
         $statement = $this->pdo->prepare($query);
-        $statement->bindParam(1,$orderID);
+        $statement->bindParam(1, $orderID);
         $statement->execute();
         return $statement->fetchAll();
     }

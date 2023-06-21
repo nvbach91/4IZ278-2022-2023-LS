@@ -6,15 +6,15 @@ $userDB = new UsersDatabase();
 
 if(!empty($_POST)){
     $errors=[];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $password2 = $_POST["password2"];
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
-    $city = $_POST["city"];
-    $street = $_POST["street"];
-    $buildingNo = $_POST["buildingNo"];
-    $zipCode = $_POST["zipCode"];
+    $email = htmlspecialchars($_POST["email"]);
+    $password = htmlspecialchars($_POST["password"]);
+    $password2 = htmlspecialchars($_POST["password2"]);
+    $firstName = htmlspecialchars($_POST["firstName"]);
+    $lastName = htmlspecialchars($_POST["lastName"]);
+    $city = htmlspecialchars($_POST["city"]);
+    $street = htmlspecialchars($_POST["street"]);
+    $buildingNo = htmlspecialchars($_POST["buildingNo"]);
+    $zipCode = htmlspecialchars($_POST["zipCode"]);
     $isRegistrationSuccesful = true;
 
     //email
@@ -134,4 +134,3 @@ else{
     $buildingNo = "";
     $zipCode = "";
 }
-?>

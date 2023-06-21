@@ -51,13 +51,13 @@ header nav a:hover {
     color: gray;
 }
 
-#homepage{
+#homepage {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#items{
+#items {
     padding: 10px;
     margin: 10px;
     display: grid;
@@ -66,20 +66,20 @@ header nav a:hover {
     text-align: center;
 }
 
-.item{
+.item {
     padding: 10px;
     margin: 10px;
     border-style: solid;
     border-color: black;
     border-width: 2px;
     border-radius: 15px;
-    display:block;
+    display: block;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.item a{
+.item a {
     color: white;
     font-weight: bold;
     background-color: purple;
@@ -88,17 +88,19 @@ header nav a:hover {
     transition: background-color 200ms ease-out 100ms;
 }
 
-table, td, th {
+table,
+td,
+th {
     border: 1px solid;
 }
-  
+
 table {
     width: 80%;
     border-collapse: collapse;
 }
 
-.item a:hover{
-    background-color:blueviolet;
+.item a:hover {
+    background-color: blueviolet;
 }
 
 #intro-image {
@@ -111,6 +113,7 @@ table {
     filter: brightness(80%);
     background-image: url(../img/background.jpg);
 }
+
 #intro-image h1 {
     font-size: 60px;
     background-color: rgba(87, 87, 87, 0.237);
@@ -129,26 +132,26 @@ footer {
     margin-top: auto;
 }
 
-main{
+main {
     background-color: rgb(245, 245, 245);
 }
 
-#cart{
+#cart {
     min-width: 300px;
-    border-style:solid;
+    border-style: solid;
     margin: 10px;
     border-radius: 10px;
 }
 
-#cart-items-section{
+#cart-items-section {
     min-width: 300px;
-    border-style:solid;
+    border-style: solid;
     margin: 10px;
     border-radius: 10px;
 }
 
-.cart-item{
-    display:flex;
+.cart-item {
+    display: flex;
     justify-content: space-between;
     padding-left: 5px;
     padding-right: 5px;
@@ -156,7 +159,7 @@ main{
     padding-bottom: 10px;
 }
 
-#logo{
+#logo {
     display: grid;
     grid-template: ". .";
     align-items: center;
@@ -164,7 +167,10 @@ main{
     color: white;
 }
 
-#loginForm, #signupForm, #editForm, #addForm{
+#loginForm,
+#signupForm,
+#editForm,
+#addForm {
     display: grid;
     grid-template: ". .";
     margin: 15px;
@@ -173,11 +179,14 @@ main{
     border-style: solid;
 }
 
-#loginForm label, #signupForm label, #editForm label, #addForm label{
+#loginForm label,
+#signupForm label,
+#editForm label,
+#addForm label {
     font-weight: bold;
 }
 
-#homepage-pagination{
+#homepage-pagination {
     display: grid;
     grid-template: ". . . . . . . . . .";
     justify-content: center;
@@ -185,7 +194,7 @@ main{
     list-style-type: none;
 }
 
-#homepage-pagination li a{
+#homepage-pagination li a {
     margin: 10px;
     color: white;
     background-color: purple;
@@ -195,43 +204,43 @@ main{
     transition: background-color 200ms ease-out 100ms;
 }
 
-#homepage-pagination li a:hover{
-    background-color:blueviolet;
+#homepage-pagination li a:hover {
+    background-color: blueviolet;
 }
 
-.price-item{
+.price-item {
     font-weight: 200;
     font-size: 20px;
 }
 
-.description-item{
+.description-item {
     text-align: center;
     margin: auto;
     font-size: 14px;
     max-width: 250px;
 }
 
-#admin-content{
-    padding:10px;
+#admin-content {
+    padding: 10px;
 }
 
-.item-quantity{
+.item-quantity {
     display: grid;
     grid-template: ". . .";
     align-items: center;
 }
 
-.item-quantity a{
+.item-quantity a {
     text-decoration: none;
-    padding:5px;
+    padding: 5px;
 }
 
-#shipment-payment-section{
+#shipment-payment-section {
     text-align: right;
     margin: 10px;
 }
 
-#shipment-payment-section button{
+#shipment-payment-section button {
     color: white;
     font-weight: bold;
     background-color: purple;
@@ -240,19 +249,19 @@ main{
     transition: background-color 200ms ease-out 100ms;
 }
 
-#shipment-payment-section button:hover{
-    background-color:blueviolet;
+#shipment-payment-section button:hover {
+    background-color: blueviolet;
 }
 
-#order-history{
-    margin:10px;
+#order-history {
+    margin: 10px;
 }
 
-.order{
-    margin-left:20px;
+.order {
+    margin-left: 20px;
 }
 
-.error{
-    color:white;
+.error {
+    color: white;
     background-color: red;
 }

@@ -11,7 +11,7 @@ if(!isset($_GET["item_id"])){
 require_once "./database/ItemsDatabase.php";
 $itemDB = new ItemsDatabase();
 $cart = [];
-$itemID = $_GET["item_id"];
+$itemID = htmlspecialchars($_GET["item_id"]);
 if(isset($_SESSION["cart"])){
     $cart = $_SESSION["cart"];
 }
@@ -24,7 +24,3 @@ if($itemDB->containsItem($itemID)){
 else{
     echo "error";
 }
-
-
-
-?>

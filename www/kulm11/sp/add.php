@@ -2,31 +2,31 @@
 require_once "./database/UsersDatabase.php";
 $userDatabase = new UsersDatabase();
 
-if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])){
+if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])) {
     header("Location: ./login.php");
     exit;
 }
-if(isset($_GET["mode"])){
-    $mode=$_GET["mode"];
-    if($mode=="item"){
+if (isset($_GET["mode"])) {
+    $mode = htmlspecialchars($_GET["mode"]);
+    if ($mode == "item") {
         require_once "./database/ItemsDatabase.php";
         require_once "./database/CategoriesDatabase.php";
         $itemsDatabase = new ItemsDatabase();
         $categoriesDatabase = new CategoriesDatabase();
         $categories = $categoriesDatabase->fetchAll();
-    }
-    elseif($mode=="user"){
+    } elseif ($mode == "user") {
         require_once "./UsersDatabase.php";
         $usersDatabase = new UsersDatabase();
-        $mode="user";
+        $mode = "user";
     }
 }
 ?>
 
-<?php require "./checks/addCheck.php"?>
+<?php require "./checks/addCheck.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,6 +34,7 @@ if(isset($_GET["mode"])){
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Add</title>
 </head>
+
 <body>
     <header>
         <?php include "./includes/logo.php" ?>
@@ -48,7 +49,7 @@ if(isset($_GET["mode"])){
     <main>
         <form action="./add.php" method="POST" id="addForm">
 
-            <?php if($mode=="item"):?>
+            <?php if ($mode == "item") : ?>
                 <label>Name:</label>
                 <input type="text" name="name">
                 <label>Price:</label>
@@ -59,12 +60,12 @@ if(isset($_GET["mode"])){
                 <input type="url" name="image">
                 <label>Category:</label>
                 <select name="category">
-                    <?php foreach ($categories as $category): ?>
+                    <?php foreach ($categories as $category) : ?>
                         <option value="<?php echo $category["categoryid"]; ?>"><?php echo $category["name"]; ?></option>
-                    <?php endforeach;?>
+                    <?php endforeach; ?>
                 </select>
-            <?php endif;?>
-            <?php if($mode=="user"):?>
+            <?php endif; ?>
+            <?php if ($mode == "user") : ?>
                 <label>E-mail:</label>
                 <input type="email" name="email">
                 <label>Password:</label>
@@ -88,10 +89,11 @@ if(isset($_GET["mode"])){
                     <option value="user">user</option>
                     <option value="admin">admin</option>
                 </select>
-            <?php endif;?>
+            <?php endif; ?>
             <button type="submit">Add</button>
         </form>
     </main>
     <?php include "./includes/footer.php"; ?>
 </body>
+
 </html>

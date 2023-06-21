@@ -2,32 +2,32 @@
 require_once "./database/UsersDatabase.php";
 $userDatabase = new UsersDatabase();
 
-if(!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])){
+if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])) {
     header("Location: ./login.php");
     exit;
 }
-$mode="";
-if(isset($_GET["item_id"])){
+$mode = "";
+if (isset($_GET["item_id"])) {
     require_once "./database/ItemsDatabase.php";
     require_once "./database/CategoriesDatabase.php";
     $itemsDatabase = new ItemsDatabase();
-    $editedItem = $itemsDatabase->fetch($_GET["item_id"]);
+    $editedItem = $itemsDatabase->fetch(htmlspecialchars($_GET["item_id"]));
     $categoriesDatabase = new CategoriesDatabase();
     $categories = $categoriesDatabase->fetchAll();
-    $mode="item";
-}
-elseif(isset($_GET["user_id"])){
+    $mode = "item";
+} elseif (isset($_GET["user_id"])) {
     require_once "./database/UsersDatabase.php";
     $usersDatabase = new UsersDatabase();
-    $editedUser = $usersDatabase->fetch($_GET["user_id"]);
-    $mode="user";
+    $editedUser = $usersDatabase->fetch(htmlspecialchars($_GET["user_id"]));
+    $mode = "user";
 }
 ?>
 
-<?php require "./checks/editCheck.php"?>
+<?php require "./checks/editCheck.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,6 +35,7 @@ elseif(isset($_GET["user_id"])){
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Edit</title>
 </head>
+
 <body>
     <header>
         <?php include "./includes/logo.php" ?>
@@ -49,7 +50,7 @@ elseif(isset($_GET["user_id"])){
     <main>
         <form action="./edit.php" method="POST" id="editForm">
 
-            <?php if($mode=="item"):?>
+            <?php if ($mode == "item") : ?>
                 <input type="number" name="itemid" value="<?php echo $editedItem["itemid"] ?>" hidden>
                 <label>Name:</label>
                 <input type="text" name="name" value="<?php echo $editedItem["name"] ?>">
@@ -61,12 +62,12 @@ elseif(isset($_GET["user_id"])){
                 <input type="url" name="image" value="<?php echo $editedItem["image"]; ?>">
                 <label>Category:</label>
                 <select name="category">
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $category["categoryid"]; ?>" <?php if($editedItem["category_categoryid"] == $category["categoryid"]) echo "selected"; ?>><?php echo $category["name"]; ?></option>
-                    <?php endforeach;?>
+                    <?php foreach ($categories as $category) : ?>
+                        <option value="<?php echo $category["categoryid"]; ?>" <?php if ($editedItem["category_categoryid"] == $category["categoryid"]) echo "selected"; ?>><?php echo $category["name"]; ?></option>
+                    <?php endforeach; ?>
                 </select>
-            <?php endif;?>
-            <?php if($mode=="user"):?>
+            <?php endif; ?>
+            <?php if ($mode == "user") : ?>
                 <input type="number" name="userid" value="<?php echo $editedUser["userid"] ?>" hidden>
                 <label>E-mail:</label>
                 <input type="email" name="email" value="<?php echo $editedUser["username"] ?>">
@@ -84,13 +85,14 @@ elseif(isset($_GET["user_id"])){
                 <input type="text" name="zipcode" value="<?php echo $editedUser["zipcode"] ?>">
                 <label>Role:</label>
                 <select name="role">
-                    <option value="user" <?php if($editedUser["role"] == "user") echo"selected";?>>user</option>
-                    <option value="admin" <?php if($editedUser["role"] == "admin") echo"selected";?>>admin</option>
+                    <option value="user" <?php if ($editedUser["role"] == "user") echo "selected"; ?>>user</option>
+                    <option value="admin" <?php if ($editedUser["role"] == "admin") echo "selected"; ?>>admin</option>
                 </select>
-            <?php endif;?>
+            <?php endif; ?>
             <button type="submit">Edit</button>
         </form>
     </main>
     <?php include "./includes/footer.php"; ?>
 </body>
+
 </html>

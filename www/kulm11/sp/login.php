@@ -1,6 +1,6 @@
 <?php require_once "./database/UsersDatabase.php" ?>
 <?php
-if(isset($_COOKIE["username"])){
+if (isset($_COOKIE["username"])) {
     header("Location: ./index.php");
     exit;
 }
@@ -9,6 +9,7 @@ if(isset($_COOKIE["username"])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +17,7 @@ if(isset($_COOKIE["username"])){
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Login</title>
 </head>
+
 <body>
     <header>
         <?php include "./includes/logo.php" ?>
@@ -36,7 +38,9 @@ if(isset($_COOKIE["username"])){
             <p><a href="./signup.php">Don't have an account? Click here</a></p>
             <button type="submit">Login</button>
         </form>
+        <a>Facebook</a>
     </main>
     <?php include "./includes/footer.php" ?>
 </body>
+
 </html>
