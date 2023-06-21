@@ -265,3 +265,20 @@ main {
     color: white;
     background-color: red;
 }
+
+#facebookLogin{
+    margin: 10px;
+    color: white;
+    background-color: purple;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: none;
+}
+#facebookLogin:hover {
+    background-color: blueviolet;
+}
+
+#loginContent{
+    text-align: center;
+}

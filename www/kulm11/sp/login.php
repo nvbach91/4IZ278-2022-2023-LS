@@ -29,7 +29,7 @@ if (isset($_COOKIE["username"])) {
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="loginContent">
         <form action="./login.php" method="POST" id="loginForm">
             <label>E-mail:</label>
             <input type="email" name="email">
@@ -38,7 +38,7 @@ if (isset($_COOKIE["username"])) {
             <p><a href="./signup.php">Don't have an account? Click here</a></p>
             <button type="submit">Login</button>
         </form>
-        <a>Facebook</a>
+        <a id="facebookLogin" href="./loginViaFacebook.php">Facebook</a>
     </main>
     <?php include "./includes/footer.php" ?>
 </body>
