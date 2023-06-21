@@ -1,5 +1,5 @@
 <?php
-require_once "db/ReservationsDatabase.php";
+require_once "../db/ReservationsDatabase.php";
 session_start();
 
 $reservationsDb = ReservationsDatabase::getInstance();

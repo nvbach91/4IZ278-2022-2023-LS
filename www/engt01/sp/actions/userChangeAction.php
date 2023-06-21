@@ -1,6 +1,6 @@
 <?php
-require_once "db/UserDatabase.php";
-require_once "db/LoansDatabase.php";
+require_once "../db/UserDatabase.php";
+require_once "../db/LoansDatabase.php";
 session_start();
 
 $userDb = UserDatabase::getInstance();

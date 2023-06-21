@@ -70,7 +70,10 @@ include "components/header.php" ?>
                                 <?php echo $catDb->getCategory(intval($book["category_id"])) ?>
                             </small></p>
                         <p class="card-text"><?php
-                            echo $bookAvailableCount > 0 ? "Dostupné (" . $bookAvailableCount . " kus(ů) zbývá)" : "Dočasně nedostupné"
+                            if ($bookAvailableCount === 0) echo "Dočasně nedostupné";
+                            elseif ($bookAvailableCount === 1) echo "Dostupné (1 kus zbývá)";
+                            elseif ($bookAvailableCount >= 2 && $bookAvailableCount < 5) echo "Dostupné ($bookAvailableCount kusy zbývají)";
+                            else echo "Dostupné ($bookAvailableCount kus(ů) zbývá)";
                             ?></p>
                     </a>
                     <?php if ($userEmail && $bookAvailableCount > 0): ?>

@@ -28,7 +28,10 @@ include "components/header.php" ?>
                 <h5><b><?php echo $book["author"] ?></b></h5>
                 <h6><?php echo $catDb->getCategory($book["category_id"]) ?></h6>
                 <span><small class="text-secondary"><?php
-                        echo $bookAvailableCount > 0 ? "Dostupné (" . $bookAvailableCount . " kus(ů) zbývá)" : "Dočasně nedostupné"
+                        if ($bookAvailableCount === 0) echo "Dočasně nedostupné";
+                        elseif ($bookAvailableCount === 1) echo "Dostupné (1 kus zbývá)";
+                        elseif ($bookAvailableCount >= 2 && $bookAvailableCount < 5) echo "Dostupné ($bookAvailableCount kusy zbývají)";
+                        else echo "Dostupné ($bookAvailableCount kus(ů) zbývá)";
                         ?></small></span>
             </div>
             <?php if (intval($userType) >= 3): ?>

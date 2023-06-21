@@ -16,7 +16,7 @@ class BooksDatabase extends Database {
 
     public function addBook(string $isbn, string $name, string $author, string $desc, int $category,
                             int    $amount = 1): bool {
-        if (!$this->getBook($isbn)) return false;
+        if ($this->getBook($isbn)) return false;
 
         $query = "INSERT INTO books(isbn, name, author, description, amount, category_id) VALUE (:isbn, :name, :author, :desc, :amount, :catId)";
         $statement = $this->pdo->prepare($query);

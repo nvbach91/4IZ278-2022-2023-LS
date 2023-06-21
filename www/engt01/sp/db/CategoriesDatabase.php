@@ -27,14 +27,16 @@ class CategoriesDatabase extends Database {
         return $statement->fetch()["name"];
     }
 
-    public function getCategoryId(string $name): string|null {
+    public function getCategoryId(string $name): ?int {
         $query = "SELECT category_id FROM categories WHERE name = :name";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["name" => $name]);
-        return $statement->fetch()["category_id"];
+        $fetch = $statement->fetch();
+        if ($fetch === false) return null;
+        else return $fetch["category_id"];
     }
 
-    public function addCategory(string $name): int {
+    public function addCategory(string $name): ?int {
         $query = "INSERT INTO categories(name) VALUE (:name)";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["name" => $name]);
@@ -43,7 +45,9 @@ class CategoriesDatabase extends Database {
         $statement = $this->pdo->prepare($idQuery);
         $statement->execute(["name" => $name]);
 
-        return $statement->fetch()["category_id"];
+        $fetch = $statement->fetch();
+        if ($fetch === false) return null;
+        else return $fetch["category_id"];
     }
 
     public function deleteCategory(int $id): void {
