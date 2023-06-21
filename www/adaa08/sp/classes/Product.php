@@ -12,10 +12,11 @@ class Product
 
     public function getProducts()
     {
-        $stmt = $this->db->prepare('SELECT * FROM products WHERE is_deleted = 0');
-        $stmt->execute();
-        return array_map('htmlspecialchars', $stmt->get_result()->fetch_all(MYSQLI_ASSOC));
+    $stmt = $this->db->prepare('SELECT * FROM products WHERE is_deleted = 0');
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+
 
     public function updateQuantity($productId, $quantity) {
         $stmt = $this->db->prepare('UPDATE products SET q_in_stock = q_in_stock + ? WHERE product_id = ?');

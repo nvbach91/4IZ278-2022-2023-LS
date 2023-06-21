@@ -25,58 +25,65 @@ $db->close();
     <?php include 'meta.php'; ?>
 </head>
 <body>
-
 <?php include 'header.php';?>
 
-    <h1>Vitajte, Admin</h1>
+<div class="container">
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="#current-orders"  style="color:#333">Aktúalne objednávky</a></li>
+                <li><a href="#completed-orders" style="color:#333">História objednávok</a></li>
+                <li><a href="#products" style="color:#333">Produkty</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    <nav>
-        <ul>
-            <li><a href="#current-orders">Aktúalne objednávky</a></li>
-            <li><a href="#completed-orders">História objednávok</a></li>
-            <li><a href="#products">Produkty</a></li>
-        </ul>
-    </nav>
+    <main>
+    <h1 class="center-text">Vitajte, Admin</h1>
+    <h2 class="center-text">Aktúalne objednávky</h2>
 
-    <section id="current-orders">
-        <h2>Aktuálne objednávky</h2>
+    <div class="grid-container">
         <?php foreach ($current_orders as $order): ?>
-        <div>
-            <h3>Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h3>
+        <div class="order-item">
+            <h4>Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h4>
             <p>Suma: <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></p>
             <p>Status: <?= $order['status'] ?></p>
             <button type="button" onclick="location.href='mark_as_completed.php?order_id=<?= $order['order_id'] ?>'">Vybaviť</button>
             <a href="cancel_order.php?order_id=<?= $order['order_id'] ?>">Zrušiť</a>
         </div>
         <?php endforeach; ?>
-    </section>
+    </div>
 
+    <h2 class="center-text">Vybavené objednávky</h2> 
 
-
-    <section id="completed-orders">
-        <h2>História objednávok</h2>
+    <div class="grid-container">
         <?php foreach ($completed_orders as $order): ?>
-        <div>
-            <h3>Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h3>
+        <div class="order-item">
+            <h4>Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h4>
             <p>Suma: <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></p>
         </div>
         <?php endforeach; ?>
-    </section>
+    </div>
 
-    <section id="products">
-        <h2>Všetky produkty</h2>
-        <?php foreach ($products as $product): ?>
-        <div>
-            <h3><?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-            <p>Cena: <?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?></p>
-            <button type="button" onclick="location.href='edit_product.php?product_id=<?= $product['product_id'] ?>'">Upraviť</button>
-            <button type="button" onclick="location.href='delete_product.php?product_id=<?= $product['product_id'] ?>'">Vymazať</button>
-        </div>
-        <?php endforeach; ?>
-    </section>
+        <section id="products">
+            <h2>Všetky produkty</h2>
+            <div class="product-grid">
+                <?php foreach ($products as $product): ?>
+                <div class="product-item">
+                    <img src="<?= htmlspecialchars($product['photo'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>">
+                    <h3><?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?></h3>
+                    <p>Cena: <?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?></p>
+                    <button type="button" onclick="location.href='edit_product.php?product_id=<?= $product['product_id'] ?>'">Upraviť</button>
+                    <button type="button" onclick="location.href='delete_product.php?product_id=<?= $product['product_id'] ?>'">Vymazať</button>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
 
-    <a href="logout.php">Odhlásiť sa</a>
+        <a href="logout.php" class="logout-button">Odhlásiť sa</a>
+    </main>
+</div>
 
-    <?php include 'footer.php';?>
+<?php include 'footer.php';?>
 </body>
 </html>

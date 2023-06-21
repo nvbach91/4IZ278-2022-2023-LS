@@ -19,7 +19,7 @@
         <h1>KitchenStore</h1>
     </div>
 
-        <div style="text-align: center; margin-bottom:50px">
+        <div class="welcome-text">
             Vitajte v našom obchode KitchenStore ponúkame vám rôzne kuchynské potreby a spotrebiče.
         </div>
 

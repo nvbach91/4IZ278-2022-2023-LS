@@ -1,9 +1,8 @@
-<nav class="top-bar" data-topbar role="navigation">
+<nav class="top-bar">
   <ul class="title-area">
     <li class="name">
-      <a href="index.php" style="color:white; margin-left: 10px;">KitchenStore</a>
+      <a href="index.php">KitchenStore</a>
     </li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
   </ul>
 
   <section class="top-bar-section">

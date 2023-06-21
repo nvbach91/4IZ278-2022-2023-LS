@@ -34,23 +34,37 @@ $totalCartPrice = 0;
     <h1>Nákupný košík</h1>
 </header>
 
-<?php if (count($cartItems) > 0): 
+<?php if (count($cartItems) > 0): ?>
+    <table>
+    <tr>
+        <th>Obrázok</th>
+        <th>Názov</th>
+        <th>Cena</th>
+        <th>Množstvo</th>
+        <th>Cena za daný produkt</th>
+    </tr>
+    
+    <?php
     foreach ($cartItems as $item): 
         $totalPriceForThisItem = $item['price'] * $item['quantity'];
         $totalCartPrice += $totalPriceForThisItem;
     ?>
 
-<div class="cart-item">
-    <img src="<?= htmlspecialchars($item['photo'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?>"/>
-    <h3><?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?></h3>
-    <p>Cena: <?= htmlspecialchars($item['price'], ENT_QUOTES, 'UTF-8') ?></p>
-    <p>Množstvo: <?= htmlspecialchars($item['quantity'], ENT_QUOTES, 'UTF-8') ?></p>
-    <p>Celková cena pre typ produktu: <?= htmlspecialchars($totalPriceForThisItem, ENT_QUOTES, 'UTF-8') ?></p>
-</div>
+    <tr>
+        <td><img class="product-image" src="<?= htmlspecialchars($item['photo'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?>"/></td>
+        <td><?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?></td>
+        <td><?= htmlspecialchars($item['price'], ENT_QUOTES, 'UTF-8') ?>€</td>
+        <td><?= htmlspecialchars($item['quantity'], ENT_QUOTES, 'UTF-8') ?></td>
+        <td><?= htmlspecialchars($totalPriceForThisItem, ENT_QUOTES, 'UTF-8') ?>€</td>
+    </tr>
 
-<?php endforeach; ?>
+    <?php endforeach; ?>
+    <tr>
+        
+    </tr>
+</table>
 
-<p>Celková cena: <?= $totalCartPrice ?></p>
+<p class="price">Celková cena: <?= $totalCartPrice ?> €</p>
 
 <form action="order.php" method="post">
     <button type="submit">Objednať</button>

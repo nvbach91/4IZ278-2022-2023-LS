@@ -35,18 +35,29 @@ $product = $productObj->getProductById($product_id);
 <?php include 'header.php'; ?>
 
 <form action="update_product.php" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id, ENT_QUOTES, 'UTF-8') ?>">
-    <input type="text" name="name" placeholder="Názov produktu" value="<?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>">
-    <input type="number" name="price" placeholder="Cena" value="<?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?>">
-    <input type="text" name="description" placeholder="Popis" value="<?= htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8') ?>">
-    <input type="number" name="q_in_stock" placeholder="Nový počet kusov" value="<?= htmlspecialchars($product['q_in_stock'], ENT_QUOTES, 'UTF-8') ?>">
+    
+        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id, ENT_QUOTES, 'UTF-8') ?>">
 
+        <label for="name">Názov produktu</label>
+        <input type="text" name="name" placeholder="Názov produktu" value="<?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>">
+
+        <label for="price">Nová cena produktu(€)</label>
+        <input type="number" name="price" placeholder="Cena" value="<?= htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8') ?>">
+
+        <label for="description">Nový popis produktu</label>
+        <input type="text" name="description" placeholder="Popis" value="<?= htmlspecialchars($product['description'], ENT_QUOTES, 'UTF-8') ?>">
+
+        <label for="q_in_stock">Pridaný počet kusov(ks)</label>
+        <input type="number" name="q_in_stock" placeholder="Nový počet kusov" value="<?= htmlspecialchars($product['q_in_stock'], ENT_QUOTES, 'UTF-8') ?>">
+
+    <label for="category_id">Zmena kategórie</label>
     <select name="category_id">
         <?php foreach ($categories as $category): ?>
         <option value="<?= htmlspecialchars($category['category_id'], ENT_QUOTES, 'UTF-8') ?>" <?= $category['category_id'] == $product['categories_category_id'] ? 'selected' : '' ?>><?= htmlspecialchars($category['name'], ENT_QUOTES, 'UTF-8') ?></option>
         <?php endforeach; ?>
     </select>
-
+    
+    <label for="photo">Zmena fotografie</label>
     <input type="file" name="photo">
 
     <button type="submit">Upraviť produkt</button>

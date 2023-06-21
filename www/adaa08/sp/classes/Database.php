@@ -3,10 +3,15 @@
 class Database extends mysqli
 {
     public function __construct() {
-        $host = getenv('DB_HOST');
-        $db = getenv('DB_NAME');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
+
+        $envFile = '.env'; 
+        $envConfig = parse_ini_file($envFile); 
+
+        $host = $envConfig['DB_HOST'];
+        $db = $envConfig['DB_NAME'];
+        $user = $envConfig['DB_USER'];
+        $pass = $envConfig['DB_PASS'];
+
         $charset = 'utf8mb4';
 
         parent::__construct($host, $user, $pass, $db);
