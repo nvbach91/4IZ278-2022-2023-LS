@@ -22,7 +22,7 @@
     <x-navbar />
     <!-- End Navbar -->
     <!-- Main Content -->
-    <div class="pt-5 w-100 homepage-cover" style="background-image: url('{{ asset('images/homepageWallpaper.jpg') }}'); height: 400px">
+    <div class="pt-5 w-100 homepage-cover" style="background-image: url('{{ asset('images/homepagewallpaper.jpg') }}'); height: 400px">
         <div class="container">
             <h1 class="mb-3">Vítejte v aplikaci TaskShin</h1>
             <p>Tato aplikace na vytváření projektů, úkolů a poznámek ti pomůže zvýšit produktivitu a efektivitu, a zároveň udržet všechny důležité informace na dosah. S její pomocí budeš mít větší kontrolu nad svými projekty a úkoly, a zároveň usnadníš spolupráci s týmem</p>

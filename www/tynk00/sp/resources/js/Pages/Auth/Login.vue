@@ -23,7 +23,7 @@ const submit = () => {
         ...data,
         remember: form.remember ? 'on' : '',
     })).post(route('login'), {
-        onFinish: () => window.location.href = "/dashboard"
+        onFinish: () => window.location.href = "https://esotemp.vse.cz/~tynk00/sp/dashboard"
         
     });
 };

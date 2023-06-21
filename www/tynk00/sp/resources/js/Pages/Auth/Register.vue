@@ -18,7 +18,7 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('register'), {
-        onFinish: () => window.location.href = "/dashboard"
+        onFinish: () => window.location.href = "https://esotemp.vse.cz/~tynk00/sp/dashboard"
     });
 };
 </script>

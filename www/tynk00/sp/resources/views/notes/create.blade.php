@@ -56,6 +56,7 @@
                             <div class="form-group">
                                 <label for="project_id" class="form-label">Projekt</label>
                                 <select class="form-control" name="project_id" id="project_id">
+                                    <option value="">Bez projektu</option>
                                     @foreach ($projects as $project)
                                         <option value="{{ $project->id }}">{{ $project->name }}</option>
                                     @endforeach
