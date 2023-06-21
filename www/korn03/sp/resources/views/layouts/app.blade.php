@@ -42,24 +42,7 @@
                             <a class="nav-link" href="/">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Schools</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Publishers</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Support
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Delivery Information</a>
-                                <a class="dropdown-item" href="#">Privacy Policy</a>
-                                <a class="dropdown-item" href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="/#footer">Contact</a>
                         </li>
                     </ul>
 
@@ -126,7 +109,7 @@
 
 
         <!-- Section: Links  -->
-        <section class="">
+        <section class="" id="footer">
             <div class="container text-center text-md-start mt-5">
                 <!-- Grid row -->
                 <div class="row mt-3">
@@ -147,16 +130,16 @@
                             Products
                         </h6>
                         <p>
-                            <a href="#!" class="text-reset">Overdrive pedals</a>
+                            <a href="{{ url('category', ['id' => 1]) }}" class="text-reset">Overdrive pedals</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Distortion pedals</a>
+                            <a href="{{ url('category', ['id' => 2]) }}" class="text-reset">Distortion pedals</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Dealy pedals</a>
+                            <a href="{{ url('category', ['id' => 3]) }}" class="text-reset">Dealy pedals</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Tuner pedals</a>
+                            <a href="{{ url('category', ['id' => 4]) }}" class="text-reset">Tuner pedals</a>
                         </p>
                     </div>
                     <!-- Grid column -->
@@ -184,9 +167,9 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                        <p><i class="fas fa-home me-3 text-secondary"></i> Prague, 148 00, CZ</p>
+                        <p>Prague, 148 00, CZ</p>
                         <p>
-                            <i class="fas fa-envelope me-3 text-secondary"></i>
+                            </i>
                             korn03@vse.cz
                         </p>
                     </div>
