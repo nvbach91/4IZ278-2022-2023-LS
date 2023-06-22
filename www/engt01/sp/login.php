@@ -4,6 +4,8 @@ require_once "db/CategoriesDatabase.php";
 require_once "db/UserDatabase.php";
 session_start();
 
+if (isset($_SESSION["userType"])) header("Location: index.php");
+
 $bookDb = BooksDatabase::getInstance();
 $catDb = CategoriesDatabase::getInstance();
 $userDb = UserDatabase::getInstance();
@@ -20,7 +22,6 @@ if (!empty($_POST)) {
 
     if (empty($errors)) {
         if (!$userDb->login($email, $password)) {
-//            setcookie("session", $email, time() + (86400), "/");
             $_SESSION["userEmail"] = $email;
             $_SESSION["userId"] = $userDb->getUserId($email);
             $_SESSION["userType"] = $userDb->getUserType($userDb->getUserId($email));

@@ -4,6 +4,8 @@ require_once "db/UserDatabase.php";
 require_once "db/ReservationsDatabase.php";
 session_start();
 
+if (($_SESSION["userType"] ?? 0) < 3) header("Location: index.php");
+
 $bookDb = BooksDatabase::getInstance();
 $userDb = UserDatabase::getInstance();
 $reservationsDb = ReservationsDatabase::getInstance();

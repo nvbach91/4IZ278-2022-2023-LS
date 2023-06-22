@@ -1,7 +1,6 @@
 <?php
 require_once "Database.php";
 
-// TODO test
 class BooksDatabase extends Database {
     private static ?BooksDatabase $sInstance = null;
 

@@ -3,6 +3,8 @@ require_once "db/BooksDatabase.php";
 require_once "db/CategoriesDatabase.php";
 session_start();
 
+if (($_SESSION["userType"] ?? 0) < 3) header("Location: index.php");
+
 $bookDb = BooksDatabase::getInstance();
 $catDb = CategoriesDatabase::getInstance();
 

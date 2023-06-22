@@ -4,6 +4,8 @@ require_once "db/UserDatabase.php";
 require_once "db/LoansDatabase.php";
 session_start();
 
+if (($_SESSION["userType"] ?? 0) < 2) header("Location: index.php");
+
 $bookDb = BooksDatabase::getInstance();
 $userDb = UserDatabase::getInstance();
 $loansDb = LoansDatabase::getInstance();

@@ -2,13 +2,16 @@
 require_once "db/BooksDatabase.php";
 require_once "db/CategoriesDatabase.php";
 require_once "db/LoansDatabase.php";
+require_once "db/ReservationsDatabase.php";
 session_start();
 
 $bookDb = BooksDatabase::getInstance();
 $catDb = CategoriesDatabase::getInstance();
 $loansDb = LoansDatabase::getInstance();
+$reservationsDb = ReservationsDatabase::getInstance();
 
 $userType = $_SESSION["userType"] ?? 0;
+$userId = $_SESSION["userId"] ?? -1;
 $userEmail = $_SESSION["userEmail"] ?? "";
 
 if (!empty($_GET["isbn"])) $isbn = $_GET["isbn"];
@@ -38,7 +41,11 @@ include "components/header.php" ?>
                 <a href="edit-book.php?isbn=<?php echo $isbn ?>" class="btn btn-danger" style="margin-left: auto">Upravit</a>
             <?php endif;
             if ($userEmail && $book["amount"] > 0): ?>
-                <button type="submit" class="btn btn-primary">Rezervovat</button>
+                <button type="submit" class="btn btn-primary"
+                    <?php echo $reservationsDb->hasReserved($book["isbn"], $userId) ? "disabled" : "" ?>>
+                    <!-- TODO unreserve? -->
+                    <?php echo $reservationsDb->hasReserved($book["isbn"], $userId) ? "Rezervováno" : "Rezervovat" ?>
+                </button>
             <?php endif ?>
         </div>
         <p class="my-1"><?php echo $book["description"] ?></p>

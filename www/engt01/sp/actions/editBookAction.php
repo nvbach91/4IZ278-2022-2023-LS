@@ -3,15 +3,17 @@ require_once "../db/BooksDatabase.php";
 require_once "../db/CategoriesDatabase.php";
 session_start();
 
+if (($_SESSION["userType"] ?? 0) < 3) header("Location: ../index.php");
+
 $bookDb = BooksDatabase::getInstance();
 $catDb = CategoriesDatabase::getInstance();
 
-$book = $_POST["book"] ?? "";
-$author = $_POST["author"] ?? "";
-$isbn = $_POST["isbn"] ?? "";
-$category = $_POST["category"] ?? "";
-$amount = $_POST["amount"] ?? "";
-$desc = $_POST["desc"] ?? "";
+$book = htmlspecialchars($_POST["book"] ?? "");
+$author = htmlspecialchars($_POST["author"] ?? "");
+$isbn = htmlspecialchars($_POST["isbn"] ?? "");
+$category = htmlspecialchars($_POST["category"] ?? "");
+$amount = htmlspecialchars($_POST["amount"] ?? "");
+$desc = htmlspecialchars($_POST["desc"] ?? "");
 
 // TODO regex check if isbn matches format
 

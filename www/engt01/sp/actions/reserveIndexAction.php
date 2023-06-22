@@ -12,5 +12,5 @@ if (!empty($_POST["reservation"])) {
     $reservationsDb->reserve($reservation, $userDb->getUserId($_SESSION["userEmail"]), null,
         strtotime("+1 month"));
 
-    header("Location: index.php?reserved=1");
+    header("Location: ../index.php?reserved=1");
 }

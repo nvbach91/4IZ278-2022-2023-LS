@@ -26,6 +26,7 @@
         <div class="d-inline-flex flex-row flex-wrap btn-group">
             <?php if (intval($_SESSION["userType"] ?? 0) >= 3): ?>
                 <a href="edit-book.php" class="btn btn-outline-info">Přidat knihu</a>
+                <a href="book-queue.php" class="btn btn-outline-info">Stav rezervací</a>
             <?php endif;
             if (intval($_SESSION["userType"] ?? 0) >= 2): ?>
                 <a href="branch.php" class="btn btn-outline-info">Pobočka</a>
