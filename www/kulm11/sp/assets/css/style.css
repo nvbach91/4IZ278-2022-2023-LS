@@ -290,3 +290,7 @@ main {
     padding:5px;
     margin:10px;
 }
+
+#confirmation{
+    text-align: center;
+}
