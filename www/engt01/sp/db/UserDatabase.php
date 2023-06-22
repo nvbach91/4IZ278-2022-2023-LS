@@ -1,6 +1,10 @@
 <?php
 require_once "Database.php";
 
+const LOGIN_SUCCESS = 0;
+const LOGIN_FAIL = 1;
+const LOGIN_NO_ACC = 2;
+
 class UserDatabase extends Database {
     private static ?UserDatabase $sInstance = null;
 
@@ -34,9 +38,9 @@ class UserDatabase extends Database {
         $statement->execute(["email" => $email]);
         $ret = $statement->fetch();
 
-        if (!$ret) return 2;
-        elseif (password_verify($password, $ret["password"])) return 1;
-        else return 0;
+        if (!$ret) return LOGIN_NO_ACC;
+        elseif (password_verify($password, $ret["password"])) return LOGIN_SUCCESS;
+        else return LOGIN_FAIL;
     }
 
     public function getDebt(int $userId): int {
