@@ -21,14 +21,16 @@ if (!empty($_POST)) {
     if ($password == "") $errors[] = "Prázdné heslo";
 
     if (empty($errors)) {
-        if (!$userDb->login($email, $password)) {
+        $login = $userDb->login($email, $password);
+        if ($login === 0) {
             $_SESSION["userEmail"] = $email;
             $_SESSION["userId"] = $userDb->getUserId($email);
             $_SESSION["userType"] = $userDb->getUserType($userDb->getUserId($email));
 
             header("Location: index.php?logged=1");
             exit();
-        } else $errors[] = "Špatný email nebo heslo";
+        } else if ($login === 1) $errors[] = "Špatný email nebo heslo";
+        else $errors[] = "Neexistující účet";
     }
 }
 

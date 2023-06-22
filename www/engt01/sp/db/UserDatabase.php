@@ -32,10 +32,11 @@ class UserDatabase extends Database {
         $query = "SELECT password FROM users WHERE email = :email";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["email" => $email]);
-        $hash = $statement->fetch()["password"];
+        $ret = $statement->fetch();
 
-        if (password_verify($password, $hash)) return 0;
-        else return 1;
+        if (!$ret) return 2;
+        elseif (password_verify($password, $ret["password"])) return 1;
+        else return 0;
     }
 
     public function getDebt(int $userId): int {
