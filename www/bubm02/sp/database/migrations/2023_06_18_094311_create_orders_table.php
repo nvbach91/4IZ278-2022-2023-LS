@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('type', 64);
             $table->string('status', 64)->nullable();
             $table->string('note', 512)->nullable();
             $table->string('shipping_type', 64)->nullable();

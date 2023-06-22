@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adress;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the profile for the given user.
-     */
     public function add(Request $request)
     {
         $requestQuantity = $request->input('quantity');
@@ -79,7 +72,8 @@ class CartController extends Controller
             $products = [];
         return view('cart', [
             'cart' => $request->session()->get('cart'),
-            'items' => $products
+            'items' => $products,
+            'adresses' => Adress::all()->where('user_id', $request->user()->id),
         ]);
     }
 }

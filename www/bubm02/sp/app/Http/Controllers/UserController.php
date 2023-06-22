@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Adress;
+use App\Models\Item;
+use App\Models\Order;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -22,12 +24,21 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(): RedirectResponse
+    {
+        return redirect()->route('index');
+    }
+
     /**
      *
      */
     public function profile() : Renderable
     {
-        return view('profile', ['user' => Auth::user()]);
+        return view('profile',
+            ['user' => Auth::user(),
+                'adresses' => Adress::all()->where('user_id', Auth::user()->id),
+                'orders' => Order::all()->where('user_id', Auth::user()->id),
+            ]);
     }
 
     public function profileUpdate(Request $request): RedirectResponse
@@ -36,7 +47,7 @@ class UserController extends Controller
         if ($user->provider_id != null && $request->input('email') != $user->email) {
             throw ValidationException::withMessages(['field_name' => 'You cant change email if you are logged in with social media']);
         }
-        $request->validate([
+        $request->validateWithBag('profile', [
             'first_name' => 'required', 'max:64',
             'last_name' => 'required',' max:64',
             'phone' => 'max:16', 'phone',
@@ -56,6 +67,31 @@ class UserController extends Controller
             $user->phone = $request->input('phone');
         }
         $user->update();
+        return back();
+    }
+
+    public function addAdress(Request $request)
+    {
+        $request->validateWithBag('adress',[
+            'country' => 'required', 'max:32',
+            'city' => 'required', 'max:128',
+            'adress1' => 'required', 'max:128',
+            'adress2' => 'max:128',
+            'zip' => 'max:10',
+        ]);
+        $adress = new Adress();
+        $adress->adress_1 = $request->input('adress1');
+        $adress->adress_2 = $request->input('adress2');
+        $adress->city = $request->input('city');
+        $adress->country = $request->input('country');
+        $adress->zip_code = $request->input('zip');
+        $adress->user_id = Auth::user()->id;
+        $adress->save();
+        return back();
+    }
+    public function removeAdress(Request $request)
+    {
+        Adress::find($request->input('id'))->delete();
         return back();
     }
 

@@ -75,7 +75,9 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-0">
+                            <p class="text-center">By clicking this you agree to our <a href="{{route('privacy-policy')}}">privacy policy</a></p>
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}

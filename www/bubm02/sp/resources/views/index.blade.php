@@ -33,7 +33,7 @@
                                 </li>
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-plus"></i></a></li>
-                                <li><a href="/product/{{$item->id}}"><i class="fa fa-expand"></i></a></li>
+                                <li><a href="{{route('product', $item->id)}}"><i class="fa fa-expand"></i></a></li>
                             </ul>
                         </div>
                         <div class="part-2">

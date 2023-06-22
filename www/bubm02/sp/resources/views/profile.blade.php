@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="card-header">{{ __('Dashboard') }}</div>
 
             {{--                <div class="card-body">--}}
             {{--                    @if (session('status'))--}}
@@ -22,11 +21,12 @@
             <div class="container rounded bg-white mt-5 mb-5 card">
                 <div class="row">
                     <div class="col-md-3 border-right">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
-                                class="rounded-circle mt-5" width="150px"
-                                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
-                                class="font-weight-bold">Edogaru</span><span
-                                class="text-black-50">edogaru@mail.com.my</span><span> </span>
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                            <img class="rounded-circle mt-5" width="150px"
+                                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <span class="font-weight-bold">{{$user->first_name}}</span>
+                            <span>{{$user->last_name}}</span>
+                            <span class="text-black-50">{{$user->email}}</span>
                         </div>
                     </div>
                     <div class="col-md-5 border-right">
@@ -36,11 +36,13 @@
                             </div>
                             <form method="post" action="{{route('profile.update')}}">
                                 @csrf
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $error }}
-                                    </div>
-                                @endforeach
+                                @if($errors->profile->any())
+                                    @foreach ($errors->profile->all() as $error)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $error }}
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <div class="row mt-2">
                                     <div class="col-md-6">
                                         <label class="labels" for="first-name">Name</label>
@@ -60,7 +62,8 @@
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels" for="email">Email</label>
-                                    <input id="email" name="email" type="text" class="form-control" placeholder="enter email id"
+                                    <input id="email" name="email" type="text" class="form-control"
+                                           placeholder="Enter email"
                                            value="{{$user->email}}">
                                 </div>
                                 <div class="col-md-12 mt-3">
@@ -78,33 +81,104 @@
                     </div>
                     <div class="col-md-4">
                         <div class="p-3 py-5">
-                            <div class="d-flex justify-content-between align-items-center experience">
-                                <h4>Active addresses</h4>
-                                <span class="border px-3 p-1 add-experience">
-                                    <i class="fa fa-plus"></i>&nbsp;Adress
-                                </span>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <label class="labels" for="">Address Line 1</label>
-                                <input type="text" class="form-control" placeholder="enter address line 1"
-                                       value="">
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <label class="labels">Additional Details</label>
-                                <input type="text" class="form-control" placeholder="additional details" value="">
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md-6"><label class="labels">Country</label><input type="text"
-                                                                                                  class="form-control"
-                                                                                                  placeholder="country"
-                                                                                                  value="">
+                            <form method="post" action="{{route('adress.add')}}">
+                                @csrf
+                                @if($errors->adress->any())
+                                    @foreach ($errors->adress->all() as $error)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $error }}
+                                        </div>
+                                    @endforeach
+                                @endif
+                                <div class="d-flex justify-content-between align-items-center experience">
+                                    <h4>Addresses</h4>
                                 </div>
-                                <div class="col-md-6"><label class="labels">State/Region</label><input
-                                        type="text" class="form-control" value="" placeholder="state"></div>
-                            </div>
+                                @foreach($adresses as $adress)
+                                    <form id="form-adress-{{$adress->id}}" method="post"
+                                          action="{{route('adress.remove')}}">
+                                        @csrf
+                                        <p>{{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}
+                                            <a href="javascript:{}"
+                                               onclick="document.getElementById('form-adress-{{$adress->id}}').submit();"
+                                               class="float-end text-black">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </p>
+                                        <input type="hidden" name="id" value="{{$adress->id}}">
+                                    </form>
+                                @endforeach
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress1">Address Line 1</label>
+                                    <input type="text" class="form-control" placeholder="Enter address line 1"
+                                           value="" id="adress1" name="adress1">
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress2">Address Line 2</label>
+                                    <input type="text" class="form-control" placeholder="Enter address line 2"
+                                           value="" id="adress2" name="adress2">
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="zip">Zip Code</label>
+                                    <input id="zip" name="zip" type="text" class="form-control"
+                                           placeholder="Zip code" value="">
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <label class="labels" for="country">Country</label>
+                                        <input type="text" class="form-control" placeholder="country"
+                                               value="" id="country" name="country">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="labels" for="city">City</label>
+                                        <input id="city" name="city" type="text" class="form-control" value=""
+                                               placeholder="City">
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center">
+                                    <button class="btn btn-primary profile-button" type="submit">Add adress</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="container rounded bg-white mt-5 mb-5 card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Orders</h4>
+                </div>
+                @foreach($orders as $order)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="p-3 py-5">
+                                <div class="d-flex justify-content-between align-items-center experience">
+                                    <h5>Order #{{$order->id}}</h5>
+                                    <span class="float-end"><i class="fa fa-calendar"></i> {{$order->created_at}}</span>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress1">Address</label>
+                                    @php($adress = $order->adress())
+                                    <p>{{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}</p>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress1">Total Price</label>
+                                    <p>{{$order->total_price}}€</p>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress1">Status</label>
+                                    <p>{{$order->status}}</p>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="labels" for="adress1">Products</label>
+                                    <ul>
+                                        @foreach($order->items() as $product)
+                                            <li>{{$product->name}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

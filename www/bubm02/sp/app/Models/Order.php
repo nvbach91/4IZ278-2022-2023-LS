@@ -11,14 +11,23 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function adress() : HasOne
+    public function adress()
     {
-        return $this->hasOne(Adress::class);
+        return Adress::find($this->adress_id);
     }
 
-    public function items() : BelongsToMany
+    public function items() : array
     {
-        return $this->belongsToMany(Item::class, 'order_items');
+        return $this
+            ->belongsToMany(Item::class, 'order_items')
+            ->get(['order_id', 'item_id', 'old_price', 'quantity'])
+            ->all();
+    }
+
+    public function itemsBelong()
+    {
+        return $this
+            ->belongsToMany(Item::class, 'order_items');
     }
 
     protected $fillable = [

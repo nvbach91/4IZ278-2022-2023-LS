@@ -21,7 +21,7 @@
     @yield('config')
 </head>
 <body>
-<div id="app container">
+<div id="app container" style="width: auto">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -42,6 +42,12 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     <!-- Authentication Links -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('cart.show')}}">
+                            <i class="fa fa-shopping-cart fa-2x"></i>
+                        </a>
+                    </li>
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
@@ -55,11 +61,6 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="/cart">
-                                <i class="fa fa-shopping-cart fa-2x"></i>
-                            </a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -67,21 +68,21 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    {{ __('Profile') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('profile') }}">
-                                    {{ __('Profile') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
+                            @endguest
                         </li>
-                    @endguest
                 </ul>
             </div>
         </div>
@@ -95,14 +96,16 @@
                         @php($categoryCollapseId = str_replace(' ', '-',$category->name ).'-collapse')
 
                         <button class="btn btn-toggle align-items-center rounded collapsed bi-arrow-down"
-                                data-bs-toggle="collapse" data-bs-target="#{{$categoryCollapseId}}" aria-expanded="false">
+                                data-bs-toggle="collapse" data-bs-target="#{{$categoryCollapseId}}"
+                                aria-expanded="false">
                             {{$category->name}}
                         </button>
                         @if($hasChildCategories)
                             <div class="collapse" id="{{$categoryCollapseId}}">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     @foreach($category->childCategories as $childCategory)
-                                        <li><a href="/category/{{$childCategory->id}}" class="link-dark rounded">{{$childCategory->name}}</a></li>
+                                        <li><a href="{{route('category', $childCategory->id)}}"
+                                               class="link-dark rounded">{{$childCategory->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -111,16 +114,16 @@
                 @endforeach
             </ul>
         </aside>
-        <main class="col-10">
+        <main class="col-10 container">
             @yield('content')
         </main>
     </div>
 </div>
 
 <!-- Footer-->
-<footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-</footer>
+{{--<footer class="py-5 bg-dark sticky-bottom">--}}
+{{--    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>--}}
+{{--</footer>--}}
 <script>
 
 </script>

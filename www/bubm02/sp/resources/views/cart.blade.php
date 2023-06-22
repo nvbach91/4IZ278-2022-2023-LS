@@ -10,9 +10,24 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 <div class="card shopping-cart" style="border-radius: 15px;">
+
+                    @if (session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{session()->get('message')}}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @elseif(session()->has('error'))
+                    @endif
                     <div class="card-body text-black">
 
                         <div class="row">
+                            @if($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
                             <div class="col-lg-6 px-5 py-4">
 
                                 <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
@@ -85,16 +100,17 @@
 
                                 <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
 
-                                <form class="mb-5">
+                                <form class="mb-5" method="post" action="{{route('order.submit')}}">
+                                    @csrf
 
                                     <div class="form-outline mb-5">
-                                        <input type="text" id="typeText" class="form-control form-control-lg" size="17"
-                                               value="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                        <input type="text" id="typeText" class="form-control form-control-lg"
+                                               placeholder="1234 5678 9012 3457" minlength="16" maxlength="19" name="card-number" />
                                         <label class="form-label" for="typeText">Card Number</label>
                                     </div>
 
                                     <div class="form-outline mb-5">
-                                        <input type="text" id="typeName" class="form-control form-control-lg" size="17"
+                                        <input type="text" id="typeName" class="form-control form-control-lg" placeholder="John Doe" minlength="5" maxlength="50" name="card-name"
                                                value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
                                         <label class="form-label" for="typeName">Name on card</label>
                                     </div>
@@ -102,24 +118,50 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-5">
                                             <div class="form-outline">
-                                                <input type="text" id="typeExp" class="form-control form-control-lg" value="01/22"
-                                                       size="7" id="exp" minlength="7" maxlength="7" />
+                                                <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="01/22"
+                                                       size="7" id="exp" minlength="5" maxlength="5" />
                                                 <label class="form-label" for="typeExp">Expiration</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-5">
                                             <div class="form-outline">
                                                 <input type="password" id="typeText" class="form-control form-control-lg"
-                                                       value="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
                                                 <label class="form-label" for="typeText">Cvv</label>
                                             </div>
                                         </div>
                                     </div>
+                                    <h4 class="pt-2 fw-bold">Shipping adress</h4>
+                                    <div class="mb-2 mt-3">
+                                        @foreach($adresses as $adress)
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" value="{{$adress->id}}" type="radio" name="adress" id="radio-adress-{{$adress->id}}">
+                                                <label class="form-check-label" for="radio-adress-{{$adress->id}}">
+                                                    {{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
 
-                                    <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a
-                                            href="#!">obcaecati sapiente</a>.</p>
+                                    <h4 class="pt-2 mb-1 fw-bold">Shipping type</h4>
+                                    <div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" value="pickup" type="radio" name="shipping-type" id="shipping1">
+                                            <label class="form-check-label" for="shipping1">
+                                                Shipping by courier
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" value="post" type="radio" name="shipping-type" id="shipping2">
+                                            <label class="form-check-label" for="shipping2">
+                                                Shipping by post
+                                            </label>
+                                        </div>
+                                    </div>
 
-                                    <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg">Buy now</button>
 
                                     <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
                                         <a href="{{route('index')}}"><i class="fa fa-angle-left me-2"></i>Back to shopping</a>
@@ -129,8 +171,8 @@
 
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
