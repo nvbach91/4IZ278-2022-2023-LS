@@ -26,7 +26,6 @@ header {
 
 main {
     grid-area: main;
-    /*max-width: 1280px;*/
 }
 
 footer {
@@ -78,4 +77,8 @@ footer {
 
 .edit-book-grid > label {
     justify-self: end;
+}
+
+.edit-book-grid > textarea {
+    height: 200px;
 }
