@@ -127,7 +127,7 @@
                                 <div class="p-4">
                                     <h3>Payment</h3>
                                 </div>
-                                <div class="row justify-content-center">
+                                <div class="row">
                                     <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
                                         <form>
                                             <div class="d-flex flex-row pb-3">
