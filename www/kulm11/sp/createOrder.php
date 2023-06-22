@@ -45,6 +45,11 @@
             $ordersDB->createOrderItem($quantity,$itemsPrice,$orderID,$temp,$item["name"]);
         }
 
+        $subject = "Confirmation of your Store Trek order";
+        $message = "Thank you for your Store Trek order! For more information checkout your order history page.";
+        $header = ["MIME-Version"=>"1.0","Content-type"=>"text/html;charset=UTF-8","From" => "kulm11@vse.cz", "Reply-To" => "kulm11@vse.cz"];
+        mail($_COOKIE["username"], $subject, $message, $header);
+
         $_SESSION["cart"]=[];
         header("Location: ./orderhistory.php");
         exit;
@@ -77,7 +82,7 @@
         <form action="./createOrder.php" method="POST" id="checkoutForm">
             <input type="text" name="shipping" value="<?php echo $_POST["shipping"];?>" hidden>
             <input type="text" name="payment" value="<?php echo $_POST["payment"];?>" hidden>
-            <a href="./cart.php">Cancel</a>
+            <a href="./checkout.php">Cancel</a>
             <button type="submit" value="Confirm" name="confirmButton">Confirm</button>
         </form>
     </main>
