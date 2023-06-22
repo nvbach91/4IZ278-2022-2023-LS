@@ -25,29 +25,36 @@
                 $productDescription = $product['description'];
                 $productPrice = $product['price'];
                 $productImage = $product['image'];
+                ?>
 
-                echo "<div class='product-detail-container'>";
-                echo "<div class='product-detail'>";
-                echo "<img src='$productImage' alt='$productName'>";
-                echo "<h3>$productName</h3>";
-                echo "<p>$productDescription</p>";
-                echo "<p>Price: $productPrice</p>";
+                <div class="product-detail-container">
+                    <div class="product-detail">
+                        <img src="<?php echo $productImage; ?>" alt="<?php echo $productName; ?>">
+                        <h3><?php echo $productName; ?></h3>
+                        <p><?php echo $productDescription; ?></p>
+                        <p>Price: <?php echo $productPrice; ?></p>
 
-                echo "<form action='cart.php' method='post'>";
-                echo "<input type='hidden' name='product_id' value='$productId'>";
-                echo "<input type='hidden' name='quantity' value='1'>";
-                echo "<input type='submit' name='add_to_cart' value='Add to Cart' class='btn'>";
-                echo "</form>";
-                echo "</div>";
-                echo "</div>";
+                        <form action="cart.php" method="post">
+                            <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="submit" name="add_to_cart" value="Add to Cart" class="btn">
+                        </form>
+                    </div>
+                </div>
+
+                <?php
             } else {
-                echo "<p>Product not found.</p>";
+                ?>
+                <p>Product not found.</p>
+                <?php
             }
         } catch (PDOException $e) {
             die("Error executing the query: " . $e->getMessage());
         }
     } else {
-        echo "<p>Invalid product ID.</p>";
+        ?>
+        <p>Invalid product ID.</p>
+        <?php
     }
     ?>
 </body>

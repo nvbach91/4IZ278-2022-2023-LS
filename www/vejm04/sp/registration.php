@@ -64,10 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($errors)) {
         foreach ($errors as $error) {
             if ($error == 'Email is already registered') {
-                echo "<p class='error'>$error - <a href='login.php'>Login instead</a></p>";
+                $errorHtml = "<p class='error'>$error - <a href='login.php'>Login instead</a></p>";
             } else {
-                echo "<p class='error'>$error</p>";
+                $errorHtml = "<p class='error'>$error</p>";
             }
+            $errorHtmlArray[] = $errorHtml;
         }
     } else {
         try {
@@ -78,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $userId;
 
             header('Location: index.php');
+            exit();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -118,9 +120,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="password" name="password" required><br>
 
             <input type="submit" value="Register">
-
-            <a href="privacyPolicy.php" class="privacyPolicyAndFB">Zásady ochrany osobních údajů</a>
         </form>
+        
+        <?php if (!empty($errorHtmlArray)): ?>
+            <?php foreach ($errorHtmlArray as $errorHtml): ?>
+                <?php echo $errorHtml; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+    <div>
+        <a href="privacyPolicy.php" class="privacyPolicyAndFB">Zásady ochrany osobních údajů</a>
     </div>
 </body>
 </html>

@@ -30,25 +30,23 @@ if (isset($_GET['id'])) {
 </head>
 <body>
     <?php include 'header.php'; ?>
-    <h1><?php echo $categoryName; ?></h1>
+    <h1><?= $categoryName ?></h1>
     <div class="product-wrapper">
-        <?php
-        if (count($products) > 0) {
-            foreach ($products as $product) {
-                echo '<div class="product">';
-                echo '<h3>' . $product['name'] . '</h3>';
-                echo '<a href="productDetail.php?id=' . $product['id'] . '">';
-                echo '<img src="' . $product['image'] . '" alt="' . $product['name'] . '">';
-                echo '</a>';
-                echo '<p>' . $product['description'] . '</p>';
-                echo '<p>Price: $' . $product['price'] . '</p>';
-                echo '<a href="productDetail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
-                echo '</div>';
-            }
-        } else {
-            echo '<p>No products found in this category.</p>';
-        }
-        ?>
+        <?php if (count($products) > 0): ?>
+            <?php foreach ($products as $product): ?>
+                <div class="product">
+                    <h3><?= $product['name'] ?></h3>
+                    <a href="productDetail.php?id=<?= $product['id'] ?>">
+                        <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
+                    </a>
+                    <p><?= $product['description'] ?></p>
+                    <p>Price: $<?= $product['price'] ?></p>
+                    <a href="productDetail.php?id=<?= $product['id'] ?>" class="btn">View Details</a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No products found in this category.</p>
+        <?php endif; ?>
     </div>
 </body>
 </html>
