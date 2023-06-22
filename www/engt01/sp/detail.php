@@ -22,9 +22,10 @@ else header("Location: index.php");
 if (isset($_GET["saved"]) && $_GET["saved"]) $errors[] = "Úspěšně uloženo";
 
 $book = $bookDb->getBook($isbn);
-$bookAvailableCount = $book["amount"] - count($loansDb->getCurrentLoansOfBook($book["isbn"]));
 
 if (!$book) header("Location: index.php");
+
+$bookAvailableCount = $book["amount"] - count($loansDb->getCurrentLoansOfBook($book["isbn"]));
 
 if (isset($_GET["reserved"]) && $_GET["reserved"]) {
     $errors[] = "Úspěšně rezervováno";
