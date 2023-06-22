@@ -9,12 +9,12 @@ class PublicController extends Controller
 
     public function index() : Renderable
     {
-        return view('index', ['items' => Item::all()]);
+        return view('index', ['items' => Item::latest()->paginate(4)]);
     }
 
     public function category($id) : Renderable
     {
-        return view('index', ['items' => Item::all()->where('category_id', $id)]);
+        return view('index', ['items' => Item::latest()->where('category_id', $id)->paginate(4)]);
     }
 
     public function product($id) : Renderable

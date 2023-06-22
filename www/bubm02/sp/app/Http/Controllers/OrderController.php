@@ -57,7 +57,7 @@ class OrderController extends Controller
                 $quantity = $cart[$itemId];
                 if ($quantity > 0) {
                     $item = Item::find($itemId);
-                    $order->belongsToMany(Item::class, 'order_items')->attach($item, ['quantity' => $quantity, 'old_price' => $item->price]);
+                    $order->belongsToMany(Item::class, 'order_items')->attach($item, ['quantity' => $quantity, 'old_price' => $item->discount_price > 0 ? $item->discount_price : $item->price]);
                 }
             }
         }

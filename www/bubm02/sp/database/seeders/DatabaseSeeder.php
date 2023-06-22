@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->createGuitarCategory();
         $this->createBassCategory();
         $this->createKeysCategory();
-        $this->createItems();
+        $this->addAcousticGuitars();
     }
 
     public function createGuitarCategory() : void {
@@ -130,7 +130,7 @@ class DatabaseSeeder extends Seeder
             'category_id' => $keysId,
         ]);
     }
-    public function createItems() : void {
+    public function addAcousticGuitars() : void {
         $guitarsId = $this->getCategoryId('Acoustic guitars');
         DB::table('items')->insert([
             'name' => 'Harley Benton CLA-15M SolidWood',
@@ -241,6 +241,97 @@ class DatabaseSeeder extends Seeder
             'category_id' => $guitarsId,
         ]);
     }
+
+    public function addClassicalGuitars() {
+        $categoryId = $this->getCategoryId('Classic guitars');
+        DB::table('items')->insert([
+            'name' => 'Thomann Classic Guitar S 4/4',
+            'image' => 'https://images.static-thomann.de/pics/bdb/130180/17136473_800.jpg',
+            'description' => '
+            Classical Guitar
+
+                Size: 4/4
+                Solid, tinted spruce top
+                Back and sides: Solid maple, walnut stained
+                Neck: Maple, walnut stained
+                Fretboard: Acacia
+                Bridge: Acacia
+                Black top and back binding
+                Walnut coloured neck finish
+                Nut width: 52 mm
+                Scale length: 650 mm
+                Total length: 98 cm
+                Nickel-plated Van Gent tuners
+                Round, warm, differentiated sound
+                Strings: Hannabach 815 (Art.122784)
+                Colour: Natural high gloss
+                Made in Europe
+                Matching strap buttons: Art.213102 (not included)'
+            ,
+            'price' => 4699,
+            'stock' => 5,
+            'rating' => 5,
+            'category_id' => $categoryId,
+        ]);
+        DB::table('items')->insert([
+            'name' => 'Cort AC75 Open Pore',
+            'image' => 'https://images.static-thomann.de/pics/bdb/566036/18265556_800.jpg',
+            'description' => 'google translate
+            Acoustic Guitar
+
+                Size: 3/4
+                Top: Spruce
+                Back & sides: Mahogany
+                Neck: Mahogany
+                Fingerboard: Merbau
+                Scale: 578 mm (22.8")
+                Nut width: 45 mm (1 3/4")
+                18 Frets
+                Bridge material: Merbau
+                Finish: Open Pore
+                Colour: Natural
+
+            ',
+            'price' => 2099,
+            'stock' => 5,
+            'rating' => 5,
+            'category_id' => $categoryId,
+        ]);
+        DB::table('items')->insert([
+            'name' => 'Cort CEC5 Natural Glossy',
+            'image' => 'https://images.static-thomann.de/pics/bdb/566030/18338883_800.jpg',
+            'description' => 'google translate
+            Acoustic Guitar
+
+            Top: Spruce
+            Back and sides: Okoume
+            Neck: Mahogany
+            Fingerboard: Merbau
+            Scale: 650 mm (25.6")
+            19 Frets
+            Bridge: Merbau
+            Colour: Natural open pore
+
+            ',
+            'price' => 2099,
+            'discount_price' => 1999,
+            'stock' => 5,
+            'rating' => 5,
+            'category_id' => $categoryId,
+        ]);
+    }
+
+//    public function a() {
+//        DB::table('items')->insert([
+//            'name' => '',
+//            'image' => '',
+//            'description' => '',
+//            'price' => ,
+//            'stock' => 5,
+//            'rating' => 5,
+//            'category_id' => $categoryId,
+//        ]);
+//    }
 
 
 

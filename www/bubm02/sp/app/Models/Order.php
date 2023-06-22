@@ -16,12 +16,21 @@ class Order extends Model
         return Adress::find($this->adress_id);
     }
 
-    public function items() : array
+    public function orderItems() : array
     {
         return $this
             ->belongsToMany(Item::class, 'order_items')
             ->get(['order_id', 'item_id', 'old_price', 'quantity'])
             ->all();
+    }
+
+    public function totalPrice()
+    {
+        $totalPrice = 0;
+        foreach ($this->orderItems() as $orderItem) {
+            $totalPrice += $orderItem->old_price * $orderItem->quantity;
+        }
+        return $totalPrice;
     }
 
     public function itemsBelong()

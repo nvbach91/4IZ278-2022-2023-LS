@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('config')
+    <link rel="stylesheet" href="{{ asset('frontend/css/product-list.css') }}">
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
@@ -143,37 +146,43 @@
                 </div>
             </div>
             <div class="container rounded bg-white mt-5 mb-5 card">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Orders</h4>
+                <div class="p-2 py-2 pt-4 d-flex justify-content-center align-items-center">
+                    <h2 class="text-center">Orders</h2>
                 </div>
                 @foreach($orders as $order)
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="p-3 py-5">
+                            <div class="p-3 py-3">
                                 <div class="d-flex justify-content-between align-items-center experience">
-                                    <h5>Order #{{$order->id}}</h5>
+                                    <h5 class="mt-3">Order #{{$order->id}}</h5>
                                     <span class="float-end"><i class="fa fa-calendar"></i> {{$order->created_at}}</span>
                                 </div>
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels" for="adress1">Address</label>
+                                    <label class="labels">Address</label>
                                     @php($adress = $order->adress())
                                     <p>{{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}</p>
                                 </div>
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels" for="adress1">Total Price</label>
-                                    <p>{{$order->total_price}}€</p>
+                                    <label class="labels">Total Price</label>
+                                    <p>{{$order->totalPrice()}} Kč</p>
                                 </div>
                                 <div class="col-md-12 mt-3">
-                                    <label class="labels" for="adress1">Status</label>
+                                    <label class="labels">Status</label>
                                     <p>{{$order->status}}</p>
                                 </div>
-                                <div class="col-md-12 mt-3">
-                                    <label class="labels" for="adress1">Products</label>
-                                    <ul>
-                                        @foreach($order->items() as $product)
-                                            <li>{{$product->name}}</li>
-                                        @endforeach
-                                    </ul>
+                                <div class="col-md-12 mt-3 row">
+                                    <label class="label">Products</label>
+                                    @foreach($order->orderItems() as $orderItem)
+                                        @php($item = \App\Models\Item::find($orderItem->item_id))
+                                        {{-- //copilot, please make item cards --}}
+                                        <div class="col-md-4">
+                                            <img src="{{$item->image}}" style="max-width: 150px; max-height: 250px">
+                                            <p>Name: {{$item->name}}</p>
+                                            <p>Total price: {{$orderItem->price}} Kč</p>
+                                            <p>Quantity: {{$orderItem->quantity}}</p>
+                                        </div>
+
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
