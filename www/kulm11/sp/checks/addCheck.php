@@ -155,4 +155,20 @@ if (!empty($_POST)) {
         header("Location: ./admin.php");
         exit;
     }
+}else{
+        $email = "";
+        $firstName = "";
+        $lastName = "";
+        $password = "";
+        $password2 = "";
+        $city = "";
+        $street = "";
+        $buildingNo = "";
+        $zipCode = "";
+        $role = "";
+        $name = "";
+        $price = "";
+        $description = "";
+        $image = "";
+        $category = "";
 }

@@ -33,15 +33,16 @@ class OrdersDatabase extends Database
         return $result["orderid"];
     }
 
-    public function createOrderItem($quantity, $price, $orderid, $itemid)
+    public function createOrderItem($quantity, $price, $orderid, $itemid, $itemname)
     {
-        $query = "INSERT ordereditem (quantity, price, order_orderid, item_itemid) 
-        VALUES(?,?,?,?);";
+        $query = "INSERT ordereditem (quantity, price, order_orderid, item_itemid, itemname) 
+        VALUES(?,?,?,?,?);";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1, $quantity);
         $statement->bindParam(2, $price);
         $statement->bindParam(3, $orderid);
         $statement->bindParam(4, $itemid);
+        $statement->bindParam(5, $itemname);
         $statement->execute();
     }
 
@@ -59,6 +60,26 @@ class OrdersDatabase extends Database
         $query = "SELECT * FROM ordereditem where order_orderid=?;";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1, $orderID);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function getUsersOrdersAmount($id)
+    {
+        $query = "SELECT COUNT(*) AS count FROM `Order` WHERE user_userid=?";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindParam(1, $id);
+        $statement->execute();
+        $result = $statement->fetchAll()[0]["count"];
+        return $result;
+    }
+    public function fetchPage($userid, $itemsCountPerPage, $offset)
+    {
+        $query = "SELECT * FROM `Order` WHERE user_userid=? ORDER BY orderid ASC LIMIT $itemsCountPerPage
+        OFFSET ?;";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindParam(1, $userid);
+        $statement->bindParam(2, $offset, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
     }

@@ -36,24 +36,26 @@ $items = $itemsDatabase->fetchPage($itemsPerPage, $offset);
         <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
-                <?php
-                if (!isset($_COOKIE["username"])) {
-                    echo '<li><a href="./signup.php">Sign up</a></li><li><a href="./login.php">Login</a></li>';
-                } else {
-                    if ($usersDatabase->isAdmin($_COOKIE["username"])) {
-                        echo '<li><a href="./admin.php">Admin</a></li>';
-                    } else {
-                        if (isset($_SESSION["cart"])) {
+                <?php if(!isset($_COOKIE["username"])): ?>
+                    <li><a href="./signup.php">Sign up</a></li>
+                    <li><a href="./login.php">Login</a></li>
+                <?php endif; ?>
+                <?php if(isset($_COOKIE["username"])): ?>
+                    <?php if($usersDatabase->isAdmin($_COOKIE["username"])): ?>
+                        <li><a href="./admin.php">Admin</a></li>
+                    <?php endif; ?>
+                    <?php if(!$usersDatabase->isAdmin($_COOKIE["username"])): ?>
+                        <?php if (isset($_SESSION["cart"])) {
                             $itemsNumber = count($_SESSION["cart"]);
                         } else {
                             $itemsNumber = 0;
                         }
-                        echo '<li><a href="./orderhistory.php">Order history</a></li>';
-                        echo '<li><a href="./checkout.php">Checkout (' . $itemsNumber . ')</a></li>';
-                    }
-                    echo '<li><a href="./logout.php">Logout</a></li>';
-                }
-                ?>
+                        ?>
+                        <li><a href="./orderhistory.php">Order history</a></li>
+                        <li><a href="./checkout.php">Checkout (<?php echo $itemsNumber;?>)</a></li>
+                    <?php endif; ?>
+                    <li><a href="./logout.php">Logout</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
@@ -67,7 +69,7 @@ $items = $itemsDatabase->fetchPage($itemsPerPage, $offset);
             <div id="items">
                 <?php foreach ($items as $item) : ?>
                     <div class="item">
-                        <img height="200" src="<?php echo $item["image"]; ?>" alt="<?php echo $item["name"]; ?>">
+                        <a href="./product.php?id=<?php echo $item["itemid"];?>"><img height="200" src="<?php echo $item["image"]; ?>" alt="<?php echo $item["name"]; ?>"></a>
                         <h2><?php echo $item["name"]; ?></h2>
                         <p class="price-item">$<?php echo $item["price"]; ?></p>
                         <p class="description-item"><?php echo $item["description"]; ?></p>

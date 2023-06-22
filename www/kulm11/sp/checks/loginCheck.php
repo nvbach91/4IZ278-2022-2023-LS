@@ -37,3 +37,6 @@ if(!empty($_POST)){
     }
 
 }
+else{
+    $email="";
+}

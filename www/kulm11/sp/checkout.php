@@ -61,23 +61,29 @@ $totalPrice = 0;
     <main>
         <div id="cart">
             <?php if ($cart != []) : ?>
-                <div id="cart-items-section">
+                <div>
+                    <table id="cart-items-section">
                     <?php foreach ($cart as $item) : ?>
                         <?php $totalPrice = $totalPrice + $item["price"]; ?>
                         <?php if (!in_array($item["itemid"], $itemsInCart)) : ?>
-                            <div class="cart-item">
-                                <p><strong><?php echo $item["name"]; ?></strong></p>
+                            <div>
+                                <tr class="cart-item">
+                                <td><strong><?php echo $item["name"]; ?></strong></td>
                                 <div class="item-quantity">
-                                    <p><?php echo countItemOccurencesInCart($item["itemid"]); ?></p>
+                                    <td>
+                                    <?php echo countItemOccurencesInCart($item["itemid"]); ?>
                                     <a href="./changeItemQuantity.php?type=add&id=<?php echo $item["itemid"]; ?>">+</a>
                                     <a href="./changeItemQuantity.php?type=remove&id=<?php echo $item["itemid"]; ?>">-</a>
+                                    </td>
                                 </div>
-                                <p><a href="./removeItemCart.php?item_id=<?php echo $item["itemid"]; ?>">Remove</a></p>
-                                <p>$<?php echo $item["price"] * countItemOccurencesInCart($item["itemid"]); ?></p>
+                                <td><a href="./removeItemCart.php?item_id=<?php echo $item["itemid"]; ?>">Remove</a></td>
+                                <td>$<?php echo $item["price"] * countItemOccurencesInCart($item["itemid"]); ?></td>
+                                </tr>
                             </div>
                             <?php array_push($itemsInCart, $item["itemid"]); ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
+                    </table>
                 </div>
                 <div id="shipment-payment-section">
                     <form action="./createOrder.php" method="POST" id="checkoutForm">

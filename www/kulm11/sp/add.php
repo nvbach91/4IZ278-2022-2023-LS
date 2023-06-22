@@ -15,7 +15,7 @@ if (isset($_GET["mode"])) {
         $categoriesDatabase = new CategoriesDatabase();
         $categories = $categoriesDatabase->fetchAll();
     } elseif ($mode == "user") {
-        require_once "./UsersDatabase.php";
+        require_once "./database/UsersDatabase.php";
         $usersDatabase = new UsersDatabase();
         $mode = "user";
     }
@@ -51,13 +51,13 @@ if (isset($_GET["mode"])) {
 
             <?php if ($mode == "item") : ?>
                 <label>Name:</label>
-                <input type="text" name="name">
+                <input type="text" name="name" value=<?php echo $name;?>>
                 <label>Price:</label>
-                <input type="number" name="price">
+                <input type="number" name="price" value=<?php echo $price;?>>
                 <label>Description:</label>
-                <input type="text" name="description">
+                <input type="text" name="description" value=<?php echo $description;?>>
                 <label>Image URL:</label>
-                <input type="url" name="image">
+                <input type="url" name="image" value=<?php echo $image;?>>
                 <label>Category:</label>
                 <select name="category">
                     <?php foreach ($categories as $category) : ?>
@@ -67,23 +67,23 @@ if (isset($_GET["mode"])) {
             <?php endif; ?>
             <?php if ($mode == "user") : ?>
                 <label>E-mail:</label>
-                <input type="email" name="email">
+                <input type="email" name="email" value=<?php echo $email;?>>
                 <label>Password:</label>
                 <input type="password" name="password">
                 <label>Repeat password:</label>
                 <input type="password" name="password2">
                 <label>First name:</label>
-                <input type="text" name="firstname">
+                <input type="text" name="firstname" value=<?php echo $firstName;?>>
                 <label>Last name:</label>
-                <input type="text" name="lastname">
+                <input type="text" name="lastname" value=<?php echo $lastName;?>>
                 <label>City:</label>
-                <input type="text" name="city">
+                <input type="text" name="city" value=<?php echo $city;?>>
                 <label>Street:</label>
-                <input type="text" name="street">
+                <input type="text" name="street" value=<?php echo $street;?>>
                 <label>Building number:</label>
-                <input type="number" name="buildingno">
+                <input type="number" name="buildingno" value=<?php echo $buildingNo;?>>
                 <label>Zip code:</label>
-                <input type="text" name="zipcode">
+                <input type="text" name="zipcode" value=<?php echo $zipCode;?>>
                 <label>Role:</label>
                 <select name="role">
                     <option value="user">user</option>

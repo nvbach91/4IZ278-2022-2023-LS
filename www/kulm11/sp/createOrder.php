@@ -35,7 +35,8 @@
     foreach(array_unique($itemsIDs) as $temp){
         $quantity=$quantities[$temp];
         $itemsPrice=$quantity*$itemsDB->fetch($temp)["price"];
-        $ordersDB->createOrderItem($quantity,$itemsPrice,$orderID,$temp);
+        $item = $itemsDB->fetch($itemID);
+        $ordersDB->createOrderItem($quantity,$itemsPrice,$orderID,$temp,$item["name"]);
     }
 
     $_SESSION["cart"]=[];

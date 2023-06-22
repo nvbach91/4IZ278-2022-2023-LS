@@ -6,9 +6,9 @@ $userDB = new UsersDatabase();
 
 if(!empty($_POST)){
     $errors=[];
-    $email = htmlspecialchars($_POST["email"]);
-    $firstName = htmlspecialchars($_POST["firstName"]);
-    $lastName = htmlspecialchars($_POST["lastName"]);
+    $email = htmlspecialchars($_COOKIE["username"]);
+    $firstName = htmlspecialchars($_COOKIE["first_name"]);
+    $lastName = htmlspecialchars($_COOKIE["last_name"]);
     $city = htmlspecialchars($_POST["city"]);
     $street = htmlspecialchars($_POST["street"]);
     $buildingNo = htmlspecialchars($_POST["buildingNo"]);

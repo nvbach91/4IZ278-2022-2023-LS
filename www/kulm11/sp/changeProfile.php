@@ -1,6 +1,6 @@
 <?php require_once "./database/UsersDatabase.php" ?>
 <?php
-if (!isset($_COOKIE["username"]) && !isset($_COOKIE["username"]) && !isset($_COOKIE["username"])) {
+if (!isset($_COOKIE["username"]) && !isset($_COOKIE["first_name"]) && !isset($_COOKIE["last_name"])) {
     header("Location: ./index.php");
     exit;
 }
@@ -29,12 +29,6 @@ if (!isset($_COOKIE["username"]) && !isset($_COOKIE["username"]) && !isset($_COO
     </header>
     <main>
         <form action="./changeProfile.php" method="POST" id="signupForm">
-            <label>E-mail:</label>
-            <input type="email" name="email" value=<?php echo $_COOKIE["username"];?> readonly="readonly">
-            <label>First name:</label>
-            <input type="text" name="firstName" value=<?php echo $_COOKIE["first_name"];?> readonly="readonly">
-            <label>Last name:</label>
-            <input type="text" name="lastName" value=<?php echo $_COOKIE["last_name"];?> readonly="readonly">
             <label>City:</label>
             <input type="text" name="city">
             <label>Street:</label>

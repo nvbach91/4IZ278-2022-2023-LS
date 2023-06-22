@@ -32,23 +32,23 @@ if (isset($_COOKIE["username"])) {
     <main>
         <form action="./signup.php" method="POST" id="signupForm">
             <label>E-mail:</label>
-            <input type="email" name="email">
+            <input type="email" name="email" value=<?php echo $email;?>>
             <label>Password:</label>
             <input type="password" name="password">
             <label>Repeat password:</label>
             <input type="password" name="password2">
             <label>First name:</label>
-            <input type="text" name="firstName">
+            <input type="text" name="firstName" value=<?php echo $firstName;?>>
             <label>Last name:</label>
-            <input type="text" name="lastName">
+            <input type="text" name="lastName" value=<?php echo $lastName;?>>
             <label>City:</label>
-            <input type="text" name="city">
+            <input type="text" name="city" value=<?php echo $city;?>>
             <label>Street:</label>
-            <input type="text" name="street">
+            <input type="text" name="street" value=<?php echo $street;?>>
             <label>Building number:</label>
-            <input type="number" name="buildingNo">
+            <input type="number" name="buildingNo" value=<?php echo $buildingNo;?>>
             <label>Zip code:</label>
-            <input type="text" name="zipCode">
+            <input type="text" name="zipCode" value=<?php echo $zipCode;?>>
             <p><a href="./login.php">Already have an account? Click here</a></p>
             <button type="submit">Signup</button>
         </form>

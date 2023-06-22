@@ -142,21 +142,8 @@ main {
     margin: 10px;
     border-radius: 10px;
 }
-
 #cart-items-section {
-    min-width: 300px;
-    border-style: solid;
-    margin: 10px;
-    border-radius: 10px;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: 100%;
 }
 
 #logo {
@@ -266,6 +253,11 @@ main {
     background-color: red;
 }
 
+.success {
+    color: white;
+    background-color: green;
+}
+
 #facebookLogin{
     margin: 10px;
     color: white;
@@ -281,4 +273,20 @@ main {
 
 #loginContent{
     text-align: center;
+}
+
+#itemPage{
+    padding:15px;
+}
+
+#itemPageContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+#itemPageContnt img, #itemPageInfo{
+    padding:5px;
+    margin:10px;
 }

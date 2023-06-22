@@ -15,7 +15,17 @@ if (!isset($_COOKIE["username"])) {
 }
 $username = $_COOKIE["username"];
 $userID = $usersDB->getUserViaEmail($username)["userid"];
-$orders = $ordersDB->getUsersOrders($userID);
+
+$totalItemAmounts = $ordersDB->getUsersOrdersAmount($usersDB->getUserViaEmail($username)["userid"]);
+$itemsPerPage = 3;
+$paginationCount = ceil($totalItemAmounts / $itemsPerPage);
+
+if (!empty($_GET)) {
+    $offset = htmlspecialchars($_GET["offset"]);
+} else {
+    $offset = 0;
+}
+$orders = $ordersDB->fetchPage($userID, $itemsPerPage, $offset);
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +59,15 @@ $orders = $ordersDB->getUsersOrders($userID);
         </nav>
     </header>
     <main>
+    <ul id="homepage-pagination">
+            <?php for ($i = 0; $i < $paginationCount; $i++) { ?>
+                <li>
+                    <a href="<?php echo './orderhistory.php?offset=' . $i * $itemsPerPage; ?>">
+                        <?php echo $i + 1; ?>
+                    </a>
+                </li>
+            <?php } ?>
+        </ul>
         <div id="order-history">
             <h2>Order history</h2>
             <?php foreach ($orders as $order) : ?>
@@ -63,9 +82,8 @@ $orders = $ordersDB->getUsersOrders($userID);
                         <th>Price</th>
                     </tr>
                     <?php foreach ($orderedItems as $orderedItem) : ?>
-                        <?php $item = $itemsDB->fetch($orderedItem["item_itemid"]); ?>
                         <tr>
-                            <td><?php echo $item["name"]; ?></td>
+                            <td><a <?php if($itemsDB->containsItem($orderedItem["item_itemid"]))echo "href='./product.php?id=". $orderedItem["item_itemid"] ."'"; ?>><?php echo $orderedItem["itemname"]; ?></a></td>
                             <td><?php echo $orderedItem["quantity"]; ?></td>
                             <td>$<?php echo $orderedItem["price"]; ?></td>
                             <?php $totalPrice = $totalPrice + $orderedItem["price"]; ?>
@@ -82,7 +100,7 @@ $orders = $ordersDB->getUsersOrders($userID);
                         <td>0</td>
                     </tr>
                 </table>
-                <p class="total-price"><strong>Total: <?php echo $totalPrice; ?></strong></p>
+                <p class="total-price"><strong>Total: $<?php echo $totalPrice; ?></strong></p>
         </div>
     <?php endforeach; ?>
     </div>

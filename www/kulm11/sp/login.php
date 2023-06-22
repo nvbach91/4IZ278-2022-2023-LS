@@ -5,6 +5,10 @@ if (isset($_COOKIE["username"])) {
     exit;
 }
 ?>
+
+<?php if (isset($_GET["signup"]) && $_GET["signup"] == "success"): ?>
+    <div class='success'>Sign up was successful</div>
+<?php endif;?>
 <?php require "./checks/loginCheck.php" ?>
 
 <!DOCTYPE html>
@@ -32,7 +36,7 @@ if (isset($_COOKIE["username"])) {
     <main id="loginContent">
         <form action="./login.php" method="POST" id="loginForm">
             <label>E-mail:</label>
-            <input type="email" name="email">
+            <input type="email" name="email" value=<?php echo $email;?>>
             <label>Password:</label>
             <input type="password" name="password">
             <p><a href="./signup.php">Don't have an account? Click here</a></p>

@@ -119,7 +119,7 @@ if(!empty($_POST)){
 
     if($isRegistrationSuccesful){
         $userDB->addUser($email,$password,$firstName,$lastName,$city,$street,$buildingNo,$zipCode, "user");
-        header("Location: ./login.php");
+        header("Location: ./login.php?signup=success");
         exit;
     }
 }

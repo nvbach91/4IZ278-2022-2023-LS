@@ -28,7 +28,7 @@ class ItemsDatabase extends Database
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1, $id);
         $statement->execute();
-        $result = $statement->fetch();
+        $result = $statement->fetchAll();
         if (count($result) == 0) return false;
         return true;
     }
