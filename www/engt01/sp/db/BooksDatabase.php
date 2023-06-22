@@ -30,16 +30,24 @@ class BooksDatabase extends Database {
         return $statement->fetch();
     }
 
-//    public function getBooks(int $category, int $amount = 0, int $offset = 0): array {
-    public function getBooks(int $category): array {
-        if ($category === 0) return $this->getAllBooks(); // TODO
+    public function getAllBooksOfCategory(int $category): array {
+        if ($category === 0) return $this->getAllBooks();
 
-//        $query = "SELECT * FROM books WHERE category_id = :catId LIMIT :offset, :amount";
         $query = "SELECT * FROM books WHERE category_id = :catId";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue("catId", $category, PDO::PARAM_INT);
-//        $statement->bindValue("offset", $offset, PDO::PARAM_INT);
-//        $statement->bindValue("amount", $amount, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function getBooks(int $category, ?int $amount = 0, ?int $offset = 0): array {
+        if ($category !== 0) $query = "SELECT * FROM books WHERE category_id = :catId LIMIT :offset, :amount";
+        else $query = "SELECT * FROM books LIMIT :offset, :amount";
+
+        $statement = $this->pdo->prepare($query);
+        if ($category !== 0) $statement->bindValue("catId", $category, PDO::PARAM_INT);
+        $statement->bindValue("offset", $offset, PDO::PARAM_INT);
+        $statement->bindValue("amount", $amount, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
     }
