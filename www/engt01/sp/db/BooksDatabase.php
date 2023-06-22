@@ -68,7 +68,7 @@ class BooksDatabase extends Database {
             "catId" => $category, "amount" => $amount]);
     }
 
-    public function deleteBook(int $isbn): void {
+    public function deleteBook(string $isbn): void {
         $query = "DELETE FROM books WHERE isbn = :isbn";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["isbn" => $isbn]);
