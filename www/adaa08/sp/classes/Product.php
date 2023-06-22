@@ -30,15 +30,6 @@ class Product
         $stmt->execute();
     }
 
-    public function getProductsPaginated($page) {
-        $offset = ($page - 1) * $this->productsPerPage;
-
-        $stmt = $this->db->prepare("SELECT product_id, name, price, description, photo FROM products WHERE is_deleted = 0 LIMIT ? OFFSET ?");
-        $stmt->bind_param('ii', $this->productsPerPage, $offset);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function getTotalProducts() {
         $stmt = $this->db->prepare("SELECT COUNT(*) AS total_products FROM products WHERE is_deleted = 0");
         $stmt->execute();
@@ -46,13 +37,23 @@ class Product
         return $result->fetch_assoc()['total_products'];
     }
 
+    public function getProductsPaginated($page) {
+        $offset = ($page - 1) * $this->productsPerPage;
+    
+        $stmt = $this->db->prepare("SELECT product_id, name, price, description, photo, q_in_stock FROM products WHERE is_deleted = 0 LIMIT ? OFFSET ?");
+        $stmt->bind_param('ii', $this->productsPerPage, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function getProductsByCategory($categoryId, $page) {
         $offset = ($page - 1) * $this->productsPerPage;
-        $stmt = $this->db->prepare("SELECT product_id, name, price, description, photo FROM products WHERE is_deleted = 0 AND categories_category_id = ? LIMIT ? OFFSET ?");
+        $stmt = $this->db->prepare("SELECT product_id, name, price, description, photo, q_in_stock FROM products WHERE is_deleted = 0 AND categories_category_id = ? LIMIT ? OFFSET ?");
         $stmt->bind_param('iii', $categoryId, $this->productsPerPage, $offset);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    
 
     public function getProductById($productId) {
         $stmt = $this->db->prepare('SELECT * FROM products WHERE product_id = ?');
@@ -74,9 +75,13 @@ class Product
         $stmt->bind_param('sdsiisi', $name, $price, $description, $quantity, $categoryId, $photoUrl, $productId);
         return $stmt->execute();
     }
-    
 
-
+    public function updateProductWithoutPhoto($productId, $name, $price, $description, $quantity, $categoryId)
+    {
+    $sql = "UPDATE products SET name = ?, price = ?, description = ?, q_in_stock = q_in_stock + ?, categories_category_id = ? WHERE product_id = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param("sdsiis", $name, $price, $description, $quantity, $categoryId, $productId);
+    return $stmt->execute();
+    }    
 }
-
 ?>

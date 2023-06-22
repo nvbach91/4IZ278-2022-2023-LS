@@ -3,9 +3,11 @@ session_start();
 
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
+require_once 'email.php';  
 
 $db = new Database();
 $userObj = new User($db);
+$error_message = '';
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -13,28 +15,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $lastname = htmlspecialchars($_POST['second_name']);
     $email = htmlspecialchars($_POST['email']);
     $phone = htmlspecialchars($_POST['phone']);
-    $password = $_POST['password']; // No hashing here
+    $password = $_POST['password']; 
     $role = 'user';
 
-    if ($userObj->createUser($firstname, $lastname, $email, $phone, $role, $password)) {
+    $userCreated = $userObj->createUser($firstname, $lastname, $email, $phone, $role, $password);
 
+    if ($userCreated) {
         $to = $email;
-        $subject = "Registrácia bola úspešná";
-        $message = "Vážený " . $firstname . ",\n\nĎakujeme za registráciu na našej stránke.";
-        $headers = "From: noreply@example.com" . "\r\n" .
-            "Reply-To: noreply@example.com" . "\r\n" .
-            "X-Mailer: PHP/" . phpversion();
-        if(mail($to, $subject, $message, $headers)) {
-            header("location: login.php");
+        $subject = 'Testing PHP Mail'; 
+        $message = 'Pán ' .$firstname. '  Ďakujeme vám za registráciu na našom E-shope.'; 
+        $from = 'example@vse.cz'; 
+
+        if (sendEmail($to, $subject, $message, $from)) {
+            header("Location: login.php");
+            exit;
         } else {
-            echo "Email nemôže byť poslaný.";
+            echo "Failed to send email";
         }
     } else {
-        echo "Niečo nefungovalo, skúste to prosím neskôr.";
+        $error_message = 'Používateľ s tým emailom už existuje.';
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="sk">
@@ -64,6 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <small>Heslo by malo obsahovať 8 znakov, jedno písmeno a jedno číslo.</small>
 
     <input type="submit" value="Register">
+    <p><?php echo $error_message; ?><p>
 </form>
 
 <?php include 'footer.php';?>

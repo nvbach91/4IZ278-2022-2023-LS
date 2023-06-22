@@ -3,10 +3,12 @@ session_start();
 
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
+require_once 'classes/Cart.php';
 require_once 'set_cookie.php';
 
 $db = new Database();
 $userObj = new User($db);
+$cartObj = new Cart($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -19,6 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['role'] = $user['role'];
         $_SESSION['loggedin'] = true;
 
+        $cart_id = $cartObj->getCartIdByUserId($_SESSION['user_id']);
+    
+        if (!$cart_id) {
+            $cart_id = $cartObj->createCart($_SESSION['user_id']);
+        }
+    
+        $_SESSION['cart_id'] = $cart_id;
+
         set_user_cookie($user['user_id']);
 
         if ($_SESSION['role'] == 'admin') {
@@ -28,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         exit();
     } else {
-        $error_message = 'Invalid credentials';
+        $error_message = 'Nesprávne prihlasovacie údaje.';
     }
 }
 
@@ -54,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($error_message)): ?>
             <p><?= htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
-
 
         <input type="submit" value="Login">
     </form>

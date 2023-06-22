@@ -42,10 +42,10 @@ $totalCartPrice = 0;
         <th>Cena</th>
         <th>Množstvo</th>
         <th>Cena za daný produkt</th>
+        <th>Vymazať produkt s košíka</th>
     </tr>
     
-    <?php
-    foreach ($cartItems as $item): 
+    <?php foreach ($cartItems as $item): 
         $totalPriceForThisItem = $item['price'] * $item['quantity'];
         $totalCartPrice += $totalPriceForThisItem;
     ?>
@@ -56,6 +56,12 @@ $totalCartPrice = 0;
         <td><?= htmlspecialchars($item['price'], ENT_QUOTES, 'UTF-8') ?>€</td>
         <td><?= htmlspecialchars($item['quantity'], ENT_QUOTES, 'UTF-8') ?></td>
         <td><?= htmlspecialchars($totalPriceForThisItem, ENT_QUOTES, 'UTF-8') ?>€</td>
+        <td>
+            <form action="remove_from_cart.php" method="post">
+                <input type="hidden" name="product_id" value="<?= htmlspecialchars($item['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+                <input type="submit" value="✖" title="Remove from cart">
+            </form>
+        </td>
     </tr>
 
     <?php endforeach; ?>

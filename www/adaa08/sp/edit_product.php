@@ -24,6 +24,7 @@ $categories = $categoryObj->getCategories();
 $product = $productObj->getProductById($product_id);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -59,6 +60,8 @@ $product = $productObj->getProductById($product_id);
     
     <label for="photo">Zmena fotografie</label>
     <input type="file" name="photo">
+    <input type="hidden" name="old_photo" value="<?= htmlspecialchars($product['photo'], ENT_QUOTES, 'UTF-8') ?>">
+
 
     <button type="submit">Upraviť produkt</button>
 </form>

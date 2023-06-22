@@ -15,6 +15,7 @@ $order_id = $_GET['order_id'];
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
 require_once 'classes/Order.php';
+require_once 'email.php';
 
 $db = new Database();
 $orderObj = new Order($db);
@@ -27,24 +28,18 @@ if ($orderObj->updateOrderStatus($order_id, "Vybavená")) {
     if ($email) {
 
         $to = $email;
-        $subject = "Order Update";
-        $message = "Your order (Order ID: " . $order_id . ") has been processed and is on its way.";
-        $headers = "From: noreply@example.com" . "\r\n" .
-            "Reply-To: noreply@example.com" . "\r\n" .
-            "X-Mailer: PHP/" . phpversion();
+        $subject = 'Testing PHP Mail'; 
+        $message = "Vaša objednávka (Order ID: " . $order_id . ") bola vybevaná a je na ceste ku vám.";
+        $from = 'example@vse.cz'; 
         
-        if (mail($to, $subject, $message, $headers)) {
-            header('Location: admin.php');
-            exit();
-        } else {
-            echo "Email could not be sent.";
+        if(!sendEmail($to, $subject, $message, $from)) {
+                echo "Email sa nepodarilo odoslať.";
         }
+
     } else {
-        echo "Could not find user email.";
+        echo "Could not update order status.";
     }
-} else {
-    echo "Could not update order status.";
-}
+} 
 header('Location: admin.php');
 
 ?>

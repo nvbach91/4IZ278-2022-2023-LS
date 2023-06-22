@@ -30,6 +30,8 @@ $categories = $categoryObj->getCategories();
 <head>
     <title>Products</title>
     <?php include 'meta.php'; ?>
+    <script src="js/product.js"></script>
+
 </head>
 <body>
 
@@ -55,26 +57,30 @@ $categories = $categoryObj->getCategories();
 <div class="products">
     <?php
         foreach ($products as $product) {
-            echo "<div class='product'>\n";
+            $quantityInStock = $product['q_in_stock'];
+            echo "<div class='product' data-quantity='$quantityInStock'>\n";
             echo "<img src='" . $product['photo'] . "' alt='" . $product['name'] . "'/>\n";
             echo "<h3>" . $product['name'] . "</h3>\n";
             echo "<p>Cena: " . $product['price'] . "€</p>\n";
             echo "<p>" . $product['description'] . "</p>\n";
+            echo "<p> Počet ks:" . $product['q_in_stock'] . "</p>\n";
+            echo "<span class='vypredane'>Vypredané</span>\n"; 
             echo "<form action='add_to_cart.php' method='post'>\n";
             echo "<input type='hidden' name='product_id' value='" . $product['product_id'] . "'>\n";
             
             echo "<select name='quantity'>\n";
-            for($i=1; $i<=10; $i++) {
+            $maxQuantity = min(10, $product['q_in_stock']); 
+            for($i=1; $i<=$maxQuantity; $i++) {
                 echo "<option value='".$i."'>".$i."</option>\n";
             }
             echo "</select>\n";
-
             echo "<button type='submit' class='add-to-cart'>Pridať do košíka</button>\n";
             echo "</form>\n";
-            echo "</div>\n";
+            echo "</div>\n"; 
         }
     ?>
 </div>
+
 
 
 <div class="pagination">

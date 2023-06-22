@@ -54,6 +54,7 @@
     .product {
         border: 1px solid #ccc;
         padding: 10px;
+        position: relative;
     }
     
     .product img {
@@ -157,7 +158,7 @@
   
   .grid-container {
       display: grid;
-      grid-template-columns: repeat(5, minmax(300px, 1fr));
+      grid-template-columns: repeat(4, minmax(300px, 1fr));
       gap: 20px;
   }
   
@@ -347,6 +348,27 @@ form button:hover {
   margin-bottom: 50px;
   font-size: 24px; 
 }
+
+.vypredane {
+  display: none;
+  color: red;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.product.out-of-stock {
+  opacity: 0.6;
+}
+
+.product.out-of-stock .vypredane {
+  display: block;
+}
+
 
 
 

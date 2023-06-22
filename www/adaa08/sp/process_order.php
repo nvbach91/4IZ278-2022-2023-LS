@@ -6,6 +6,8 @@ require_once 'classes/Cart.php';
 require_once 'classes/Order.php';
 require_once 'classes/Product.php';
 require_once 'classes/Address.php';
+require_once 'classes/Admin.php';  
+require_once 'email.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -19,17 +21,31 @@ $cart = new Cart($db);
 $order = new Order($db);
 $product = new Product($db);
 $address = new Address($db);
+$admin = new Admin($order, $product, $user); 
 
-$city = htmlspecialchars(trim($_POST['city']));
-$postal_code = htmlspecialchars(trim($_POST['postal_code']));
-$street_plus_number = htmlspecialchars(trim($_POST['street_plus_number']));
-$country = htmlspecialchars(trim($_POST['country']));
+if (!isset($_POST['previous_address'])) {
+    $city = isset($_POST['city']) ? htmlspecialchars(trim($_POST['city'])) : "";
+    $postal_code = isset($_POST['postal_code']) ? htmlspecialchars(trim($_POST['postal_code'])) : "";
+    $street_plus_number = isset($_POST['street_plus_number']) ? htmlspecialchars(trim($_POST['street_plus_number'])) : "";
+    $country = isset($_POST['country']) ? htmlspecialchars(trim($_POST['country'])) : "";
 
-$address_id = $address->createAddress($city, $postal_code, $street_plus_number, $country, $_SESSION['user_id']);
+    $address_id = $address->createAddress($city, $postal_code, $street_plus_number, $country, $_SESSION['user_id']);
+} else {
+
+    $previous_address = $address->getAddress($_POST['previous_address']);
+    
+    $city = $previous_address['city'];
+    $postal_code = $previous_address['postal_code'];
+    $street_plus_number = $previous_address['street_plus_number'];
+    $country = $previous_address['country'];
+    
+    $address_id = $address->createAddress($city, $postal_code, $street_plus_number, $country, $_SESSION['user_id']);
+}
+
 
 $cartItems = $cart->getCartItems($_SESSION['cart_id']);
 
-foreach ($orderItems as $item) {
+foreach ($cartItems as $item) { 
     $product->updateProductStock($item['product_id'], $item['quantity']);
 }
 
@@ -42,10 +58,9 @@ foreach ($cartItems as $item) {
 $status = 'Spracováva sa';
 $order_id = $order->createOrder($_SESSION['user_id'], $address_id, $total, $status);
 
-foreach ($cartItems as $item) {
+foreach ($orderItems as $item) {
     $product->updateProductStock($item['product_id'], $item['quantity']);
     $order->createOrderItem($order_id, $item['product_id'], $item['quantity'], $productDetails['price']);
-
 }
 
 $cart->deleteCart($_SESSION['cart_id']);
@@ -58,26 +73,26 @@ if(isset($_SESSION['user_id'])) {
 }
 
 $userDetails = $user->getUser($_SESSION['user_id']);
-$adminEmail = 'adaa08@vse.cz';
+$admins = $admin->getAdmins();
 
 $to = $userDetails['email']; 
-$subject = "Potvrdenie objednávky";
+$subject = 'Testing PHP Mail';
 $message = "Ďakujeme za objednávku. Pracujeme na jej vybavení.";
-$headers = "From: noreply@example.com" . "\r\n" .
-    "Reply-To: noreply@example.com" . "\r\n" .
-    "X-Mailer: PHP/" . phpversion();
+$from = 'example@vse.cz'; 
 
-mail($to, $subject, $message, $headers);
+    if(!sendEmail($to, $subject, $message, $from)){
+        echo "Email sa nepodarilo odoslať.";
+    }
 
-$toAdmin = $adminEmail;
-$subjectAdmin = "Nová objednávka";
-$messageAdmin = "Nová objednávka bola vytvorená.";
-$headersAdmin = "From: noreply@example.com" . "\r\n" .
-    "Reply-To: noreply@example.com" . "\r\n" .
-    "X-Mailer: PHP/" . phpversion();
-
-mail($toAdmin, $subjectAdmin, $messageAdmin, $headersAdmin);
-
+    foreach ($admins as $adminUser) {
+        $toAdmin = $adminUser['email'];
+        $subjectAdmin = 'Testing PHP Mail';
+        $messageAdmin = "Nová objednávka bola vytvorená.";
+        $fromAdmin = 'example@vse.cz'; 
+        if(!sendEmail($toAdmin, $subjectAdmin, $messageAdmin, $fromAdmin)){
+            echo "Failed to send email to the admin";
+        }
+    }
 
 header('Location: order_success.php');
 ?>

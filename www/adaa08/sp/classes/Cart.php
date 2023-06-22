@@ -51,7 +51,32 @@ class Cart
     $stmt = $this->db->prepare('DELETE FROM shopping_cart WHERE cart_id = ?');
     $stmt->bind_param('i', $cartId);
     $stmt->execute();
-}
+}   
+
+    public function removeFromCart($productId, $cartId)
+    {
+    $stmt = $this->db->prepare('DELETE FROM shopping_cart_item WHERE products_product_id = ? AND shopping_cart_cart_id = ?');
+    $stmt->bind_param('ii', $productId, $cartId);
+    $stmt->execute();
+    }
+
+    public function getCartIdByUserId($userId) 
+    {
+    $stmt = $this->db->prepare('SELECT cart_id FROM shopping_cart WHERE users_user_id = ?');
+    $stmt->bind_param('i', $userId);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['cart_id'];
+    } else {
+        return false;
+    }
+    }
+
+
 
 }
 

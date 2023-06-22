@@ -33,6 +33,16 @@ class User
 
     public function createUser($firstname, $lastname, $email, $phone, $role, $password)
     {
+
+    $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        
+        return false;
+    }
+
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $stmt = $this->db->prepare("INSERT INTO users (first_name, second_name, email, phone, role, password) VALUES (?, ?, ?, ?, ?, ?)");
     if ($stmt) {
@@ -40,7 +50,8 @@ class User
         return $stmt->execute();
     }
     return false;
-}
+    }
+
 
 
     public function getUserEmailByOrderId($orderId)
@@ -53,7 +64,20 @@ class User
         return $user['email'] ?? null;
     }
 
-    
+    public function getAdmins() {
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE role = ?');
+        $stmt->bind_param('s', $role);
+        $role = 'admin'; 
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 
+
+    public function getAllUsers() 
+{
+    $sql = "SELECT email, role FROM users";
+    $result = $this->db->query($sql);
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 
 }
