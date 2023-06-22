@@ -26,9 +26,13 @@ $bookAvailableCount = $book["amount"] - count($loansDb->getCurrentLoansOfBook($b
 
 if (!$book) header("Location: index.php");
 
+if (isset($_GET["reserved"]) && $_GET["reserved"]) {
+    $errors[] = "Úspěšně rezervováno";
+}
+
 include "components/header.php" ?>
 <main class="d-flex flex-column">
-    <form class="w-75 my-3 mx-auto" action="detail.php?isbn=<?php echo $isbn ?>" method="post">
+    <form class="w-75 my-3 mx-auto" action="actions/reserveDetailAction.php" method="post">
         <?php if (!empty($errors)): ?>
             <div class="text-success">
                 <?php foreach ($errors as $error): ?>
@@ -52,7 +56,8 @@ include "components/header.php" ?>
                 <a href="edit-book.php?isbn=<?php echo $isbn ?>" class="btn btn-danger" style="margin-left: auto">Upravit</a>
             <?php endif;
             if ($userEmail && $book["amount"] > 0): ?>
-                <button type="submit" class="btn btn-primary"
+                <button type="submit" class="btn btn-primary" name="reservation"
+                        value="<?php echo $book["isbn"] ?>"
                     <?php echo $reservationsDb->hasReserved($book["isbn"], $userId) ? "disabled" : "" ?>>
                     <!-- TODO unreserve? -->
                     <?php echo $reservationsDb->hasReserved($book["isbn"], $userId) ? "Rezervováno" : "Rezervovat" ?>
