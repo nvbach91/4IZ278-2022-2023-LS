@@ -42,6 +42,12 @@ Route::post('/cart/order', [App\Http\Controllers\OrderController::class, 'create
 
 Route::get('/profile', [App\Http\Controllers\UserController::class, 'get'])->name('profile');
 
+Route::get('profile/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('profile_edit');
+
+Route::post('profile/update/info', [App\Http\Controllers\UserController::class, 'updateInfo'])->name('profile_edit_submit');
+
+Route::post('profile/update/address', [App\Http\Controllers\UserController::class, 'updateAddress'])->name('profile_address_submit');
+
 
 //AUTH2.0
 Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');

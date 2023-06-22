@@ -51,8 +51,9 @@ class OrderController extends Controller
         $order->save();
 
 
+        return redirect(route('profile'));
 
-
+        /*
             $arrayKeys = array_keys($cart);
         for ($i = 0; $i < count($arrayKeys); $i++) {
             $itemId = $arrayKeys[$i];
@@ -63,12 +64,13 @@ class OrderController extends Controller
                     $order->belongsToMany(Product::class, 'order_items')->attach($product, ['quantity' => $quantity, 'old_price' => $item->price]);
                 }
             }
-        }
 
+        }
+            */
 
         //remove cart from session after success
         //$request->session()->remove('cart');
 
-        return redirect(route('profile'));
+
     }
 }

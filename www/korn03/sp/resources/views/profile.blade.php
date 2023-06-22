@@ -21,8 +21,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
+                <!-- User Info-->
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -47,9 +47,8 @@
                                 <div class="col-sm-9 text-secondary">{{ $user->phone ? $user->phone : 'Not specified' }}</div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-sm-12"> <a class="btn btn-info " target="__blank" href="#">Edit</a>
-                                </div>
+                            <div class="col-sm-2">
+                                <a type="sumbit" href="{{route('profile_edit')}}" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
                     </div>
@@ -68,13 +67,10 @@
                                             <div class="media-body">
                                                 <h6 class="mb-1">Work</h6>
                                                 <p>{{$address->country}}, {{$address->city}}, {{$address->street}}, {{$address->home}}, {{$address->postcode}}</p>
-                                                <p class="mb-0 text-black font-weight-bold"><a class="text-primary mr-3"
-                                                        data-toggle="modal" data-target="#add-address-modal"
-                                                        href="#"><i class="icofont-ui-edit"></i> EDIT</a> <a
-                                                        class="text-danger" data-toggle="modal"
-                                                        data-target="#delete-address-modal" href="#"><i
-                                                            class="icofont-ui-delete"></i> DELETE</a></p>
                                             </div>
+                                            <div class="col-sm-7">
+                                                <a href="{{route("profile_edit")}}"
+                                                    class="btn btn-primary mb-1">Edit</a>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +87,7 @@
                             @else
 
                             @foreach ($orders as $order)
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-header">
                                 ID: {{$order->id}}
                                 </div>
