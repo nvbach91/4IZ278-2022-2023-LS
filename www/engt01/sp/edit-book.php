@@ -34,8 +34,6 @@ $desc = $_GET["desc"] ?? $desc;
 
 if (isset($_GET["wrong"]) && $_GET["wrong"]) $errors[] = "Špatně zadáno";
 
-if (isset($_GET["saved"]) && $_GET["saved"]) $errors[] = "Úspěšně uloženo";
-
 include "components/header.php" ?>
 <main class="mx-4 my-3 mx-auto w-75">
     <?php if (!empty($errors)): ?>

@@ -28,8 +28,6 @@ $catId = $catDb->getCategoryId($category);
 if ($catId === null) $catId = $catDb->addCategory($category);
 
 if ($bookDb->getBook($isbn)) $bookDb->editBook($isbn, $book, $author, $desc, $catId, $amount);
-else var_dump($bookDb->addBook($isbn, $book, $author, $desc, $catId, $amount));
+else $bookDb->addBook($isbn, $book, $author, $desc, $catId, $amount);
 
-header("Location: ../edit-book.php?saved=1&book=" . rawurlencode($book) . "&author=" . rawurlencode($author) .
-    "&isbn=" . rawurlencode($isbn) . "&category=" . rawurlencode($category) . "&amount=" . rawurlencode($amount) .
-    "&desc=" . rawurlencode($desc));
+header("Location: ../detail.php?saved=1&isbn=" . rawurlencode($isbn));

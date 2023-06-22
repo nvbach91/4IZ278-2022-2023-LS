@@ -10,12 +10,16 @@ $catDb = CategoriesDatabase::getInstance();
 $loansDb = LoansDatabase::getInstance();
 $reservationsDb = ReservationsDatabase::getInstance();
 
+$errors = [];
+
 $userType = $_SESSION["userType"] ?? 0;
 $userId = $_SESSION["userId"] ?? -1;
 $userEmail = $_SESSION["userEmail"] ?? "";
 
 if (!empty($_GET["isbn"])) $isbn = $_GET["isbn"];
 else header("Location: index.php");
+
+if (isset($_GET["saved"]) && $_GET["saved"]) $errors[] = "Úspěšně uloženo";
 
 $book = $bookDb->getBook($isbn);
 $bookAvailableCount = $book["amount"] - count($loansDb->getCurrentLoansOfBook($book["isbn"]));
@@ -25,6 +29,13 @@ if (!$book) header("Location: index.php");
 include "components/header.php" ?>
 <main class="d-flex flex-column">
     <form class="w-75 my-3 mx-auto" action="detail.php?isbn=<?php echo $isbn ?>" method="post">
+        <?php if (!empty($errors)): ?>
+            <div class="text-success">
+                <?php foreach ($errors as $error): ?>
+                    <p><?php echo $error ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif ?>
         <div class="d-flex flex-row align-items-end justify-content-between my-4" style="gap: 8px">
             <div class="d-flex flex-column" style="gap: 16px">
                 <h2><?php echo $book["name"] ?></h2>
