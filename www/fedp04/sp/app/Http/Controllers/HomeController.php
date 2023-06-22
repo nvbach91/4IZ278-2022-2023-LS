@@ -25,13 +25,13 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('home', ['products' => Product::all()]);
+        return view('home', ['products' =>  Product::latest()->paginate(6)]);
     }
 
     public function category($id)
     {
 
-        return view('home', ['products' => Product::all()->where('category_id', $id)]);
+        return view('home', ['products' => Product::latest()->where('category_id', $id)->paginate(6)]);
     }
 
     public function product($id)
@@ -44,5 +44,9 @@ class HomeController extends Controller
     {
 
         return view('order', ['products' => Product::find($id)]);
+    }
+
+    public function homeRedirect()  {
+        return redirect()->route('home');
     }
 }

@@ -36,7 +36,7 @@
                                 or you can pick it up yourself at our store. If you are willing to order inanimate product,
                                 you can order its delivery via coureer/post or you can pick it up from our store as well.
                                 FROGS CAN NOT BE DELIVERED VIA POST!!!</p>
-                            <form action="/cart/add" method="POST">
+                            <form action="{{route('cart.add')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$product->id}}">
                                 <input type="hidden" name="redirect" value="home">

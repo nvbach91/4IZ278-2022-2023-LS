@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'homeRedirect']);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/category/{id}', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
 Route::get('/product/{id}', [App\Http\Controllers\HomeController::class, 'product'])->name('product');
@@ -22,6 +23,9 @@ Route::get('/order/{id}', [App\Http\Controllers\HomeController::class, 'order'])
 Route::get('/cart', [App\Http\Controllers\CartController::class, 'get'])->name('cart');
 Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/minus', [App\Http\Controllers\CartController::class, 'minus'])->name('cart.minus');
+Route::post('/order/make', [App\Http\Controllers\OrderController::class, 'submit'])->name('make.order');
+Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order');
+
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
 Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -36,5 +40,4 @@ Route::get('/dashboard', function () {
     return "Admin dashboard";
 });
 });
-
 

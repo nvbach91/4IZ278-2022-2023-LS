@@ -13,7 +13,7 @@
                         @csrf
                         @foreach ($errors->all() as $error)
                             <div class="alert alert-danger" role="alert">
-                                {{ $error }}
+                                <p>{{ $error }}</p>
                             </div>
                         @endforeach
                         <div class="d-flex justify-content-between align-items-center mb-3">

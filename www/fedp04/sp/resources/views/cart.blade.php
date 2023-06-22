@@ -15,6 +15,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-8">
                         <div class="items">
+                            @php($sum = 0)
                             @foreach ($products as $product)
                                 <div class="product">
                                     <div class="row">
@@ -37,22 +38,23 @@
                                                     <div class="col-md-4 quantity">
                                                         <label for="quantity">Quantity:</label>
 
-                                                        <form method="post" action="{{route('cart.minus')}}">
+                                                        <form method="post" action="{{ route('cart.minus') }}">
                                                             @csrf
-                                                            <input type="hidden" value="cart" name="redirect">
-                                                            <input type="hidden" name="id" value="{{$product->id}}">
-                                                            <button class="btn px-2"  type="submit"
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $product->id }}">
+                                                            <button class="btn px-2" type="submit"
                                                                 onclick="this.parentNode.querySelector('input[id=quantity]').stepDown()">
                                                                 <div>-</div>
                                                             </button>
                                                         </form>
-                                                        <input id="quantity" type="" value="{{$cart[$product->id]}}"
+                                                        <input id="quantity" type=""
+                                                            value="{{ $cart[$product->id] }}"
                                                             class="form-control quantity-input">
 
-                                                        <form method="post" action="{{route('cart.add')}}">
+                                                        <form method="post" action="{{ route('cart.add') }}">
                                                             @csrf
-                                                            <input type="hidden" value="cart" name="redirect">
-                                                            <input type="hidden" name="id" value="{{$product->id}}">
+                                                            <input type="hidden" name="id"
+                                                                value="{{ $product->id }}">
                                                             <button class="btn px-2" type="submit"
                                                                 onclick="this.parentNode.querySelector('input[id=quantity]').stepUp()">
                                                                 <div>+</div>
@@ -60,7 +62,8 @@
                                                         </form>
                                                     </div>
                                                     <div class="col-md-3 price">
-                                                        <span>{{\App\Models\Product::toKc($product->price * $cart[$product->id])}}</span>
+                                                        @php($sum += $product->price * $cart[$product->id]) )
+                                                        <span>{{ \App\Models\Product::toKc($product->price * $cart[$product->id]) }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,21 +73,94 @@
                             @endforeach
 
 
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-4">
-                        <div class="summary">
-                            <h3>Summary</h3>
-                            <div class="summary-item"><span class="text"></span>{{\App\Models\Product::sumKc($cart)}}<span class="price"></span>
-                            </div>
-                            <h5>+ shipping</h5>
-                            <div class="shipping"><span class= "text"></span>{{100}} {{"Kč"}}<span class="price"></span></div>
+                            <div class="col-lg-5">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $error }}
+                                        </div>
+                                    @endforeach
+                                @endif
+                                <div class="card bg-primary text-white rounded-3">
 
-                            <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h5 class="mb-0">Card details</h5>
+                                        </div>
+
+                                        <form class="mt-4" method="POST" action="{{ route('make.order') }}">
+                                            @csrf
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="text" id="typeName" class="form-control form-control-lg"
+                                                    siez="17" placeholder="Cardholder's Name" />
+                                                <label class="form-label" for="typeName">Cardholder's Name</label>
+                                            </div>
+
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="text" id="typeText" class="form-control form-control-lg"
+                                                    placeholder="1234 5678 9012 3457" minlength="16" maxlength="19"
+                                                    name="card" />
+                                                <label class="form-label" for="typeText">Card Number</label>
+                                            </div>
+
+                                            <div class="row mb-4">
+                                                <div class="col-md-6">
+                                                    <div class="form-outline form-white">
+                                                        <input type="text" id="typeExp"
+                                                            class="form-control form-control-lg" placeholder="MM/YY"
+                                                            size="5" id="expire" name="expire" minlength="5"
+                                                            maxlength="5" />
+                                                        <label class="form-label" for="typeExp">Expiration</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-outline form-white">
+                                                        <input type="password" id="typeText"
+                                                            class="form-control form-control-lg"
+                                                            placeholder="&#9679;&#9679;&#9679;" size="1"
+                                                            minlength="3" maxlength="3" />
+                                                        <label class="form-label" for="typeText">Cvv</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-2">Subtotal</p>
+                                                <p class="mb-2">{{\App\Models\Product::toKc($sum)}}</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between">
+                                                <p class="mb-2">Shipping</p>
+                                                <p class="mb-2">{{\App\Models\Product::toKc(100)}}</p>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mb-4">
+                                                <p class="mb-2">Total(Incl. taxes)</p>
+                                                <p class="mb-2">{{\App\Models\Product::toKc($sum + 100)}}</p>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-info btn-block btn-lg">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>{{\App\Models\Product::toKc($sum + 100)}}</span>
+                                                    <span> Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                                </div>
+                                            </button>
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+    </section>
+    </div>
     </section>
 @endsection

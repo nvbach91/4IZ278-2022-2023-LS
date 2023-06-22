@@ -25,24 +25,26 @@ class CartController extends Controller
         }
         $oldCart[$productId] = $amount;
         $request->session()->put('cart', $oldCart);
-        return redirect()->route($request->input('redirect'));
+        return redirect()->back();
     }
 
     public function minus(Request $request)
     {
         $oldCart = $request->session()->get('cart');
-        if($oldCart != null) {
-            $productId = $request->input('id');
-            if (isset($oldCart[$request->input('id')])) {
-                $amount = $oldCart[$request->input('id')] - 1;
-                $oldCart[$productId] = $amount;
-            }
-            if ($oldCart[$productId]  <= 0) {
-                unset($oldCart, $productId);
-            }
-            $request->session()->put('cart', $oldCart);
+        if ($oldCart == null) {
+            return redirect()->back();
         }
-        return redirect()->route($request->input('redirect'));
+        $productId = $request->input('id');
+        if (isset($oldCart[$productId])) {
+            $amount = $oldCart[$productId] - 1;
+            $oldCart[$productId] = $amount;
+        }
+        if ($oldCart[$productId]  <= 0) {
+            unset($oldCart[$productId]);
+        }
+        $products = Product::all()->whereIn('id', array_keys($oldCart));
+        $request->session()->put('cart', $oldCart);
+        return redirect()->back();
     }
 
     public function get(Request $request)
@@ -50,17 +52,12 @@ class CartController extends Controller
         $cart = $request->session()->get('cart');
         if (isset($cart)) {
             $products = Product::all()->whereIn('id', array_keys($cart));
-        }
-        else {
-            $products=[];
+        } else {
+            $products = [];
         }
         return view('cart', [
-            'cart' => $request->session()->get('cart'),
+            'cart' => $cart,
             'products' => $products
         ]);
     }
-
-    
-
-
 }

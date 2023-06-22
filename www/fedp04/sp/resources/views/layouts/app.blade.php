@@ -27,7 +27,9 @@
 <body>
     <div id="app container">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <img src="{{ asset('/img/smalllogo.png') }}" class="img-fluid logo">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('/img/smalllogo.png') }}" class="img-fluid logo">
+            </a>
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

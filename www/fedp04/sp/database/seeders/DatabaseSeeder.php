@@ -82,6 +82,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('products')->insert([
+            'name' => 'Rocks for a terrarium',
+            'description' =>  'Special rocks for a terrarium',
+            'price' => 500,
+            'category_id' => $this->getCategoryId("Accessories"),
+            'img' => 'https://cdn.shopify.com/s/files/1/0397/7868/0992/products/terrarium-stones-kit-sproutsouth-sproutsouth-online-houseplants-300786_600x600.jpg?v=1611958379'
+        ]);
+
+        DB::table('products')->insert([
             'name' => 'Frog hat for humans',
             'description' =>  'A knitted hat in a shape of a frog(for humans)',
             'price' => 200,
@@ -103,6 +111,23 @@ class DatabaseSeeder extends Seeder
             'price' => 3000,
             'category_id' => $this->getCategoryId("Terrariums"),
             'img' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Regenwaldterrarium.jpg/640px-Regenwaldterrarium.jpg'
+        ]);
+
+
+        DB::table('products')->insert([
+            'name' => 'Tree frog',
+            'description' =>  'a small and friendly forg',
+            'price' => 4000,
+            'category_id' => $this->getCategoryId("Frogs"),
+            'img' => 'https://t2.ea.ltmcdn.com/en/posts/1/3/0/step_by_step_guide_to_preparing_a_terrarium_for_a_green_tree_frog_1031_orig.jpg'
+        ]);
+
+        DB::table('products')->insert([
+            'name' => ' African Horned Frog',
+            'description' =>  'a middle-sized frog with horns',
+            'price' => 5000,
+            'category_id' => $this->getCategoryId("Frogs"),
+            'img' => 'https://i.pinimg.com/originals/b5/c3/09/b5c30943b588ed14721e67c7e353840e.jpg'
         ]);
 
     }
