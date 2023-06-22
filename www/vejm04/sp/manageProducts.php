@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Function to delete a product by ID
 function deleteProduct($productId) {
     global $pdo;
     try {
@@ -27,11 +26,9 @@ try {
     die("Error executing the query: " . $e->getMessage());
 }
 
-// Check if a delete request has been made
 if (isset($_POST['delete'])) {
     $productId = $_POST['product_id'];
     deleteProduct($productId);
-    // Redirect to refresh the page after deleting
     header("Location: manageProducts.php");
     exit();
 }

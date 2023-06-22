@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Function to delete an order by ID
 function deleteOrder($orderId) {
     global $pdo;
     try {
@@ -27,11 +26,9 @@ try {
     die("Error executing the query: " . $e->getMessage());
 }
 
-// Check if a delete request has been made
 if (isset($_POST['delete'])) {
     $orderId = $_POST['order_id'];
     deleteOrder($orderId);
-    // Redirect to refresh the page after deleting
     header("Location: manageOrders.php");
     exit();
 }

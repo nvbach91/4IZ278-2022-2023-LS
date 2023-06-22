@@ -71,3 +71,10 @@ a {
     color: #000000;
     text-decoration: none;
 }
+
+.googleLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

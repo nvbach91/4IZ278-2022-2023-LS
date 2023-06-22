@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Function to delete a category by ID
 function deleteCategory($categoryId) {
     global $pdo;
     try {
@@ -27,11 +26,9 @@ try {
     die("Error executing the query: " . $e->getMessage());
 }
 
-// Check if a delete request has been made
 if (isset($_POST['delete'])) {
     $categoryId = $_POST['category_id'];
     deleteCategory($categoryId);
-    // Redirect to refresh the page after deleting
     header("Location: manageCategories.php");
     exit();
 }

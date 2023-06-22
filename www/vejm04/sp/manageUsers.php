@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Function to delete a user by ID
 function deleteUser($userId) {
     global $pdo;
     try {
@@ -27,11 +26,9 @@ try {
     die("Error executing the query: " . $e->getMessage());
 }
 
-// Check if a delete request has been made
 if (isset($_POST['delete'])) {
     $userId = $_POST['user_id'];
     deleteUser($userId);
-    // Redirect to refresh the page after deleting
     header("Location: manageUsers.php");
     exit();
 }

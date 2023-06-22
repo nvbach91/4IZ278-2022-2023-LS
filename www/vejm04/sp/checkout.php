@@ -106,7 +106,7 @@ foreach ($cartItems as $cartItem) {
                         ?>
                             <tr>
                                 <td><?= $shippingName; ?></td>
-                                <td><?= $shippingPrice; ?> Kč</td>
+                                <td><?= $shippingPrice; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -135,7 +135,7 @@ foreach ($cartItems as $cartItem) {
                         ?>
                             <tr>
                                 <td><?= $paymentName; ?></td>
-                                <td><?= $paymentPrice; ?> Kč</td>
+                                <td><?= $paymentPrice; ?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

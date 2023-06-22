@@ -129,7 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </div>
     <div>
-        <a href="privacyPolicy.php" class="privacyPolicyAndFB">Zásady ochrany osobních údajů</a>
+        <a href="googleLogin.php?action=login" class="privacyPolicyAndFB">Login with Google instead</a>
+    </div>
+    <div>
+        <a href="privacyPolicy.php" class="privacyPolicyAndFB">Privacy Policy</a>
     </div>
 </body>
 </html>

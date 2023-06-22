@@ -46,5 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="submit" value="Login">
         </form>
     </div>
+    <div>
+        <a href="googleLogin.php?action=login" class="googleLogin">Login with Google instead</a>
+    </div>
 </body>
 </html>
