@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->string('status', 10);
-            $table->float('total_price');
+            //$table->float('total_price');
             $table->string('payment_method',100);
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -96,7 +96,7 @@
                                   <p class="card-text">Status: {{$order->status}}</p>
                                   <p class="card-text">Total price: {{$order->total_price}}$</p>
                                   <p class="card-text">Payment method: {{$order->payment_method}}</p>
-                                  <a href="#" class="btn btn-primary">Details</a>
+                                  <a href="{{route('order', $order->id)}}" class="btn btn-primary">Details</a>
                                 </div>
                               </div>
                             @endforeach

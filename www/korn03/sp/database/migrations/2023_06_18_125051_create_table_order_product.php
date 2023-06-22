@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->primary(array('order_id', 'product_id'));
             $table->integer('amount');
+            $table->integer('price_actual');
             $table->integer('discount')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders');

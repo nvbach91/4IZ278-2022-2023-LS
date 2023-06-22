@@ -5,6 +5,7 @@
 
     $total_price = 0;
     $total_sale = 0;
+
 @endphp
 
 
@@ -34,6 +35,9 @@
                                 @else
                                     @php
                                         $uniqueID = array_count_values($cart);
+                                        var_dump($cart);
+                                                echo('   ||||   ');
+                                                var_dump($uniqueID);
                                     @endphp
                                     @foreach ($products as $product)
                                         @if (in_array($product->id, $cart))
@@ -211,8 +215,12 @@
                                             <p class="mb-2">{{ $total_price - $total_sale }}$</p>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-block btn-lg">
-                                            <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                        @if (empty($cart))
+                                        disabled
+                                        @endif>
+                                            <div class="d-flex justify-content-between"
+                                            >
                                                 <span>Checkout</span>
                                             </div>
                                         </button>

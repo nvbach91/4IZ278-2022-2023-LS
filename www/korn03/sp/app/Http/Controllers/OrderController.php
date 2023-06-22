@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\Order;
-
-
-
+use App\Models\Product;
+use DB;
+use Illuminate\Contracts\Session\Session;
 
 class OrderController extends Controller
 {
@@ -35,42 +35,38 @@ class OrderController extends Controller
     */
     public function createOrder(Request $request)
     {
-        //$product = $request->id;
+        $cart = $request->session()->get('cart');
+        $uniqueID = array_count_values($cart);
 
-        /*
-        mini-vzorec for myself
-        $user = User::where('email', $data->email)->first();
-        $firstlastName = explode(' ', $data->name);
-        */
         $order = new Order();
         $order->user_id = Auth::user()->id;
         $order->status = "received";
-        $order->total_price = $request->total_price;
         $order->payment_method = $request->payment_method;
-
         $order->save();
 
 
-        return redirect(route('profile'));
+        foreach ($uniqueID as $id){
+            $product= Product::find($id);
+            $price = $product->price;
+            $discount = $product->discount;
+            $amount = $uniqueID[$id];
 
-        /*
-            $arrayKeys = array_keys($cart);
-        for ($i = 0; $i < count($arrayKeys); $i++) {
-            $itemId = $arrayKeys[$i];
-            if (isset($cart[$itemId])) {
-                $quantity = $cart[$itemId];
-                if ($quantity > 0) {
-                    $item = Product::find($product_id);
-                    $order->belongsToMany(Product::class, 'order_items')->attach($product, ['quantity' => $quantity, 'old_price' => $item->price]);
-                }
-            }
-
+            $order->belongsToMany(Product::class, 'table_order_product')->attach($product, ['amount' => $amount, 'price_actual' => $price, 'discount_actual' => $discount]);
         }
-            */
+        return redirect(route('profile'));
+    }
 
-        //remove cart from session after success
-        //$request->session()->remove('cart');
+    public function showOrder($id) : Renderable {
+        //Order::where('user_id', Auth::user()->id
 
-
+        return view('order',
+        ['user' => Auth::user(),
+        'order' => Order::find($id),
+        'order_products'=> Order::find($id)
+        ->belongsToMany(Product::class, 'table_order_product')
+        ->get(['order_id', 'product_id', 'price_actual', 'amount', 'discount_actual'])
+        ->all(),
+        'products'=> Product::all()
+    ]);
     }
 }

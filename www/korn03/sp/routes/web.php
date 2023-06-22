@@ -48,6 +48,8 @@ Route::post('profile/update/info', [App\Http\Controllers\UserController::class, 
 
 Route::post('profile/update/address', [App\Http\Controllers\UserController::class, 'updateAddress'])->name('profile_address_submit');
 
+Route::get('profile/order/{id}', [App\Http\Controllers\OrderController::class, 'showOrder'])->name('order');
+
 
 //AUTH2.0
 Route::get('/login/facebook', [App\Http\Controllers\Auth\LoginController::class, 'redirectToFacebook'])->name('login.facebook');

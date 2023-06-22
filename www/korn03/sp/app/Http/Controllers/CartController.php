@@ -26,7 +26,9 @@ class CartController extends Controller
         if (!self::checkStock($product)) {
             return redirect()->route('main');
         }
-        $uniqueID = array_count_values($oldCart);
+        if(isset($oldCart)){
+            $uniqueID = array_count_values($oldCart);
+        }
         if (isset($uniqueID[$product])) {
             if ($uniqueID[$product] >= Product::find($product)->stock) {
                 return redirect()->route('cart');
