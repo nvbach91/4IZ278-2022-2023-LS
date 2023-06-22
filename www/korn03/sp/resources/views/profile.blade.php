@@ -83,14 +83,26 @@
                         </div>
                     </div>
                     <!--Orders-->
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="orders">
                         <div class="card-body">
                             <h3>Orders:</h3>
                             @if (empty($orders))
                             <p>You have no orders... Wanna make one?</p>
                             @else
+
                             @foreach ($orders as $order)
-                            <p>{{$order->created_at}}</p>
+                            <div class="card">
+                                <div class="card-header">
+                                ID: {{$order->id}}
+                                </div>
+                                <div class="card-body">
+                                  <h5 class="card-title">Date: {{$order->created_at}}</h5>
+                                  <p class="card-text">Status: {{$order->status}}</p>
+                                  <p class="card-text">Total price: {{$order->total_price}}$</p>
+                                  <p class="card-text">Payment method: {{$order->payment_method}}</p>
+                                  <a href="#" class="btn btn-primary">Details</a>
+                                </div>
+                              </div>
                             @endforeach
                             @endif
                         </div>

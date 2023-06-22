@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('main') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -39,10 +39,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Products</a>
+                            <a class="nav-link" href="{{route('main')}}">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#footer">Contact</a>
+                            <a class="nav-link" href="{{route('main')}}#footer">Contact</a>
                         </li>
                     </ul>
 
@@ -154,10 +154,10 @@
                             Useful links
                         </h6>
                         <p>
-                            <a href="/profile" class="text-reset">Profile</a>
+                            <a href="{{route('profile')}}" class="text-reset">Profile</a>
                         </p>
                         <p>
-                            <a href="/profile#orders" class="text-reset">My orders</a>
+                            <a href="{{route('profile')}}#orders" class="text-reset">My orders</a>
                         </p>
                         <p>
                             <a href="https://www.youtube.com/watch?v=Bya_tjymfuk&list=LL&index=70"
@@ -186,7 +186,7 @@
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
             © 2023
-            <a class="text-reset fw-bold" href="/">Wah-Wah-World</a>
+            <a class="text-reset fw-bold" href="{{route('main')}}">Wah-Wah-World</a>
         </div>
         <!-- Copyright -->
     </footer>

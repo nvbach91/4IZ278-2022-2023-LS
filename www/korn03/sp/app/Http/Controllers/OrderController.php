@@ -42,19 +42,33 @@ class OrderController extends Controller
         $user = User::where('email', $data->email)->first();
         $firstlastName = explode(' ', $data->name);
         */
-            $order = new Order();
-            $order->user_id = Auth::user()->id;
-            $order->status = "received";
-            $order->total_price = $request->total_price;
-            $order->payment_method = $request->payment_method;
+        $order = new Order();
+        $order->user_id = Auth::user()->id;
+        $order->status = "received";
+        $order->total_price = $request->total_price;
+        $order->payment_method = $request->payment_method;
 
-            $order->save();
+        $order->save();
 
-            //remove cart from session after success
-            $request->session()->remove('cart');
 
-            return redirect(route('profile'));
 
+
+            $arrayKeys = array_keys($cart);
+        for ($i = 0; $i < count($arrayKeys); $i++) {
+            $itemId = $arrayKeys[$i];
+            if (isset($cart[$itemId])) {
+                $quantity = $cart[$itemId];
+                if ($quantity > 0) {
+                    $item = Product::find($product_id);
+                    $order->belongsToMany(Product::class, 'order_items')->attach($product, ['quantity' => $quantity, 'old_price' => $item->price]);
+                }
+            }
+        }
+
+
+        //remove cart from session after success
+        //$request->session()->remove('cart');
+
+        return redirect(route('profile'));
     }
-
 }
