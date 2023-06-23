@@ -15,14 +15,25 @@ class OrderController extends Controller
         $this->middleware('auth');
     }
 
+    public function show($id) {
+        $order = Order::find($id);
+        if ($order == null) {
+            return back()->withErrors("Order not found");
+        }
+        if ($order->user_id != auth()->user()->id) {
+            return back()->withErrors("You are not allowed to view this order");
+        }
+        return view('order', ['order' => $order, 'user' => auth()->user()]);
+    }
+
     public function submit(Request $request)
     {
         $cart = $request->session()->get('cart');
         $user_id = $request->user()->id;
-        $adress = $request->input('adress');
+        $adressId = $request->input('adress');
         $shippingType = $request->input('shipping-type');
 
-        if ($adress == null) {
+        if ($adressId == null) {
             if (!Adress::all()->where('user_id', $user_id)->count() > 0) {
                 return redirect()->route('profile')->withErrors( 'Please add an adress','adress');
             }
@@ -40,16 +51,34 @@ class OrderController extends Controller
         $request->validate([
             'adress' => 'required',
             'shipping-type' => 'required',
-            'card-number' => ['required', 'min:16', 'max:19'],
-            'card-name' => ['required', 'min:5', 'max:50'],
+            'card-number' => ['required', 'min:16', 'max:16', 'regex:/\d{16}/'],
+            'card-name' => ['required', 'min:5', 'max:128', 'regex:/\w+\s+\w+\w*/'],
+            'card-expire' => ['required', 'min:5', 'max:5', 'regex:/\d{2}\/\d{2}/'],
+            'cvv-code' => ['required', 'min:3', 'max:3', 'regex:/\d{3}/'],
         ]);
+        foreach ($cart as $id => $quantity) {
+            $item = Item::find($id);
+            if ($item->stock < $quantity) {
+                return back()->withErrors("Sorry, not enough stock for item: " . $item->name . 'available: ' . $item->stock);
+            }
+            $item->stock = $item->stock - $quantity;
+            if ($item->stock < 0) {
+                $item->stock = 0;
+            }
+            $item->save();
+        }
+        $orderAdress = Adress::find($adressId);
         $order = new Order();
         $order->user_id = $user_id;
         $order->status = 'new';
 //        $order->note = $request->input('note');
         $order->shipping_type = $shippingType;
         $order->tracking_number = rand(100000000, 999999999);
-        $order->adress_id = $adress;
+        $order->country = $orderAdress->country;
+        $order->city = $orderAdress->city;
+        $order->adress_1 = $orderAdress->adress_1;
+        $order->adress_2 = $orderAdress->adress_2;
+        $order->zip_code = $orderAdress->zip_code;
         $order->save();
 
         $arrayKeys = array_keys($cart);
@@ -65,7 +94,7 @@ class OrderController extends Controller
         }
 
         $request->session()->forget('cart');
-        return back()->with('success', 'Order submitted successfully.');
+        return redirect()->route('order.show', ['id' => $order->id]);
     }
 
 }

@@ -18,11 +18,15 @@ return new class extends Migration
             $table->string('note', 512)->nullable();
             $table->string('shipping_type', 64)->nullable();
             $table->string('tracking_number', 128)->nullable();
-            $table->unsignedBigInteger('adress_id');
+
+            $table->string('country', 32);
+            $table->string('city', 128);
+            $table->string('adress_1', 128);
+            $table->string('adress_2', 128)->nullable();
+            $table->string('zip_code', 10);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('adress_id')->references('id')->on('adresses');
         });
     }
 

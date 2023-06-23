@@ -3,6 +3,26 @@
 @section('content')
 
     <section class="py-5">
+        <div class="col-md-12">
+            @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
+                    <strong>{{session()->get('success')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @elseif(session()->has('error'))
+                <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
+                    <strong>{{session()->get('error')}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @elseif($errors->any('errors'))
+                @foreach($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
+                        <strong>{{$error}}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+            @endif
+        </div>
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6 product-image-wrap d-flex justify-content-center">
@@ -29,6 +49,11 @@
                         @endif
                     </div>
                     <p class="lead">{{$item->description}}</p>
+                    @if($item->stock > 0)
+                        <h5 class="product-stock text-success">In stock</h5>
+                    @else
+                        <h5 class="product-stock text-danger">Out of stock</h5>
+                    @endif
                     <div class="d-flex">
                         <form id="form{{$item->id}}" method="post" action="{{route('cart.add')}}">
                             @csrf

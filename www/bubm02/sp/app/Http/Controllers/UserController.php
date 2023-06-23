@@ -45,11 +45,11 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if ($user->provider_id != null && $request->input('email') != $user->email) {
-            throw ValidationException::withMessages(['field_name' => 'You cant change email if you are logged in with social media']);
+            back()->with('error' , 'You cant change email if you are logged in with social media');
         }
         $request->validateWithBag('profile', [
-            'first_name' => 'required', 'max:64',
-            'last_name' => 'required',' max:64',
+            'first_name' => 'required', 'max:64', 'regex:/\w+/',
+            'last_name' => 'required',' max:64', 'regex:/\w+/',
             'phone' => 'max:16', 'phone',
             'email' => [
                 'required', 'email', 'max:64',
@@ -67,17 +67,17 @@ class UserController extends Controller
             $user->phone = $request->input('phone');
         }
         $user->update();
-        return back();
+        return back()->with('success', 'Profile updated successfully.');
     }
 
     public function addAdress(Request $request)
     {
         $request->validateWithBag('adress',[
-            'country' => 'required', 'max:32',
-            'city' => 'required', 'max:128',
-            'adress1' => 'required', 'max:128',
-            'adress2' => 'max:128',
-            'zip' => 'max:10',
+            'country' => 'required', 'max:32', 'regex:/\w+/',
+            'city' => 'required', 'max:128', 'regex:/\w+/',
+            'adress1' => 'required', 'max:128', 'regex:/\w+/',
+            'adress2' => 'max:128', 'regex:/\w+/',
+            'zip' => 'max:10', 'regex:/\d{5}/',
         ]);
         $adress = new Adress();
         $adress->adress_1 = $request->input('adress1');

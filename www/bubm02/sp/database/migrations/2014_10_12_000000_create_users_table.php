@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('discount_expiration')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role')->default("user");
+            $table->string('timezone')->default(config('app.timezone'));
             $table->rememberToken();
             $table->timestamps();
         });

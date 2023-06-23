@@ -46,6 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('cart.show')}}">
                             <i class="fa fa-shopping-cart fa-2x"></i>
+                            @if(session()->has('cart') && count(session()->get('cart')) > 0)
+                                <span class='badge badge-warning' id='lblCartCount'> {{count(session()->get('cart'))}} </span>
+                            @endif
                         </a>
                     </li>
                     @guest
@@ -95,7 +98,7 @@
                         @php($hasChildCategories = count($category->childCategories()->getResults()) > 0)
                         @php($categoryCollapseId = str_replace(' ', '-',$category->name ).'-collapse')
 
-                        <button class="btn btn-toggle align-items-center rounded collapsed bi-arrow-down"
+                        <button class="btn btn-toggle align-items-center rounded collapsed bi-arrow-down" id="category-{{$category->id}}"
                                 data-bs-toggle="collapse" data-bs-target="#{{$categoryCollapseId}}"
                                 aria-expanded="false">
                             {{$category->name}}
@@ -103,6 +106,8 @@
                         @if($hasChildCategories)
                             <div class="collapse" id="{{$categoryCollapseId}}">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                    <li><a href="{{route('category', $category->id)}}"
+                                           class="link-dark rounded">{{$category->name}}</a></li>
                                     @foreach($category->childCategories as $childCategory)
                                         <li><a href="{{route('category', $childCategory->id)}}"
                                                class="link-dark rounded">{{$childCategory->name}}</a></li>

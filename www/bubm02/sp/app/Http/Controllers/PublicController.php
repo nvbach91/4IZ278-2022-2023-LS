@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Contracts\Support\Renderable;
 class PublicController extends Controller
@@ -12,9 +13,18 @@ class PublicController extends Controller
         return view('index', ['items' => Item::latest()->paginate(4)]);
     }
 
-    public function category($id) : Renderable
+    public function category($id)
     {
-        return view('index', ['items' => Item::latest()->where('category_id', $id)->paginate(4)]);
+        $rootCategory = Category::find($id);
+        if ($rootCategory == null) {
+            return redirect()->route('index');
+        }
+        if (Category::all()->where('category_id', $rootCategory->id)->count() > 0) {
+            $categoryIds = Category::select('id')->where('category_id', $rootCategory->id)->get()->toArray();
+        } else {
+            $categoryIds = [$rootCategory->id];
+        }
+        return view('index', ['items' => Item::latest()->whereIn('category_id', $categoryIds)->paginate(4), 'categoryName' => $rootCategory->name]);
     }
 
     public function product($id) : Renderable

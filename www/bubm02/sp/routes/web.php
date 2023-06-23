@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::post('/order/submit', [App\Http\Controllers\OrderController::class, 'submit'])->name('order.submit');
+//Route::get('/order', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
+Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
 
 //Google
 Route::get('/login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');

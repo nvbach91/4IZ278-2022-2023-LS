@@ -108,13 +108,15 @@
 
                                     <div class="form-outline mb-5">
                                         <input type="text" id="typeText" class="form-control form-control-lg"
-                                               placeholder="1234 5678 9012 3457" minlength="16" maxlength="19" name="card-number" />
+                                               placeholder="1234567890123457" minlength="16" maxlength="16" pattern="^\d{16}$" name="card-number" />
                                         <label class="form-label" for="typeText">Card Number</label>
                                     </div>
 
                                     <div class="form-outline mb-5">
-                                        <input type="text" id="typeName" class="form-control form-control-lg" placeholder="John Doe" minlength="5" maxlength="50" name="card-name"
-                                               value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" />
+                                        <input type="text" id="typeName" class="form-control form-control-lg" placeholder="John Doe"
+                                               minlength="5" maxlength="128"
+                                               name="card-name"
+                                               value="{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}" pattern="\w+\s+\w+\w*" />
                                         <label class="form-label" for="typeName">Name on card</label>
                                     </div>
 
@@ -122,14 +124,15 @@
                                         <div class="col-md-6 mb-5">
                                             <div class="form-outline">
                                                 <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="01/22"
-                                                       size="7" id="exp" minlength="5" maxlength="5" />
+                                                       name="card-expire" minlength="5" maxlength="5" pattern="\d{2}/\d{2}" />
                                                 <label class="form-label" for="typeExp">Expiration</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-5">
                                             <div class="form-outline">
                                                 <input type="password" id="typeText" class="form-control form-control-lg"
-                                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                                       name="cvv-code"
+                                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" pattern="\d{3}" />
                                                 <label class="form-label" for="typeText">Cvv</label>
                                             </div>
                                         </div>

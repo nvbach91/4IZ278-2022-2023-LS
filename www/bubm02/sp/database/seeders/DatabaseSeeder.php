@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->createBassCategory();
         $this->createKeysCategory();
         $this->addAcousticGuitars();
+        $this->addClassicalGuitars();
     }
 
     public function createGuitarCategory() : void {

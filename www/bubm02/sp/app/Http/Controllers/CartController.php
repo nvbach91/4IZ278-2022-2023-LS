@@ -11,6 +11,11 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+        $itemId = $request->input('id');
+        $item =Item::find($itemId);
+        if ($item->stock <= 0) {
+            return back()->withErrors("Sorry, the item: " . $item->name . " is out of stock!");
+        }
         $requestQuantity = $request->input('quantity');
         if ($requestQuantity == null) {
             $requestQuantity = 1;
@@ -19,7 +24,6 @@ class CartController extends Controller
         if ($cart == null) {
             $cart = [];
         }
-        $itemId = $request->input('id');
         if (isset($cart[$itemId])) {
             $quantity = $cart[$itemId] + $requestQuantity;
         } else {
@@ -27,7 +31,7 @@ class CartController extends Controller
         }
         $cart[$itemId] = $quantity;
         $request->session()->put('cart', $cart);
-        return back();
+        return back()->with('success', 'Item added to cart successfully!');
     }
 
     public function subtract(Request $request)
