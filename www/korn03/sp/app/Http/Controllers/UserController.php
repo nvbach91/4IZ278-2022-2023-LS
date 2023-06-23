@@ -31,6 +31,7 @@ class UserController extends Controller
     {
         return view('profile_edit', ['user' => Auth::user(), 'addresses' => Address::where('user_id', Auth::user()->id)->get(), 'orders' => Order::where('user_id', Auth::user()->id)->get()]);
     }
+
     public function updateInfo(Request $request)
     {
         /*
@@ -46,6 +47,15 @@ class UserController extends Controller
             'title' => ['required', 'unique:posts', 'max:255'],
         ]);
         */
+        $request->validate([
+            'name' => 'required|max:125',
+            'surname' => 'required|max:125',
+            'email' => 'required|email:rdc|max:255',
+            'phone'=> 'nullable|max:20',
+
+        ]);
+
+
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
         $user->surname = $request->surname;
@@ -59,6 +69,15 @@ class UserController extends Controller
     }
     public function updateAddress(Request $request)
     {
+        $request->validate([
+            'country' => 'required|max:3',
+            'city' => 'required|max:25',
+            'street' => 'required|max:50',
+            'home'=> 'required|max:50',
+            'postcode'=> 'required|max:11',
+
+        ]);
+
         $address = Address::find($request->address_id);
         $address->country = $request->country;
         $address->city = $request->city;

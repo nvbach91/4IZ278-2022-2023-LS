@@ -40,13 +40,13 @@
                             </div>
                             <div class="col-md-2 text-center d-flex flex-column justify-content-center align-items-center">
                                 <p class="text-muted mb-0 small">Price:
-                                    {{ $order_product->price_actual * $order_product->amount }}$</p>
+                                    {{ $order_product->price_actual}}$</p>
                                 <p class="text-muted mb-0 small">Sale:
-                                    -{{ $order_product->discount_actual * $order_product->amount }}$</p>
+                                    -{{ $order_product->discount_actual}}$</p>
                             </div>
                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                 <p class="text-muted mb-0 small">Total price:
-                                    {{ $order_product->price_actual * $order_product->amount - $order_product->discount_actual * $order_product->amount }}$
+                                    {{ ($order_product->price_actual * $order_product->amount) - ($order_product->discount_actual * $order_product->amount)}}$
                                 </p>
                             </div>
                         </div>

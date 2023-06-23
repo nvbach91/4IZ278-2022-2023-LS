@@ -20,10 +20,32 @@ Route::get('/', function () {
 
 Auth::routes();
 
+/*
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.index');
     });
+});
+*/
+
+//admin page
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'get'])->name('dashboard');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/dashboard/edit/product/{id}', [App\Http\Controllers\AdminController::class, 'editProductPage'])->name('edit_product_page');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::post('/dashboard/edit/product/', [App\Http\Controllers\AdminController::class, 'editProduct'])->name('edit_product');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/dashboard/add/product/new', [App\Http\Controllers\AdminController::class, 'addProductPage'])->name('add_product_page');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::post('/dashboard/add/product/', [App\Http\Controllers\AdminController::class, 'addProduct'])->name('add_product');
+});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::post('/dashboard/edit/order/status', [App\Http\Controllers\AdminController::class, 'changeStatusOfOrder'])->name('change_order_status');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
