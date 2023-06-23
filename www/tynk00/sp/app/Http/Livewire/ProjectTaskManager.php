@@ -54,6 +54,8 @@ class ProjectTaskManager extends Component
         $task->project_id = $this->project_id;
         $task->user_id = Auth::id();
         $task->save();
+        $this->project->updated_at = now();
+        $this->project->save();
     }
 
     public function editTask($taskId){
@@ -72,6 +74,8 @@ class ProjectTaskManager extends Component
         $task->due = $this->due;
         $task->project_id = $this->project_id;
         $task->save();
+        $this->project->updated_at = now();
+        $this->project->save();
     }
 
 
@@ -85,6 +89,8 @@ class ProjectTaskManager extends Component
             $task->completed = 1;
         }
         $task->save();
+        $this->project->updated_at = now();
+        $this->project->save();
     }
 
     public function deleteTask($taskId){
@@ -95,6 +101,11 @@ class ProjectTaskManager extends Component
     public function destroyTask(){
         $task = Task::where('id', $this->taskId)->first();
         $task->delete();
+        
+
+        $this->project->updated_at = now();
+        $this->project->save();
+
     }
 
 }

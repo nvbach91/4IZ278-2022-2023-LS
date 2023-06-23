@@ -8,6 +8,8 @@ use Livewire\Component;
 use App\Models\Project;
 use App\Models\Task;
 
+use Illuminate\Support\Facades\Validator;
+
 class TaskManager extends Component
 {
 
@@ -62,6 +64,7 @@ class TaskManager extends Component
     }
 
     public function updateTask(){
+
         $task = Task::where('id', $this->taskId)->first();
         $task->name = $this->name;
         $task->description = $this->description;

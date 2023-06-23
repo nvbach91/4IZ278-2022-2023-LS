@@ -58,12 +58,24 @@ class NoteController extends Controller
 
         $note->update($validatedData);
 
+        if($note->project != null){
+            $note->project->updated_at = now();
+            $note->project->save();
+        }
+
         return redirect()->route('notes');
     }
 
     public function destroy(Note $note)
     {
+
+        if($note->project != null){
+            $note->project->updated_at = now();
+            $note->project->save();
+        }
+
         $note->delete();
+
 
         return redirect()->route('notes');
     }

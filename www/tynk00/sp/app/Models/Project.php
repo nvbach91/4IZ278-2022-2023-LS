@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Project extends Model
 {
@@ -12,6 +13,8 @@ class Project extends Model
     protected $fillable = ['name', 'description', 'user_id', 'color'];
 
     protected $primaryKey = 'id';
+
+    public $timestamps = true;
 
     protected $with = ['tags'];
 
@@ -49,5 +52,12 @@ class Project extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function lastUpdate(){
+        $updated_at = $this->attributes['updated_at'];
+        Carbon::setLocale('cs');
+        $timeSinceUpdate = Carbon::parse($updated_at)->diffForHumans();
+        return $timeSinceUpdate;
     }
 }
