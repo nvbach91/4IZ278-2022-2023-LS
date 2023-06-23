@@ -11,10 +11,11 @@ $loansDb = LoansDatabase::getInstance();
 $reservationsDb = ReservationsDatabase::getInstance();
 
 $userEmail = $_SESSION["userEmail"];
-$userDebt = $userDb->getDebt($userDb->getUserId($userEmail));
+$userId = intval($userDb->getUserId($userEmail));
+$userDebt = $userDb->getDebt($userId);
 
-$userReservations = $reservationsDb->getReservationsForUser($userDb->getUserId($userEmail));
-$userLoans = $loansDb->getLoansForUser($userDb->getUserId($userEmail));
+$userReservations = $reservationsDb->getReservationsForUser($userId);
+$userLoans = $loansDb->getLoansForUser($userId);
 
 include "components/header.php" ?>
 <main class="mx-4 my-3 mx-auto w-75 d-flex flex-column">
@@ -35,13 +36,20 @@ include "components/header.php" ?>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($userReservations as $reservation): ?>
+        <?php foreach ($userReservations as $reservation):
+            $bookReservations = $reservationsDb->getReservationsForBook($reservation["book_isbn"]);
+            $queuePosition = 0;
+            foreach ($bookReservations as $bookReservation) {
+                $queuePosition++;
+                if (intval($bookReservation["user_id"]) === $userId) break;
+            }
+            ?>
             <tr>
                 <th scope="row"><a href="detail.php?isbn=<?php echo $reservation["book_isbn"] ?>">
                         <?php echo $bookDb->getBook($reservation["book_isbn"])["name"] ?>
                     </a></th>
-                <td><?php echo date_format(date_create($reservation["start"]),"j. n. Y") ?></td>
-                <td><?php echo count($reservationsDb->getReservationsForBook($reservation["book_isbn"])) ?>.</td>
+                <td><?php echo date_format(date_create($reservation["start"]), "j. n. Y") ?></td>
+                <td><?php echo $queuePosition ?>.</td>
             </tr>
         <?php endforeach ?>
         </tbody>
@@ -63,9 +71,9 @@ include "components/header.php" ?>
                 <th scope="row"><a href="detail.php?isbn=<?php echo $loan["book_isbn"] ?>">
                         <?php echo $bookDb->getBook($loan["book_isbn"])["name"] ?>
                     </a></th>
-                <td><?php echo date_format(date_create($loan["start"]),"j. n. Y") ?></td>
-                <td><?php echo date_format(date_create($loan["end"]),"j. n. Y") ?></td>
-                <td><?php echo $loan["returned"]? "Ano" : "Ne" ?></td>
+                <td><?php echo date_format(date_create($loan["start"]), "j. n. Y") ?></td>
+                <td><?php echo date_format(date_create($loan["end"]), "j. n. Y") ?></td>
+                <td><?php echo $loan["returned"] ? "Ano" : "Ne" ?></td>
             </tr>
         <?php endforeach ?>
         </tbody>

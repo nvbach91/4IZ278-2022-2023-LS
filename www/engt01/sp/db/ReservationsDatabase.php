@@ -29,7 +29,7 @@ class ReservationsDatabase extends Database {
     }
 
     public function getReservationsForBook(string $isbn): false|array {
-        $query = "SELECT * FROM reservations WHERE book_isbn = :isbn";
+        $query = "SELECT * FROM reservations WHERE book_isbn = :isbn ORDER BY id";
         $statement = $this->pdo->prepare($query);
         $statement->execute(["isbn" => $isbn]);
         return $statement->fetchAll();
