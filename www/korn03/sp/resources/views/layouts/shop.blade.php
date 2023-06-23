@@ -5,7 +5,7 @@
 <!-- ASIDE BAR CATEGORIES-->
 @section('content')
     <div class="row">
-        <div class="flex-shrink-0 p-3 bg-white column" style="width: 280px;">
+        <div class="flex-shrink-0 p-3 bg-white column border border-right border-top-0 border-bottom-0" style="width: 280px;">
             <ul class="list-unstyled ps-0">
                 <li class="mb-1 ">
                     <div class="text-center">
@@ -24,7 +24,6 @@
                                 </ul>
                             </div>
                 </li>
-                <li class="border-top my-3"></li>
             </ul>
         </div>
         <div class="column col-9">

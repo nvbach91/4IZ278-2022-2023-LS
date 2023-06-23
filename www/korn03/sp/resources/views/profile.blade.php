@@ -94,7 +94,6 @@
                                 <div class="card-body">
                                   <h5 class="card-title">Date: {{$order->created_at}}</h5>
                                   <p class="card-text">Status: {{$order->status}}</p>
-                                  <p class="card-text">Total price: {{$order->total_price}}$</p>
                                   <p class="card-text">Payment method: {{$order->payment_method}}</p>
                                   <a href="{{route('order', $order->id)}}" class="btn btn-primary">Details</a>
                                 </div>
