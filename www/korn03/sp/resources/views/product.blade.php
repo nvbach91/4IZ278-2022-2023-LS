@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
 @php
 
@@ -17,7 +17,8 @@
 
                     <div class="row gx-4 gx-lg-5 align-items-center">
                         <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
-                                src={{ asset('/assets/img/products/' . $product->thumbnail) }} alt="{{ $product->name }} image" />
+                                src={{ asset('/assets/img/products/' . $product->thumbnail) }}
+                                alt="{{ $product->name }} image" />
                         </div>
                         <div class="col-md-6">
                             <div class="small mb-1">Code: {{ $product->code }}</div>
@@ -36,7 +37,7 @@
                             @endif
                             @if ($product->stock == 0)
                                 <p class="card-price text-danger">Out of stock</p>
-                                @else
+                            @else
                                 <p class="card-price text-success">In stock</p>
                             @endif
                             <p class="lead">{{ $product->description }}</p>
@@ -58,15 +59,18 @@
             </div>
         </section>
         <!-- Related items section-->
+        @if (!$relatedProducts->isEmpty())
+
         <section class="py-5 bg-light container rounded">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4">Related products</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 gap-2">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 gap-2 mb-2">
 
                     @foreach ($relatedProducts as $product)
                         <div class="card " style="width: 11rem;">
-                            <a href="{{ route('product', $product->id) }}"><img src="/assets/img/products/{{ $product->thumbnail }}" class="card-img-top"
-                                alt="{{ $product->name }} thumbnail"></a>
+                            <a href="{{ route('product', $product->id) }}"><img
+                                    src="{{ asset('/assets/img/products/' . $product->thumbnail) }}" class="card-img-top"
+                                    alt="{{ $product->name }} thumbnail"></a>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <h6 class="card-price">{{ $product->price }}$</h5>
@@ -75,9 +79,12 @@
                             </div>
                         </div>
                     @endforeach
-
+                </div>
+                <div class="d-flex justify-content-center">
+                    {!! $relatedProducts->links('pagination::bootstrap-4') !!}
                 </div>
             </div>
         </section>
+        @endif
     </div>
 @endsection

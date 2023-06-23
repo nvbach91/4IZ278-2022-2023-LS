@@ -55,7 +55,7 @@
                                                 <th scope="row">
                                                     <div class="d-flex align-items-center">
                                                         <a href="{{ route('product', $product->id) }}"><img
-                                                                src="/assets/img/products/{{ $product->thumbnail }}"
+                                                                src="{{ asset('/assets/img/products/' . $product->thumbnail) }}"
                                                                 class="img-fluid rounded-3" style="width: 120px;"
                                                                 alt="..."></a>
                                                         <div class="flex-column ms-4">
