@@ -94,7 +94,8 @@ foreach ($cartItems as $cartItem) {
                     </thead>
                     <tbody>
                         <?php
-                        $selectedShippingId = $_POST['selected_shipping'];
+                        $selectedShippingId = isset($_POST['selected_shipping']) ? $_POST['selected_shipping'] : '';
+                        $selectedShippingId = htmlspecialchars($selectedShippingId);
                         $shippingQuery = "SELECT * FROM shippings WHERE id = :shippingId";
                         $shippingStatement = $pdo->prepare($shippingQuery);
                         $shippingStatement->execute(['shippingId' => $selectedShippingId]);
@@ -123,7 +124,8 @@ foreach ($cartItems as $cartItem) {
                     </thead>
                     <tbody>
                         <?php
-                        $selectedPaymentId = $_POST['selected_payment'];
+                        $selectedPaymentId = isset($_POST['selected_payment']) ? $_POST['selected_payment'] : '';
+                        $selectedPaymentId = htmlspecialchars($selectedPaymentId);
                         $paymentQuery = "SELECT * FROM payments WHERE id = :paymentId";
                         $paymentStatement = $pdo->prepare($paymentQuery);
                         $paymentStatement->execute(['paymentId' => $selectedPaymentId]);
@@ -146,12 +148,19 @@ foreach ($cartItems as $cartItem) {
                 <h2>Personal Information</h2>
                 <?php
                 if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['address']) && isset($_POST['city']) && isset($_POST['zip_code']) && isset($_POST['email'])) {
-                    $firstName = $_POST['first_name'];
-                    $lastName = $_POST['last_name'];
-                    $address = $_POST['address'];
-                    $city = $_POST['city'];
-                    $zipCode = $_POST['zip_code'];
-                    $email = $_POST['email'];
+                    $firstName = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
+                    $lastName = isset($_POST['last_name']) ? trim($_POST['last_name']) : '';
+                    $address = isset($_POST['address']) ? trim($_POST['address']) : '';
+                    $city = isset($_POST['city']) ? trim($_POST['city']) : '';
+                    $zipCode = isset($_POST['zip_code']) ? $_POST['zip_code'] : '';
+                    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+
+                    $firstName = htmlspecialchars($firstName);
+                    $lastName = htmlspecialchars($lastName);
+                    $address = htmlspecialchars($address);
+                    $city = htmlspecialchars($city);
+                    $zipCode = htmlspecialchars($zipCode);
+                    $email = htmlspecialchars($email);
                 ?>
                     <p><strong>First Name:</strong> <?= $firstName; ?></p>
                     <p><strong>Last Name:</strong> <?= $lastName; ?></p>

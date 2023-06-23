@@ -10,13 +10,21 @@ $zipCode = '';
 $email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $zipCode = $_POST['zipCode'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $firstName = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+    $lastName = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+    $address = isset($_POST['address']) ? trim($_POST['address']) : '';
+    $city = isset($_POST['city']) ? trim($_POST['city']) : '';
+    $zipCode = isset($_POST['zipCode']) ? trim($_POST['zipCode']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+
+    $firstName = htmlspecialchars($firstName);
+    $lastName = htmlspecialchars($lastName);
+    $address = htmlspecialchars($address);
+    $city = htmlspecialchars($city);
+    $zipCode = htmlspecialchars($zipCode);
+    $email = htmlspecialchars($email);
+    $password = htmlspecialchars($password);
 
     $errors = [];
 

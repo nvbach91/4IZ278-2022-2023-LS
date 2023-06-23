@@ -122,8 +122,8 @@
                 $shippings = $shippingStatement->fetchAll(PDO::FETCH_ASSOC);
 
                 ?>
-                <label for='shipping'>Select Shipping:</label>
-                <select name='selected_shipping' id='shipping'>
+                <label for='shipping' id="shippingLabel">Select Shipping: </label>
+                <select name='selected_shipping' id='shipping' class='select-font'>
                 <?php
                 foreach ($shippings as $shipping) {
                     $shippingId = $shipping['id'];
@@ -153,8 +153,8 @@
                 $payments = $paymentStatement->fetchAll(PDO::FETCH_ASSOC);
 
                 ?>
-                <label for='payment'>Select Payment:</label>
-                <select name='selected_payment' id='payment'>
+                <label for='payment'>Select Payment: </label>
+                <select name='selected_payment' id='payment' class='select-font'>
                 <?php
                 foreach ($payments as $payment) {
                     $paymentId = $payment['id'];

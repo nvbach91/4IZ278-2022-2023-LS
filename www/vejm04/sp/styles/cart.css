@@ -122,3 +122,17 @@
     color: #999;
     font-size: 12px;
 }
+
+.payment-container, .shipping-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.select-font {
+    font-size: 16px;
+    margin-left: 5px;
+}
