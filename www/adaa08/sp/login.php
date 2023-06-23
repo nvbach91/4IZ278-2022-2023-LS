@@ -68,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="submit" value="Login">
     </form>
 
+    <div>
+    <a href="fb_register.php">Prihlásiť sa cez facebook</a>
+    </div>
+
     <?php include 'footer.php';?>
 </body>
 </html>

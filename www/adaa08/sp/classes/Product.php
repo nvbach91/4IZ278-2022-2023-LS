@@ -17,7 +17,6 @@ class Product
     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-
     public function updateQuantity($productId, $quantity) {
         $stmt = $this->db->prepare('UPDATE products SET q_in_stock = q_in_stock + ? WHERE product_id = ?');
         $stmt->bind_param('ii', $quantity, $productId);
@@ -53,8 +52,18 @@ class Product
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-    
 
+    public function getProductsByPrice($priceOrder, $page) {
+        $offset = ($page - 1) * $this->productsPerPage;
+        if ($priceOrder !== 'ASC' && $priceOrder !== 'DESC') {
+            die('Invalid sort order');
+        }
+        $stmt = $this->db->prepare("SELECT product_id, name, price, description, photo, q_in_stock FROM products WHERE is_deleted = 0 ORDER BY price $priceOrder LIMIT ? OFFSET ?");
+        $stmt->bind_param('ii', $this->productsPerPage, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
     public function getProductById($productId) {
         $stmt = $this->db->prepare('SELECT * FROM products WHERE product_id = ?');
         $stmt->bind_param('i', $productId);
@@ -82,6 +91,20 @@ class Product
     $stmt = $this->db->prepare($sql);
     $stmt->bind_param("sdsiis", $name, $price, $description, $quantity, $categoryId, $productId);
     return $stmt->execute();
+    }
+
+    public function addProduct($name, $price, $description, $q_in_stock, $category_id, $photo) {
+        $query = "INSERT INTO products (name, price, description, q_in_stock, categories_category_id, photo) 
+                  VALUES (?, ?, ?, ?, ?, ?)";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sdsiss", $name, $price, $description, $q_in_stock, $category_id, $photo);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }    
 }
 ?>

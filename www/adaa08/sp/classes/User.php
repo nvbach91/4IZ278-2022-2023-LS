@@ -17,14 +17,15 @@ class User
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public function getUserByEmail($email)
-    {
-        $stmt = $this->db->prepare('SELECT * FROM users WHERE email = ?');
-        $stmt->bind_param('s', $email);
+    public function getUserByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email = ? AND deleted = 0";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
-    }
-
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }   
+    
     public function verifyPassword($password, $hashedPassword)
     {
         return password_verify($password, $hashedPassword);
@@ -33,8 +34,8 @@ class User
 
     public function createUser($firstname, $lastname, $email, $phone, $role, $password)
     {
-
-    $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ?");
+    
+    $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? AND deleted = 0");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -51,8 +52,6 @@ class User
     }
     return false;
     }
-
-
 
     public function getUserEmailByOrderId($orderId)
     {
@@ -72,12 +71,55 @@ class User
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-
     public function getAllUsers() 
 {
-    $sql = "SELECT email, role FROM users";
+    $sql = "SELECT email, role FROM users WHERE deleted = 0";
     $result = $this->db->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+
+public function getRoleByEmail($email)
+{
+    $sql = "SELECT role FROM users WHERE email = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    return $user['role'];
+}
+
+public function changeRole($email, $role)
+{
+    $sql = "UPDATE users SET role = ? WHERE email = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param('ss', $role, $email);
+    $stmt->execute();
+}
+
+public function softDeleteUser($user_id) {
+    $sql = "UPDATE users SET deleted = 1 WHERE user_id = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    return $stmt->execute();
+}
+
+public function getUsersWhere($whereCondition) {
+    $sql = "SELECT * FROM users WHERE " . $whereCondition;
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+public function verifyByEmail($email) {
+    $sql = "SELECT * FROM users WHERE email=?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
 }
 
 }

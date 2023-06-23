@@ -70,6 +70,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <p><?php echo $error_message; ?><p>
 </form>
 
+<div>
+    <a href="fb_register.php">Prihlásiť sa cez facebook</a>
+</div>
+
 <?php include 'footer.php';?>
 </body>
 </html>

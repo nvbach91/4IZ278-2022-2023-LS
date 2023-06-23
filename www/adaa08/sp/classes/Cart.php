@@ -18,11 +18,29 @@ class Cart
         return $this->db->getInsertId();
     }
 
+
     public function addToCart($quantity, $productId, $cartId)
     {
-        $stmt = $this->db->prepare('INSERT INTO shopping_cart_item (quantity, products_product_id, shopping_cart_cart_id) VALUES (?, ?, ?)');
-        $stmt->bind_param('iii', $quantity, $productId, $cartId);
+        $existingProduct = $this->getCartItemByProductId($productId, $cartId);
+
+        if ($existingProduct) {
+            $newQuantity = $existingProduct['quantity'] + $quantity;
+            $stmt = $this->db->prepare('UPDATE shopping_cart_item SET quantity = ? WHERE shopping_cart_cart_id = ? AND products_product_id = ?');
+            $stmt->bind_param('iii', $newQuantity, $cartId, $productId);
+        } else {
+            $stmt = $this->db->prepare('INSERT INTO shopping_cart_item (quantity, products_product_id, shopping_cart_cart_id) VALUES (?, ?, ?)');
+            $stmt->bind_param('iii', $quantity, $productId, $cartId);
+        }
         $stmt->execute();
+    }
+
+    public function getCartItemByProductId($productId, $cartId)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM shopping_cart_item WHERE products_product_id = ? AND shopping_cart_cart_id = ?');
+        $stmt->bind_param('ii', $productId, $cartId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 
     public function getCartItems($cartId) 

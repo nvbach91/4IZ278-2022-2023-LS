@@ -58,8 +58,9 @@ foreach ($cartItems as $item) {
 $status = 'Spracováva sa';
 $order_id = $order->createOrder($_SESSION['user_id'], $address_id, $total, $status);
 
-foreach ($orderItems as $item) {
+foreach ($cartItems as $item) {
     $product->updateProductStock($item['product_id'], $item['quantity']);
+    $productDetails = $product->getProductById($item['product_id']);
     $order->createOrderItem($order_id, $item['product_id'], $item['quantity'], $productDetails['price']);
 }
 

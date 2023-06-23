@@ -39,7 +39,7 @@ $db->close();
     <?php foreach ($orders as $order): ?>
         <?php if($order['status'] == 'Spracováva sa'): ?>
             <div class="order-item">
-                <h4>Objednávka<?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h4>
+                <h4><a href="order_details.php?order_id=<?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?>">Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></a></h4>
                 <p>Suma: <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></p>
                 <p>Status: <?= htmlspecialchars($order['status'], ENT_QUOTES, 'UTF-8') ?></p>
             </div>
@@ -52,7 +52,7 @@ $db->close();
     <?php foreach ($orders as $order): ?>
         <?php if($order['status'] == 'Vybavená'): ?>
             <div class="order-item">
-                <h4>Objednávka<?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></h4>
+                <h4><a href="order_details.php?order_id=<?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?>">Objednávka <?= htmlspecialchars($order['order_id'], ENT_QUOTES, 'UTF-8') ?></a></h4>
                 <p>Suma: <?= htmlspecialchars($order['total'], ENT_QUOTES, 'UTF-8') ?></p>
                 <p>Status: <?= htmlspecialchars($order['status'], ENT_QUOTES, 'UTF-8') ?></p>
             </div>

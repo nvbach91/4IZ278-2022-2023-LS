@@ -60,9 +60,26 @@ class Admin {
         return $this->userObj->getAdmins();
     }
 
-    public function getAllUsers() 
-    {
-        return $this->userObj->getAllUsers();
+    public function getAllUsers() {
+        return $this->userObj->getUsersWhere('deleted = 0');
     }
+
+    public function addProduct($name, $price, $description, $quantity, $categoryId, $photo)
+    {
+        if ($photo && is_uploaded_file($photo['tmp_name'])) {
+            $target_dir = "pictures/";
+            $target_file = $target_dir . basename($photo["name"]);
+            $full_url = 'https://esotemp.vse.cz/~adaa08/sp/' . $target_file;
+
+            if (!move_uploaded_file($photo["tmp_name"], $target_file)) {
+                throw new Exception("File upload failed");
+            }
+
+            return $this->productObj->addProduct($name, $price, $description, $quantity, $categoryId, $full_url);
+        } else {
+            throw new Exception("Product photo is required");
+        }
+    }
+
 }
 ?>

@@ -23,6 +23,25 @@ if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
 }
 
 $categories = $categoryObj->getCategories();
+
+if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
+    $categoryId = $_GET['category_id'];
+    
+    if (isset($_GET['price_order']) && $_GET['price_order'] != '') {
+        $priceOrder = $_GET['price_order'];
+        $products = $productObj->getProductsByPrice($priceOrder, $page);
+    } else {
+        $products = $productObj->getProductsByCategory($categoryId, $page);
+    }
+    
+} else {
+    if (isset($_GET['price_order']) && $_GET['price_order'] != '') {
+        $priceOrder = $_GET['price_order'];
+        $products = $productObj->getProductsByPrice($priceOrder, $page);
+    } else {
+        $products = $productObj->getProductsPaginated($page);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +71,12 @@ $categories = $categoryObj->getCategories();
         }
     ?>
 </select>
+<select name="price_order" onchange="this.form.submit()">
+        <option value="">Filtrovanie podľa ceny</option>
+        <option value="ASC">Od najmenšej po najväčšiu</option>
+        <option value="DESC">Od najväčšej po najemnšiu</option>
+    </select>
+
 </form>
 
 <div class="products">
@@ -81,13 +106,25 @@ $categories = $categoryObj->getCategories();
     ?>
 </div>
 
-
-
 <div class="pagination">
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-    <a href="?page=<?= $i ?>"><?= $i ?></a>
+    <?php 
+    $params = array();
+    if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
+        $params['category_id'] = $_GET['category_id'];
+    }
+    if (isset($_GET['price_order']) && $_GET['price_order'] != '') {
+        $params['price_order'] = $_GET['price_order'];
+    }
+
+    for ($i = 1; $i <= $totalPages; $i++): 
+        $params['page'] = $i;
+
+        $queryString = http_build_query($params);
+    ?>
+    <a href="?<?= $queryString ?>"><?= $i ?></a>
     <?php endfor; ?>
 </div>
+
 
 <?php include 'footer.php'; ?>
 </body>
