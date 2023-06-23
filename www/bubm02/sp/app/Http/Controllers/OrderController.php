@@ -23,7 +23,9 @@ class OrderController extends Controller
         $shippingType = $request->input('shipping-type');
 
         if ($adress == null) {
-            return redirect()->route('profile')->withErrors( 'Please add an adress','adress');
+            if (!Adress::all()->where('user_id', $user_id)->count() > 0) {
+                return redirect()->route('profile')->withErrors( 'Please add an adress','adress');
+            }
         }
 
         $validator = Validator::make($request->session()->all(), [
@@ -32,7 +34,7 @@ class OrderController extends Controller
 
         if ($validator->fails()) {
             return back()
-                ->withErrors($validator);
+                ->withErrors("Please add items to cart");
         }
 
         $request->validate([

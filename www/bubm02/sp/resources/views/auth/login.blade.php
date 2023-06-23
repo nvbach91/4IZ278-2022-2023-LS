@@ -65,7 +65,7 @@
                                         {{ __('Login') }}
                                     </button>
                                 </div>
-                                <div class="ol-md-6 offset-md-3 w-100">
+                                <div class="ol-md-12 w-100 d-flex justify-content-center">
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}

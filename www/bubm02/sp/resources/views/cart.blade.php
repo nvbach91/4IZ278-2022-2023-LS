@@ -10,12 +10,12 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
                 @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
                         <strong>{{session()->get('success')}}</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @elseif(session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
                         <strong>{{session()->get('error')}}</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
