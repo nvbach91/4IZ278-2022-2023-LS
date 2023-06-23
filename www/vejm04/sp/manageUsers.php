@@ -19,7 +19,7 @@ function deleteUser($userId) {
 }
 
 try {
-    $query = "SELECT * FROM users";
+    $query = "SELECT * FROM users ORDER BY id DESC";
     $statement = $pdo->query($query);
     $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

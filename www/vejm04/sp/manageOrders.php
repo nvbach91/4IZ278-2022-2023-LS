@@ -19,7 +19,7 @@ function deleteOrder($orderId) {
 }
 
 try {
-    $query = "SELECT * FROM orders";
+    $query = "SELECT * FROM orders ORDER BY id DESC ";
     $statement = $pdo->query($query);
     $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -32,6 +32,7 @@ if (isset($_POST['delete'])) {
     header("Location: manageOrders.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +62,14 @@ if (isset($_POST['delete'])) {
                     <?php foreach ($orders as $order) { ?>
                         <tr>
                             <td><?php echo $order['id']; ?></td>
-                            <td><?php echo $order['user_id']; ?></td>
+                            <?php
+                                $userQuery = "SELECT email FROM users WHERE id = ?";
+                                $userStatement = $pdo->prepare($userQuery);
+                                $userStatement->execute([$order['user_id']]);
+                                $user = $userStatement->fetch(PDO::FETCH_ASSOC);
+                                $email = $user ? $user['email'] : 'N/A';
+                                ?>
+                            <td><?php echo $email; ?></td>
                             <td><?php echo $order['total']; ?></td>
                             <td><?php echo $order['date']; ?></td>
                             <td><?php echo $order['status']; ?></td>

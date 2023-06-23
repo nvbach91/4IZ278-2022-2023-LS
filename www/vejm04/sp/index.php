@@ -28,6 +28,13 @@ function displayProducts($products)
         $output .= '<p>' . $product['description'] . '</p>';
         $output .= '<p>Price: $' . $product['price'] . '</p>';
         $output .= '<a href="productDetail.php?id=' . $product['id'] . '" class="btn">View Details</a>';
+        $output .= '<form method="post" action="cart.php">';
+        $output .= '<input type="hidden" name="product_id" value="' . $product['id'] . '">';
+        $output .= '<input type="hidden" name="quantity" value="1">';
+        $output .= '<button type="submit" name="add_to_cart" class="btn addToCartBtn">Add to Cart</button>';
+        $output .= '</form>';
+
+
         $output .= '</div>';
     }
     return $output;
