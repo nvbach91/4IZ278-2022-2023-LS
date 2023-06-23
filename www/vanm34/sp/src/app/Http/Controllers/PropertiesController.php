@@ -21,8 +21,9 @@ class PropertiesController extends Controller
                 'status' => [
                     'nullable',
                     'in:1,2',
-                    Rule::requiredIf($request->sort !== null),
+                     Rule::requiredIf($request->sort !== null),
                 ],
+                'property_type' => 'nullable|in:1,2,3',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors(['status' => 'You must choose a status if you want to sort the properties.']);
@@ -47,6 +48,11 @@ class PropertiesController extends Controller
         if ($request->has('status')) {
             $query->where('rentsale', $request->status);
         }
+
+        if ($request->has('property_type')) {
+            $query->where('property_type', $request->property_type);
+        }
+
 
         if ($request->has('city') && trim($request->city) != "") {
             $query->where('city', 'LIKE', '%' . trim($request->city) . '%');

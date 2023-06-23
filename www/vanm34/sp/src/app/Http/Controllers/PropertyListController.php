@@ -27,12 +27,12 @@ class PropertyListController extends Controller
         $request->validate([
             'description' => 'required|max:40',
             'longDescription' => 'required|max:255',
-            'property_type' => 'required|integer',
+            'property_type' => 'required|integer|min:1|max:3',
             'rentsale' => 'required|numeric|min:1|max:2',
             'size' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'street' => 'required|max:255',
-            'city' => 'required|max:255',
+            'city' => 'required|max:255|regex:/^[A-Za-z\s\-]+$/',
             'imagepath.*' => 'required|url',
         ]);
 
@@ -61,17 +61,18 @@ class PropertyListController extends Controller
 
     public function update(Request $request, Property $property)
     {
+        //dd($request->all());
         // validation
         $request->validate([
             'description' => 'required|max:40',
             'longDescription' => 'required|max:255',
-            'property_type' => 'required|integer',
+            'property_type' => 'required|integer|min:1|max:3',
             'rentsale' => 'required|numeric|min:1|max:2',
             'size' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
             'street' => 'required|max:255',
-            'city' => 'required|max:255',
-            'imagepath.*' => 'nullable|url',
+            'city' => 'required|max:255|regex:/^[A-Za-z\s\-]+$/',
+            'imagepath.*' => 'required|url',
         ]);
 
         // update data
@@ -102,18 +103,13 @@ class PropertyListController extends Controller
         return redirect()->route('property.index');
     }
 
-    // Delete images on Cascade so I don't need to care about it on an application level
     public function destroy(Property $property)
     {
+        //odmazání interested z tabulky
+        $property->interestedUsers()->delete();
+    
         $property->delete();
-
+    
         return redirect()->route('property.index');
-    }
-
-    public function deleteImage(Image $image)
-    {
-        $image->delete();
-
-        return response(null, 200);
     }
 }

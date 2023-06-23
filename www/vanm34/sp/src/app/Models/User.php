@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->interests()->where('property_id', $propertyId)->exists();
     }
+
+    public function lamo(){
+        $dsa = 'lama';
+        return $dsa;
+    }
 }
