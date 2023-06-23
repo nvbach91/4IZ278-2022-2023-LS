@@ -45,28 +45,41 @@ class OrderController extends Controller
         $order->save();
 
 
-        foreach ($uniqueID as $id){
-            $product= Product::find($id);
+        foreach ($uniqueID as $productId => $amount) {
+            $product = Product::find($productId);
             $price = $product->price;
             $discount = $product->discount;
-            $amount = $uniqueID[$id];
+            if ($product->stock < $amount) {
+                $order->delete();
+                return redirect(route('cart'));
+            }
+
+            $product->stock -= $amount;
+            $product->save();
 
             $order->belongsToMany(Product::class, 'table_order_product')->attach($product, ['amount' => $amount, 'price_actual' => $price, 'discount_actual' => $discount]);
         }
-        return redirect(route('profile'));
+
+        //$request->session()->forget('cart');
+
+        return redirect(route('order', $order->id));
     }
 
-    public function showOrder($id) : Renderable {
+    public function showOrder($id): Renderable
+    {
         //Order::where('user_id', Auth::user()->id
 
-        return view('order',
-        ['user' => Auth::user(),
-        'order' => Order::find($id),
-        'order_products'=> Order::find($id)
-        ->belongsToMany(Product::class, 'table_order_product')
-        ->get(['order_id', 'product_id', 'price_actual', 'amount', 'discount_actual'])
-        ->all(),
-        'products'=> Product::all()
-    ]);
+        return view(
+            'order',
+            [
+                'user' => Auth::user(),
+                'order' => Order::find($id),
+                'order_products' => Order::find($id)
+                    ->belongsToMany(Product::class, 'table_order_product')
+                    ->get(['order_id', 'product_id', 'price_actual', 'amount', 'discount_actual'])
+                    ->all(),
+                'products' => Product::all()
+            ]
+        );
     }
 }

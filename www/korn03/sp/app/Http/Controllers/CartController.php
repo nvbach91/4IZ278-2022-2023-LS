@@ -24,14 +24,14 @@ class CartController extends Controller
             $quantity = 1;
         }
         if (!self::checkStock($product)) {
-            return redirect()->route('main');
+            return redirect()->route('cart')->withErrors(["custom_error" => 'No more products left!']);
         }
-        if(isset($oldCart)){
+        if (isset($oldCart)) {
             $uniqueID = array_count_values($oldCart);
         }
         if (isset($uniqueID[$product])) {
             if ($uniqueID[$product] >= Product::find($product)->stock) {
-                return redirect()->route('cart');
+                return redirect()->route('cart')->withErrors(["custom_error" => 'No more products left!']);
             }
         }
         if ($oldCart == null) {
@@ -49,15 +49,9 @@ class CartController extends Controller
     public function remove(Request $request)
     {
         $oldCart = $request->session()->get('cart');
-
         $product = $request->id;
-        /*
-        if ($oldCart == null){
-            return;
-        }
-        */
+
         unset($oldCart[array_search($product, $oldCart)]);
-        //$newCart = unset($oldCart[array_search($product, $oldCart)]);
 
         $request->session()->put('cart', $oldCart);
 

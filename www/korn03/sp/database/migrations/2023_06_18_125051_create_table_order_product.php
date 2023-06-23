@@ -18,7 +18,7 @@ return new class extends Migration
             $table->primary(array('order_id', 'product_id'));
             $table->integer('amount');
             $table->integer('price_actual');
-            $table->integer('discount')->nullable();
+            $table->integer('discount_actual')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('product_id')->references('id')->on('products');

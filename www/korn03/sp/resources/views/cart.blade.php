@@ -30,14 +30,20 @@
                             </thead>
                             <tbody>
 
+                                @if ($errors->has('custom_error'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('custom_error') }}
+                                    </div>
+                                @endif
                                 @if (empty($cart))
                                     <h2 class='mb-4'>Nothing in cart!</h2>
                                 @else
                                     @php
                                         $uniqueID = array_count_values($cart);
-                                        var_dump($cart);
-                                                echo('   ||||   ');
-                                                var_dump($uniqueID);
+                                        /* DEBUG PURPOSES*/
+                                        //var_dump($cart);
+                                        //echo('   ||||   ');
+                                        //var_dump($uniqueID);
                                     @endphp
                                     @foreach ($products as $product)
                                         @if (in_array($product->id, $cart))
@@ -160,43 +166,43 @@
                                     </div>
 
                                     <!--
-                                        <div class="col-md-6 col-lg-4 col-xl-6">
-                                            <div class="row">
-                                                <div class="col-12 col-xl-6">
-                                                    <div class="form-outline mb-4 mb-xl-5">
-                                                        <input type="text" id="typeName"
-                                                            class="form-control form-control-lg" siez="17"
-                                                            placeholder="John Smith" />
-                                                        <label class="form-label" for="typeName">Name on card</label>
-                                                    </div>
+                                            <div class="col-md-6 col-lg-4 col-xl-6">
+                                                <div class="row">
+                                                    <div class="col-12 col-xl-6">
+                                                        <div class="form-outline mb-4 mb-xl-5">
+                                                            <input type="text" id="typeName"
+                                                                class="form-control form-control-lg" siez="17"
+                                                                placeholder="John Smith" />
+                                                            <label class="form-label" for="typeName">Name on card</label>
+                                                        </div>
 
-                                                    <div class="form-outline mb-4 mb-xl-5">
-                                                        <input type="text" id="typeExp"
-                                                            class="form-control form-control-lg" placeholder="MM/YY"
-                                                            size="7" id="exp" minlength="7" maxlength="7" />
-                                                        <label class="form-label" for="typeExp">Expiration</label>
+                                                        <div class="form-outline mb-4 mb-xl-5">
+                                                            <input type="text" id="typeExp"
+                                                                class="form-control form-control-lg" placeholder="MM/YY"
+                                                                size="7" id="exp" minlength="7" maxlength="7" />
+                                                            <label class="form-label" for="typeExp">Expiration</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-12 col-xl-6">
-                                                    <div class="form-outline mb-4 mb-xl-5">
-                                                        <input type="text" id="typeText"
-                                                            class="form-control form-control-lg" siez="17"
-                                                            placeholder="1111 2222 3333 4444" minlength="19"
-                                                            maxlength="19" />
-                                                        <label class="form-label" for="typeText">Card Number</label>
-                                                    </div>
+                                                    <div class="col-12 col-xl-6">
+                                                        <div class="form-outline mb-4 mb-xl-5">
+                                                            <input type="text" id="typeText"
+                                                                class="form-control form-control-lg" siez="17"
+                                                                placeholder="1111 2222 3333 4444" minlength="19"
+                                                                maxlength="19" />
+                                                            <label class="form-label" for="typeText">Card Number</label>
+                                                        </div>
 
-                                                    <div class="form-outline mb-4 mb-xl-5">
-                                                        <input type="password" id="typeText"
-                                                            class="form-control form-control-lg"
-                                                            placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3"
-                                                            maxlength="3" />
-                                                        <label class="form-label" for="typeText">Cvv</label>
+                                                        <div class="form-outline mb-4 mb-xl-5">
+                                                            <input type="password" id="typeText"
+                                                                class="form-control form-control-lg"
+                                                                placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3"
+                                                                maxlength="3" />
+                                                            <label class="form-label" for="typeText">Cvv</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                         -->
+                                             -->
                                     <div class="col-lg-4 col-xl-3 ">
                                         <div class="d-flex justify-content-between" style="font-weight: 500;">
                                             <p class="mb-2">Subtotal</p>
@@ -216,11 +222,8 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-block btn-lg"
-                                        @if (empty($cart))
-                                        disabled
-                                        @endif>
-                                            <div class="d-flex justify-content-between"
-                                            >
+                                            @if (empty($cart)) disabled @endif>
+                                            <div class="d-flex justify-content-between">
                                                 <span>Checkout</span>
                                             </div>
                                         </button>
