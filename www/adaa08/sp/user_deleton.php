@@ -1,0 +1,1 @@
+Vymažete si údaje tak, že nám napíšete.
