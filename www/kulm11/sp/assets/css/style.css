@@ -1,0 +1,296 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: purple;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav a {
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    top: 5px;
+    transition: color 200ms ease-out 100ms;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header nav a:hover {
+    color: gray;
+}
+
+#homepage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#items {
+    padding: 10px;
+    margin: 10px;
+    display: grid;
+    grid-template: ". . .";
+    justify-content: center;
+    text-align: center;
+}
+
+.item {
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 15px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.item a {
+    color: white;
+    font-weight: bold;
+    background-color: purple;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 200ms ease-out 100ms;
+}
+
+table,
+td,
+th {
+    border: 1px solid;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.item a:hover {
+    background-color: blueviolet;
+}
+
+#intro-image {
+    padding: 150px;
+    background-position: center;
+    color: white;
+
+    background-size: cover;
+    text-align: center;
+    filter: brightness(80%);
+    background-image: url(../img/background.jpg);
+}
+
+#intro-image h1 {
+    font-size: 60px;
+    background-color: rgba(87, 87, 87, 0.237);
+}
+
+#intro-image h3 {
+    background-color: rgba(87, 87, 87, 0.237);
+    font-size: 22px;
+}
+
+footer {
+    background-color: purple;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+main {
+    background-color: rgb(245, 245, 245);
+}
+
+#cart {
+    min-width: 300px;
+    border-style: solid;
+    margin: 10px;
+    border-radius: 10px;
+}
+#cart-items-section {
+    width: 100%;
+}
+
+#logo {
+    display: grid;
+    grid-template: ". .";
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+#loginForm,
+#signupForm,
+#editForm,
+#addForm {
+    display: grid;
+    grid-template: ". .";
+    margin: 15px;
+    justify-content: center;
+    padding: 10px;
+    border-style: solid;
+}
+
+#loginForm label,
+#signupForm label,
+#editForm label,
+#addForm label {
+    font-weight: bold;
+}
+
+#homepage-pagination {
+    display: grid;
+    grid-template: ". . . . . . . . . .";
+    justify-content: center;
+    text-align: center;
+    list-style-type: none;
+}
+
+#homepage-pagination li a {
+    margin: 10px;
+    color: white;
+    background-color: purple;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 200ms ease-out 100ms;
+}
+
+#homepage-pagination li a:hover {
+    background-color: blueviolet;
+}
+
+.price-item {
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.description-item {
+    text-align: center;
+    margin: auto;
+    font-size: 14px;
+    max-width: 250px;
+}
+
+#admin-content {
+    padding: 10px;
+}
+
+.item-quantity {
+    display: grid;
+    grid-template: ". . .";
+    align-items: center;
+}
+
+.item-quantity a {
+    text-decoration: none;
+    padding: 5px;
+}
+
+#shipment-payment-section {
+    text-align: right;
+    margin: 10px;
+}
+
+#shipment-payment-section button {
+    color: white;
+    font-weight: bold;
+    background-color: purple;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 200ms ease-out 100ms;
+}
+
+#shipment-payment-section button:hover {
+    background-color: blueviolet;
+}
+
+#order-history {
+    margin: 10px;
+}
+
+.order {
+    margin-left: 20px;
+}
+
+.error {
+    color: white;
+    background-color: red;
+}
+
+.success {
+    color: white;
+    background-color: green;
+}
+
+#facebookLogin{
+    margin: 10px;
+    color: white;
+    background-color: purple;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: none;
+}
+#facebookLogin:hover {
+    background-color: blueviolet;
+}
+
+#loginContent{
+    text-align: center;
+}
+
+#itemPage{
+    padding:15px;
+}
+
+#itemPageContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+#itemPageContnt img, #itemPageInfo{
+    padding:5px;
+    margin:10px;
+}
+
+#confirmation{
+    text-align: center;
+}
