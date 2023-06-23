@@ -29,8 +29,8 @@
 
                     <div class="row">
                         @foreach($orders as $order)
-                            <div class="col-md-2">
-                                <a href="{{route('order.show',$order->id)}}">
+                            <div class="col-2">
+                                <a href="{{route('order.admin.show',$order->id)}}">
                                     <button class="text-center btn btn-primary ">Order #{{$order->id}}</button>
                                 </a>
                             </div>

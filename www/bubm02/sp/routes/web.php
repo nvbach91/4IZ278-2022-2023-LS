@@ -20,8 +20,10 @@ Auth::routes();
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\OrderController::class, 'showAdminAll'])->name('order.admin.show.all');
     Route::get('/dashboard/order/{id}', [App\Http\Controllers\OrderController::class, 'showAdmin'])->name('order.admin.show');
-    Route::get('/dashboard/order/approve/{id}', [App\Http\Controllers\OrderController::class, 'denyAdmin'])->name('order.admin.approve');
-    Route::get('/dashboard/order/deny/{id}', [App\Http\Controllers\OrderController::class, 'approveAdmin'])->name('order.admin.deny');
+    Route::get('/dashboard/order/approve/{id}', [App\Http\Controllers\OrderController::class, 'approveAdmin'])->name('order.admin.approve');
+    Route::get('/dashboard/order/deny/{id}', [App\Http\Controllers\OrderController::class, 'denyAdmin'])->name('order.admin.deny');
+    Route::get('/dashboard/order/ship/{id}', [App\Http\Controllers\OrderController::class, 'shipAdmin'])->name('order.admin.ship');    
+    Route::get('/dashboard/item/add', [App\Http\Controllers\OrderController::class, 'addItem'])->name('addItem.admin.ship');
 });
 
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index'])->name('index');
