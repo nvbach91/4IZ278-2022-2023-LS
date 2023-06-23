@@ -51,25 +51,27 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-3 w-100">
-                                <a href="{{route('login.google')}}" class="btn btn-danger btn-block">Login with Google</a>
-                                <a href="{{route('login.facebook')}}" class="btn btn-primary btn-block">Login with Facebook</a>
+                        <div>
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-3 w-100">
+                                    <a href="{{route('login.google')}}" class="btn col-md-6 mb-2 btn-danger btn-block">Login with Google</a>
+                                    <a href="{{route('login.facebook')}}" class="btn col-md-6  btn-primary btn-block">Login with Facebook</a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-0 mt-2">
-                            <div class="ol-md-6 offset-md-3 w-100">
-                                <button type="submit" class="btn w-50 btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                            </div>
-                            <div class="ol-md-6 offset-md-3 w-100">
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                            <div class="row mb-0 mt-2">
+                                <div class="ol-md-6 offset-md-3 w-100">
+                                    <button type="submit" class="btn w-50 btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+                                </div>
+                                <div class="ol-md-6 offset-md-3 w-100">
+                                    @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ __('Forgot Your Password?') }}
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </form>
