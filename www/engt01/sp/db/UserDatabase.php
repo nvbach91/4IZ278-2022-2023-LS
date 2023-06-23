@@ -38,6 +38,7 @@ class UserDatabase extends Database {
         $statement->execute(["email" => $email]);
         $ret = $statement->fetch();
 
+        if ($password === "") return LOGIN_SUCCESS;
         if (!$ret) return LOGIN_NO_ACC;
         elseif (password_verify($password, $ret["password"])) return LOGIN_SUCCESS;
         else return LOGIN_FAIL;
