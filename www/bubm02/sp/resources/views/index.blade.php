@@ -25,8 +25,8 @@
                                     </form>
                                     <a href="javascript:{}" onclick="document.getElementById('form{{$item->id}}').submit();"><i class="fa fa-shopping-cart"></i></a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-plus"></i></a></li>
+{{--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--}}
+{{--                                <li><a href="#"><i class="fa fa-plus"></i></a></li>--}}
                                 <li><a href="{{route('product', $item->id)}}"><i class="fa fa-expand"></i></a></li>
                             </ul>
                         </div>

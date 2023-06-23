@@ -19,6 +19,8 @@ class PublicController extends Controller
 
     public function product($id) : Renderable
     {
-        return view('product', ['item' => Item::find($id)]);
+        $item = Item::find($id);
+        $relatedItems = Item::all()->whereNotIn('id', $item->id)->where('category_id', $item->category_id)->take(4);
+        return view('product', ['item' => $item, 'relatedItems' => $relatedItems]);
     }
 }

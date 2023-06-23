@@ -174,14 +174,12 @@
                                     <label class="label">Products</label>
                                     @foreach($order->orderItems() as $orderItem)
                                         @php($item = \App\Models\Item::find($orderItem->item_id))
-                                        {{-- //copilot, please make item cards --}}
                                         <div class="col-md-4">
                                             <img src="{{$item->image}}" style="max-width: 150px; max-height: 250px">
                                             <p>Name: {{$item->name}}</p>
                                             <p>Total price: {{$orderItem->price}} Kč</p>
                                             <p>Quantity: {{$orderItem->quantity}}</p>
                                         </div>
-
                                     @endforeach
                                 </div>
                             </div>
