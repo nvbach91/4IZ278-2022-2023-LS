@@ -1,0 +1,121 @@
+.property-container {
+    width: 30%;
+    padding: 1rem;
+    margin: 1rem;
+    box-sizing: border-box;
+    /* Makes sure padding is included in the width */
+    display: inline-block;
+    /* Align containers horizontally */
+    vertical-align: top;
+    /* Align the top of each container, regardless of their height */
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Adjusts the size of the image within the container */
+.property-container img {
+    width: 100%;
+    /* Make the image expand to the width of the container */
+    height: auto;
+    /* Keep the original aspect ratio of the image */
+}
+
+/* Adjusts the font-size within the container */
+.property-container .content {
+    font-size: 0.8rem;
+    /* Adjust as needed */
+}
+
+/* aspect ratio obr=ayk; v containeru */
+.property-container .image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    overflow: hidden;
+}
+
+.property-container .image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* This makes the image cover the entire space of the parent. */
+}
+
+.pagination {
+    align-items: center;
+}
+
+.filter {
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 300px;
+    margin-right: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #9ecdff54;
+    box-shadow: 0 0 5px rgba(43, 43, 43, 0.05);
+
+}
+
+.filter .form-group {
+    margin-bottom: 10px;
+}
+
+.filter .form-group label {
+    font-weight: bold;
+}
+
+.filter button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.filter button:hover {
+    background-color: #0056b3;
+}
+
+.button {
+    display: inline-block;
+    background-color: #f8f9fa;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+    padding: .4rem .75rem;
+    font-size: .95rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-decoration: none;
+    margin-bottom: 3px;
+}
+
+.moreInfoButton {
+    display: inline-block;
+    background-color: #58acff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+    padding: .4rem .75rem;
+    font-size: .95rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    text-decoration: none;
+    margin-top: 15px;
+    color: #ffffff;
+}
+
+.moreInfoButton:hover {
+    background-color: #0b85ff;
+    color: #ffffff;
+}
