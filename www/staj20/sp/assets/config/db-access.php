@@ -1,0 +1,6 @@
+<?php
+const DB_HOST = 'REDACTED';
+const DB_DATABASE = 'REDACTED';
+const DB_USERNAME = 'REDACTED';
+const DB_PASSWORD = 'REDACTED';
+?>
