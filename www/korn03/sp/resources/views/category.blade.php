@@ -12,7 +12,7 @@
 
         @foreach ($products as $product)
             <div class="card " style="width: 11rem;">
-                <img src="/assets/img/products/{{ $product->thumbnail }}" class="card-img-top"
+                <img src={{ asset('/assets/img/products/' . $product->thumbnail) }} class="card-img-top"
                     alt="{{ $product->name }} thumbnail">
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>

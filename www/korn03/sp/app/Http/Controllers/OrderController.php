@@ -51,7 +51,7 @@ class OrderController extends Controller
             $discount = $product->discount;
             if ($product->stock < $amount) {
                 $order->delete();
-                return redirect(route('cart'));
+                return redirect(route('cart'))->withErrors(["custom_error" => 'No more products left!']);;
             }
 
             $product->stock -= $amount;
