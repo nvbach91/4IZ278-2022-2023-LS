@@ -17,7 +17,7 @@
         <h4>Filters:</h4>
 
 
-        <form action="{{ route('propertiesList.index') }}" method="GET">
+        <form id="filterForm" action="{{ route('propertiesList.index') }}" method="GET" onsubmit="return handleFormSubmit(event)">
           <div class="form-group">
             <label for="sort">Sort by:</label>
             <select name="sort" id="sort">
@@ -37,6 +37,16 @@
               <option value="2" {{ request()->status == '2' ? 'selected' : '' }}>For Sale</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="property_type">Type:</label>
+            <select name="property_type" id="property_type">
+              <option value="">--Select--</option>
+              <option value="1" {{ request()->property_type == '1' ? 'selected' : '' }}>Apartment</option>
+              <option value="2" {{ request()->property_type == '2' ? 'selected' : '' }}>House</option>
+              <option value="3" {{ request()->property_type == '3' ? 'selected' : '' }}>Lot</option>
+            </select>
+          </div>
+
 
           <div class="form-group">
             <label for="city">City:</label>
@@ -98,6 +108,34 @@
   </div>
 </body>
 
+<script type="text/javascript">
+  //Deletes from URL the paramater which is not used
+  function handleFormSubmit(event) {
+    var form = document.getElementById('filterForm');
+
+
+    if (form.sort.value === "") {
+      form.sort.disabled = true;
+    }
+
+
+    if (form.status.value === "") {
+      form.status.disabled = true;
+    }
+
+
+    if (form.property_type.value === "") {
+      form.property_type.disabled = true;
+    }
+
+
+    if (form.city.value.trim() === "") {
+      form.city.disabled = true;
+    }
+
+    return true;
+  }
+</script>
 @include('partials.footer')
 
 </html>

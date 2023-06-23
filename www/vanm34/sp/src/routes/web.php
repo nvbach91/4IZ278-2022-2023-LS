@@ -46,7 +46,6 @@ Route::get('/property/{property}', [PropertyDetailController::class, 'show'])->n
 
 
 
-
 Route::middleware(['auth', 'checkUserRole'])->group(function () {
     Route::get('/propertyEditor', [PropertyListController::class, 'index'])->name('property.index');
     //adding
@@ -67,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/interests', [ProfileController::class, 'interests'])->name('profile.interests');
+    Route::get('/property-interests', [UserController::class, 'showProperties'])->name('property.interests');
 });
 
 

@@ -46,7 +46,7 @@
                       @default Unknown
                       @endswitch
                     </td>
-                    <td>{{ $property->rentsale ? 'Rent' : 'Sale' }}</td>
+                    <td>{{ $property->rentsale == 1 ? 'Rent' : 'Sale' }}</td>
                     <td>{{ $property->size }}</td>
                     <td>{{ $property->price }}</td>
                     <td>{{ $property->street }}, {{ $property->city }}</td>
