@@ -41,7 +41,7 @@
         foreach(array_unique($itemsIDs) as $temp){
             $quantity=$quantities[$temp];
             $itemsPrice=$quantity*$itemsDB->fetch($temp)["price"];
-            $item = $itemsDB->fetch($itemID);
+            $item = $itemsDB->fetch($temp);
             $ordersDB->createOrderItem($quantity,$itemsPrice,$orderID,$temp,$item["name"]);
         }
 

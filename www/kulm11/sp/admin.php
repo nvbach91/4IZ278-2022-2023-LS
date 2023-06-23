@@ -1,17 +1,27 @@
 <?php require_once "./database/UsersDatabase.php" ?>
 <?php require_once "./database/ItemsDatabase.php" ?>
+<?php require_once "./database/CategoriesDatabase.php" ?>
 <?php
 session_start();
 $userDatabase = new UsersDatabase();
 $users = $userDatabase->fetchAll();
 $itemsDatabase = new ItemsDatabase();
 $items = $itemsDatabase->fetchAll();
+$categoriesDatabase = new CategoriesDatabase();
 
 if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])) {
     header("Location: ./login.php");
     exit;
 }
 ?>
+
+<script type="text/javascript"> 
+    function deleteConfirmation(newurl) {
+        if (confirm("Are you sure you want to delete this user?")) {
+            document.location = newurl;
+        }
+    }
+</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +70,7 @@ if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"]
                     <td><?php echo $user["zipcode"]; ?></td>
                     <td><?php echo $user["role"]; ?></td>
                     <td><a href="./edit.php?user_id=<?php echo $user["userid"] ?>">Edit</a></td>
-                    <td><a href="./remove.php?user_id=<?php echo $user["userid"] ?>">Remove</a></td>
+                    <td><a href="javascript:deleteConfirmation('./remove.php?user_id=<?php echo $user["userid"] ?>')">Remove</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -70,7 +80,6 @@ if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"]
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th>Description</th>
                 <th>Image URL</th>
                 <th>Category</th>
                 <th\>
@@ -79,9 +88,8 @@ if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"]
                 <tr>
                     <td><?php echo $item["name"]; ?></td>
                     <td><?php echo $item["price"]; ?></td>
-                    <td><?php echo $item["description"]; ?></td>
-                    <td><?php echo $item["image"]; ?></td>
-                    <td><?php echo $item["category_categoryid"]; ?></td>
+                    <td><img src="<?php echo $item["image"]; ?>" width="100" alt="<?php echo $item["name"]; ?>"></td>
+                    <td><?php echo $categoriesDatabase->fetch($item["category_categoryid"])["name"]; ?></td>
                     <td><a href="./edit.php?item_id=<?php echo $item["itemid"] ?>">Edit</a></td>
                     <td><a href="./remove.php?item_id=<?php echo $item["itemid"] ?>">Remove</a></td>
                 </tr>

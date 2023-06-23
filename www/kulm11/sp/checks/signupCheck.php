@@ -35,8 +35,13 @@ if(!empty($_POST)){
 
     //password
 
-    if(strlen($password)<6){
-        $error="Password must be at least 6 characters long.";
+    if(strlen($password)<8){
+        $error="Password must be at least 8 characters long.";
+        array_push($errors,$error);
+        $isRegistrationSuccesful="false";
+    }
+    elseif(!preg_match("^(?=.*[A-Z])(?=.*[0-9]).{8}$)",$password)){
+        $error="Password has to have at least 1 upper case letter and one number.";
         array_push($errors,$error);
         $isRegistrationSuccesful="false";
     }

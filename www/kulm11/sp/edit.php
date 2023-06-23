@@ -2,7 +2,13 @@
 require_once "./database/UsersDatabase.php";
 $userDatabase = new UsersDatabase();
 
-if (!isset($_COOKIE["username"]) || !$userDatabase->isAdmin($_COOKIE["username"])) {
+if(!isset($_COOKIE["username"])){
+    header("Location: ./login.php");
+    exit;
+}
+
+if (!$userDatabase->isAdmin($_COOKIE["username"])) {
+    //if(isset($_GET["user_id"])&&)
     header("Location: ./login.php");
     exit;
 }

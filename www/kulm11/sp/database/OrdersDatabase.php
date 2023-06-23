@@ -48,7 +48,7 @@ class OrdersDatabase extends Database
 
     public function getUsersOrders($id)
     {
-        $query = "SELECT * FROM `Order` where user_userid=?;";
+        $query = "SELECT * FROM `Order` where user_userid=? ORDER BY orderid DESC;";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1, $id);
         $statement->execute();
@@ -75,7 +75,7 @@ class OrdersDatabase extends Database
     }
     public function fetchPage($userid, $itemsCountPerPage, $offset)
     {
-        $query = "SELECT * FROM `Order` WHERE user_userid=? ORDER BY orderid ASC LIMIT $itemsCountPerPage
+        $query = "SELECT * FROM `Order` WHERE user_userid=? ORDER BY orderid DESC LIMIT $itemsCountPerPage
         OFFSET ?;";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(1, $userid);
