@@ -11,7 +11,7 @@ class AdminMiddleware
     {
         if(Auth::user()->role == 'admin')
         {
-            return $next($request)->with(['status'=>'Access Denied! as you are not as admin']);
+            return $next($request);
         }
         else
         {

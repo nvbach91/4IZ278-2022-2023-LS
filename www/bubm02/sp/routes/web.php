@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\View;
 Auth::routes();
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view("admin");
-    });
+    Route::get('/dashboard', [App\Http\Controllers\OrderController::class, 'showAdminAll'])->name('order.admin.show.all');
+    Route::get('/dashboard/order/{id}', [App\Http\Controllers\OrderController::class, 'showAdmin'])->name('order.admin.show');
+    Route::get('/dashboard/order/approve/{id}', [App\Http\Controllers\OrderController::class, 'denyAdmin'])->name('order.admin.approve');
+    Route::get('/dashboard/order/deny/{id}', [App\Http\Controllers\OrderController::class, 'approveAdmin'])->name('order.admin.deny');
 });
 
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index'])->name('index');

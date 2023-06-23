@@ -26,6 +26,41 @@ class OrderController extends Controller
         return view('order', ['order' => $order, 'user' => auth()->user()]);
     }
 
+    public function showAdmin($id) {
+        $order = Order::find($id);
+        if ($order == null) {
+            return back()->withErrors("Order not found");
+        }
+        if ($order->user_id != auth()->user()->id) {
+            return back()->withErrors("You are not allowed to view this order");
+        }
+        return view('order', ['order' => $order, 'user' => auth()->user()]);
+    }
+
+    public function showAdminAll() {
+        $orders = Order::all();
+        return view('admin', ['orders' => $orders]);
+    }
+
+    public function approveAdmin($id) {
+        $order = Order::find($id);
+        if ($order == null) {
+            return back()->withErrors("Order not found");
+        }
+        $order->status = 'approved';
+        $order->save();
+        return back()->with('status', 'Order approved');
+    }
+    public function denyAdmin($id) {
+        $order = Order::find($id);
+        if ($order == null) {
+            return back()->withErrors("Order not found");
+        }
+        $order->status = 'denied';
+        $order->save();
+        return back()->with('status', 'Order denied');
+    }
+
     public function submit(Request $request)
     {
         $cart = $request->session()->get('cart');

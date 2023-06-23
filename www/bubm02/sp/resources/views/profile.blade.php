@@ -27,13 +27,15 @@
                         @if (session()->has('error'))
                             <div class="alert alert-danger alert-dismissible fade show mx-5" role="alert">
                                 <strong>{{session()->get('error')}}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                             </div>
                         @endif
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
                                 <strong>{{session()->get('success')}}</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
                             </div>
                         @endif
                     </div>
@@ -98,30 +100,30 @@
                     </div>
                     <div class="col-md-4">
                         <div class="p-3 py-5">
-                                @if($errors->adress->any())
-                                    @foreach ($errors->adress->all() as $error)
-                                        <div class="alert alert-danger" role="alert">
-                                            {{ $error }}
-                                        </div>
-                                    @endforeach
-                                @endif
-                                <div class="d-flex justify-content-between align-items-center experience">
-                                    <h4>Addresses</h4>
-                                </div>
-                                @foreach($adresses as $adress)
-                                    <form id="form-adress-{{$adress->id}}" method="post"
-                                          action="{{route('adress.remove')}}">
-                                        @csrf
-                                        <p>{{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}
-                                            <a href="javascript:{}"
-                                               onclick="document.getElementById('form-adress-{{$adress->id}}').submit();"
-                                               class="float-end text-black">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </p>
-                                        <input type="hidden" name="id" value="{{$adress->id}}">
-                                    </form>
+                            @if($errors->adress->any())
+                                @foreach ($errors->adress->all() as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
                                 @endforeach
+                            @endif
+                            <div class="d-flex justify-content-between align-items-center experience">
+                                <h4>Addresses</h4>
+                            </div>
+                            @foreach($adresses as $adress)
+                                <form id="form-adress-{{$adress->id}}" method="post"
+                                      action="{{route('adress.remove')}}">
+                                    @csrf
+                                    <p>{{$adress->adress_1 . ', ' . $adress->adress_2 . ', ' . $adress->zip_code . ', ' . $adress->city . ', ' . $adress->country}}
+                                        <a href="javascript:{}"
+                                           onclick="document.getElementById('form-adress-{{$adress->id}}').submit();"
+                                           class="float-end text-black">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </p>
+                                    <input type="hidden" name="id" value="{{$adress->id}}">
+                                </form>
+                            @endforeach
                             <form method="post" action="{{route('adress.add')}}">
                                 @csrf
                                 <div class="col-md-12 mt-3">
@@ -163,54 +165,15 @@
                 <div class="p-2 py-2 pt-4 d-flex justify-content-center align-items-center">
                     <h2 class="text-center">Orders</h2>
                 </div>
-                    <div class="row mb-3">
-                            @foreach($orders as $order)
-
-                            <div class="col-md-2">
-                        <a href="{{route('order.show',$order->id)}}" ><button class="text-center btn btn-primary ">Order #{{$order->id}}</button></a>
-{{--                        <div class="col-md-12">--}}
-{{--                            <div class="p-3 py-3">--}}
-{{--                                <div class="d-flex justify-content-between align-items-center experience">--}}
-{{--                                    <h5 class="mt-3">Order #{{$order->id}}</h5>--}}
-{{--                                    @php--}}
-{{--                                        $date = new DateTime($order->created_at->toDateTimeString());--}}
-{{--                                        $timezone = new DateTimeZone($user->timezone);--}}
-{{--                                        $offset = $timezone->getOffset($date);--}}
-{{--                                        $timestamp = strtotime($date->format('Y-m-d H:i:s')) + $offset;--}}
-{{--                                        $zonedDate = date("Y-m-d H:i:s", $timestamp);--}}
-{{--                                    @endphp--}}
-{{--                                    <span class="float-end"><i class="fa fa-calendar"></i> {{$zonedDate}}</span>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-12 mt-3">--}}
-{{--                                    <label class="labels">Address</label>--}}
-{{--                                    <p>{{$order->adress_1 . ', ' . $order->adress_2 . ', ' . $order->zip_code . ', ' . $order->city . ', ' . $order->country}}</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-12 mt-3">--}}
-{{--                                    <label class="labels">Total Price</label>--}}
-{{--                                    <p>{{$order->totalPrice()}} Kč</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-12 mt-3">--}}
-{{--                                    <label class="labels">Status</label>--}}
-{{--                                    <p>{{$order->status}}</p>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-12 mt-3 row">--}}
-{{--                                    <label class="label">Products</label>--}}
-{{--                                    @foreach($order->orderItems() as $orderItem)--}}
-{{--                                        @php($item = \App\Models\Item::find($orderItem->item_id))--}}
-{{--                                        <div class="col-md-4">--}}
-{{--                                            <img src="{{$item->image}}" style="max-width: 150px; max-height: 250px">--}}
-{{--                                            <p>Name: {{$item->name}}</p>--}}
-{{--                                            <p>Price: {{$orderItem->old_price}} Kč</p>--}}
-{{--                                            <p>Quantity: {{$orderItem->quantity}}</p>--}}
-{{--                                        </div>--}}
-{{--                                    @endforeach--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                            </div>
-
-                            @endforeach
-                    </div>
+                <div class="row mb-3">
+                    @foreach($orders as $order)
+                        <div class="col-md-2">
+                            <a href="{{route('order.show',$order->id)}}">
+                                <button class="text-center btn btn-primary ">Order #{{$order->id}}</button>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
