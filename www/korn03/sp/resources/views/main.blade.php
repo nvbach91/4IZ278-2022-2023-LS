@@ -1,0 +1,27 @@
+@extends('layouts.shop')
+
+@php use App\Models\Product; @endphp
+
+@section('products')
+    @foreach (Product::paginate(5) as $product)
+        <div class="card align-self-stretch " style="width: 11rem;">
+            <a href="{{ route('product', $product->id) }}"><img
+                    src="{{ asset('/assets/img/products/' . $product->thumbnail) }}" class="card-img-top"
+                    alt="{{ $product->name }} thumbnail"></a>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ $product->name }}</h5>
+                <h6 class="card-price">{{ $product->price }}$</h5>
+                    @if ($product->stock > 0)
+                        <p class="card-price text-success">In stock</p>
+                    @endif
+                    @if ($product->stock == 0)
+                        <p class="card-price text-danger">Out of stock</p>
+                    @endif
+                    <a href="{{ route('product', $product->id) }}" class="btn btn-primary mt-auto p-2">Details</a>
+            </div>
+        </div>
+    @endforeach
+@endsection
+@section('pagination')
+{!! Product::paginate(5)->links("pagination::bootstrap-4") !!}
+@endsection
