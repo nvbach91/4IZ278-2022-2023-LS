@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i>
+                <a class="nav-link btn btn-dark" href="{{ route('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i>
                     Přehled</a>
             </li>
             <li class="nav-item">
@@ -15,7 +15,7 @@
                     Projekty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('tasks') }}"><i class="fa fa-tasks" aria-hidden="true"></i> Úkoly</a>
+                <a class="nav-link" href="{{ route('tasks') }}"><i class="fa fa-check-square" aria-hidden="true"></i> Úkoly</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('notes') }}"><i class="fa fa-sticky-note-o" aria-hidden="true"></i>

@@ -32,7 +32,7 @@
                             <input type="checkbox" class="custom-control-input" name="completed"
                                 {{ $task->completed ? 'checked' : '' }} id="task{{ $task->id }}Checkbox"
                                 wire:click="completeTask({{ $task->id }})">
-                            <label class="custom-control-label" for="task{{ $task->id }}Checkbox"></label>
+                            <label class="custom-control-label rounded" for="task{{ $task->id }}Checkbox"></label>
                         </div>
 
 

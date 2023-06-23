@@ -49,6 +49,11 @@
 
         </div>
 
+        <div class="card-footer">
+            {{ $project->lastUpdate() }}
+        
+        </div>
+
         <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="addTagModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
