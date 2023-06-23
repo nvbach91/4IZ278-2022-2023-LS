@@ -1,0 +1,33 @@
+header {
+    background-color: #333;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-button {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-home {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.nav-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
