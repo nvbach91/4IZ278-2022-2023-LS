@@ -1,0 +1,104 @@
+.custom-control-label::before,
+.custom-control-label::after {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: #22222299 solid 1px;
+}
+
+.custom-control .custom-control-input:checked~.custom-control-label::before {
+    border-color: #007bff;
+    background-color: #007bff;
+}
+
+.task-check {
+    width: 15px;
+    height: 15px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.note {
+    text-decoration: none;
+    transition: 0.5s;
+    height: 250px;
+    width: 250px;
+}
+
+.note:hover {
+    transform: scale(1.1);
+}
+
+.custom-link {
+    color: inherit;
+    /* Inherits the color from its parent */
+    text-decoration: none;
+    /* Removes underline on the link */
+}
+
+.custom-link:hover {
+    color: inherit;
+    /* Inherits the color from its parent */
+    text-decoration: none;
+    /* Removes underline on the link */
+
+}
+
+.square-radio .form-check-input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 0;
+    border: 1px solid #000000aa;
+    background-color: #fff;
+    outline: none;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.square-radio .form-check-input[type="radio"]:checked {
+    opacity: 1;
+}
+
+.square-radio .form-check-input[type="radio"]:not(:checked) {
+    opacity: 0.4;
+}
+
+.bg-note-selection {
+    background: #eaeaea;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 14px;
+}
+
+.nav-link.dropdown-toggle::after {
+    vertical-align: middle;
+    margin-left: 5px;
+    display: none !important;
+}
+
+.homepage-cover{
+    background-size: cover;
+}
