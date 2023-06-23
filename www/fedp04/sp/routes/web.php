@@ -25,6 +25,7 @@ Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->n
 Route::post('/cart/minus', [App\Http\Controllers\CartController::class, 'minus'])->name('cart.minus');
 Route::post('/order/make', [App\Http\Controllers\OrderController::class, 'submit'])->name('make.order');
 Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'show'])->name('order');
+Route::get('/orders', [App\Http\Controllers\OrdersController::class, 'showAll'])->name('orders');
 
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');

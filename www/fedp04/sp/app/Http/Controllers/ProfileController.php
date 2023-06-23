@@ -50,8 +50,20 @@ class ProfileController extends Controller
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
-        if ($request->input('adress') != null) {
-            $user->adress = $request->input('adress');
+        if ($request->input('country') != null) {
+            $user->country = $request->input('country');
+        }
+        if ($request->input('city') != null) {
+                $user->city = $request->input('city');
+        }
+        if ($request->input('street') != null) {
+            $user->street = $request->input('street');
+        }
+        if ($request->input('house') != null) {
+            $user->house = $request->input('house');
+        }
+        if ($request->input('zip') != null) {
+            $user->zip = $request->input('zip');
         }
         if ($request->input('phone') != null) {
             $user->phone = $request->input('phone');

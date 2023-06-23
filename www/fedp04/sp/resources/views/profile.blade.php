@@ -31,8 +31,24 @@
                             <div class="col-md-12"><label class="labels">Phone Number</label><input type="text"
                                     name="phone" class="form-control" placeholder="enter phone number"
                                     value="{{ $user->phone }}"></div>
-                            <div class="col-md-12"><label class="labels">Address</label><input type="text" name="adress"
-                                    class="form-control" placeholder="enter address" value="{{ $user->adress }}"></div>
+
+
+                            <div class="col-md-12"><label class="labels">Country</label><input type="text" name="country"
+                                    class="form-control" placeholder="enter country" value="{{ $user->country }}"></div>
+
+                            <div class="col-md-12"><label class="labels">City</label><input type="text" name="city"
+                                    class="form-control" placeholder="enter city" value="{{ $user->city }}"></div>
+
+                            <div class="col-md-12"><label class="labels">Street</label><input type="text" name="street"
+                                    class="form-control" placeholder="enter street" value="{{ $user->street }}"></div>
+
+                            <div class="col-md-12"><label class="labels">House</label><input type="text" name="house"
+                                    class="form-control" minlength="1" maxlength="5" placeholder="enter your house's number"
+                                    value="{{ $user->house }}"></div>
+
+                            <div class="col-md-12"><label class="labels">ZIP</label><input type="text" name="zip"
+                                    class="form-control" placeholder="enter zip code"
+                                    value="{{ $user->zip }}"></div>
                         </div>
                         <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Update
                                 Profile</button></div>

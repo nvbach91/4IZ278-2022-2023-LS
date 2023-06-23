@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <p class="small text-muted mb-1">Date</p>
-                                    <p>{{ date('Y-m-d') }}</p>
+                                    <p>{{ date('Y-m-d h:i:s') }}</p>
                                 </div>
                                 <div class="col mb-3">
                                     <p class="small text-muted mb-1">Order No.</p>

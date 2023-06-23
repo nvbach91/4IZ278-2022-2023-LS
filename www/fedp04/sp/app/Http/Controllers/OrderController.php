@@ -24,7 +24,20 @@ class OrderController extends Controller
         $user = Auth::user();
         $cart = $request->session()->get('cart');
 
-        if ($user->adress == null) {
+        if ($user->country == null) {
+            return redirect()->route('profile')->withErrors("You must enter your adress to make an order");
+        }
+
+        if ($user->city == null) {
+            return redirect()->route('profile')->withErrors("You must enter your adress to make an order");
+        }
+        if ($user->street == null) {
+            return redirect()->route('profile')->withErrors("You must enter your adress to make an order");
+        }
+        if ($user->house == null) {
+            return redirect()->route('profile')->withErrors("You must enter your adress to make an order");
+        }
+        if ($user->zip == null) {
             return redirect()->route('profile')->withErrors("You must enter your adress to make an order");
         }
 
@@ -44,7 +57,11 @@ class OrderController extends Controller
 
         $order = new Order();
         $order->user_id = $user->id;
-        $order->order_adress = $user->adress;
+        $order->order_country = $user->country;
+        $order->order_city = $user->city;
+        $order->order_street = $user->street;
+        $order->order_house = $user->house;
+        $order->order_zip = $user->zip;
         $order->save();
 
         $arrayKeys = array_keys($cart);
@@ -55,6 +72,7 @@ class OrderController extends Controller
                 if ($amount > 0) {
                     $product = Product::find($productId);
                     $order->belongsToMany(Product::class, 'order_items')->attach($product, ['amount' => $amount, 'ordered_price' => $product->price]);
+                    
                 }
             }
         }
@@ -69,7 +87,8 @@ class OrderController extends Controller
         ->get(['order_id', 'product_id', 'ordered_price', 'amount'])
         ->all();
         return view('order', ['order' => $order, 'orderItems' => $orderItems]);
-    }
+      }
+
 
 
 }

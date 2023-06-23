@@ -28,6 +28,15 @@
                     <input type="submit" value="add to cart">
                 </form> --}}
                     </a>
+                    <form action="{{route('cart.add')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$product->id}}">
+                        <input type="hidden" name="redirect" value="home">
+                        <div class="cart mt-4 align-items-center"> <button type="submit"
+                                class="btn btn-danger text-uppercase mr-3 px-5" >Add to cart</button> <i
+                                class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                        </div>
+                    </form>
                 </div>
             @endforeach
         </div>

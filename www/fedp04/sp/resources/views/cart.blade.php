@@ -97,8 +97,8 @@
                                             </div>
 
                                             <div class="form-outline form-white mb-4">
-                                                <input type="text" id="typeText" class="form-control form-control-lg"
-                                                    placeholder="1234 5678 9012 3457" minlength="16" maxlength="19"
+                                                <input type="text"  pattern="\d{16}" id="typeText" class="form-control form-control-lg"
+                                                    placeholder="1234 5678 9012 3457" minlength="16" maxlength="16" data-pattern-mismatch="The credit card number must have 16 digits"
                                                     name="card" />
                                                 <label class="form-label" for="typeText">Card Number</label>
                                             </div>
@@ -107,9 +107,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-outline form-white">
                                                         <input type="text" id="typeExp"
-                                                            class="form-control form-control-lg" placeholder="MM/YY"
-                                                            size="5" id="expire" name="expire" minlength="5"
-                                                            maxlength="5" />
+                                                            class="form-control form-control-lg" pattern="\d{2}/\d{2}"
+                                                                 placeholder="MM/YY"  id="expire" name="expire" minlength="4"
+                                                            maxlength="6" />
                                                         <label class="form-label" for="typeExp">Expiration</label>
                                                     </div>
                                                 </div>
