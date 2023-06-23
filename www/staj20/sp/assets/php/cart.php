@@ -26,20 +26,26 @@ class ShoppingCart
     }
     public function emptyCart()
     {
-        unset($this->items);
+        $this->items = [];
     }
-    public function getIds(){
+    public function getIds()
+    {
         return array_keys($this->items);
     }
     public function showCart()
     {
-        $ids = implode(",", array_keys($this->items));
-        if ($ids) {
-            
-            $database = new Database();
-            $query = "SELECT * FROM products WHERE product_id IN ($ids)";
-            return $database->queryGet($query);
-            
+        if(empty($this->items)){
+            return;
         }
+        $questionMarks="";
+        foreach(array_keys($this->items) as $itemId){
+            $questionMarks .= "?,";
+        }
+        $questionMarks = trim($questionMarks,",");
+        $database = new Database();
+        $query = "SELECT * FROM products WHERE product_id IN ($questionMarks)";
+        $params = array_keys($this->items);
+        $result = $database->queryGet($query, $params);
+        return $result;
     }
 }

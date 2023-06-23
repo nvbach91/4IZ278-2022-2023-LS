@@ -18,16 +18,16 @@
     <div class="wrapper">
         <header>
             <nav class="nav-list">
-                <a class="nav-item-current" href="">
+                <a class="nav-item-current" href="./">
                     <p>Staromor</p>
                 </a>
-                <a class="nav-item" href="store">
+                <a class="nav-item" href="./store">
                     <p>Obchod</p>
                 </a>
-                <a class="nav-item" href="account">
+                <a class="nav-item" href="./account">
                     <p>Uživatelský účet</p>
                 </a>
-                <a class="nav-item" href="cart">
+                <a class="nav-item" href="./cart">
                     <p>Nákupní košík</p>
                 </a>
             </nav>
@@ -40,7 +40,6 @@
                         <h2>Váš prodejce kvalitních starožitností</h2>
                         <a class="link-button" href="store">Nakupujte kvalitní autentické starožitnosti</a>
                     </div>
-
                 </nav>
                 <aside class="intro-columns">
                     <div class="intro-image">
@@ -53,7 +52,7 @@
             </div>
         </main>
         <footer>
-            <p>Staromor, Copyright 2023</p>
+            <p>Staromor, Copyright 2022</p>
         </footer>
     </div>
 </body>

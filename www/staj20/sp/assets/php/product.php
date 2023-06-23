@@ -7,8 +7,9 @@ class Product{
     public function showProduct()
     {
         $database = new Database();
-        $query = "SELECT * FROM products WHERE product_id = $this->id";
-        $data = $database->queryGet($query);
+        $query = "SELECT * FROM products WHERE product_id = ?";
+        $params = array($this->id);
+        $data = $database->queryGet($query,$params);
         return $data[0];
 
     }

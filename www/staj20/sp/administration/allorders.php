@@ -1,21 +1,14 @@
 <?php
 session_start();
 require_once __DIR__ . '/../assets/php/core.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
-if (isset($_SESSION['gtoken'])) {
-    require_once(__DIR__ . '/../assets/config/google.php');
-    $client->setAccessToken($_SESSION['gtoken']);
-    if ($client->isAccessTokenExpired()) {
-        header('Location: logout.php');
-        exit;
-    }
-}
 $account = new Account();
 $privilege = $account->getPrivilege();
+if ($privilege < 5) {
+    header('Location: ../index.php');
+    exit;
+}
+$orderView = new Order();
+$orders = $orderView->GetAllOrders();
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -43,7 +36,7 @@ $privilege = $account->getPrivilege();
                 <a class="nav-item" href="../store">
                     <p>Obchod</p>
                 </a>
-                <a class="nav-item-current" href="../account">
+                <a class="nav-item" href="../account">
                     <p>Uživatelský účet</p>
                 </a>
                 <a class="nav-item" href="../cart">
@@ -52,22 +45,18 @@ $privilege = $account->getPrivilege();
             </nav>
         </header>
         <main>
-            <h1>Účet</h1>
-            
-            <?php if (isset($_SESSION['user_id'])): ?>
-            <h2>Účet</h2>
-            <ul>
-                <li>Uživatelské jméno: <?php echo $_SESSION['username']; ?></li>
-                <li>Email: <?php echo $_SESSION['email']; ?></li>
-            </ul>
-            <a class="link-button" href="logout.php">Odhlásit se</a>
-            <a class="link-button" href="useraddress.php">Moje adresy</a>
-            <a class="link-button" href="userorders.php">Moje objednávky</a>
-            <?php if($privilege >= 5): ?>
-            <a class="link-button" href="../administration/">Administrace</a>
-            <?php endif; ?>
-
-            <?php endif; ?>
+            <h1>Správa objednávek</h1>
+            <h2>Správa objednávek</h2>
+            <a class="link-button" href="index.php">Zpět</a>
+            <?php
+            foreach ($orders as $order):
+            ?>
+            <h3>Objednávka id <?php echo $order['order_id'];?></h3>
+            <p>Čas poslední změny: <?php echo $order['date'];?></p>
+            <p>Stav objednávky: <?php echo $order['status'];?></p>
+            <p>Hodnota objednávky: <?php echo $order['total_price'];?> Kč</p>
+            <a class="link-button" href="orderdetail.php?order_id=<?php echo $order['order_id'];?>">Detaily objednávky</a>
+            <?php endforeach; ?>
         </main>
         <footer>
             <p>Staromor, Copyright 2023</p>

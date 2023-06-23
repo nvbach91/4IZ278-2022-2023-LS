@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../assets/php/core.php';
+require_once __DIR__ . '/../assets/php/core.php';
 $cart = unserialize($_SESSION['cart']);
 //secho $_SESSION['cart'];
-
-if(isset($_POST["update"])){
+$csrf_good = csrf_check();
+if(isset($_POST["update"]) && $csrf_good){
     $ids = $cart->getIds();
     foreach($ids as $id){
         if(isset($_POST["remove_" . $id])){
@@ -20,8 +20,8 @@ if(isset($_POST["update"])){
 }
 $cartproducts = $cart->showCart();
 
-if(isset($_POST["order"])){
-    header("Location:  ../neworder");
+if(isset($_POST["order"]) && $csrf_good){
+    header("Location:  orderaddress.php");
 }
 $totalprice = 0;
 
@@ -67,8 +67,9 @@ $totalprice = 0;
                 <?php
                 if (isset($cartproducts)) {
                 ?>
-                    <form action="." method="post">
-                    <input type="hidden" name="update" value="update">              
+                    <form method="post">
+                    <input type="hidden" name="update" value="update">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'];?>">             
                     <table>
                         <tr>
                             <th>Obrázek</th>
@@ -84,7 +85,6 @@ $totalprice = 0;
                         foreach ($cartproducts as $cartproduct) {
                             $id = $cartproduct['product_id'];
                             $name = $cartproduct['name'];
-                            $iname = $cartproduct['internal_name'];
                             $desc = $cartproduct['description'];
                             $img = $cartproduct['img'];
                             $price = $cartproduct['price'];
@@ -95,12 +95,12 @@ $totalprice = 0;
                         ?>
                             <tr>
                                 <th><img class="mini-img" src="../<?php echo $img; ?>" alt="<?php echo $desc; ?>"></th>
-                                <th><a class="link-button" href="../store/<?php echo ($iname) ?>/"><?php echo $name; ?></a></th>
+                                <th><a class="link-button" href="../store/producta.php?id=<?php echo ($id) ?>"><?php echo $name; ?></a></th>
                                 <th><?php echo $price; ?> Kč</th>
                                 <th><?php echo $stock; ?> skladem</th>
                                 <th><input type="number" name="amount_<?php echo $id; ?>" min="1" max="<?php echo $stock; ?>" value="<?php echo $amount; ?>"></th>
                                 <th><?php echo ($price * $amount); ?> Kč</th>
-                                <th><input type="submit" name="remove_<?php echo $id; ?>" value="Zrušit"></th>
+                                <th><button class="link-button" type="submit" name="remove_<?php echo $id; ?>">Zrušit</button></th>
 
                             </tr>
                         <?php
@@ -109,9 +109,9 @@ $totalprice = 0;
                         ?>
                     </table>
                     <p>Celková cena: <?php echo $totalprice; ?> Kč</p>
-                    <input type="submit" value="Obnovit">
-                    <br>
-                    <input type="submit" name="order" value="Pokračovat na objednávku">
+                    <button class="link-button" type="submit">Přepočítat cenu</button>
+                    <button class="link-button" type="submit" name="order">Pokračovat na objednávku</button>
+                    
                     </form>
                 <?php
                 } else {

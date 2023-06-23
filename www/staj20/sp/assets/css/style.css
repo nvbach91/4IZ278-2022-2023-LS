@@ -65,14 +65,15 @@ footer {
     background-color: rgb(70, 105, 151);
     color: white;
 }
-a.nav-item, a.link-button {
+a.nav-item, a.link-button, button.link-button {
     color: white;
     background-color: rgb(39, 39, 39);
     transition: ease .5s;
 }
 
 a.nav-item:hover,
-a.link-button:hover {
+a.link-button:hover,
+button.link-button:hover {
     color: white;
     background-color: rgb(70, 105, 151);
     transition: ease .5s;
@@ -123,6 +124,15 @@ img {
 
 a.link-button {
     display: block;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+
+button.link-button {
+    display: inline;
     padding: 10px;
     margin: 10px;
     border-radius: 5px;

@@ -6,7 +6,9 @@ class Address{
     public $zip;
     public $city;
     public $country;
-    public $additional_info;
     public $email;
+
+    public $additional_info;
     public $phone;
+    public $id;
 }

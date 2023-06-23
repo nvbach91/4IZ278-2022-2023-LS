@@ -1,32 +1,10 @@
 <!DOCTYPE html>
 <?php
-const DEFAULT_LIMIT = 3;
 session_start();
 require_once __DIR__ . '/../assets/php/core.php';
-
-if(isset($_GET['from']) && isset($_GET['limit'])){
-    $from = verify($_GET['from']);
-    $limit = verify($_GET['limit']);
-}
-else{
-    $from = 1;
-    $limit = DEFAULT_LIMIT;
-}
 $productsClass = new Products();
-$productAmount = $productsClass->getProductAmount();
-if(isset($_GET['next'])){
-    $from = $from + $limit;
-}
-if(isset($_GET['back'])){
-    $from = $from - $limit;
-}
-if($from > $productAmount) $from = $productAmount;
-if($from < 1) $from = 1;
-if($limit < 1) $limit = 1;
+$products = $productsClass->showProducts();
 
-$to = $from + $limit;
-
-$products = $productsClass->showSomeProducts($from,$limit);
 ?>
 
 <html lang="cs">
@@ -64,28 +42,6 @@ $products = $productsClass->showSomeProducts($from,$limit);
         </header>
         <main>
             <h1>Obchod - Staromor</h1>
-            <form>
-                
-                <?php if($from > 1): ?>
-                <button class="link-button" type="submit" name="back">Zpět</button>
-                <?php endif; ?>
-                <?php for($countfrom = 1;$countfrom <= $productAmount;$countfrom = $countfrom + $limit){
-                    $to = $countfrom + $limit - 1;
-                    if($to > $productAmount) $to = $productAmount;
-                    ?>
-                    <a href="?from=<?php echo $countfrom;?>&limit=<?php echo $limit;?>">[<?php echo $countfrom;?>-<?php echo $to;?>]</a>
-                    <?php
-                }
-                ?>
-                <?php if($from + $limit <= $productAmount): ?>
-                <button class="link-button" type="submit" name="next">Další</button>
-                <?php endif; ?>
-                <input type="hidden" name="from" value=<?php echo $from; ?>>
-                <label for="limit">Počet produktů na stránku</label> 
-                <input name="limit" type="number" required min=1 value=<?php echo $limit; ?>>
-                <button class="link-button" type="submit">Obnovit</button>
-
-            </form>
             <nav class="store-page">
                 <?php
                 foreach($products as $product){
@@ -106,10 +62,12 @@ $products = $productsClass->showSomeProducts($from,$limit);
                     <p class="price"><?php echo $price; ?> Kč</p>
                     <p><?php echo $stock; ?> skladem</p>
                 </div>
-                <?php } ?>
-                
+                <?php
+
+                }
+
+                ?>
             </nav>
-            
         </main>
         <footer>
             <p>Staromor, Copyright 2023</p>

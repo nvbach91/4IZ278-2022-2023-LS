@@ -1,5 +1,5 @@
 <?php
-require_once realpath(__DIR__ . '/..')  . '/config/db-access.php';
+require_once __DIR__ . '/../../assets/config/db-access.php';
 
 class Database {
     protected $pdo;
@@ -16,10 +16,15 @@ class Database {
             PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC
         );
     }
-    public function queryGet($query) {
+    public function queryGet($query,$params) {
         $statement = $this->pdo->prepare($query);
-        $statement->execute();
+        $statement->execute($params);
         return $statement->fetchAll();
+    }
+    public function querySet($query,$params){
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($params);
+        
     }
 }
 

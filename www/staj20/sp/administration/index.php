@@ -1,21 +1,12 @@
 <?php
 session_start();
 require_once __DIR__ . '/../assets/php/core.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
-if (isset($_SESSION['gtoken'])) {
-    require_once(__DIR__ . '/../assets/config/google.php');
-    $client->setAccessToken($_SESSION['gtoken']);
-    if ($client->isAccessTokenExpired()) {
-        header('Location: logout.php');
-        exit;
-    }
-}
 $account = new Account();
 $privilege = $account->getPrivilege();
+if($privilege < 5){
+    header('Location: ../index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -43,7 +34,7 @@ $privilege = $account->getPrivilege();
                 <a class="nav-item" href="../store">
                     <p>Obchod</p>
                 </a>
-                <a class="nav-item-current" href="../account">
+                <a class="nav-item" href="../account">
                     <p>Uživatelský účet</p>
                 </a>
                 <a class="nav-item" href="../cart">
@@ -52,22 +43,10 @@ $privilege = $account->getPrivilege();
             </nav>
         </header>
         <main>
-            <h1>Účet</h1>
-            
-            <?php if (isset($_SESSION['user_id'])): ?>
-            <h2>Účet</h2>
-            <ul>
-                <li>Uživatelské jméno: <?php echo $_SESSION['username']; ?></li>
-                <li>Email: <?php echo $_SESSION['email']; ?></li>
-            </ul>
-            <a class="link-button" href="logout.php">Odhlásit se</a>
-            <a class="link-button" href="useraddress.php">Moje adresy</a>
-            <a class="link-button" href="userorders.php">Moje objednávky</a>
-            <?php if($privilege >= 5): ?>
-            <a class="link-button" href="../administration/">Administrace</a>
-            <?php endif; ?>
-
-            <?php endif; ?>
+            <h1>Administrace</h1>
+            <h2>Panel administrace</h2>
+            <a class="link-button" href="allorders.php">Správa objednávek</a>
+            <a class="link-button" href="../account/">Zpět</a>
         </main>
         <footer>
             <p>Staromor, Copyright 2023</p>
