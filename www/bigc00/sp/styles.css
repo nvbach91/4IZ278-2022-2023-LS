@@ -1,0 +1,148 @@
+
+	body {
+		font-family: Tahoma, serif;
+	}
+
+	h1 {
+		text-align: center;
+	}
+
+	body {
+		font-family: Tahoma, serif;
+	}
+	
+	h1 {
+		text-align: center;
+	}
+	
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	
+	th,
+	td {
+		padding: 10px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+	}
+	
+	th {
+		background-color: #f2f2f2;
+	}
+	
+	#center {
+		width: 900px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+	.course_item {
+		width: 260px;
+		float: left;
+		background: #424242;
+		color: #fff;
+		margin: 0 10px;
+		padding: 10px;
+	}
+	.course_item img {
+		width: 100%;
+		height: 20%;
+		margin-bottom: 10px;
+	}
+
+	.course_item a {
+		display: block;
+		color: #424242;
+		text-decoration: none;
+		text-align: center;
+		border: 1px solid #fff;
+		padding: 10px 0;
+		margin: 0 0 10px 0;
+		background: #fff;
+	}
+
+	.course_item a:hover {
+		background: transparent;
+		color: #fff;
+	}
+
+	.pagination {
+		margin-top: 20px;
+		text-align: center;
+	}
+
+	.pagination a {
+		display: inline-block;
+		padding: 5px 10px;
+		margin: 0 5px;
+		background-color: #f2f2f2;
+		color: #424242;
+		text-decoration: none;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+	}
+
+	.pagination a.active {
+		background-color: #424242;
+		color: #fff;
+	}
+
+	.pagination a:hover {
+		background-color: #ddd;
+	}
+	.category-buttons {
+	margin-bottom: 10px;
+}
+
+.category-button {
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 0 5px;
+	background-color: #f2f2f2;
+	color: #424242;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.category-button.active {
+	background-color: #424242;
+	color: #fff;
+}
+
+.category-button:hover {
+	background-color: #ddd;
+}
+.cart-link {
+	display: inline-block;
+	padding: 10px;
+	background-color: #f2f2f2;
+	color: #424242;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.cart-link:hover {
+	background-color: #ddd;
+}
+.empty-cart-message {
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+.action-buttons {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.action-buttons a {
+	margin-right: 10px;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+	border-radius: 4px;
+}

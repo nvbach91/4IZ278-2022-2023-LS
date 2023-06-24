@@ -1,0 +1,361 @@
+* {
+    outline: none;
+    margin: 0
+}
+
+@font-face {
+    font-family: 'Joyride';
+    src: url('../fonts/Joyride\ W05\ STD.ttf');
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(89.73deg, rgba(0, 31, 61, 0.2) -0.43%, rgba(0, 31, 61, 0) 100%), #001429;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.brand {
+    width: 160px;
+    height: 100px;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    left: 10%;
+    top: 1%;
+    color: white;
+    font-family: 'Joyride';
+    justify-content: center;
+}
+
+.brand p {
+    position: absolute;
+    z-index: 0;
+    top: 55px;
+}
+
+.brand img {
+    position: absolute;
+    z-index: 0;
+}
+
+.login-btn,
+.post-btn,
+input#submit {
+    position: relative;
+    display: flex;
+    z-index: 2;
+    color: white;
+    background: #0C2133;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    top: 2%;
+    width: 10%;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia;
+    font-size: 150%;
+    font-weight: 700;
+}
+
+.rightside {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10%;
+}
+
+#header {
+    position: relative;
+    top: 17%;
+}
+
+body {
+    background: #fff1a580;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.blue-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    overflow: hidden;
+    max-height: 85%;
+    top: 30px;
+    background: rgba(0, 51, 102, 0.9);
+    border-radius: 20px;
+    font-family: 'Georgia';
+    font-size: 120%;
+    line-height: 110%;
+    color: #FFFFFF;
+    flex-wrap: wrap;
+    height: 75%;
+    margin-bottom: 3%;
+}
+
+.post-img {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 5%;
+}
+
+.blue-box img {
+    width: 80%;
+}
+
+.post-text {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin-top: 2%;
+}
+
+.blue-box a {
+    display: flex;
+    position: relative;
+    top: 12%;
+    left: 30%;
+    width: 300px;
+}
+
+.input-field {
+    width: 100%;
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.input {
+    position: relative;
+    width: 60%;
+    height: 25px;
+    background: #0C2133;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    top: 10px;
+}
+
+select[class='input'] {
+    width: 61.5%;
+    height: 31px;
+    padding-left: 2px;
+}
+
+.blue-box h2 {
+    padding-top: 5%;
+}
+
+.blue-box#login,
+.blue-box#transactions {
+    min-height: 400px;
+    max-height: 150%;
+}
+
+.blue-box#login a {
+    top: 20px;
+    left: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+main#column {
+    flex-direction: column;
+    align-items: center;
+}
+
+input#submit {
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    font-size: 100%;
+    width: 400px;
+    height: 50px;
+}
+
+a#grey:hover {
+    color: grey;
+    transition-duration: 0.5s;
+}
+
+.post-btn#make-account {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.input-field#checkbox,
+.input-field#checkbox-error {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.input-field#checkbox p {
+    padding-left: 2%;
+}
+
+.input-field#checkbox input,
+.input-field#checkbox-error input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.input-field#checkbox-error p {
+    padding-left: 2%;
+    background-color: rgba(255, 0, 0, 0.61);
+    ;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='number'] {
+    padding-left: 5px;
+    color: white;
+}
+
+.error {
+    position: relative;
+    top: 10px;
+    background: rgba(255, 0, 0, 0.61);
+    border-radius: 10px;
+    height: 20px;
+}
+
+.error p {
+    text-align: center;
+    font-size: 80%;
+}
+
+.error a#exists {
+    font-size: 80%;
+    left: 30px;
+    top: 0;
+}
+
+.success {
+    margin-top: 10px;
+    background-color: rgba(0, 128, 0, 0.411);
+    border-radius: 10px;
+    height: 20px;
+}
+
+.success a#success {
+    font-size: 80%;
+    left: 30px;
+    top: 0;
+}
+
+.success a#success:hover,
+.error a#exists:hover {
+    color: gray;
+    transition-duration: 250ms;
+}
+
+.add-account {
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 1%;
+    width: 70px;
+    height: 70px;
+    background: #0C2133;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 350%;
+    text-align: center;
+}
+
+.add-account:hover {
+    box-shadow: 0 0 .8em #d8b80180;
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.login-btn:hover,
+.post-btn:hover,
+input#submit:hover {
+    box-shadow: 0 0 .8em #fff1a580;
+    transition-duration: 250ms;
+    cursor: pointer;
+}
+
+.blue-box#account {
+    justify-content: left;
+    align-items: flex-start;
+    min-width: 400px;
+}
+
+.blue-box-text {
+    position: relative;
+    margin-left: 4%;
+}
+
+.blue-box-text p {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.blue-box-text {
+    background: none;
+}
+
+.login-btn#account-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100px;
+    width: 10%;
+    height: 20%;
+    font-size: 90%;
+    margin-top: 1%;
+    margin-left: 80%;
+    font-weight: 400;
+}
+
+table {
+    margin-top: 10px;
+    font-family: Georgia;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+td,
+th {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd3d;
+    border-radius: 10px;
+}
+
+.login-btn#back {
+    position: absolute;
+    top: 14%;
+    left: 5%;
+}
