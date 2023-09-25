@@ -115,13 +115,23 @@ dist
 .editorconfig
 
 # images
-*.png
 *.jpg
 *.jpeg
+*.jpe
+*.jif
+*.jfif
+*.jfi
 *.ico
-*.tiff
-*.giff
-*.svg
-*.webp
-*.raw
+*.png
 *.bmp
+*.svg
+*.svgz
+*.gif
+*.webp
+*.tiff
+*.psd
+*.raw
+*.eps
+*.pdf
+
+.vscode/
